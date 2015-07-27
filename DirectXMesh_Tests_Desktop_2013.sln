@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xtmesh_Desktop_2012", "mesh\xtmesh_Desktop_2012.vcxproj", "{475EEB5A-3133-437F-99CC-F26B41285A54}"
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xtmesh_Desktop_2013", "mesh\xtmesh_Desktop_2013.vcxproj", "{475EEB5A-3133-437F-99CC-F26B41285A54}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xtcp_Desktop_2012", "cp\xtcp_Desktop_2012.vcxproj", "{811DBC21-0BA0-44E6-8F08-9B8A4E96E058}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xtcp_Desktop_2013", "cp\xtcp_Desktop_2013.vcxproj", "{811DBC21-0BA0-44E6-8F08-9B8A4E96E058}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xtvb_Desktop_2012", "vb\xtvb_Desktop_2012.vcxproj", "{53ACCB10-4A85-4845-8367-2E8C7891A475}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xtvb_Desktop_2013", "vb\xtvb_Desktop_2013.vcxproj", "{53ACCB10-4A85-4845-8367-2E8C7891A475}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXMesh", "..\DirectXMesh\DirectXMesh_Desktop_2012.vcxproj", "{6857F086-F6FE-4150-9ED7-7446F1C1C220}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXMesh", "..\DirectXMesh\DirectXMesh_Desktop_2013.vcxproj", "{6857F086-F6FE-4150-9ED7-7446F1C1C220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
