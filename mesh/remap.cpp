@@ -1363,6 +1363,8 @@ bool Test05()
             }
         }
 
+        memset( destvb.get(), 0, sizeof(32) * ( 65535 + 256 ) );
+
         hr = FinalizeVB( srcvb.get(), 32, 65535, &dups.front(), dups.size(), nullptr, destvb.get() );
         if ( FAILED(hr) )
         {
