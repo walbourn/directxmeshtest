@@ -166,6 +166,7 @@
     <ClCompile Include="process.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Utilities\WaveFrontReader.h" />
     <ClInclude Include="..\common\directxtest.h" />
     <ClInclude Include="..\common\ShapesGenerator.h" />
     <ClInclude Include="..\common\TestGeometry.h" />
