@@ -1345,7 +1345,7 @@ bool Test07()
         WCHAR szPath[MAX_PATH];
         ExpandEnvironmentStringsW( g_VBMedia[index].fname, szPath, MAX_PATH );
 
-#ifdef DEBUG
+#ifdef _DEBUG
         OutputDebugStringW(szPath);
         OutputDebugStringA("\n");
 #endif

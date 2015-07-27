@@ -59,7 +59,7 @@ bool Test01()
         WCHAR szPath[MAX_PATH];
         ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
 
-#ifdef DEBUG
+#ifdef _DEBUG
         OutputDebugStringW(szPath);
         OutputDebugStringA("\n");
 #endif
@@ -93,7 +93,7 @@ bool Test01()
         size_t nFaces = mesh->indices.size() / 3;
         size_t nVerts = mesh->vertices.size();
 
-#ifdef DEBUG
+#ifdef _DEBUG
         char output[ 256 ] = { 0 };
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
@@ -108,7 +108,7 @@ bool Test01()
             continue;
         }
 
-#ifdef DEBUG
+#ifdef _DEBUG
         hr = Validate(&mesh->indices.front(), nFaces, nVerts, nullptr, VALIDATE_DEGENERATE, &msgs );
         if ( FAILED(hr) )
         {
@@ -359,7 +359,7 @@ for( size_t j = 0; j < nFaces; ++j )
         }
         else
         {
-#ifdef DEBUG
+#ifdef _DEBUG
             OutputDebugStringA( "INFO: no texture coordinates\n" );
 #endif
         }
@@ -387,7 +387,7 @@ bool Test02()
         WCHAR szPath[MAX_PATH];
         ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
 
-#ifdef DEBUG
+#ifdef _DEBUG
         OutputDebugStringW(szPath);
         OutputDebugStringA("\n");
 #endif
@@ -421,7 +421,7 @@ bool Test02()
         size_t nFaces = mesh->indices.size() / 3;
         size_t nVerts = mesh->vertices.size();
 
-#ifdef DEBUG
+#ifdef _DEBUG
         char output[ 256 ] = { 0 };
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
@@ -586,7 +586,7 @@ bool Test03()
         WCHAR szPath[MAX_PATH];
         ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
 
-#ifdef DEBUG
+#ifdef _DEBUG
         OutputDebugStringW(szPath);
         OutputDebugStringA("\n");
 #endif
@@ -620,7 +620,7 @@ bool Test03()
         size_t nFaces = mesh->indices.size() / 3;
         size_t nVerts = mesh->vertices.size();
 
-#ifdef DEBUG
+#ifdef _DEBUG
         char output[ 256 ] = { 0 };
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
@@ -668,7 +668,7 @@ bool Test03()
             float acmr, atvr;
             ComputeVertexCacheMissRate( &mesh->indices.front(), nFaces, nVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
 
-#ifdef DEBUG
+#ifdef _DEBUG
             sprintf_s( output, "INFO: original: %u vache, ACMR %f, ATVR %f\n", ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
             OutputDebugStringA( output );
 #endif
@@ -707,7 +707,7 @@ bool Test03()
                     float acmr2, atvr2;
                     ComputeVertexCacheMissRate( newIndices.get(), nFaces, nVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr2, atvr2 );
 
-#ifdef DEBUG
+#ifdef _DEBUG
                     sprintf_s( output, "optimized: %u vache, ACMR %f, ATVR %f\n", ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr2, atvr2 );
                     OutputDebugStringA( output );
 #endif
@@ -818,7 +818,7 @@ bool Test04()
         WCHAR szPath[MAX_PATH];
         ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
 
-#ifdef DEBUG
+#ifdef _DEBUG
         OutputDebugStringW(szPath);
         OutputDebugStringA("\n");
 #endif
@@ -852,7 +852,7 @@ bool Test04()
         size_t nFaces = mesh->indices.size() / 3;
         size_t nVerts = mesh->vertices.size();
 
-#ifdef DEBUG
+#ifdef _DEBUG
         char output[ 256 ] = { 0 };
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
@@ -907,7 +907,7 @@ bool Test04()
             continue;
         }
 
-#ifdef DEBUG
+#ifdef _DEBUG
         sprintf_s( output, "INFO: %Iu duplicated verts\n", dupVerts.size() );
         OutputDebugStringA( output );
 #endif
@@ -972,7 +972,7 @@ bool Test04()
             float acmr, atvr;
             ComputeVertexCacheMissRate( sortedIndices.get(), nFaces, nTotalVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
 
-#ifdef DEBUG
+#ifdef _DEBUG
             auto subsets = ComputeSubsets( attributes.get(), nFaces );
             sprintf_s( output, "INFO: %Iu attribute groups\nINFO: original: %u vache, ACMR %f, ATVR %f\n", subsets.size(),
                               ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
@@ -1020,7 +1020,7 @@ printf("%u\n", faceRemap[j]);
                     float acmr2, atvr2;
                     ComputeVertexCacheMissRate( newIndices.get(), nFaces, nTotalVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr2, atvr2 );
 
-#ifdef DEBUG
+#ifdef _DEBUG
                     sprintf_s( output, "optimized: %u vache, ACMR %f, ATVR %f\n", ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr2, atvr2 );
                     OutputDebugStringA( output );
 #endif
