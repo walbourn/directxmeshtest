@@ -71,21 +71,21 @@ bool Test15()
             success = false;
             printe("ERROR: Attribute sort failed attributes\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u\n", attributes[j]);
+                print("%u\n", attributes[j]);
         }
         else if ( !IsValidFaceRemap( g_cubeIndices16, remap.get(), 12 ) )
         {
             success = false;
             printe("ERROR: Attribute sort failed, remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_faceRemap, sizeof(s_faceRemap) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort failed remap\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
 
         // identity
@@ -102,14 +102,14 @@ bool Test15()
             success = false;
             printe("ERROR: Attribute sort identity failed attributes\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u\n", attributesId[j]);
+                print("%u\n", attributesId[j]);
         }
         else if ( memcmp( remap.get(), s_faceRemapId, sizeof(s_faceRemapId) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort identity failed\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
 
         // zero
@@ -126,23 +126,26 @@ bool Test15()
             success = false;
             printe("ERROR: Attribute sort zero failed attributes\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u\n", attributesZero[j]);
+                print("%u\n", attributesZero[j]);
         }
         else if ( memcmp( remap.get(), s_faceRemapId, sizeof(s_faceRemapId) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort zero failed\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = AttributeSort( UINT32_MAX, &attributesZero.front(), remap.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: AttributeSort expected failure for 32-max value faces (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     return success;
@@ -173,7 +176,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) fmcube failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_reverse, sizeof(s_reverse) ) != 0 )
         {
@@ -181,7 +184,7 @@ bool Test16()
             printe("ERROR: OptimizeFaces(16) fmcube failed\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                printe("\t%Iu -> %u\n", j, remap[j]);
+                print("\t%Iu -> %u\n", j, remap[j]);
             }
         }
 
@@ -201,7 +204,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) fmcube failed [striporder] remap invalid [striporder]\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_strip, sizeof(s_strip) ) != 0 )
         {
@@ -209,17 +212,20 @@ bool Test16()
             printe("ERROR: OptimizeFaces(16) fmcube failed [striporder]\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                printe("\t%Iu -> %u\n", j, remap[j]);
+                print("\t%Iu -> %u\n", j, remap[j]);
             }
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = OptimizeFaces( g_fmCubeIndices16, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: OptimizeFaces(16) expected failure for 32-max value faces (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 32-bit fmcube
@@ -240,7 +246,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) fmcube failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_reverse, sizeof(s_reverse) ) != 0 )
         {
@@ -248,7 +254,7 @@ bool Test16()
             printe("ERROR: OptimizeFaces(32) fmcube failed\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                printe("\t%Iu -> %u\n", j, remap[j]);
+                print("\t%Iu -> %u\n", j, remap[j]);
             }
         }
 
@@ -268,7 +274,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) fmcube failed [striporder] remap invalid [striporder]\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_strip, sizeof(s_strip) ) != 0 )
         {
@@ -276,17 +282,20 @@ bool Test16()
             printe("ERROR: OptimizeFaces(32) fmcube failed [striporder]\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                printe("\t%Iu -> %u\n", j, remap[j]);
+                print("\t%Iu -> %u\n", j, remap[j]);
             }
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = OptimizeFaces( g_fmCubeIndices32, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: OptimizeFaces(32) expected failure for 32-max value faces (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Unused (16)
@@ -348,14 +357,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) unused failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_vcremap, sizeof(s_vcremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(16) unused failed\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
 
         // striporder
@@ -374,14 +383,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) unused [striporder] failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_soremap, sizeof(s_soremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(16) unused [striporder] failed\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
     }
 
@@ -444,14 +453,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) unused failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_vcremap, sizeof(s_vcremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(32) unused failed\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
 
         // striporder
@@ -470,14 +479,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) unused [striporder] failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_soremap, sizeof(s_soremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(32) unused [striporder] failed\n" );
             for(size_t j=0; j < 12; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
     }
 
@@ -509,7 +518,7 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) cube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
@@ -518,6 +527,8 @@ bool Test17()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = OptimizeVertices( g_cubeIndices16, 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, remap.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -545,6 +556,7 @@ bool Test17()
             printe("\nERROR: OptimizeVertices(16) expected failure for bad vert count (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 16-bit fmcube
@@ -570,7 +582,7 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) fmcube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 24; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
@@ -597,7 +609,7 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) cube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
@@ -606,6 +618,8 @@ bool Test17()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = OptimizeVertices( g_cubeIndices32, 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, remap.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -633,6 +647,7 @@ bool Test17()
             printe("\nERROR: OptimizeVertices(32) expected failure for bad vert count (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 32-bit fmcube
@@ -658,7 +673,7 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) fmcube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 24; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
@@ -711,14 +726,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) unused faces failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uforder, sizeof(s_uforder) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(16) unused faces failed\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
 
         // Vertices
@@ -747,14 +762,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) unused verts failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uvorder, sizeof(s_uvorder) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeVertices(16) unused verts failed\n" );
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
     }
 
@@ -802,14 +817,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) unused faces failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uforder, sizeof(s_uforder) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(32) unused faces failed\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
 
         // Vertices
@@ -838,14 +853,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) unused verts failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uvorder, sizeof(s_uvorder) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeVertices(32) unused verts failed\n" );
             for(size_t j=0; j < 8; ++j)
-                printf("%u -> %u\n", j, remap[j]);
+                print("%Iu -> %u\n", j, remap[j]);
         }
     }
 

@@ -9,12 +9,12 @@
 #include "TestGeometry.h"
 #include "ShapesGenerator.h"
 
-#include "directxmesh.h"
+#include "directxmeshp.h"
 
 using namespace DirectX;
 
 static const UINT DXGI_START = 1;
-static const UINT DXGI_END = 115; // as of DXGI 1.2
+static const UINT DXGI_END = 190; // as of DXGI 1.3
 
 static const float g_Epsilon = 0.0001f;
 
@@ -46,6 +46,7 @@ bool Test01()
         DXGI_FORMAT_B5G6R5_UNORM, DXGI_FORMAT_B5G5R5A1_UNORM,
         DXGI_FORMAT_B8G8R8A8_UNORM, DXGI_FORMAT_B8G8R8X8_UNORM,
         DXGI_FORMAT_B4G4R4A4_UNORM,
+        XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM,
     };
 
     bool success = true;
@@ -70,7 +71,7 @@ bool Test01()
             success = false;
         }
 
-        if ( BytesPerElement( (DXGI_FORMAT)f ) == 0 && isvb )
+        if ( BytesPerElement( (DXGI_FORMAT)f ) == 0 && (isvb || isib) )
         {
             printe( "ERROR: BytesPerElement failed on DXGI Format %u\n", f );
             success = false;
@@ -211,6 +212,8 @@ bool Test22()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         ComputeVertexCacheMissRate( g_fmCubeIndices16, 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, OPTFACES_V_DEFAULT, acmr, atvr );
         if( acmr != -1.f || atvr != -1.f )
         {
@@ -231,6 +234,7 @@ bool Test22()
             printe("\nERROR: ComputeVertexCacheMissRate(16) expected failure for 32-max value faces (ACMR %f, ATVR %f)\n", acmr, atvr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 16-bit sphere
@@ -297,6 +301,8 @@ bool Test22()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)  
         ComputeVertexCacheMissRate( g_fmCubeIndices32, 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, OPTFACES_V_DEFAULT, acmr, atvr );
         if( acmr != -1.f || atvr != -1.f )
         {
@@ -317,6 +323,7 @@ bool Test22()
             printe("\nERROR: ComputeVertexCacheMissRate(32) expected failure for 32-max value faces (ACMR %f, ATVR %f)\n", acmr, atvr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 32-bit sphere

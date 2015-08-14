@@ -453,7 +453,7 @@ inline bool IsValidPointReps( _In_reads_(nVerts) const uint32_t* pointRep, size_
 
 //--------------------------------------------------------------------------------------
 template<typename index_t>
-inline bool IsValidFaceRemap( _In_reads_(nFaces) const index_t* indices, _In_reads_(nFaces) const uint32_t* faceRemap, size_t nFaces )
+inline bool IsValidFaceRemap( _In_reads_(nFaces*3) const index_t* indices, _In_reads_(nFaces) const uint32_t* faceRemap, size_t nFaces )
 {
     if ( !indices || !faceRemap || !nFaces )
         return false;
@@ -510,7 +510,7 @@ inline bool IsValidFaceRemap( _In_reads_(nFaces) const index_t* indices, _In_rea
 
 //--------------------------------------------------------------------------------------
 template<typename index_t>
-inline bool IsValidVertexRemap( _In_reads_(nFaces) const index_t* indices, size_t nFaces,
+inline bool IsValidVertexRemap( _In_reads_(nFaces*3) const index_t* indices, size_t nFaces,
                                 _In_reads_(nVerts) const uint32_t* vertexRemap, size_t nVerts, bool allowdups = false )
 {
     if ( !indices || !nFaces || !vertexRemap || !nVerts )

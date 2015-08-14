@@ -13,10 +13,17 @@
 
 using namespace DirectX;
 
+enum
+{
+    FLAGS_NONE              = 0x0,
+    FLAGS_IGNORE_SLOWDOWN   = 0x1,
+};
+
 static const float g_Epsilon = 0.0001f;
 
 struct TestMedia
 {
+    DWORD           options;
     const wchar_t * fname;
     float           stripOrderACMR;
     float           stripOrderATVR;
@@ -32,17 +39,17 @@ struct TestMedia
 
 static const TestMedia g_TestMedia[] =
 {
-    // filename                             | striporder           | independent          | attr-striporder      | attr-independent     | dups
-    { MEDIA_PATH L"cup._obj",                 1.050532f, 1.473881f,  0.761170f, 1.067910f,  1.268085f, 1.779104f,  1.002128f, 1.405970f,  0,  0   },
-    { MEDIA_PATH L"teapot._obj",              1.013672f, 1.958491f,  0.646484f, 1.249057f,  1.013672f, 1.958491f,  0.646484f, 1.249057f,  0,  0   },
-    { MEDIA_PATH L"SuperSimpleRunner._obj",   1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        0,  0   },
-    { MEDIA_PATH L"shuttle._obj",             0.878247f, 1.745161f,  0.696429f, 1.383871f,  0.870130f, 1.285372f,  0.798701f, 1.179856f,  0,  107 },
-    { MEDIA_PATH L"player_ship_a._obj",       1.102867f, 1.053140f,  1.091062f, 1.041868f,  1.102867f, 1.053140f,  1.091062f, 1.041868f,  0,  0   },
-    { MEDIA_PATH L"FSEngineGeo._obj",         1.689465f, 1.013975f,  1.676662f, 1.006291f,  1.689465f, 1.013975f,  1.676662f, 1.006291f,  10, 0   },
-    { MEDIA_PATH L"sphere.vbo",               1.001894f, 1.885918f,  0.630682f, 1.187166f,  1.001894f, 1.885918f,  0.630682f, 1.187166f,  0,  0   },
-    { MEDIA_PATH L"cylinder.vbo",             1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  0,  0   },
-    { MEDIA_PATH L"torus.vbo",                1.000918f, 2.001837f,  0.642332f, 1.284665f,  1.000918f, 2.001837f,  0.642332f, 1.284665f,  0,  0   },
-    { MEDIA_PATH L"Head_Big_Ears.vbo",        0.815828f, 1.604267f,  0.664554f, 1.306799f,  0.815828f, 1.604267f,  0.664554f, 1.306799f,  0,  0   },
+    // flags                    | filename                              | striporder           | independent          | attr-striporder      | attr-independent     | dups
+    { FLAGS_NONE,               MEDIA_PATH L"cup._obj",                 1.050532f, 1.473881f,  0.761170f, 1.067910f,  1.268085f, 1.779104f,  1.002128f, 1.405970f,  0,  0   },
+    { FLAGS_IGNORE_SLOWDOWN,    MEDIA_PATH L"teapot._obj",              1.013672f, 1.958491f,  0.646484f, 1.249057f,  1.013672f, 1.958491f,  0.646484f, 1.249057f,  0,  0   },
+    { FLAGS_NONE,               MEDIA_PATH L"SuperSimpleRunner._obj",   1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        0,  0   },
+    { FLAGS_NONE,               MEDIA_PATH L"shuttle._obj",             0.878247f, 1.745161f,  0.696429f, 1.383871f,  0.870130f, 1.285372f,  0.798701f, 1.179856f,  0,  107 },
+    { FLAGS_NONE,               MEDIA_PATH L"player_ship_a._obj",       1.102867f, 1.053140f,  1.091062f, 1.041868f,  1.102867f, 1.053140f,  1.091062f, 1.041868f,  0,  0   },
+    { FLAGS_NONE,               MEDIA_PATH L"FSEngineGeo._obj",         1.689465f, 1.013975f,  1.676662f, 1.006291f,  1.689465f, 1.013975f,  1.676662f, 1.006291f,  10, 0   },
+    { FLAGS_NONE,               MEDIA_PATH L"sphere.vbo",               1.001894f, 1.885918f,  0.630682f, 1.187166f,  1.001894f, 1.885918f,  0.630682f, 1.187166f,  0,  0   },
+    { FLAGS_NONE,               MEDIA_PATH L"cylinder.vbo",             1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  0,  0   },
+    { FLAGS_NONE,               MEDIA_PATH L"torus.vbo",                1.000918f, 2.001837f,  0.642332f, 1.284665f,  1.000918f, 2.001837f,  0.642332f, 1.284665f,  0,  0   },
+    { FLAGS_NONE,               MEDIA_PATH L"Head_Big_Ears.vbo",        0.815828f, 1.604267f,  0.664554f, 1.306799f,  0.815828f, 1.604267f,  0.664554f, 1.306799f,  0,  0   },
 };
 
 //-------------------------------------------------------------------------------------
@@ -57,7 +64,12 @@ bool Test01()
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
         WCHAR szPath[MAX_PATH];
-        ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
+        DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
+        if ( !ret || ret > MAX_PATH )
+        {
+            printe( "ERROR: ExpandEnvironmentStrings FAILED\n" );
+            return false;
+        }
 
 #ifdef _DEBUG
         OutputDebugStringW(szPath);
@@ -137,15 +149,6 @@ bool Test01()
             success = false;
             continue;
         }
-
-#if 0
-printf("POINTREP:\n");
-for( size_t j = 0; j < nVerts; ++j )
-{
-    printf("%Iu -> %u\n", j, preps[j] );
-}
-#endif
-
 #endif
 
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ mesh->indices.size() ] );
@@ -158,14 +161,6 @@ for( size_t j = 0; j < nVerts; ++j )
             printe("ERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", hr, szPath );
             continue;
         }
-
-#if 0
-printf("ADJ:\n");
-for( size_t j = 0; j < nFaces; ++j )
-{
-    printf("%Iu -> %u %u %u\n", j, adj[j * 3], adj[j * 3 + 1], adj[j * 3 + 2] );
-}
-#endif
 
         hr = Validate( &mesh->indices.front(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( FAILED(hr) )
@@ -385,7 +380,12 @@ bool Test02()
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
         WCHAR szPath[MAX_PATH];
-        ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
+        DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
+        if ( !ret || ret > MAX_PATH )
+        {
+            printe( "ERROR: ExpandEnvironmentStrings FAILED\n" );
+            return false;
+        }
 
 #ifdef _DEBUG
         OutputDebugStringW(szPath);
@@ -584,7 +584,12 @@ bool Test03()
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
         WCHAR szPath[MAX_PATH];
-        ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
+        DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
+        if ( !ret || ret > MAX_PATH )
+        {
+            printe( "ERROR: ExpandEnvironmentStrings FAILED\n" );
+            return false;
+        }
 
 #ifdef _DEBUG
         OutputDebugStringW(szPath);
@@ -741,15 +746,18 @@ bool Test03()
                         break;
 
                     default:
-                        if ( ( (acmr2 > acmr) && fabs( acmr2 - acmr ) > g_Epsilon )
-                             || ( (atvr2 > atvr) && fabs( atvr2 - atvr ) > g_Epsilon ) )
+                        if ( !( g_TestMedia[index].options & FLAGS_IGNORE_SLOWDOWN ) )
                         {
-                            pass = false;
-                            success = false;
-                            printe("ERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%S\n",
-                                   s_vcache[ vindex ], s_restart[ vindex ], szPath );
-                            print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
-                            print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
+                            if ( ( (acmr2 > acmr) && fabs( acmr2 - acmr ) > g_Epsilon )
+                                 || ( (atvr2 > atvr) && fabs( atvr2 - atvr ) > g_Epsilon ) )
+                            {
+                                pass = false;
+                                success = false;
+                                printe("ERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%S\n",
+                                       s_vcache[ vindex ], s_restart[ vindex ], szPath );
+                                print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
+                                print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
+                            }
                         }
                         break;
                     }
@@ -816,7 +824,12 @@ bool Test04()
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
         WCHAR szPath[MAX_PATH];
-        ExpandEnvironmentStringsW( g_TestMedia[index].fname, szPath, MAX_PATH );
+        DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
+        if ( !ret || ret > MAX_PATH )
+        {
+            printe( "ERROR: ExpandEnvironmentStrings FAILED\n" );
+            return false;
+        }
 
 #ifdef _DEBUG
         OutputDebugStringW(szPath);
@@ -996,15 +1009,6 @@ bool Test04()
             }
             else
             {
-#if 0
-printf("FACEREMAP:\n");
-for(size_t j = 0; j < nFaces; ++j )
-{
-//if ( j >= 10 && j < (nFaces-10) ) j = nFaces - 10;
-//printf("%Iu -> %u\n", j, faceRemap[j]);
-printf("%u\n", faceRemap[j]);
-}
-#endif
                 std::unique_ptr<uint16_t[]> newIndices( new uint16_t[ nFaces * 3 ] );
 
                 hr = ReorderIB( sortedIndices.get(), nFaces, faceRemap.get(), newIndices.get() );
@@ -1054,15 +1058,18 @@ printf("%u\n", faceRemap[j]);
                         break;
 
                     default:
-                        if ( ( (acmr2 > acmr) && fabs( acmr2 - acmr ) > g_Epsilon )
-                             || ( (atvr2 > atvr) && fabs( atvr2 - atvr ) > g_Epsilon ) )
+                        if ( !( g_TestMedia[index].options & FLAGS_IGNORE_SLOWDOWN ) )
                         {
-                            pass = false;
-                            success = false;
-                            printe("ERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%S\n",
-                                   s_vcache[ vindex ], s_restart[ vindex ], szPath );
-                            print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
-                            print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
+                            if ( ( (acmr2 > acmr) && fabs( acmr2 - acmr ) > g_Epsilon )
+                                 || ( (atvr2 > atvr) && fabs( atvr2 - atvr ) > g_Epsilon ) )
+                            {
+                                pass = false;
+                                success = false;
+                                printe("ERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%S\n",
+                                       s_vcache[ vindex ], s_restart[ vindex ], szPath );
+                                print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
+                                print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
+                            }
                         }
                         break;
                     }

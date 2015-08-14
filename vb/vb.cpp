@@ -10,7 +10,7 @@
 #include "WaveFrontReader.h"
 #include "scoped.h"
 
-#include "directxmesh.h"
+#include "directxmeshp.h"
 
 using namespace DirectX;
 using namespace TestInputLayouts;
@@ -441,6 +441,13 @@ static const TestVB g_TestVBs[] =
     { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(0.533333f, 0.533333f, 0.533333f, 0.533333f), 2, 0x88, 0x88 },
     { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 2, 0xFF, 0xFF },
     { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(0.266667f, 0.533333f, 0.733333f, 1.0f), 2, 0x8B, 0xF4 },
+// DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM
+    { XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM, XMFLOAT4(0.5f, 0.5f, 0.5f, 0.666667f), 4, 0x00, 0xFD, 0xF3, 0x8F },
+    { XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 4, 0xFF, 0xFD, 0xF7, 0xDF },
+    { XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM, XMFLOAT4(0.25f, 0.5f, 0.75f, 0.0f), 4, 0x80, 0xFC, 0xF3, 0x17 },
+    { XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM, XMFLOAT4(-0.500978f, -0.500978f, -0.500978f, 0.666667f), 4, 0x00, 0x03, 0x0C, 0xB0 },
+    { XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM, XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), 4, 0x01, 0x06, 0x18, 0xE0 },
+    { XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM, XMFLOAT4(-0.25f, -0.5f, -0.75f, 0.0f), 4, 0x80, 0x03, 0x0C, 0x28 },
 };
 
 //-------------------------------------------------------------------------------------
@@ -637,12 +644,15 @@ bool Test03()
                 // Expected error cases
                 memset( buff.get(), 0xff, sizeof(XMVECTOR) * nVerts );
 
+                #pragma warning(push)
+                #pragma warning(disable:6387)
                 hr = reader->Read( buff.get(), nullptr, 0, nVerts );
                 if ( SUCCEEDED( hr ) )
                 {
                     success = false;
                     printe( "ERROR: VB reader with null semantic name should fail\n" );
                 }
+                #pragma warning(pop)
 
                 hr = reader->Read( buff.get(), "NORMAL", 0, nVerts );
                 if ( SUCCEEDED( hr ) )
@@ -1343,7 +1353,12 @@ bool Test07()
     for( size_t index=0; index < _countof(g_VBMedia); ++index )
     {
         WCHAR szPath[MAX_PATH];
-        ExpandEnvironmentStringsW( g_VBMedia[index].fname, szPath, MAX_PATH );
+        DWORD ret = ExpandEnvironmentStringsW(g_VBMedia[index].fname, szPath, MAX_PATH);
+        if ( !ret || ret > MAX_PATH )
+        {
+            printe( "ERROR: ExpandEnvironmentStrings FAILED\n" );
+            return false;
+        }
 
 #ifdef _DEBUG
         OutputDebugStringW(szPath);

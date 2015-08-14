@@ -241,6 +241,8 @@ bool Test11()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -268,6 +270,7 @@ bool Test11()
             printe("\nERROR: ComputeNormals(16) expected failure for bad vert count (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 16-bit (face-mapped cube)
@@ -626,6 +629,8 @@ bool Test11()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -653,6 +658,7 @@ bool Test11()
             printe("\nERROR: ComputeNormals(32) expected failure for bad vert count (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 32-bit (face-mapped cube)

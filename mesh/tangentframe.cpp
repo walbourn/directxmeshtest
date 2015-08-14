@@ -289,6 +289,8 @@ bool Test13()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = ComputeTangentFrame( g_fmCubeIndices16, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, D3D11_16BIT_INDEX_STRIP_CUT_VALUE,
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
@@ -336,6 +338,7 @@ bool Test13()
             printe("\nERROR: ComputeTangentFrame(16) [4] expected failure for both nullptr outputs (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 32-bit (face-mapped cube)
@@ -522,6 +525,8 @@ bool Test13()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = ComputeTangentFrame( g_fmCubeIndices32, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, D3D11_32BIT_INDEX_STRIP_CUT_VALUE,
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
@@ -569,6 +574,7 @@ bool Test13()
             printe("\nERROR: ComputeTangentFrame(32) [4] expected failure for both nullptr outputs (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Unused (16)

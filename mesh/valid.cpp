@@ -384,6 +384,8 @@ bool Test06()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385)
         hr = Validate( g_cubeIndices16, 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
@@ -404,6 +406,7 @@ bool Test06()
             printe("\nERROR: Validate(16) expected failure for 32-max value faces (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // 32-bit
@@ -524,6 +527,8 @@ bool Test06()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = Validate( g_cubeIndices32, 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
@@ -544,6 +549,7 @@ bool Test06()
             printe("\nERROR: Validate(32) expected failure for 32-max value faces (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     return success;

@@ -15,6 +15,8 @@
 
 using namespace DirectX;
 
+#pragma warning(disable:6262) // test code doesn't need conservative stack size
+
 //-------------------------------------------------------------------------------------
 // FinalizeIB
 bool Test03()
@@ -251,6 +253,8 @@ bool Test03()
         }        
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = FinalizeIB( g_fmCubeIndices16, 12, nullptr, 24, destib.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -322,6 +326,7 @@ bool Test03()
             printe("\nERROR: FinalizeIB(16) [in-place] expected failure for bad vert count (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Identity (32)
@@ -554,6 +559,8 @@ bool Test03()
         }        
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = FinalizeIB( g_fmCubeIndices32, 12, nullptr, 24, destib.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -625,6 +632,7 @@ bool Test03()
             printe("\nERROR: FinalizeIB(32) [in-place] expected failure for bad vert count (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Unused (16)
@@ -1205,6 +1213,8 @@ bool Test04()
         }        
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, nullptr, 0, nullptr, destvb.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -1263,6 +1273,7 @@ bool Test04()
             printe("\nERROR: FinalizeVB [in-place] expected failure for 32-max value verts (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Unused (4)
@@ -1822,7 +1833,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printf("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -1841,11 +1852,13 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printf("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = ReorderIB( g_cubeIndices16, 12, nullptr, destib.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -1875,6 +1888,7 @@ bool Test18()
             printe("\nERROR: ReorderIB(16) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Identity (32)
@@ -2094,7 +2108,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printf("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -2113,11 +2127,13 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printf("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = ReorderIB( g_cubeIndices32, 12, nullptr, destib.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -2147,6 +2163,7 @@ bool Test18()
             printe("\nERROR: ReorderIB(32) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Unused faces (16)
@@ -2186,7 +2203,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printf("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
     }
@@ -2244,7 +2261,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printf("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
     }
