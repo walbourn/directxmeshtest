@@ -958,7 +958,7 @@ bool Test04()
                         buff2.push_back( s_cubeVB[ j ].Tex );
                     }
 
-                    hr = writer->Write( &buff3.front(), "POSITION", 0, nVerts );
+                    hr = writer->Write( buff3.data(), "POSITION", 0, nVerts );
                     if ( FAILED(hr) )
                     {
                         success = false;
@@ -966,7 +966,7 @@ bool Test04()
                     }
                     else
                     {
-                        hr = writer->Write( &buff2.front(), "TEXCOORD", 0, nVerts );
+                        hr = writer->Write( buff2.data(), "TEXCOORD", 0, nVerts );
                         if ( FAILED(hr) )
                         {
                             success = false;
@@ -1400,7 +1400,7 @@ bool Test07()
 
         size_t nVerts = mesh->vertices.size();
 
-        hr = reader->AddStream( &mesh->vertices.front(), nVerts, 0, g_VBMedia[index].stride );
+        hr = reader->AddStream( mesh->vertices.data(), nVerts, 0, g_VBMedia[index].stride );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1452,7 +1452,7 @@ bool Test07()
             }
         }
 
-        if ( memcmp( &mesh->vertices.front(), vb.get(), nVerts * g_VBMedia[index].stride ) == 0 )
+        if ( memcmp( mesh->vertices.data(), vb.get(), nVerts * g_VBMedia[index].stride ) == 0 )
         {
             ++npass;
         }

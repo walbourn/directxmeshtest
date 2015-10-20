@@ -60,13 +60,13 @@ bool Test15()
         std::unique_ptr<uint32_t[]> remap( new uint32_t[ 12 ] );
         memset( remap.get(), 0xff, sizeof(uint32_t) * 12 );
 
-        HRESULT hr = AttributeSort( 12, &attributes.front(), remap.get() );
+        HRESULT hr = AttributeSort( 12, attributes.data(), remap.get() );
         if ( FAILED(hr) )
         {
             success = false;
             printe("ERROR: Attribute sort failed (%08X)\n", hr );
         }
-        else if ( memcmp( &attributes.front(), s_attributes, sizeof(s_attributes) ) != 0 )
+        else if ( memcmp( attributes.data(), s_attributes, sizeof(s_attributes) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort failed attributes\n" );
@@ -91,13 +91,13 @@ bool Test15()
         // identity
         memset( remap.get(), 0xff, sizeof(uint32_t) * 12 );
 
-        hr = AttributeSort( 12, &attributesId.front(), remap.get() );
+        hr = AttributeSort( 12, attributesId.data(), remap.get() );
         if ( FAILED(hr) )
         {
             success = false;
             printe("ERROR: Attribute sort identity failed (%08X)\n", hr );
         }
-        else if ( memcmp( &attributesId.front(), s_attributesId, sizeof(s_attributesId) ) != 0 )
+        else if ( memcmp( attributesId.data(), s_attributesId, sizeof(s_attributesId) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort identity failed attributes\n" );
@@ -115,13 +115,13 @@ bool Test15()
         // zero
         memset( remap.get(), 0xff, sizeof(uint32_t) * 12 );
 
-        hr = AttributeSort( 12, &attributesZero.front(), remap.get() );
+        hr = AttributeSort( 12, attributesZero.data(), remap.get() );
         if ( FAILED(hr) )
         {
             success = false;
             printe("ERROR: Attribute sort zero failed (%08X)\n", hr );
         }
-        else if ( memcmp( &attributesZero.front(), s_attributesZero, sizeof(s_attributesZero) ) != 0 )
+        else if ( memcmp( attributesZero.data(), s_attributesZero, sizeof(s_attributesZero) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort zero failed attributes\n" );
@@ -139,7 +139,7 @@ bool Test15()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = AttributeSort( UINT32_MAX, &attributesZero.front(), remap.get() );
+        hr = AttributeSort( UINT32_MAX, attributesZero.data(), remap.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: AttributeSort expected failure for 32-max value faces (%08X)\n", hr );

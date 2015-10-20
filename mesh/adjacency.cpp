@@ -2158,7 +2158,7 @@ bool Test19()
         for( uint32_t j = 0; j < 8; ++j )
             remap.push_back( j );
 
-        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, nullptr, 0, &remap.front(),
+        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, nullptr, 0, remap.data(),
                                              destvb.get(), preps.get() );
         if ( FAILED(hr) )
         {
@@ -2190,7 +2190,7 @@ bool Test19()
 
         memcpy( preps.get(), s_cubePointReps, sizeof(uint32_t) * 8 );
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, preps.get(), &remap.front() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, preps.get(), remap.data() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: FinalizeVBAndPointReps cube identity [in-place] failed (%08X)\n", hr );
@@ -2225,21 +2225,21 @@ bool Test19()
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), UINT32_MAX, 8, s_cubePointReps, nullptr, 0, &remap.front(), destvb.get(), preps.get() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), UINT32_MAX, 8, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps expected failure for bad stride value (%08X)\n", hr );
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, nullptr, 0, &remap.front(), destvb.get(), preps.get() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps expected failure for strip cut value (%08X)\n", hr );
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX, s_cubePointReps, nullptr, 0, &remap.front(), destvb.get(), preps.get() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps expected failure for 32-max value verts (%08X)\n", hr );
@@ -2258,21 +2258,21 @@ bool Test19()
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), UINT32_MAX, 8, preps.get(), &remap.front() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), UINT32_MAX, 8, preps.get(), remap.data() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for bad stride value (%08X)\n", hr );
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, preps.get(), &remap.front() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, preps.get(), remap.data() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for strip cut value (%08X)\n", hr );
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX, preps.get(), &remap.front() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX, preps.get(), remap.data() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for 32-max value verts (%08X)\n", hr );
@@ -2462,7 +2462,7 @@ bool Test20()
         for( uint32_t j = 0; j < 4; ++j )
             dups.push_back( j );
 
-        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, &dups.front(), dups.size(), &remap.front(),
+        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, dups.data(), dups.size(), remap.data(),
                                              destvb.get(), preps.get() );
         if ( FAILED(hr) )
         {
@@ -2547,7 +2547,7 @@ bool Test20()
         for( uint32_t j = 0; j < 4; ++j )
             dups.push_back( j );
 
-        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, &dups.front(), dups.size(), s_remap, destvb.get(), prout.get() );
+        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, dups.data(), dups.size(), s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVBAndPointReps dups fmcube failed (%08X)\n", hr );
@@ -2612,7 +2612,7 @@ bool Test20()
         for( uint32_t j = 0; j < 4; ++j )
             dups.push_back( j );
 
-        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, &dups.front(), dups.size(), s_remap, destvb.get(), prout.get() );
+        HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, dups.data(), dups.size(), s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVBAndPointReps dups unused failed (%08X)\n", hr );

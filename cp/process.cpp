@@ -112,7 +112,7 @@ bool Test01()
 #endif
 
         std::wstring msgs;
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -121,7 +121,7 @@ bool Test01()
         }
 
 #ifdef _DEBUG
-        hr = Validate(&mesh->indices.front(), nFaces, nVerts, nullptr, VALIDATE_DEGENERATE, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, nullptr, VALIDATE_DEGENERATE, &msgs );
         if ( FAILED(hr) )
         {
             OutputDebugStringW( msgs.c_str() );
@@ -136,7 +136,7 @@ bool Test01()
         std::unique_ptr<uint32_t[]> preps( new uint32_t[ nVerts ] );
         memset( preps.get(), 0xff, sizeof(uint32_t) * nVerts );
 
-        hr = GenerateAdjacencyAndPointReps( &mesh->indices.front(), nFaces, pos.get(), nVerts, 0.f, preps.get(), nullptr );
+        hr = GenerateAdjacencyAndPointReps( mesh->indices.data(), nFaces, pos.get(), nVerts, 0.f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             success = false;
@@ -154,7 +154,7 @@ bool Test01()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ mesh->indices.size() ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) *  mesh->indices.size() );
 
-        hr = GenerateAdjacencyAndPointReps( &mesh->indices.front(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
+        hr = GenerateAdjacencyAndPointReps( mesh->indices.data(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             success = false;
@@ -162,7 +162,7 @@ bool Test01()
             continue;
         }
 
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -173,7 +173,7 @@ bool Test01()
         std::unique_ptr<XMFLOAT3[]> normals( new XMFLOAT3[ nVerts ] );
         memset( normals.get(), 0xff, sizeof(XMFLOAT3) * nVerts );
 
-        hr = ComputeNormals( &mesh->indices.front(), nFaces, pos.get(), nVerts, CNORM_DEFAULT, normals.get() );
+        hr = ComputeNormals( mesh->indices.data(), nFaces, pos.get(), nVerts, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
             success = false;
@@ -241,7 +241,7 @@ bool Test01()
             for( size_t j = 0; j < nVerts; ++j )
                 texcoords[ j ] = mesh->vertices[ j ].textureCoordinate;
 
-            hr = ComputeTangentFrame( &mesh->indices.front(), nFaces, pos.get(), normals.get(), texcoords.get(), nVerts,
+            hr = ComputeTangentFrame( mesh->indices.data(), nFaces, pos.get(), normals.get(), texcoords.get(), nVerts,
                                       tangents.get(), bitangents.get() );
             if ( FAILED(hr) )
             {
@@ -428,7 +428,7 @@ bool Test02()
 #endif
 
         std::wstring msgs;
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -443,7 +443,7 @@ bool Test02()
         for( size_t j = 0; j < nVerts; ++j )
             pos[ j ] = mesh->vertices[ j ].position;
 
-        hr = GenerateAdjacencyAndPointReps( &mesh->indices.front(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
+        hr = GenerateAdjacencyAndPointReps( mesh->indices.data(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             success = false;
@@ -451,7 +451,7 @@ bool Test02()
             continue;
         }
 
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -461,7 +461,7 @@ bool Test02()
 
         // bowties
         std::unique_ptr<uint16_t[]> newIndices( new uint16_t[ nFaces * 3 ] );
-        memcpy( newIndices.get(), &mesh->indices.front(), sizeof(uint16_t) * nFaces * 3 );
+        memcpy( newIndices.get(), mesh->indices.data(), sizeof(uint16_t) * nFaces * 3 );
 
         std::unique_ptr<uint32_t[]> newAdj( new uint32_t[ mesh->indices.size() ] );
         memcpy( newAdj.get(), adj.get(), sizeof(uint32_t) * nFaces * 3 );
@@ -499,7 +499,7 @@ bool Test02()
             for( size_t j = 0; j < mesh->attributes.size(); ++j )
                 attributes[ j ] = mesh->attributes[ j ];
 
-            memcpy( newIndices.get(), &mesh->indices.front(), sizeof(uint16_t) * nFaces * 3 );
+            memcpy( newIndices.get(), mesh->indices.data(), sizeof(uint16_t) * nFaces * 3 );
             memcpy( newAdj.get(), adj.get(), sizeof(uint32_t) * nFaces * 3 );
 
             dupVerts.clear();
@@ -532,7 +532,7 @@ bool Test02()
             for( size_t j = 0; j < mesh->attributes.size(); ++j )
                 attributes[ j ] = mesh->attributes[ j ];
 
-            memcpy( newIndices.get(), &mesh->indices.front(), sizeof(uint16_t) * nFaces * 3 );
+            memcpy( newIndices.get(), mesh->indices.data(), sizeof(uint16_t) * nFaces * 3 );
             memcpy( newAdj.get(), adj.get(), sizeof(uint32_t) * nFaces * 3 );
 
             dupVerts.clear();
@@ -632,7 +632,7 @@ bool Test03()
 #endif
 
         std::wstring msgs;
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -647,7 +647,7 @@ bool Test03()
         for( size_t j = 0; j < nVerts; ++j )
             pos[ j ] = mesh->vertices[ j ].position;
 
-        hr = GenerateAdjacencyAndPointReps( &mesh->indices.front(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
+        hr = GenerateAdjacencyAndPointReps( mesh->indices.data(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             success = false;
@@ -655,7 +655,7 @@ bool Test03()
             continue;
         }
 
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -671,7 +671,7 @@ bool Test03()
         for( size_t vindex = 0; vindex < _countof( s_vcache ); ++vindex )
         {
             float acmr, atvr;
-            ComputeVertexCacheMissRate( &mesh->indices.front(), nFaces, nVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
+            ComputeVertexCacheMissRate( mesh->indices.data(), nFaces, nVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
 
 #ifdef _DEBUG
             sprintf_s( output, "INFO: original: %u vache, ACMR %f, ATVR %f\n", ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
@@ -681,7 +681,7 @@ bool Test03()
             std::unique_ptr<uint32_t[]> faceRemap( new uint32_t[ nFaces ] );
             memset( faceRemap.get(), 0xff, sizeof(uint32_t) * nFaces );
 
-            hr = OptimizeFaces( &mesh->indices.front(), nFaces, adj.get(), faceRemap.get(), s_vcache[ vindex ], s_restart[ vindex ] );
+            hr = OptimizeFaces( mesh->indices.data(), nFaces, adj.get(), faceRemap.get(), s_vcache[ vindex ], s_restart[ vindex ] );
             if ( FAILED(hr) )
             {
                 pass = false;
@@ -689,7 +689,7 @@ bool Test03()
                 printe("ERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
                 continue;
             }
-            else if ( !IsValidFaceRemap( &mesh->indices.front(), faceRemap.get(), nFaces ) )
+            else if ( !IsValidFaceRemap( mesh->indices.data(), faceRemap.get(), nFaces ) )
             {
                 pass = false;
                 success = false;
@@ -699,7 +699,7 @@ bool Test03()
             else
             {
                 std::unique_ptr<uint16_t[]> newIndices( new uint16_t[ nFaces * 3 ] );
-                hr = ReorderIB( &mesh->indices.front(), nFaces, faceRemap.get(), newIndices.get() );
+                hr = ReorderIB( mesh->indices.data(), nFaces, faceRemap.get(), newIndices.get() );
                 if ( FAILED(hr) )
                 {
                     pass = false;
@@ -790,7 +790,7 @@ bool Test03()
                     }
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nVerts ] );
-                    hr = FinalizeVB( &mesh->vertices.front(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts, nullptr, 0, 
+                    hr = FinalizeVB( mesh->vertices.data(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts, nullptr, 0, 
                                      vertRemap.get(), vb.get() );
                     if ( FAILED(hr) )
                     {
@@ -872,7 +872,7 @@ bool Test04()
 #endif
 
         std::wstring msgs;
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -887,7 +887,7 @@ bool Test04()
         for( size_t j = 0; j < nVerts; ++j )
             pos[ j ] = mesh->vertices[ j ].position;
 
-        hr = GenerateAdjacencyAndPointReps( &mesh->indices.front(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
+        hr = GenerateAdjacencyAndPointReps( mesh->indices.data(), nFaces, pos.get(), nVerts, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             success = false;
@@ -895,7 +895,7 @@ bool Test04()
             continue;
         }
 
-        hr = Validate( &mesh->indices.front(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
+        hr = Validate( mesh->indices.data(), nFaces, nVerts, adj.get(), VALIDATE_DEFAULT | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( FAILED(hr) )
         {
             success = false;
@@ -909,7 +909,7 @@ bool Test04()
             attributes[ j ] = mesh->attributes[ j ];
 
         std::unique_ptr<uint16_t[]> sortedIndices( new uint16_t[ nFaces * 3 ] );
-        memcpy( sortedIndices.get(), &mesh->indices.front(), sizeof(uint16_t) * nFaces * 3 );
+        memcpy( sortedIndices.get(), mesh->indices.data(), sizeof(uint16_t) * nFaces * 3 );
 
         std::vector<uint32_t> dupVerts;
         hr = Clean( sortedIndices.get(), nFaces, nVerts, adj.get(), attributes.get(), dupVerts );
@@ -1102,8 +1102,8 @@ bool Test04()
                     }
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nTotalVerts ] );
-                    hr = FinalizeVB( &mesh->vertices.front(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts,
-                                     dupVerts.empty() ? nullptr : &dupVerts.front(), dupVerts.size(), 
+                    hr = FinalizeVB( mesh->vertices.data(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts,
+                                     dupVerts.empty() ? nullptr : dupVerts.data(), dupVerts.size(), 
                                      vertRemap.get(), vb.get() );
                     if ( FAILED(hr) )
                     {

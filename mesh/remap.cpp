@@ -147,7 +147,7 @@ bool Test03()
 
         auto destib = CreateIndexBuffer<uint16_t>( 1023, IB_ZERO );
 
-        HRESULT hr = FinalizeIB( srcib.get(), 341, &remap.front(), 1024, destib.get() );
+        HRESULT hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024, destib.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeIB(16) shuffle failed (%08X)\n", hr );
@@ -168,7 +168,7 @@ bool Test03()
 
         auto srcib2 = CreateIndexBuffer<uint16_t>( 1023, IB_IDENTITY );
 
-        hr = FinalizeIB( srcib.get(), 341, &remap.front(), 1024 );
+        hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024 );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeIB(16) shuffle [in-place] failed (%08X)\n", hr );
@@ -453,7 +453,7 @@ bool Test03()
 
         auto destib = CreateIndexBuffer<uint32_t>( 1023, IB_ZERO );
 
-        HRESULT hr = FinalizeIB( srcib.get(), 341, &remap.front(), 1024, destib.get() );
+        HRESULT hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024, destib.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeIB(32) shuffle failed (%08X)\n", hr );
@@ -474,7 +474,7 @@ bool Test03()
 
         auto srcib2 = CreateIndexBuffer<uint32_t>( 1023, IB_IDENTITY );
 
-        hr = FinalizeIB( srcib.get(), 341, &remap.front(), 1024 );
+        hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024 );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeIB(32) shuffle [in-place] failed (%08X)\n", hr );
@@ -846,7 +846,7 @@ bool Test04()
 
         auto destvb = CreateVertexBuffer( 32, 65535 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) identity failed (%08X)\n", hr );
@@ -872,7 +872,7 @@ bool Test04()
             }
         }
 
-        hr = FinalizeVB( srcvb.get(), 32, 65535, &remap.front() );
+        hr = FinalizeVB( srcvb.get(), 32, 65535, remap.data() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) identity [in-place] failed (%08X)\n", hr );
@@ -910,7 +910,7 @@ bool Test04()
 
         auto destvb = CreateVertexBuffer( 32, 65535 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) reverse failed (%08X)\n", hr );
@@ -922,7 +922,7 @@ bool Test04()
             success = false;
         }
 
-        hr = FinalizeVB( srcvb.get(), 32, 65535, &remap.front() );
+        hr = FinalizeVB( srcvb.get(), 32, 65535, remap.data() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) reverse [in-place] failed (%08X)\n", hr );
@@ -949,7 +949,7 @@ bool Test04()
 
         auto destvb = CreateVertexBuffer( 32, 65535 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) shuffle failed (%08X)\n", hr );
@@ -971,7 +971,7 @@ bool Test04()
             }
         }
 
-        hr = FinalizeVB( srcvb.get(), 32, 65535, &remap.front() );
+        hr = FinalizeVB( srcvb.get(), 32, 65535, remap.data() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) shuffle [in-place] failed (%08X)\n", hr );
@@ -1005,7 +1005,7 @@ bool Test04()
 
         auto destvb = CreateVertexBuffer( 16, 65535 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) identity failed (%08X)\n", hr );
@@ -1031,7 +1031,7 @@ bool Test04()
             }
         }
 
-        hr = FinalizeVB( srcvb.get(), 16, 65535, &remap.front() );
+        hr = FinalizeVB( srcvb.get(), 16, 65535, remap.data() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) identity [in-place] failed (%08X)\n", hr );
@@ -1069,7 +1069,7 @@ bool Test04()
 
         auto destvb = CreateVertexBuffer( 16, 65535 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) reverse failed (%08X)\n", hr );
@@ -1081,7 +1081,7 @@ bool Test04()
             success = false;
         }
 
-        hr = FinalizeVB( srcvb.get(), 16, 65535, &remap.front() );
+        hr = FinalizeVB( srcvb.get(), 16, 65535, remap.data() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) reverse [in-place] failed (%08X)\n", hr );
@@ -1108,7 +1108,7 @@ bool Test04()
 
         auto destvb = CreateVertexBuffer( 16, 65535 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) shuffle failed (%08X)\n", hr );
@@ -1130,7 +1130,7 @@ bool Test04()
             }
         }
 
-        hr = FinalizeVB( srcvb.get(), 16, 65535, &remap.front() );
+        hr = FinalizeVB( srcvb.get(), 16, 65535, remap.data() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) shuffle [in-place] failed (%08X)\n", hr );
@@ -1342,7 +1342,7 @@ bool Test05()
 
         auto destvb = CreateVertexBuffer( 32, 65535 + 256 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, &dups.front(), dups.size(), &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) dups identity [remap] failed (%08X)\n", hr );
@@ -1376,7 +1376,7 @@ bool Test05()
 
         memset( destvb.get(), 0, sizeof(32) * ( 65535 + 256 ) );
 
-        hr = FinalizeVB( srcvb.get(), 32, 65535, &dups.front(), dups.size(), nullptr, destvb.get() );
+        hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), nullptr, destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) dups identity failed (%08X)\n", hr );
@@ -1425,7 +1425,7 @@ bool Test05()
 
         auto destvb = CreateVertexBuffer( 32, 65535 + 256 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, &dups.front(), dups.size(), &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) dups reverse [remap] failed (%08X)\n", hr );
@@ -1478,7 +1478,7 @@ bool Test05()
 
         auto destvb = CreateVertexBuffer( 32, 65535 + 256 );
 
-        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, &dups.front(), dups.size(), &remap.front(), destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) dups shuffle [remap] failed (%08X)\n", hr );
@@ -1542,7 +1542,7 @@ bool Test05()
                                             19, 16, 21, 22, 20, 23,
                                              3, 2, 1, 0 };
 
-        HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, &dups.front(), dups.size(), s_remap, destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, dups.data(), dups.size(), s_remap, destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(4) dups fmcube failed (%08X)\n", hr );
@@ -1589,7 +1589,7 @@ bool Test05()
                                             19, 16, 21, 22, 20, 23,
                                             3, 0, 1, 0 };
 
-        HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, &dups.front(), dups.size(), s_remap, destvb.get() );
+        HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, dups.data(), dups.size(), s_remap, destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(4) dups unused failed (%08X)\n", hr );

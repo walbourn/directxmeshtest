@@ -244,7 +244,7 @@ bool Test22()
         ShapesGenerator<uint16_t>::CreateSphere( indices, vertices, 1.f, 16, false );
 
         float acmr, atvr;
-        ComputeVertexCacheMissRate( &indices.front(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
         if ( fabs(acmr - 1.016098f) > g_Epsilon
              || fabs(atvr - 1.912656f) > g_Epsilon )
@@ -261,7 +261,7 @@ bool Test22()
         ShapesGenerator<uint16_t>::CreateCylinder( indices, vertices, 1.f, 1.f, 32, false );
 
         float acmr, atvr;
-        ComputeVertexCacheMissRate( &indices.front(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
         if ( fabs(acmr - 1.079365f) > g_Epsilon
              || fabs(atvr - 1.046154f) > g_Epsilon )
@@ -278,7 +278,7 @@ bool Test22()
         ShapesGenerator<uint16_t>::CreateTorus( indices, vertices, 1.f, 0.333f, 32, false );
 
         float acmr, atvr;
-        ComputeVertexCacheMissRate( &indices.front(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
         if ( fabs(acmr - 1.015611f) > g_Epsilon
              || fabs(atvr - 2.031221f) > g_Epsilon )
@@ -333,7 +333,7 @@ bool Test22()
         ShapesGenerator<uint32_t>::CreateSphere( indices, vertices, 1.f, 16, false );
 
         float acmr, atvr;
-        ComputeVertexCacheMissRate( &indices.front(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
         if ( fabs(acmr - 1.016098f) > g_Epsilon
              || fabs(atvr - 1.912656f) > g_Epsilon )
@@ -350,7 +350,7 @@ bool Test22()
         ShapesGenerator<uint32_t>::CreateCylinder( indices, vertices, 1.f, 1.f, 32, false );
 
         float acmr, atvr;
-        ComputeVertexCacheMissRate( &indices.front(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
         if ( fabs(acmr - 1.079365f) > g_Epsilon
              || fabs(atvr - 1.046154f) > g_Epsilon )
@@ -367,7 +367,7 @@ bool Test22()
         ShapesGenerator<uint32_t>::CreateTorus( indices, vertices, 1.f, 0.333f, 32, false );
 
         float acmr, atvr;
-        ComputeVertexCacheMissRate( &indices.front(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
         if ( fabs(acmr - 1.015611f) > g_Epsilon
              || fabs(atvr - 2.031221f) > g_Epsilon )
@@ -409,7 +409,7 @@ bool Test24()
             printe("ERROR: ComputeSubsets null failed count %Iu .. 1\n", subsets.size() );
             success = false;
         }
-        else if ( memcmp( s_result, &subsets.front(), sizeof(s_result) ) != 0 )
+        else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
@@ -444,7 +444,7 @@ bool Test24()
             printe("ERROR: ComputeSubsets identity failed count %Iu .. 12\n", subsets.size() );
             success = false;
         }
-        else if ( memcmp( s_result, &subsets.front(), sizeof(s_result) ) != 0 )
+        else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
@@ -468,7 +468,7 @@ bool Test24()
             printe("ERROR: ComputeSubsets zero failed count %Iu .. 1\n", subsets.size() );
             success = false;
         }
-        else if ( memcmp( s_result, &subsets.front(), sizeof(s_result) ) != 0 )
+        else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
@@ -502,7 +502,7 @@ bool Test24()
             printe("ERROR: ComputeSubsets unsorted failed count %Iu .. 11\n", subsets.size() );
             success = false;
         }
-        else if ( memcmp( s_result, &subsets.front(), sizeof(s_result) ) != 0 )
+        else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
@@ -531,7 +531,7 @@ bool Test24()
             printe("ERROR: ComputeSubsets sorted failed count %Iu .. 6\n", subsets.size() );
             success = false;
         }
-        else if ( memcmp( s_result, &subsets.front(), sizeof(s_result) ) != 0 )
+        else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
@@ -559,7 +559,7 @@ bool Test24()
             printe("ERROR: ComputeSubsets sorted (2) failed count %Iu .. 5\n", subsets.size() );
             success = false;
         }
-        else if ( memcmp( s_result, &subsets.front(), sizeof(s_result) ) != 0 )
+        else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {

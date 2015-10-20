@@ -461,7 +461,7 @@ bool Test14()
             printe("ERROR: Clean(16) tetra [bowties] failed unexpected number of dups %Iu\n", dups.size() );
             success = false;
         }
-        else if ( memcmp( &dups.front(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
+        else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
         {
             printe("ERROR: Clean(16) tetra [bowties] failed (3)\n" );
             success = false;
@@ -579,7 +579,7 @@ bool Test14()
             printe("ERROR: Clean(16) bface [bowties] failed unexpected number of dups %Iu\n", dups.size() );
             success = false;
         }
-        else if ( memcmp( &dups.front(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
+        else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
         {
             printe("ERROR: Clean(16) bface [bowties] failed (3)\n" );
             success = false;
@@ -697,7 +697,7 @@ bool Test14()
             printe("ERROR: Clean(16) bowtie [bowties] failed unexpected number of dups %Iu\n", dups.size() );
             success = false;
         }
-        else if ( memcmp( &dups.front(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
+        else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
         {
             printe("ERROR: Clean(16) bowtie [bowties] failed (3)\n" );
             success = false;
@@ -1041,7 +1041,7 @@ bool Test14()
             printe("ERROR: Clean(32) tetra [bowties] failed unexpected number of dups %Iu\n", dups.size() );
             success = false;
         }
-        else if ( memcmp( &dups.front(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
+        else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
         {
             printe("ERROR: Clean(32) tetra [bowties] failed (3)\n" );
             success = false;
@@ -1159,7 +1159,7 @@ bool Test14()
             printe("ERROR: Clean(32) bface [bowties] failed unexpected number of dups %Iu\n", dups.size() );
             success = false;
         }
-        else if ( memcmp( &dups.front(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
+        else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
         {
             printe("ERROR: Clean(32) bface [bowties] failed (3)\n" );
             success = false;
@@ -1277,7 +1277,7 @@ bool Test14()
             printe("ERROR: Clean(32) bowtie [bowties] failed unexpected number of dups %Iu\n", dups.size() );
             success = false;
         }
-        else if ( memcmp( &dups.front(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
+        else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
         {
             printe("ERROR: Clean(32) bowtie [bowties] failed (3)\n" );
             success = false;
