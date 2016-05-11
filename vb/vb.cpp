@@ -1352,7 +1352,7 @@ bool Test07()
 
     for( size_t index=0; index < _countof(g_VBMedia); ++index )
     {
-        WCHAR szPath[MAX_PATH];
+        wchar_t szPath[MAX_PATH];
         DWORD ret = ExpandEnvironmentStringsW(g_VBMedia[index].fname, szPath, MAX_PATH);
         if ( !ret || ret > MAX_PATH )
         {
@@ -1365,7 +1365,7 @@ bool Test07()
         OutputDebugStringA("\n");
 #endif
 
-        WCHAR ext[_MAX_EXT];
+        wchar_t ext[_MAX_EXT];
         _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 
         std::unique_ptr<WaveFrontReader<uint16_t>> mesh( new WaveFrontReader<uint16_t>() );

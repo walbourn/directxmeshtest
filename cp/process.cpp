@@ -63,7 +63,7 @@ bool Test01()
 
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
-        WCHAR szPath[MAX_PATH];
+        wchar_t szPath[MAX_PATH];
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
         if ( !ret || ret > MAX_PATH )
         {
@@ -76,7 +76,7 @@ bool Test01()
         OutputDebugStringA("\n");
 #endif
 
-        WCHAR ext[_MAX_EXT];
+        wchar_t ext[_MAX_EXT];
         _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 
         ++ncount;
@@ -379,7 +379,7 @@ bool Test02()
 
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
-        WCHAR szPath[MAX_PATH];
+        wchar_t szPath[MAX_PATH];
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
         if ( !ret || ret > MAX_PATH )
         {
@@ -392,7 +392,7 @@ bool Test02()
         OutputDebugStringA("\n");
 #endif
 
-        WCHAR ext[_MAX_EXT];
+        wchar_t ext[_MAX_EXT];
         _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 
         ++ncount;
@@ -583,7 +583,7 @@ bool Test03()
 
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
-        WCHAR szPath[MAX_PATH];
+        wchar_t szPath[MAX_PATH];
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
         if ( !ret || ret > MAX_PATH )
         {
@@ -596,7 +596,7 @@ bool Test03()
         OutputDebugStringA("\n");
 #endif
 
-        WCHAR ext[_MAX_EXT];
+        wchar_t ext[_MAX_EXT];
         _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 
         ++ncount;
@@ -823,7 +823,7 @@ bool Test04()
 
     for( size_t index=0; index < _countof(g_TestMedia); ++index )
     {
-        WCHAR szPath[MAX_PATH];
+        wchar_t szPath[MAX_PATH];
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
         if ( !ret || ret > MAX_PATH )
         {
@@ -836,7 +836,7 @@ bool Test04()
         OutputDebugStringA("\n");
 #endif
 
-        WCHAR ext[_MAX_EXT];
+        wchar_t ext[_MAX_EXT];
         _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 
         ++ncount;
