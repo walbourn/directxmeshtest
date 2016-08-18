@@ -1253,7 +1253,7 @@ bool Test05()
             }
             else
             {
-                XMVECTOR temp;
+                __declspec(align(16)) XMVECTOR temp;
                 hr = reader->Read( &temp, "DATA", 0, 1 );
                 if ( FAILED(hr) )
                 {
