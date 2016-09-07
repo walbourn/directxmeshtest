@@ -13,6 +13,8 @@
 // http://go.microsoft.com/fwlink/?LinkID=324981
 //-------------------------------------------------------------------------------------
 
+#pragma once
+
 #include <d3d11_1.h>
 
 namespace TestInputLayouts

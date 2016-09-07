@@ -13,8 +13,7 @@
 // http://go.microsoft.com/fwlink/?LinkID=324981
 //--------------------------------------------------------------------------------------
 
-#define NOMINMAX
-#include <windows.h>
+#pragma once
 
 #include <algorithm>
 #include <vector>
