@@ -450,6 +450,122 @@ static const TestVB g_TestVBs[] =
     { XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM, XMFLOAT4(-0.25f, -0.5f, -0.75f, 0.0f), 4, 0x80, 0x03, 0x0C, 0x28 },
 };
 
+static const TestVB g_TestVBs_x2Bias[] =
+{
+// DXGI_FORMAT_R16G16B16A16_UNORM
+    { DXGI_FORMAT_R16G16B16A16_UNORM, XMFLOAT4(-1.0f, -1.0f, -1.0f, -1.0f), 8, 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 },
+    { DXGI_FORMAT_R16G16B16A16_UNORM, XMFLOAT4(-0.5f, -0.5f, -0.5f, -0.5f), 8, 0x00,0x40,0x00,0x40,0x00,0x40,0x00,0x40 },
+    { DXGI_FORMAT_R16G16B16A16_UNORM, XMFLOAT4(0.f, 0.f, 0.f, 0.f), 8, 0x00,0x80,0x00,0x80,0x00,0x80,0x00,0x80 },
+    { DXGI_FORMAT_R16G16B16A16_UNORM, XMFLOAT4(0.5f, 0.5f, 0.5f, 0.5f), 8, 0xFF,0xBF,0xFF,0xBF,0xFF,0xBF,0xFF,0xBF },
+    { DXGI_FORMAT_R16G16B16A16_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 8, 0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF },
+    { DXGI_FORMAT_R16G16B16A16_UNORM, XMFLOAT4(-0.25f, 0.5f, -0.75f, 1.0f), 8, 0x00,0x60,0xFF,0xBF,0x00,0x20,0xFF,0xFF },
+// DXGI_FORMAT_R10G10B10A2_UNORM
+    { DXGI_FORMAT_R10G10B10A2_UNORM, XMFLOAT4(-1.0f, -1.0f, -1.0f, 0.666667f), 4, 0x00,0x00,0x00,0x80 },
+    { DXGI_FORMAT_R10G10B10A2_UNORM, XMFLOAT4(-0.5f, -0.5f, -0.5f, 0.666667f), 4, 0xFF,0xFC,0xF3,0x8F },
+    { DXGI_FORMAT_R10G10B10A2_UNORM, XMFLOAT4(0.5f, 0.5f, 0.5f, 0.666667f), 4, 0xFF,0xFE,0xFB,0xAF },
+    { DXGI_FORMAT_R10G10B10A2_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 4, 0xFF,0xFF,0xFF,0xFF },
+    { DXGI_FORMAT_R10G10B10A2_UNORM, XMFLOAT4(-0.25f, 0.5f, -0.75f, 0.0f), 4, 0x7F,0xFD,0xFB,0x07 },
+// DXGI_FORMAT_R11G11B10_FLOAT
+    { DXGI_FORMAT_R11G11B10_FLOAT, XMFLOAT4(-1.0f, -1.0f, -1.0f, 0.f), 4, 0x00,0x00,0x00,0x00 },
+    { DXGI_FORMAT_R11G11B10_FLOAT, XMFLOAT4(-0.5f, -0.5f, -0.5f, 0.f), 4, 0x40,0x03,0x1A,0x68 },
+    { DXGI_FORMAT_R11G11B10_FLOAT, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 4, 0x80,0x03,0x1C,0x70 },
+    { DXGI_FORMAT_R11G11B10_FLOAT, XMFLOAT4(0.5f, 0.5f, 0.5f, 0.f), 4, 0xA0,0x03,0x1D,0x74 },
+    { DXGI_FORMAT_R11G11B10_FLOAT, XMFLOAT4(1.0f, 1.0f, 1.0f, 0.f), 4, 0xC0,0x03,0x1E,0x78 },
+    { DXGI_FORMAT_R11G11B10_FLOAT, XMFLOAT4(-.25, 0.5f, -0.75f, 0.f), 4, 0x60,0x03,0x1D,0x60 },
+// DXGI_FORMAT_R8G8B8A8_UNORM
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(-1.0f, -1.0f, -1.0f, -1.f), 4, 0x00,0x00,0x00,0x00 },
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(-0.5f, -0.5f, -0.5f, -0.5f), 4, 0x3F,0x3F,0x3F,0x3F },
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 4, 0x7F, 0x7F, 0x7F, 0x7F },
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(0.5f, 0.5f, 0.5f, 0.5f), 4, 0xBF,0xBF,0xBF,0xBF },
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 4, 0xFF,0xFF,0xFF,0xFF },
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(-0.25f, 0.5f, -0.75f, 1.0f), 4, 0x5F,0xBF,0x1F,0xFF },
+// DXGI_FORMAT_R16G16_UNORM
+    { DXGI_FORMAT_R16G16_UNORM, XMFLOAT4(-1.0f, -1.0f, 0.0f, 0.f), 4, 0x00,0x00,0x00,0x00 },
+    { DXGI_FORMAT_R16G16_UNORM, XMFLOAT4(-0.5f, -0.5f, 0.0f, 0.f), 4, 0x00,0x40,0x00,0x40 },
+    { DXGI_FORMAT_R16G16_UNORM, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 4, 0x00,0x80,0x00,0x80 },
+    { DXGI_FORMAT_R16G16_UNORM, XMFLOAT4(1.0f, 1.0f, 0.0f, 0.f), 4, 0xFF,0xFF,0xFF,0xFF },
+    { DXGI_FORMAT_R16G16_UNORM, XMFLOAT4(-0.25f, 0.5f, 0.0f, 0.f), 4, 0x00,0x60,0xFF,0xBF },
+// DXGI_FORMAT_R8G8_UNORM
+    { DXGI_FORMAT_R8G8_UNORM, XMFLOAT4(-1.0f, -1.0f, 0.0f, 0.f), 2, 0x00,0x00 },
+    { DXGI_FORMAT_R8G8_UNORM, XMFLOAT4(-0.5f, -0.5f, 0.0f, 0.f), 2, 0x40,0x40 },
+    { DXGI_FORMAT_R8G8_UNORM, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 2, 0x80,0x80 },
+    { DXGI_FORMAT_R8G8_UNORM, XMFLOAT4(1.0f, 1.0f, 0.0f, 0.f), 2, 0xFF, 0xFF },
+    { DXGI_FORMAT_R8G8_UNORM, XMFLOAT4(0.25f, -0.5f, 0.0f, 0.f), 2, 0x9F,0x40 },
+// DXGI_FORMAT_R16_UNORM
+    { DXGI_FORMAT_R16_UNORM, XMFLOAT4(-1.0f, 0.0f, 0.0f, 0.f), 2, 0x00,0x00 },
+    { DXGI_FORMAT_R16_UNORM, XMFLOAT4(-0.5f, 0.0f, 0.0f, 0.f), 2, 0x00,0x40 },
+    { DXGI_FORMAT_R16_UNORM, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 2, 0x00,0x80 },
+    { DXGI_FORMAT_R16_UNORM, XMFLOAT4(0.5f, 0.0f, 0.0f, 0.f), 2, 0xFF,0xBF },
+    { DXGI_FORMAT_R16_UNORM, XMFLOAT4(1.0f, 0.0f, 0.0f, 0.f), 2, 0xFF,0xFF },
+    { DXGI_FORMAT_R16_UNORM, XMFLOAT4(0.25f, 0.0f, 0.0f, 0.f), 2, 0xFF,0x9F },
+// DXGI_FORMAT_R8_UNORM
+    { DXGI_FORMAT_R8_UNORM, XMFLOAT4(-1.0f, 0.0f, 0.0f, 0.f), 1, 0x00 },
+    { DXGI_FORMAT_R8_UNORM, XMFLOAT4(-0.5f, 0.0f, 0.0f, 0.f), 1, 0x3F },
+    { DXGI_FORMAT_R8_UNORM, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 1, 0x7F },
+    { DXGI_FORMAT_R8_UNORM, XMFLOAT4(0.5f, 0.0f, 0.0f, 0.f), 1, 0xBF },
+    { DXGI_FORMAT_R8_UNORM, XMFLOAT4(1.0f, 0.0f, 0.0f, 0.f), 1, 0xFF },
+    { DXGI_FORMAT_R8_UNORM, XMFLOAT4(0.25f, 0.0f, 0.0f, 0.f), 1, 0x9F },
+// DXGI_FORMAT_B5G6R5_UNORM
+    { DXGI_FORMAT_B5G6R5_UNORM, XMFLOAT4(-1.f, -1.f, -1.f, 0.f), 2, 0x00,0x00 },
+    { DXGI_FORMAT_B5G6R5_UNORM, XMFLOAT4(-0.483871f, -0.523809f, -0.483871f, 0.f), 2, 0xE8,0x41 },
+    { DXGI_FORMAT_B5G6R5_UNORM, XMFLOAT4(0.032258f, 0.015873f, 0.032258f, 0.f), 2, 0x10,0x84 },
+    { DXGI_FORMAT_B5G6R5_UNORM, XMFLOAT4(0.548387f, 0.523810f, 0.548387f, 0.f), 2, 0x18,0xC6 },
+    { DXGI_FORMAT_B5G6R5_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 0.f), 2, 0xFF, 0xFF },
+    { DXGI_FORMAT_B5G6R5_UNORM, XMFLOAT4(0.225806f, -0.523809f, 0.741935f, 0.f), 2, 0xFB,0x99 },
+// DXGI_FORMAT_B5G5R5A1_UNORM
+    { DXGI_FORMAT_B5G5R5A1_UNORM, XMFLOAT4(-1.f, -1.f, -1.f, 0.f), 2, 0x00,0x00 },
+    { DXGI_FORMAT_B5G5R5A1_UNORM, XMFLOAT4(-0.483871f, -0.483871f, -0.483871f, 0.f), 2, 0x08,0x21 },
+    { DXGI_FORMAT_B5G5R5A1_UNORM, XMFLOAT4(0.032258f, 0.032258f, 0.032258f, 0.f), 2, 0x10,0x42},
+    { DXGI_FORMAT_B5G5R5A1_UNORM, XMFLOAT4(0.483871f, 0.483871f, 0.483871f, 1.f), 2, 0xF7,0xDE },
+    { DXGI_FORMAT_B5G5R5A1_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 2, 0xFF,0xFF },
+    { DXGI_FORMAT_B5G5R5A1_UNORM, XMFLOAT4(0.290323f, -0.548387f, 0.741935f, 1.0f), 2, 0xFB,0xD0 },
+// DXGI_FORMAT_B8G8R8A8_UNORM
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(-1.0f, -1.0f, -1.0f, -1.f), 4, 0x00,0x00,0x00,0x00 },
+    { DXGI_FORMAT_B8G8R8A8_UNORM, XMFLOAT4(-0.5f, -0.5f, -0.5f, -0.5f), 4, 0x3F,0x3F,0x3F,0x3F },
+    { DXGI_FORMAT_B8G8R8A8_UNORM, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 4, 0x7F, 0x7F, 0x7F, 0x7F },
+    { DXGI_FORMAT_B8G8R8A8_UNORM, XMFLOAT4(0.5f, 0.5f, 0.5f, 0.5f), 4, 0xBF,0xBF,0xBF,0xBF },
+    { DXGI_FORMAT_R8G8B8A8_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 4, 0xFF,0xFF,0xFF,0xFF },
+    { DXGI_FORMAT_B8G8R8A8_UNORM, XMFLOAT4(-0.25f, 0.5f, -0.75f, 1.0f), 4, 0x1F,0xBF,0x5F,0xFF },
+// DXGI_FORMAT_B8G8R8X8_UNORM
+    { DXGI_FORMAT_B8G8R8X8_UNORM, XMFLOAT4(-1.0f, -1.0f, -1.0f, 0.f), 4, 0x00,0x00,0x00,0x00 },
+    { DXGI_FORMAT_B8G8R8X8_UNORM, XMFLOAT4(-0.5f, -0.5f, -0.5f, 0.f), 4, 0x3F,0x3F,0x3F,0x00 },
+    { DXGI_FORMAT_B8G8R8X8_UNORM, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.f), 4, 0x7F,0x7F,0x7F,0x00 },
+    { DXGI_FORMAT_B8G8R8X8_UNORM, XMFLOAT4(0.5f, 0.5f, 0.5f, 0.f), 4, 0xBF,0xBF,0xBF,0x00 },
+    { DXGI_FORMAT_B8G8R8X8_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 0.f), 4, 0xFF,0xFF,0xFF,0x00 },
+    { DXGI_FORMAT_B8G8R8X8_UNORM, XMFLOAT4(-0.25f, 0.5f, -0.75f, 0.f), 4, 0x1F,0xBF,0x5F,0x00 },
+// DXGI_FORMAT_B4G4R4A4_UNORM
+    { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(-1.f, -1.f, -1.f, -1.f), 2, 0x00,0x00 },
+    { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(-0.466667f, -0.466667f, -0.466667f, -0.466667f), 2, 0x44,0x44 },
+    { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(0.066667f, 0.066667f, 0.066667f, 0.066667f), 2, 0x88,0x88 },
+    { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(0.466667f, 0.466667f, 0.466667f, 0.466667f), 2, 0xBB,0xBB },
+    { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), 2, 0xFF, 0xFF },
+    { DXGI_FORMAT_B4G4R4A4_UNORM, XMFLOAT4(0.333333f, 0.466667f, 0.733333f, 1.0f), 2, 0xBD,0xFA },
+};
+
+inline bool IsX2BiasSupported(DXGI_FORMAT format)
+{
+    switch (format)
+    {
+    case DXGI_FORMAT_R16G16B16A16_UNORM:
+    case DXGI_FORMAT_R10G10B10A2_UNORM:
+    case DXGI_FORMAT_R11G11B10_FLOAT:
+    case DXGI_FORMAT_R8G8B8A8_UNORM:
+    case DXGI_FORMAT_R16G16_UNORM:
+    case DXGI_FORMAT_R8G8_UNORM:
+    case DXGI_FORMAT_R16_UNORM:
+    case DXGI_FORMAT_R8_UNORM:
+    case DXGI_FORMAT_B5G6R5_UNORM:
+    case DXGI_FORMAT_B5G5R5A1_UNORM:
+    case DXGI_FORMAT_B8G8R8A8_UNORM:
+    case DXGI_FORMAT_B8G8R8X8_UNORM:
+    case DXGI_FORMAT_B4G4R4A4_UNORM:
+        return true;
+
+    default:
+        return false;
+    }
+}
+
 //-------------------------------------------------------------------------------------
 
 struct VBMedia
@@ -1272,6 +1388,81 @@ bool Test05()
                                 v.vector.x, v.vector.y, v.vector.z, v.vector.w );
                     }
                 }
+
+                // Confirm that x2bias flag has expected impact on this format
+                hr = reader->Read(&temp, "DATA", 0, 1, true);
+                if (FAILED(hr))
+                {
+                    success = false;
+                    printe("ERROR: Failed reading VB format %S (x2bias), index %Iu (%08X)\n", GetName(v.format), index, hr);
+                }
+                else
+                {
+                    XMVECTOR chk = XMLoadFloat4(&v.vector);
+
+                    bool isx2bias = IsX2BiasSupported(v.format);
+
+                    if (XMVector4NearEqual(chk, temp, g_VBEpsilon) == isx2bias)
+                    {
+                        if (!isx2bias || (fabs(XMVectorGetX(chk) - 1.f) > 0.001f))
+                        {
+                            success = false;
+                            printe("ERROR: Failed reading VB format %S (x2bias %u), index %Iu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), isx2bias, index,
+                                XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
+                                v.vector.x, v.vector.y, v.vector.z, v.vector.w);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for (size_t index = 0; index < _countof(g_TestVBs_x2Bias); ++index)
+    {
+        auto& v = g_TestVBs_x2Bias[index];
+
+        assert(IsX2BiasSupported(v.format));
+        assert(BytesPerElement(v.format) == v.stride);
+
+        std::unique_ptr<VBReader> reader(new VBReader());
+
+        D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+
+        HRESULT hr = reader->Initialize(&ilDesc, 1);
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: Failed setting up VB reader for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+        }
+        else
+        {
+            hr = reader->AddStream(&v.bytes[0], 1, 0, v.stride);
+            if (FAILED(hr))
+            {
+                success = false;
+                printe("ERROR: Failed setting up stream for VB reader for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+            }
+            else
+            {
+                __declspec(align(16)) XMVECTOR temp;
+                hr = reader->Read(&temp, "DATA", 0, 1, true);
+                if (FAILED(hr))
+                {
+                    success = false;
+                    printe("ERROR: Failed reading VB format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+                }
+                else
+                {
+                    XMVECTOR chk = XMLoadFloat4(&v.vector);
+
+                    if (!XMVector4NearEqual(chk, temp, g_VBEpsilon))
+                    {
+                        success = false;
+                        printe("ERROR: Failed reading VB format %S X2BIAS, index %Iu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), index,
+                            XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
+                            v.vector.x, v.vector.y, v.vector.z, v.vector.w);
+                    }
+                }
             }
         }
     }
@@ -1332,6 +1523,81 @@ bool Test06()
                             buff[8], buff[9], buff[10], buff[11], buff[12], buff[13], buff[14], buff[15],
                             v.bytes[0], v.bytes[1], v.bytes[2], v.bytes[3], v.bytes[4], v.bytes[5], v.bytes[6], v.bytes[7],
                             v.bytes[8], v.bytes[9], v.bytes[10], v.bytes[11], v.bytes[12], v.bytes[13], v.bytes[14], v.bytes[15] );
+                }
+
+                // Confirm that x2bias flag has expected impact on this format
+                hr = writer->Write(&temp, "DATA", 0, 1, true);
+                if (FAILED(hr))
+                {
+                    success = false;
+                    printe("ERROR: Failed writing VB writer %S (x2bias), index %Iu (%08X)\n", GetName(v.format), index, hr);
+                }
+                {
+                    bool isx2bias = IsX2BiasSupported(v.format);
+
+                    if ( (!isx2bias && memcmp(buff, &v.bytes[0], v.stride) != 0)
+                         || (isx2bias && memcpy(buff, &v.bytes[0], v.stride) == 0) )
+                    {
+                        success = false;
+                        printe("ERROR: Failed writing VB format %S (x2bais %u), index %Iu: %f %f %f %f\n", GetName(v.format), isx2bias, index,
+                            v.vector.x, v.vector.y, v.vector.z, v.vector.w);
+                        printe("    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
+                            buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
+                            buff[8], buff[9], buff[10], buff[11], buff[12], buff[13], buff[14], buff[15],
+                            v.bytes[0], v.bytes[1], v.bytes[2], v.bytes[3], v.bytes[4], v.bytes[5], v.bytes[6], v.bytes[7],
+                            v.bytes[8], v.bytes[9], v.bytes[10], v.bytes[11], v.bytes[12], v.bytes[13], v.bytes[14], v.bytes[15]);
+                    }
+                }
+            }
+        }
+    }
+
+    for (size_t index = 0; index < _countof(g_TestVBs_x2Bias); ++index)
+    {
+        auto& v = g_TestVBs_x2Bias[index];
+
+        assert(IsX2BiasSupported(v.format));
+        assert(BytesPerElement(v.format) == v.stride);
+
+        std::unique_ptr<VBWriter> writer(new VBWriter());
+
+        D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+
+        HRESULT hr = writer->Initialize(&ilDesc, 1);
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: Failed setting up VB writer for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+        }
+        else
+        {
+            memset(buff, 0, sizeof(buff));
+
+            hr = writer->AddStream(buff, 1, 0, v.stride);
+            if (FAILED(hr))
+            {
+                success = false;
+                printe("ERROR: Failed setting up stream for VB writer for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+            }
+            else
+            {
+                XMVECTOR temp = XMLoadFloat4(&v.vector);
+                hr = writer->Write(&temp, "DATA", 0, 1, true);
+                if (FAILED(hr))
+                {
+                    success = false;
+                    printe("ERROR: Failed writing VB writer %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+                }
+                else if (memcmp(buff, &v.bytes[0], v.stride) != 0)
+                {
+                    success = false;
+                    printe("ERROR: Failed writing VB format %S X2BIAS, index %Iu: %f %f %f %f\n", GetName(v.format), index,
+                        v.vector.x, v.vector.y, v.vector.z, v.vector.w);
+                    printe("    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
+                        buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
+                        buff[8], buff[9], buff[10], buff[11], buff[12], buff[13], buff[14], buff[15],
+                        v.bytes[0], v.bytes[1], v.bytes[2], v.bytes[3], v.bytes[4], v.bytes[5], v.bytes[6], v.bytes[7],
+                        v.bytes[8], v.bytes[9], v.bytes[10], v.bytes[11], v.bytes[12], v.bytes[13], v.bytes[14], v.bytes[15]);
                 }
             }
         }
