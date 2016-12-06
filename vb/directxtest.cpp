@@ -29,15 +29,33 @@ extern bool Test05();
 extern bool Test06();
 extern bool Test07();
 
+extern bool Test01_DX12();
+extern bool Test02_DX12();
+extern bool Test03_DX12();
+extern bool Test04_DX12();
+extern bool Test05_DX12();
+extern bool Test06_DX12();
+extern bool Test07_DX12();
+
 TestInfo g_Tests[] =
 {
-    { "IsValid", Test01 },
-    { "ComputeInputLayout", Test02 },
-    { "VBReader", Test03 },
-    { "VBWriter", Test04 },
-    { "VBReader Formats", Test05 },
-    { "VBWriter Formats", Test06 },
-    { "VBR/W Examples", Test07 },
+    { "IsValid (D3D11)", Test01 },
+    { "ComputeInputLayout (D3D11)", Test02 },
+    { "VBReader (D3D11)", Test03 },
+    { "VBWriter (D3D11)", Test04 },
+    { "VBReader Formats (D3D11)", Test05 },
+    { "VBWriter Formats (D3D11)", Test06 },
+    { "VBR/W Examples (D3D11)", Test07 },
+
+#if (_WIN32_WINNT >= 0x0A00)
+    { "IsValid (D3D12)", Test01_DX12 },
+    { "ComputeInputLayout (D3D12)", Test02_DX12 },
+    { "VBReader (D3D12)", Test03_DX12 },
+    { "VBWriter (D3D12)", Test04_DX12 },
+    { "VBReader Formats (D3D12)", Test05_DX12 },
+    { "VBWriter Formats (D3D12)", Test06_DX12 },
+    { "VBR/W Examples (D3D12)", Test07_DX12 },
+#endif
 };
 
 

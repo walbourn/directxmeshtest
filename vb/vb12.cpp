@@ -1,10 +1,10 @@
 //-------------------------------------------------------------------------------------
-// vb.cpp
+// vb12.cpp
 //  
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //-------------------------------------------------------------------------------------
 
-#include <d3d11_1.h>
+#include <d3d12.h>
 
 #include "directxtest.h"
 #include "TestHelpers.h"
@@ -15,7 +15,7 @@
 #include "directxmesh.h"
 
 using namespace DirectX;
-using namespace TestInputLayouts11;
+using namespace TestInputLayouts12;
 
 //-------------------------------------------------------------------------------------
 
@@ -83,10 +83,10 @@ static const uint16_t s_cubeIB[] =
     23,20,22
 };
 
-static const D3D11_INPUT_ELEMENT_DESC s_cubeIL[] =
+static const D3D12_INPUT_ELEMENT_DESC s_cubeIL[] =
 {
-    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+    { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 };
 
 //-------------------------------------------------------------------------------------
@@ -572,7 +572,7 @@ inline bool IsX2BiasSupported(DXGI_FORMAT format)
 
 struct VBMedia
 {
-    const D3D11_INPUT_ELEMENT_DESC* ilDesc;
+    const D3D12_INPUT_ELEMENT_DESC* ilDesc;
     size_t                          ilNumElements;
     size_t                          stride;
     const wchar_t *                 fname;
@@ -595,7 +595,7 @@ extern const wchar_t* GetName( DXGI_FORMAT fmt );
 
 //-------------------------------------------------------------------------------------
 // VBReader
-bool Test03()
+bool Test03_DX12()
 {
     bool success = true;
 
@@ -603,7 +603,8 @@ bool Test03()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        HRESULT hr = reader->Initialize( s_cubeIL, _countof(s_cubeIL) );
+        D3D12_INPUT_LAYOUT_DESC desc = { s_cubeIL, _countof(s_cubeIL) };
+        HRESULT hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -793,7 +794,8 @@ bool Test03()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        HRESULT hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -907,7 +909,8 @@ bool Test03()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        HRESULT hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -915,7 +918,7 @@ bool Test03()
         }
         else
         {
-            auto e = reader->GetElement11( "POSITION", 0 );
+            auto e = reader->GetElement12( "POSITION", 0 );
             if ( !e )
             {
                 success = false;
@@ -925,21 +928,21 @@ bool Test03()
                       || e->Format != DXGI_FORMAT_R32G32B32_FLOAT
                       || e->InputSlot != 0
                       || e->AlignedByteOffset != 0
-                      || e->InputSlotClass != D3D11_INPUT_PER_VERTEX_DATA
+                      || e->InputSlotClass != D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA
                       || e->InstanceDataStepRate != 0 )
             {
                 success = false;
                 printe( "ERROR: POSITION0 data invalid\n" );
             }
 
-            e = reader->GetElement11( "POSITION", 1 );
+            e = reader->GetElement12( "POSITION", 1 );
             if ( e )
             {
                 success = false;
                 printe( "ERROR: Shouldn't find POSITION1 element\n" );
             }
 
-            e = reader->GetElement11( "TEXCOORD", 0 );
+            e = reader->GetElement12( "TEXCOORD", 0 );
             if ( !e )
             {
                 success = false;
@@ -949,21 +952,21 @@ bool Test03()
                       || e->Format != DXGI_FORMAT_R32G32_FLOAT
                       || e->InputSlot != 0
                       || e->AlignedByteOffset != 44
-                      || e->InputSlotClass != D3D11_INPUT_PER_VERTEX_DATA
+                      || e->InputSlotClass != D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA
                       || e->InstanceDataStepRate != 0 )
             {
                 success = false;
                 printe( "ERROR: TEXCOORD0 data invalid\n" );
             }
 
-            e = reader->GetElement11( "BINORMAL", 0 );
+            e = reader->GetElement12( "BINORMAL", 0 );
             if ( e )
             {
                 success = false;
                 printe( "ERROR: Shouldn't find POSITION1 element\n" );
             }
 
-            e = reader->GetElement11( "BLENDWEIGHT", 0 );
+            e = reader->GetElement12( "BLENDWEIGHT", 0 );
             if ( !e )
             {
                 success = false;
@@ -973,7 +976,7 @@ bool Test03()
                       || e->Format != DXGI_FORMAT_R32G32B32A32_FLOAT
                       || e->InputSlot != 1
                       || e->AlignedByteOffset != 4
-                      || e->InputSlotClass != D3D11_INPUT_PER_VERTEX_DATA
+                      || e->InputSlotClass != D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA
                       || e->InstanceDataStepRate != 0 )
             {
                 success = false;
@@ -988,7 +991,7 @@ bool Test03()
 
 //-------------------------------------------------------------------------------------
 // VBWriter
-bool Test04()
+bool Test04_DX12()
 {
     bool success = true;
 
@@ -996,7 +999,8 @@ bool Test04()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        HRESULT hr = writer->Initialize( s_cubeIL, _countof(s_cubeIL) );
+        D3D12_INPUT_LAYOUT_DESC desc = { s_cubeIL, _countof(s_cubeIL) };
+        HRESULT hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1127,7 +1131,8 @@ bool Test04()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        HRESULT hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1260,7 +1265,8 @@ bool Test04()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        HRESULT hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1268,7 +1274,7 @@ bool Test04()
         }
         else
         {
-            auto e = writer->GetElement11( "POSITION", 0 );
+            auto e = writer->GetElement12( "POSITION", 0 );
             if ( !e )
             {
                 success = false;
@@ -1278,21 +1284,21 @@ bool Test04()
                       || e->Format != DXGI_FORMAT_R32G32B32_FLOAT
                       || e->InputSlot != 0
                       || e->AlignedByteOffset != 0
-                      || e->InputSlotClass != D3D11_INPUT_PER_VERTEX_DATA
+                      || e->InputSlotClass != D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA
                       || e->InstanceDataStepRate != 0 )
             {
                 success = false;
                 printe( "ERROR: POSITION0 data invalid\n" );
             }
 
-            e = writer->GetElement11( "POSITION", 1 );
+            e = writer->GetElement12( "POSITION", 1 );
             if ( e )
             {
                 success = false;
                 printe( "ERROR: Shouldn't find POSITION1 element\n" );
             }
 
-            e = writer->GetElement11( "TEXCOORD", 0 );
+            e = writer->GetElement12( "TEXCOORD", 0 );
             if ( !e )
             {
                 success = false;
@@ -1302,21 +1308,21 @@ bool Test04()
                       || e->Format != DXGI_FORMAT_R32G32_FLOAT
                       || e->InputSlot != 0
                       || e->AlignedByteOffset != 44
-                      || e->InputSlotClass != D3D11_INPUT_PER_VERTEX_DATA
+                      || e->InputSlotClass != D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA
                       || e->InstanceDataStepRate != 0 )
             {
                 success = false;
                 printe( "ERROR: TEXCOORD0 data invalid\n" );
             }
 
-            e = writer->GetElement11( "BINORMAL", 0 );
+            e = writer->GetElement12( "BINORMAL", 0 );
             if ( e )
             {
                 success = false;
                 printe( "ERROR: Shouldn't find POSITION1 element\n" );
             }
 
-            e = writer->GetElement11( "BLENDWEIGHT", 0 );
+            e = writer->GetElement12( "BLENDWEIGHT", 0 );
             if ( !e )
             {
                 success = false;
@@ -1326,7 +1332,7 @@ bool Test04()
                       || e->Format != DXGI_FORMAT_R32G32B32A32_FLOAT
                       || e->InputSlot != 1
                       || e->AlignedByteOffset != 4
-                      || e->InputSlotClass != D3D11_INPUT_PER_VERTEX_DATA
+                      || e->InputSlotClass != D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA
                       || e->InstanceDataStepRate != 0 )
             {
                 success = false;
@@ -1341,7 +1347,7 @@ bool Test04()
 
 //-------------------------------------------------------------------------------------
 // VBReader Formats
-bool Test05()
+bool Test05_DX12()
 {
     bool success = true;
 
@@ -1353,9 +1359,10 @@ bool Test05()
 
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+        D3D12_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 };
 
-        HRESULT hr = reader->Initialize( &ilDesc, 1 );
+        D3D12_INPUT_LAYOUT_DESC desc = { &ilDesc, 1 };
+        HRESULT hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1428,9 +1435,10 @@ bool Test05()
 
         std::unique_ptr<VBReader> reader(new VBReader());
 
-        D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+        D3D12_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 };
 
-        HRESULT hr = reader->Initialize(&ilDesc, 1);
+        D3D12_INPUT_LAYOUT_DESC desc = { &ilDesc, 1 };
+        HRESULT hr = reader->Initialize( desc );
         if (FAILED(hr))
         {
             success = false;
@@ -1475,7 +1483,7 @@ bool Test05()
 
 //-------------------------------------------------------------------------------------
 // VBWriter Formats
-bool Test06()
+bool Test06_DX12()
 {
     bool success = true;
     uint8_t buff[16];
@@ -1488,9 +1496,10 @@ bool Test06()
 
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+        D3D12_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 };
 
-        HRESULT hr = writer->Initialize( &ilDesc, 1 );
+        D3D12_INPUT_LAYOUT_DESC desc = { &ilDesc, 1 };
+        HRESULT hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1563,9 +1572,10 @@ bool Test06()
 
         std::unique_ptr<VBWriter> writer(new VBWriter());
 
-        D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+        D3D12_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 };
 
-        HRESULT hr = writer->Initialize(&ilDesc, 1);
+        D3D12_INPUT_LAYOUT_DESC desc = { &ilDesc, 1 };
+        HRESULT hr = writer->Initialize( desc );
         if (FAILED(hr))
         {
             success = false;
@@ -1611,7 +1621,7 @@ bool Test06()
 
 //-------------------------------------------------------------------------------------
 // VB R/W Examples
-bool Test07()
+bool Test07_DX12()
 {
     bool success = true;
 
@@ -1657,8 +1667,9 @@ bool Test07()
             continue;
         }
 
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VBMedia[index].ilDesc, g_VBMedia[index].ilNumElements };
         std::unique_ptr<VBReader> reader( new VBReader() );
-        hr = reader->Initialize( g_VBMedia[index].ilDesc, g_VBMedia[index].ilNumElements );
+        hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1677,7 +1688,7 @@ bool Test07()
         }
 
         std::unique_ptr<VBWriter> writer( new VBWriter() );
-        hr = writer->Initialize( g_VBMedia[index].ilDesc, g_VBMedia[index].ilNumElements );
+        hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
             success = false;

@@ -1,10 +1,10 @@
 //-------------------------------------------------------------------------------------
-// inputdesc.cpp
+// inputdesc12.cpp
 //  
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //-------------------------------------------------------------------------------------
 
-#include <d3d11_1.h>
+#include <d3d12.h>
 
 #include "directxtest.h"
 #include "TestHelpers.h"
@@ -13,38 +13,38 @@
 #include "directxmesh.h"
 
 using namespace DirectX;
-using namespace TestInputLayouts11;
+using namespace TestInputLayouts12;
 
 const uint32_t VSStarterKitAnimationStride1 = 52;
 const uint32_t VSStarterKitAnimationStride2 = 20;
 
-static const D3D11_INPUT_ELEMENT_DESC s_instlayout[] =
+static const D3D12_INPUT_ELEMENT_DESC s_instlayout[] =
 {
-    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
+    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+    { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+    { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+    { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1 },
+    { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1 },
+    { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1 },
+    { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1 },
 };
 
-static const D3D11_INPUT_ELEMENT_DESC s_leaflayout[] =
+static const D3D12_INPUT_ELEMENT_DESC s_leaflayout[] =
 {
-    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "fOcc",       0, DXGI_FORMAT_R32_FLOAT,          1, 64, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+    { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+    { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 10 },
+    { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 10 },
+    { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 10 },
+    { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 10 },
+    { "fOcc",       0, DXGI_FORMAT_R32_FLOAT,          1, 64, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 10 },
 };
 
 struct TestDesc
 {
     const char* name;
     size_t elements;
-    const D3D11_INPUT_ELEMENT_DESC* desc;
+    const D3D12_INPUT_ELEMENT_DESC* desc;
     uint32_t stride;
     uint32_t offsets[ 8 ];
 };
@@ -75,36 +75,42 @@ static const TestDesc g_InputDescs[] =
 
 //-------------------------------------------------------------------------------------
 // IsValid
-bool Test01()
+bool Test01_DX12()
 {
     bool success = true;
 
-    for( size_t j = 0; j < _countof(g_InputDescs); ++j )
+    for (size_t j = 0; j < _countof(g_InputDescs); ++j)
     {
-        if ( !IsValid( g_InputDescs[ j ].desc, g_InputDescs[ j ].elements ) )
+        D3D12_INPUT_LAYOUT_DESC desc = { g_InputDescs[j].desc, g_InputDescs[j].elements };
+        if (!IsValid(desc))
         {
-            printe("ERROR: IsValid failed for desc %s\n", g_InputDescs[ j ].name );
+            printe("ERROR: IsValid failed for desc %s\n", g_InputDescs[j].name);
             success = false;
         }
     }
 
     // Multi-stream
-    if ( !IsValid( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) ) )
+    D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+    if (!IsValid(desc))
     {
-        printe("ERROR: IsValid failed for desc VSStarterKitAnimation\n" );
+        printe("ERROR: IsValid failed for desc VSStarterKitAnimation\n");
         success = false;
     }
 
     // Instance
-    if ( !IsValid( s_instlayout, _countof(s_instlayout) ) )
+    desc.NumElements = _countof(s_instlayout);
+    desc.pInputElementDescs = s_instlayout;
+    if (!IsValid( desc ))
     {
-        printe("ERROR: IsValid failed for desc instlayout\n" );
+        printe("ERROR: IsValid failed for desc instlayout\n");
         success = false;
     }
 
-    if ( !IsValid( s_leaflayout, _countof(s_leaflayout) ) )
+    desc.NumElements = _countof(s_leaflayout);
+    desc.pInputElementDescs = s_leaflayout;
+    if (!IsValid( desc ))
     {
-        printe("ERROR: IsValid failed for desc leaflayout\n" );
+        printe("ERROR: IsValid failed for desc leaflayout\n");
         success = false;
     }
 
@@ -114,18 +120,19 @@ bool Test01()
 
 //-------------------------------------------------------------------------------------
 // ComputeInputLayout
-bool Test02()
+bool Test02_DX12()
 {
     bool success = true;
 
     for( size_t j = 0; j < _countof(g_InputDescs); ++j )
     {
-        uint32_t offsets[ D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
-        memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
+        uint32_t offsets[ D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
+        memset( offsets, 0xff, sizeof(uint32_t) * D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
+        uint32_t strides[ D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
 
-        ComputeInputLayout( g_InputDescs[ j ].desc, g_InputDescs[ j ].elements, offsets, strides );
+        D3D12_INPUT_LAYOUT_DESC desc = { g_InputDescs[j].desc, g_InputDescs[j].elements };
+        ComputeInputLayout( desc, offsets, strides );
 
         if ( strides[0] != g_InputDescs[ j ].stride )
         {
@@ -153,7 +160,7 @@ bool Test02()
         else
         {
             // null offsets
-            ComputeInputLayout( g_InputDescs[ j ].desc, g_InputDescs[ j ].elements, nullptr, strides );
+            ComputeInputLayout( desc, nullptr, strides );
 
             if ( strides[0] != g_InputDescs[ j ].stride )
             {
@@ -163,9 +170,9 @@ bool Test02()
             }
 
             // null strides
-            memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
+            memset( offsets, 0xff, sizeof(uint32_t) * D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-            ComputeInputLayout( g_InputDescs[ j ].desc, g_InputDescs[ j ].elements, offsets, nullptr );
+            ComputeInputLayout( desc, offsets, nullptr );
 
             if ( memcmp( offsets, g_InputDescs[ j ].offsets, sizeof(uint32_t) * g_InputDescs[ j ].elements ) != 0 )
             {
@@ -189,12 +196,13 @@ bool Test02()
 
     // Multi-stream
     {
-        uint32_t offsets[ D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
-        memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
+        uint32_t offsets[ D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
+        memset( offsets, 0xff, sizeof(uint32_t) * D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
+        uint32_t strides[ D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
 
-        ComputeInputLayout( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation), offsets, strides );
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        ComputeInputLayout( desc, offsets, strides );
 
         if ( strides[0] != VSStarterKitAnimationStride1
              || strides[1] != VSStarterKitAnimationStride2 )
@@ -231,12 +239,13 @@ bool Test02()
 
     // Instance
     {
-        uint32_t offsets[ D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
-        memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
+        uint32_t offsets[D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT];
+        memset(offsets, 0xff, sizeof(uint32_t) * D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT);
 
-        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
+        uint32_t strides[D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT];
 
-        ComputeInputLayout( s_instlayout, _countof(s_instlayout), offsets, strides );
+        D3D12_INPUT_LAYOUT_DESC desc = { s_instlayout, _countof(s_instlayout) };
+        ComputeInputLayout( desc, offsets, strides );
 
         if ( strides[0] != 32
              || strides[1] != 64 )
@@ -270,9 +279,11 @@ bool Test02()
             print("\n\texpected: 0  12  24  0  16  32  48");
         }
 
-        memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
+        memset( offsets, 0xff, sizeof(uint32_t) * D3D12_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-        ComputeInputLayout( s_leaflayout, _countof(s_leaflayout), offsets, strides );
+        desc.NumElements = _countof(s_leaflayout);
+        desc.pInputElementDescs = s_leaflayout;
+        ComputeInputLayout( desc, offsets, strides );
 
         if ( strides[0] != 20
              || strides[1] != 68 )
