@@ -1667,7 +1667,7 @@ bool Test07_DX12()
             continue;
         }
 
-        D3D12_INPUT_LAYOUT_DESC desc = { g_VBMedia[index].ilDesc, g_VBMedia[index].ilNumElements };
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VBMedia[index].ilDesc, static_cast<UINT>(g_VBMedia[index].ilNumElements) };
         std::unique_ptr<VBReader> reader( new VBReader() );
         hr = reader->Initialize( desc );
         if ( FAILED(hr) )

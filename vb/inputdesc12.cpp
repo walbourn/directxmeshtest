@@ -81,7 +81,7 @@ bool Test01_DX12()
 
     for (size_t j = 0; j < _countof(g_InputDescs); ++j)
     {
-        D3D12_INPUT_LAYOUT_DESC desc = { g_InputDescs[j].desc, g_InputDescs[j].elements };
+        D3D12_INPUT_LAYOUT_DESC desc = { g_InputDescs[j].desc, static_cast<UINT>(g_InputDescs[j].elements) };
         if (!IsValid(desc))
         {
             printe("ERROR: IsValid failed for desc %s\n", g_InputDescs[j].name);
@@ -131,7 +131,7 @@ bool Test02_DX12()
 
         uint32_t strides[ D3D12_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
 
-        D3D12_INPUT_LAYOUT_DESC desc = { g_InputDescs[j].desc, g_InputDescs[j].elements };
+        D3D12_INPUT_LAYOUT_DESC desc = { g_InputDescs[j].desc, static_cast<UINT>(g_InputDescs[j].elements) };
         ComputeInputLayout( desc, offsets, strides );
 
         if ( strides[0] != g_InputDescs[ j ].stride )
