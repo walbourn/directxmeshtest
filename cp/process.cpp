@@ -106,7 +106,7 @@ bool Test01()
         size_t nVerts = mesh->vertices.size();
 
 #ifdef _DEBUG
-        char output[ 256 ] = { 0 };
+        char output[ 256 ] = {};
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
@@ -422,7 +422,7 @@ bool Test02()
         size_t nVerts = mesh->vertices.size();
 
 #ifdef _DEBUG
-        char output[ 256 ] = { 0 };
+        char output[ 256 ] = {};
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
@@ -626,7 +626,7 @@ bool Test03()
         size_t nVerts = mesh->vertices.size();
 
 #ifdef _DEBUG
-        char output[ 256 ] = { 0 };
+        char output[ 256 ] = {};
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
@@ -866,7 +866,7 @@ bool Test04()
         size_t nVerts = mesh->vertices.size();
 
 #ifdef _DEBUG
-        char output[ 256 ] = { 0 };
+        char output[ 256 ] = {};
         sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
