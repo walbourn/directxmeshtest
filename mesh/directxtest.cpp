@@ -45,6 +45,7 @@ extern bool Test21();
 extern bool Test22();
 extern bool Test23();
 extern bool Test24();
+extern bool Test25();
 
 TestInfo g_Tests[] =
 {
@@ -71,6 +72,7 @@ TestInfo g_Tests[] =
     { "AttributeSort", Test15 },
     { "ComputeVertexCacheMissRate", Test22 },
     { "OptimizeFaces", Test16 },
+    { "OptimizeFacesLRU", Test25 },
     { "OptimizeVertices", Test17 },
 };
 

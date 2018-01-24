@@ -490,9 +490,230 @@ bool Test16()
         }
     }
 
+    // TODO - Shapes
+
     return success;
 }
 
+//-------------------------------------------------------------------------------------
+// OptimizeFacesLRU
+bool Test25()
+{
+    bool success = true;
+
+    // 16-bit fmcube
+    {
+        std::unique_ptr<uint32_t[]> remap(new uint32_t[12 * 3]);
+        memset(remap.get(), 0xff, sizeof(uint32_t) * 12 * 3);
+
+        static const uint32_t s_reverse[] = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+
+        HRESULT hr = OptimizeFacesLRU(g_fmCubeIndices16, 12, remap.get());
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(16) fmcube failed (%08X)\n", hr);
+        }
+        else if (!IsValidFaceRemap(g_fmCubeIndices16, remap.get(), 12))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(16) fmcube failed remap invalid\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%Iu -> %u\n", j, remap[j]);
+        }
+        else if (memcmp(remap.get(), s_reverse, sizeof(s_reverse)) != 0)
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(16) fmcube failed\n");
+            for (size_t j = 0; j < 12; ++j)
+            {
+                print("\t%Iu -> %u\n", j, remap[j]);
+            }
+        }
+
+        // invalid args
+#pragma warning(push)
+#pragma warning(disable:6385)
+        hr = OptimizeFacesLRU(g_fmCubeIndices16, UINT32_MAX, remap.get());
+        if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
+        {
+            printe("\nERROR: OptimizeFacesLRU(16) expected failure for 32-max value faces (%08X)\n", hr);
+            success = false;
+        }
+
+        hr = OptimizeFacesLRU(g_fmCubeIndices16, 12, remap.get(), 128);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(16) expected failure for too large a cache size (%08X)\n", hr);
+            success = false;
+        }
+#pragma warning(pop)
+    }
+
+    // 32-bit fmcube
+    {
+        std::unique_ptr<uint32_t[]> remap(new uint32_t[12 * 3]);
+        memset(remap.get(), 0xff, sizeof(uint32_t) * 12 * 3);
+
+        static const uint32_t s_reverse[] = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+
+        HRESULT hr = OptimizeFacesLRU(g_fmCubeIndices32, 12, remap.get());
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(32) fmcube failed (%08X)\n", hr);
+        }
+        else if (!IsValidFaceRemap(g_fmCubeIndices32, remap.get(), 12))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(32) fmcube failed remap invalid\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%Iu -> %u\n", j, remap[j]);
+        }
+        else if (memcmp(remap.get(), s_reverse, sizeof(s_reverse)) != 0)
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(32) fmcube failed\n");
+            for (size_t j = 0; j < 12; ++j)
+            {
+                print("\t%Iu -> %u\n", j, remap[j]);
+            }
+        }
+
+        // invalid args
+#pragma warning(push)
+#pragma warning(disable:6385)
+        hr = OptimizeFacesLRU(g_fmCubeIndices32, UINT32_MAX, remap.get());
+        if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
+        {
+            printe("\nERROR: OptimizeFacesLRU(32) expected failure for 32-max value faces (%08X)\n", hr);
+            success = false;
+        }
+
+        hr = OptimizeFacesLRU(g_fmCubeIndices32, 12, remap.get(), 128);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(32) expected failure for too large a cache size (%08X)\n", hr);
+            success = false;
+        }
+#pragma warning(pop)
+    }
+
+#if 0
+    // TODO -
+    // Unused (16)
+    {
+        std::unique_ptr<uint32_t[]> remap(new uint32_t[12 * 3]);
+        memset(remap.get(), 0xff, sizeof(uint32_t) * 12 * 3);
+
+        static const uint16_t s_unusedIB[12 * 3] =
+        {
+            0, 1, 2,
+            0, 3, 1,
+            0, 4, 3,
+            0, 5, 4,
+            3, 6, 1,
+            3, 4, 6,
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            2, 6, 7,
+            0, 2, 7,
+            0, 7, 5,
+            5, 7, 6,
+            5, 6, 4,
+        };
+
+        static const uint32_t s_vcremap[] = { 7, 10, 9, 8, 0, 1, 4, 5, 11, 3, 2, uint32_t(-1) };
+
+#ifdef _DEBUG
+        std::wstring msgs;
+        if (FAILED(Validate(s_unusedIB, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: OptimizeFacesLRU(16) test data failed validation:\n%S\n", msgs.c_str());
+        }
+#endif
+
+        HRESULT hr = OptimizeFacesLRU(s_unusedIB, 12, remap.get());
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(16) unused failed (%08X)\n", hr);
+        }
+        else if (!IsValidFaceRemap(s_unusedIB, remap.get(), 12))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(16) unused failed remap invalid\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%Iu -> %u\n", j, remap[j]);
+        }
+        else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(16) unused failed\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%Iu -> %u\n", j, remap[j]);
+        }
+    }
+
+    // Unused (32)
+    {
+        std::unique_ptr<uint32_t[]> remap(new uint32_t[12 * 3]);
+        memset(remap.get(), 0xff, sizeof(uint32_t) * 12 * 3);
+
+        static const uint32_t s_unusedIB[12 * 3] =
+        {
+            0, 1, 2,
+            0, 3, 1,
+            0, 4, 3,
+            0, 5, 4,
+            3, 6, 1,
+            3, 4, 6,
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            2, 6, 7,
+            0, 2, 7,
+            0, 7, 5,
+            5, 7, 6,
+            5, 6, 4,
+        };
+
+        static const uint32_t s_vcremap[] = { 7, 10, 9, 8, 0, 1, 4, 5, 11, 3, 2, uint32_t(-1) };
+
+#ifdef _DEBUG
+        std::wstring msgs;
+        if (FAILED(Validate(s_unusedIB, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: OptimizeFacesLRU(32) test data failed validation:\n%S\n", msgs.c_str());
+        }
+#endif
+
+        HRESULT hr = OptimizeFacesLRU(s_unusedIB, 12, nullptr, remap.get());
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(32) unused failed (%08X)\n", hr);
+        }
+        else if (!IsValidFaceRemap(s_unusedIB, remap.get(), 12))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(32) unused failed remap invalid\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%Iu -> %u\n", j, remap[j]);
+        }
+        else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRU(32) unused failed\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%Iu -> %u\n", j, remap[j]);
+        }
+    }
+#endif
+
+    // TODO - Shapes
+
+    return success;
+}
 
 //-------------------------------------------------------------------------------------
 // OptimizeVertices
@@ -863,6 +1084,8 @@ bool Test17()
                 print("%Iu -> %u\n", j, remap[j]);
         }
     }
+
+    // TODO - Shapes
 
     return success;
 }
