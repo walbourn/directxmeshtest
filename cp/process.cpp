@@ -663,25 +663,34 @@ bool Test03()
             continue;
         }
 
-        static const uint32_t s_vcache[] = { OPTFACES_V_STRIPORDER, OPTFACES_V_DEFAULT, 24, 32 };
-        static const uint32_t s_restart[] = { 0, OPTFACES_R_DEFAULT, 20, 16 };
+        static const uint32_t s_vcache[] = { uint32_t(-1) /*LRU*/, OPTFACES_V_STRIPORDER, OPTFACES_V_DEFAULT, 24, 32 };
+        static const uint32_t s_restart[] = { 0, 0, OPTFACES_R_DEFAULT, 20, 16 };
 
         bool pass = true;
 
         for( size_t vindex = 0; vindex < _countof( s_vcache ); ++vindex )
         {
+            size_t cacheSize = (!s_vcache[vindex] || s_vcache[vindex] == uint32_t(-1)) ? OPTFACES_V_DEFAULT : s_vcache[vindex];
+
             float acmr, atvr;
-            ComputeVertexCacheMissRate( mesh->indices.data(), nFaces, nVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
+            ComputeVertexCacheMissRate( mesh->indices.data(), nFaces, nVerts, cacheSize, acmr, atvr );
 
 #ifdef _DEBUG
-            sprintf_s( output, "INFO: original: %u vache, ACMR %f, ATVR %f\n", ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr, atvr );
+            sprintf_s( output, "INFO: original: %u vache, ACMR %f, ATVR %f\n", cacheSize, acmr, atvr );
             OutputDebugStringA( output );
 #endif
 
             std::unique_ptr<uint32_t[]> faceRemap( new uint32_t[ nFaces ] );
             memset( faceRemap.get(), 0xff, sizeof(uint32_t) * nFaces );
 
-            hr = OptimizeFaces( mesh->indices.data(), nFaces, adj.get(), faceRemap.get(), s_vcache[ vindex ], s_restart[ vindex ] );
+            if (s_vcache[vindex] == uint32_t(-1))
+            {
+                hr = OptimizeFacesLRU(mesh->indices.data(), nFaces, faceRemap.get());
+            }
+            else
+            {
+                hr = OptimizeFaces(mesh->indices.data(), nFaces, adj.get(), faceRemap.get(), s_vcache[vindex], s_restart[vindex]);
+            }
             if ( FAILED(hr) )
             {
                 pass = false;
@@ -710,15 +719,38 @@ bool Test03()
                 else
                 {
                     float acmr2, atvr2;
-                    ComputeVertexCacheMissRate( newIndices.get(), nFaces, nVerts, ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr2, atvr2 );
+                    ComputeVertexCacheMissRate( newIndices.get(), nFaces, nVerts, cacheSize, acmr2, atvr2 );
 
 #ifdef _DEBUG
-                    sprintf_s( output, "optimized: %u vache, ACMR %f, ATVR %f\n", ( !s_vcache[ vindex ] ) ? OPTFACES_V_DEFAULT : s_vcache[ vindex ], acmr2, atvr2 );
+                    sprintf_s( output, "optimized: %u vache, ACMR %f, ATVR %f\n", cacheSize, acmr2, atvr2 );
                     OutputDebugStringA( output );
 #endif
 
                     switch( s_vcache[ vindex ] )
                     {
+                    case uint32_t(-1) /* LRU */:
+                        if ((acmr2 > acmr) || (atvr2 > atvr))
+                        {
+                            if (!(g_TestMedia[index].options & FLAGS_IGNORE_SLOWDOWN))
+                            {
+                                pass = false;
+                                success = false;
+                                printe("ERROR: OptimizeFacesLRU failed compared to original:\n%S\n", szPath);
+                                print("\toriginal: ACMR %f, ATVR %f\n", acmr, atvr);
+                                print("\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2);
+                            }
+                        }
+                        else if ((acmr2 > g_TestMedia[index].stripOrderACMR) || (atvr2 > g_TestMedia[index].stripOrderATVR))
+                        {
+                            pass = false;
+                            success = false;
+                            printe("ERROR: OptimizeFacesLRU failed compared to D3DX strip order:\n%S\n", szPath);
+                            print("\toriginal: ACMR %f, ATVR %f\n", acmr, atvr);
+                            print("\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2);
+                            print("\texpected: ACMR %f, ATVR %f\n", g_TestMedia[index].stripOrderACMR, g_TestMedia[index].stripOrderATVR);
+                        }
+                        break;
+
                     case OPTFACES_V_STRIPORDER:
                         if ( ( (acmr2 > g_TestMedia[index].stripOrderACMR) && fabs(acmr2 - g_TestMedia[index].stripOrderACMR) > g_Epsilon )
                              || ( (atvr2 > g_TestMedia[index].stripOrderATVR) && fabs(atvr2 - g_TestMedia[index].stripOrderATVR) > g_Epsilon ) )
@@ -801,7 +833,7 @@ bool Test03()
                 }
             }
         }
-            
+
         if( pass )
             ++npass;
     }
@@ -1114,7 +1146,9 @@ bool Test04()
                 }
             }
         }
-            
+
+        // TODO - OptimizeFacesLRU
+
         if( pass )
             ++npass;
     }
