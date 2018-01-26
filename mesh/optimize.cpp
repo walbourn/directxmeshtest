@@ -1246,7 +1246,7 @@ bool Test25()
             uint16_t(-1), uint16_t(-1), uint16_t(-1),
         };
 
-        static const uint32_t s_vcremap[] = { 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, uint32_t(-1) };
+        static const uint32_t s_vcremap[] = { 0, 1, 4, 8, 7, 2, 5, 9, 3, 10, 11, uint32_t(-1) };
 
 #ifdef _DEBUG
         std::wstring msgs;
@@ -1374,7 +1374,7 @@ bool Test25()
             uint32_t(-1), uint32_t(-1), uint32_t(-1),
         };
 
-        static const uint32_t s_vcremap[] = { 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, uint32_t(-1) };
+        static const uint32_t s_vcremap[] = { 0, 1, 4, 8, 7, 2, 5, 9, 3, 10, 11, uint32_t(-1) };
 
 #ifdef _DEBUG
         std::wstring msgs;
