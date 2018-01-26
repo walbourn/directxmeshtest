@@ -14,6 +14,31 @@
 using namespace DirectX;
 using namespace TestGeometry;
 
+namespace
+{
+    inline bool IsValidCoVector(size_t nVerts, const XMFLOAT3* vectors)
+    {
+        if (!nVerts || !vectors)
+            return false;
+
+        for (size_t j = 0; j < nVerts; ++j)
+        {
+            XMVECTOR v = XMLoadFloat3(&vectors[j]);
+            if (XMVector3IsInfinite(v) || XMVector3IsNaN(v))
+            {
+                return false;
+            }
+
+            if (XMVectorGetX(XMVector3Length(v)) > 1.0001f)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 //-------------------------------------------------------------------------------------
 // ComputeTangentFrame
 bool Test13()
@@ -579,47 +604,142 @@ bool Test13()
 
     // Unused (16)
     {
-        static const uint16_t s_unused[ 12*3 ] =
-            {
-                3,1,0,
-                2,1,3,
+        static const uint16_t s_unused[12 * 3] =
+        {
+            3,1,0,
+            2,1,3,
 
-                6,4,5,
-                7,4,6,
+            6,4,5,
+            7,4,6,
 
-                11,9,8,
-                10,9,11,
+            11,9,8,
+            10,9,11,
 
-                uint16_t(-1),uint16_t(-1),uint16_t(-1),
-                15,12,14,
+            uint16_t(-1),uint16_t(-1),uint16_t(-1),
+            15,12,14,
 
-                19,17,16,
-                18,17,19,
+            19,17,16,
+            18,17,19,
 
-                22,20,21,
-                23,20,22
-            };
+            22,20,21,
+            23,20,22
+        };
+
+        static const uint16_t s_unused_1st[12 * 3] =
+        {
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            2,1,3,
+
+            6,4,5,
+            7,4,6,
+
+            11,9,8,
+            10,9,11,
+
+            14,12,13,
+            15,12,14,
+
+            19,17,16,
+            18,17,19,
+
+            22,20,21,
+            23,20,22
+        };
+
+        static const uint16_t s_unused_all[12 * 3] =
+        {
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        };
 
 #ifdef _DEBUG
         std::wstring msgs;
-        if ( FAILED( Validate( s_unused, 12, 24, nullptr, VALIDATE_UNUSED, &msgs ) ) )
+        if (FAILED(Validate(s_unused, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: ComputeTangentFrame(16) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: ComputeTangentFrame(16) test data failed validation:\n%S\n", msgs.c_str());
+        }
+
+        if (FAILED(Validate(s_unused_1st, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeTangentFrame(16) test data 1st failed validation:\n%S\n", msgs.c_str());
+        }
+
+        if (FAILED(Validate(s_unused_all, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeTangentFrame(16) test data all failed validation:\n%S\n", msgs.c_str());
         }
 #endif
 
-        std::unique_ptr<XMFLOAT3[]> tangents( new XMFLOAT3[ 24 ] );
-        std::unique_ptr<XMFLOAT3[]> bitangents( new XMFLOAT3[ 24 ] );
+        std::unique_ptr<XMFLOAT3[]> tangents(new XMFLOAT3[24]);
+        std::unique_ptr<XMFLOAT3[]> bitangents(new XMFLOAT3[24]);
 
-        memset( tangents.get(), 0xff, sizeof(XMFLOAT3) * 24 );
-        memset( bitangents.get(), 0xff, sizeof(XMFLOAT3) * 24 );
+        memset(tangents.get(), 0xff, sizeof(XMFLOAT3) * 24);
+        memset(bitangents.get(), 0xff, sizeof(XMFLOAT3) * 24);
 
-        HRESULT hr = ComputeTangentFrame( s_unused, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
-                                          tangents.get(), bitangents.get() );
-        if ( FAILED(hr) )
+        HRESULT hr = ComputeTangentFrame(s_unused, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (FAILED(hr))
         {
-            printe("ERROR: ComputeTangentFrame(16) unused failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) unused failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidCoVector(24, tangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused tangents invalid\n");
+            success = false;
+        }
+        else if (!IsValidCoVector(24, bitangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused bi-tangents invalid\n");
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(s_unused_1st, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused 1st failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidCoVector(24, tangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused 1st tangents invalid\n");
+            success = false;
+        }
+        else if (!IsValidCoVector(24, bitangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused 1st bi-tangents invalid\n");
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(s_unused_all, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused all failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidCoVector(24, tangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused all tangents invalid\n");
+            success = false;
+        }
+        else if (!IsValidCoVector(24, bitangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(16) unused all bi-tangents invalid\n");
             success = false;
         }
     }
@@ -647,12 +767,60 @@ bool Test13()
                 23,20,22
             };
 
+        static const uint32_t s_unused_1st[12 * 3] =
+        {
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            2,1,3,
+
+            6,4,5,
+            7,4,6,
+
+            11,9,8,
+            10,9,11,
+
+            14,12,13,
+            15,12,14,
+
+            19,17,16,
+            18,17,19,
+
+            22,20,21,
+            23,20,22
+        };
+
+        static const uint32_t s_unused_all[12 * 3] =
+        {
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        };
 #ifdef _DEBUG
         std::wstring msgs;
         if ( FAILED( Validate( s_unused, 12, 24, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;
             printe("\nERROR: ComputeTangentFrame(32) test data failed validation:\n%S\n", msgs.c_str() );
+        }
+
+        if (FAILED(Validate(s_unused_1st, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeTangentFrame(32 test data 1st failed validation:\n%S\n", msgs.c_str());
+        }
+
+        if (FAILED(Validate(s_unused_all, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeTangentFrame(32) test data all failed validation:\n%S\n", msgs.c_str());
         }
 #endif
 
@@ -667,6 +835,52 @@ bool Test13()
         if ( FAILED(hr) )
         {
             printe("ERROR: ComputeTangentFrame(32) unused failed (%08X)\n", hr );
+            success = false;
+        }
+        else if (!IsValidCoVector(24, tangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused tangents invalid\n");
+            success = false;
+        }
+        else if (!IsValidCoVector(24, bitangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused bi-tangents invalid\n");
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(s_unused_1st, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused 1st failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidCoVector(24, tangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused 1st tangents invalid\n");
+            success = false;
+        }
+        else if (!IsValidCoVector(24, bitangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused 1st bi-tangents invalid\n");
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(s_unused_all, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused all failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidCoVector(24, tangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused all tangents invalid\n");
+            success = false;
+        }
+        else if (!IsValidCoVector(24, bitangents.get()))
+        {
+            printe("ERROR: ComputeTangentFrame(32) unused all bi-tangents invalid\n");
             success = false;
         }
     }

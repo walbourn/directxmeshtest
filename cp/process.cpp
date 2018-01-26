@@ -676,7 +676,7 @@ bool Test03()
             ComputeVertexCacheMissRate( mesh->indices.data(), nFaces, nVerts, cacheSize, acmr, atvr );
 
 #ifdef _DEBUG
-            sprintf_s( output, "INFO: original: %u vache, ACMR %f, ATVR %f\n", cacheSize, acmr, atvr );
+            sprintf_s( output, "INFO: original: %Iu vache, ACMR %f, ATVR %f\n", cacheSize, acmr, atvr );
             OutputDebugStringA( output );
 #endif
 
@@ -722,7 +722,7 @@ bool Test03()
                     ComputeVertexCacheMissRate( newIndices.get(), nFaces, nVerts, cacheSize, acmr2, atvr2 );
 
 #ifdef _DEBUG
-                    sprintf_s( output, "optimized: %u vache, ACMR %f, ATVR %f\n", cacheSize, acmr2, atvr2 );
+                    sprintf_s( output, "optimized: %Iu vache, ACMR %f, ATVR %f\n", cacheSize, acmr2, atvr2 );
                     OutputDebugStringA( output );
 #endif
 
