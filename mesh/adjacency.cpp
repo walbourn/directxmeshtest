@@ -220,6 +220,70 @@ static const uint32_t s_unusedAdj[3 * 12] =
     10, 5, 3
 };
 
+static const uint16_t s_unused16_1st[12 * 3] =
+{
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    0, 3, 1,
+    0, 4, 3,
+    0, 5, 4,
+    3, 6, 1,
+    3, 4, 6,
+    2, 1, 6,
+    2, 6, 7,
+    0, 2, 7,
+    0, 7, 5,
+    5, 7, 6,
+    5, 6, 4,
+};
+
+static const uint32_t s_unused32_1st[12 * 3] =
+{
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    0, 3, 1,
+    0, 4, 3,
+    0, 5, 4,
+    3, 6, 1,
+    3, 4, 6,
+    2, 1, 6,
+    2, 6, 7,
+    0, 2, 7,
+    0, 7, 5,
+    5, 7, 6,
+    5, 6, 4,
+};
+
+static const uint16_t s_unused16_all[12 * 3] =
+{
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+};
+
+static const uint32_t s_unused32_all[12 * 3] =
+{
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+};
+
 //-------------------------------------------------------------------------------------
 // GenerateAdjacencyAndPointReps (point reps)
 bool Test07()
@@ -278,6 +342,31 @@ bool Test07()
                     print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
+        }
+
+        // unused
+        hr = GenerateAdjacencyAndPointReps(s_unused16_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] invalid pointRep\n");
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(s_unused16_all, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] invalid pointRep\n");
+            success = false;
         }
 
         // invalid args
@@ -475,6 +564,31 @@ bool Test07()
                     print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
+        }
+
+        // unused
+        hr = GenerateAdjacencyAndPointReps(s_unused32_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] invalid pointRep\n");
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(s_unused32_all, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] invalid pointRep\n");
+            success = false;
         }
 
         // invalid args
@@ -686,6 +800,49 @@ bool Test08()
                 {
                     print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
+            }
+        }
+
+        // unused
+        hr = GenerateAdjacencyAndPointReps(s_unused16_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] invalid pointRep\n");
+            success = false;
+        }
+        else
+        {
+            std::wstring msgs;
+            if (FAILED(Validate(s_unused16_1st, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
+            {
+                printe("ERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] validate failed\n%S\n", msgs.c_str());
+                success = false;
+            }
+        }
+
+        hr = GenerateAdjacencyAndPointReps(s_unused16_all, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] invalid pointRep\n");
+            success = false;
+        }
+        else
+        {
+            std::wstring msgs;
+            if (FAILED(Validate(s_unused16_all, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
+            {
+                printe("ERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] validate failed\n%S\n", msgs.c_str());
+                success = false;
             }
         }
 
@@ -962,6 +1119,49 @@ bool Test08()
                 {
                     print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
+            }
+        }
+
+        // unused
+        hr = GenerateAdjacencyAndPointReps(s_unused32_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] invalid pointRep\n");
+            success = false;
+        }
+        else
+        {
+            std::wstring msgs;
+            if (FAILED(Validate(s_unused32_1st, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
+            {
+                printe("ERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] validate failed\n%S\n", msgs.c_str());
+                success = false;
+            }
+        }
+
+        hr = GenerateAdjacencyAndPointReps(s_unused32_all, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (FAILED(hr))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidPointReps(preps.get(), 8))
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] invalid pointRep\n");
+            success = false;
+        }
+        else
+        {
+            std::wstring msgs;
+            if (FAILED(Validate(s_unused32_all, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
+            {
+                printe("ERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] validate failed\n%S\n", msgs.c_str());
+                success = false;
             }
         }
 

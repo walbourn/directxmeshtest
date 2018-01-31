@@ -260,6 +260,71 @@ static const uint32_t s_unusedAdj_3[3 * 12] =
     10, 5, 3
 };
 
+static const uint16_t s_unusedIndices16_3[12 * 3] =
+{
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    0, 3, 1,
+    0, 4, 3,
+    0, 5, 4,
+    3, 6, 1,
+    3, 4, 6,
+    2, 1, 6,
+    2, 6, 7,
+    0, 2, 7,
+    0, 7, 5,
+    5, 7, 6,
+    5, 6, 4,
+};
+
+static const uint32_t s_unusedIndices32_3[12 * 3] =
+{
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    0, 3, 1,
+    0, 4, 3,
+    0, 5, 4,
+    3, 6, 1,
+    3, 4, 6,
+    2, 1, 6,
+    2, 6, 7,
+    0, 2, 7,
+    0, 7, 5,
+    5, 7, 6,
+    5, 6, 4,
+};
+
+static const uint16_t s_unusedIndices16_4[12 * 3] =
+{
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    uint16_t(-1), uint16_t(-1), uint16_t(-1),
+};
+
+static const uint32_t s_unusedIndices32_4[12 * 3] =
+{
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    uint32_t(-1), uint32_t(-1), uint32_t(-1),
+};
+
+
 //-------------------------------------------------------------------------------------
 // Validate (no adjacency)
 bool Test06()
@@ -361,6 +426,20 @@ bool Test06()
             success = false;
         }
 
+        hr = Validate(s_unusedIndices16_3, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(16) [ignore unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(s_unusedIndices16_4, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(16) [ignore unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
+            success = false;
+        }
+
         hr = Validate( s_unusedIndices16, 12, 8, nullptr, VALIDATE_UNUSED, &msgs );
         if ( hr != E_FAIL )
         {
@@ -372,6 +451,20 @@ bool Test06()
         if ( FAILED(hr) )
         {
             printe("ERROR: Validate(16) [unused 2] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            success = false;
+        }
+
+        hr = Validate(s_unusedIndices16_3, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(16) [unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(s_unusedIndices16_4, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(16) [unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
             success = false;
         }
 
@@ -504,6 +597,20 @@ bool Test06()
             success = false;
         }
 
+        hr = Validate(s_unusedIndices32_3, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(32) [ignore unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(s_unusedIndices32_4, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(32) [ignore unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
+            success = false;
+        }
+
         hr = Validate( s_unusedIndices32, 12, 8, nullptr, VALIDATE_UNUSED, &msgs );
         if ( hr != E_FAIL )
         {
@@ -515,6 +622,20 @@ bool Test06()
         if ( FAILED(hr) )
         {
             printe("ERROR: Validate(32) [unused 2] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            success = false;
+        }
+
+        hr = Validate(s_unusedIndices32_3, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(32) [unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(s_unusedIndices32_4, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(32) [unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
             success = false;
         }
 

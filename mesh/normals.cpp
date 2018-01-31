@@ -14,6 +14,31 @@
 using namespace DirectX;
 using namespace TestGeometry;
 
+namespace
+{
+    inline bool IsValidNormals(size_t nVerts, const XMFLOAT3* normals)
+    {
+        if (!nVerts || !normals)
+            return false;
+
+        for (size_t j = 0; j < nVerts; ++j)
+        {
+            XMVECTOR v = XMLoadFloat3(&normals[j]);
+            if (XMVector3IsInfinite(v) || XMVector3IsNaN(v))
+            {
+                return false;
+            }
+
+            if (XMVectorGetX(XMVector3Length(v)) > 1.0001f)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 //-------------------------------------------------------------------------------------
 // ComputeNormals
 bool Test11()
@@ -948,12 +973,56 @@ bool Test11()
             5, 6, 4,
         };
 
+        static const uint16_t s_unused_1st[12 * 3] =
+        {
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            0, 3, 1,
+            0, 4, 3,
+            0, 5, 4,
+            3, 6, 1,
+            3, 4, 6,
+            2, 1, 6,
+            2, 6, 7,
+            0, 2, 7,
+            0, 7, 5,
+            5, 7, 6,
+            5, 6, 4,
+        };
+
+        static const uint16_t s_unused_all[12 * 3] =
+        {
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+            uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        };
+
 #ifdef _DEBUG
         std::wstring msgs;
         if ( FAILED( Validate( s_unused, 12, 8, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;            
             printe("\nERROR: ComputeNormals(16) test data failed validation:\n%S\n", msgs.c_str() );
+        }
+
+        if (FAILED(Validate(s_unused_1st, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeNormals(16) test data 1st failed validation:\n%S\n", msgs.c_str());
+        }
+
+        if (FAILED(Validate(s_unused_all, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeNormals(16) test data all failed validation:\n%S\n", msgs.c_str());
         }
 #endif
 
@@ -966,6 +1035,39 @@ bool Test11()
             printe("ERROR: ComputeNormals(16) unused [angle] failed (%08X)\n", hr );
             success = false;
         }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(16) unused [angle] not valid normals\n");
+            success = false;
+        }
+
+        memset(normals.get(), 0xff, sizeof(XMFLOAT3) * 8);
+
+        hr = ComputeNormals(s_unused_1st, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeNormals(16) unused [angle 1st] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(16) unused [angle 1st] not valid normals\n");
+            success = false;
+        }
+
+        memset(normals.get(), 0xff, sizeof(XMFLOAT3) * 8);
+
+        hr = ComputeNormals(s_unused_all, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeNormals(16) unused [angle all] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(16) unused [angle all] not valid normals\n");
+            success = false;
+        }
 
         // equal weight
         memset( normals.get(), 0xff, sizeof(XMFLOAT3) * 8 );
@@ -976,6 +1078,11 @@ bool Test11()
             printe("ERROR: ComputeNormals(16) unused [equal] failed (%08X)\n", hr );
             success = false;
         }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(16) unused [equal] not valid normals\n");
+            success = false;
+        }
 
         // by area
         memset( normals.get(), 0xff, sizeof(XMFLOAT3) * 8 );
@@ -984,6 +1091,11 @@ bool Test11()
         if ( FAILED(hr) )
         {
             printe("ERROR: ComputeNormals(16) unused [area] failed (%08X)\n", hr );
+            success = false;
+        }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(16) unused [area] not valid normals\n");
             success = false;
         }
     }
@@ -1008,12 +1120,55 @@ bool Test11()
             5, 6, 4,
         };
 
+        static const uint32_t s_unused_1st[12 * 3] =
+        {
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            0, 3, 1,
+            0, 4, 3,
+            0, 5, 4,
+            3, 6, 1,
+            3, 4, 6,
+            2, 1, 6,
+            2, 6, 7,
+            0, 2, 7,
+            0, 7, 5,
+            5, 7, 6,
+            5, 6, 4,
+        };
+
+        static const uint32_t s_unused_all[12 * 3] =
+        {
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        };
+
 #ifdef _DEBUG
         std::wstring msgs;
         if ( FAILED( Validate( s_unused, 12, 8, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;            
             printe("\nERROR: ComputeNormals(32) test data failed validation:\n%S\n", msgs.c_str() );
+        }
+        if (FAILED(Validate(s_unused_1st, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeNormals(32) test data 1st failed validation:\n%S\n", msgs.c_str());
+        }
+
+        if (FAILED(Validate(s_unused_all, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
+        {
+            success = false;
+            printe("\nERROR: ComputeNormals(32) test data all failed validation:\n%S\n", msgs.c_str());
         }
 #endif
 
@@ -1026,6 +1181,39 @@ bool Test11()
             printe("ERROR: ComputeNormals(32) unused [angle] failed (%08X)\n", hr );
             success = false;
         }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(32) unused [angle] not valid normals\n");
+            success = false;
+        }
+
+        memset(normals.get(), 0xff, sizeof(XMFLOAT3) * 8);
+
+        hr = ComputeNormals(s_unused_1st, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeNormals(32) unused [angle 1st] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(32) unused [angle 1st] not valid normals\n");
+            success = false;
+        }
+
+        memset(normals.get(), 0xff, sizeof(XMFLOAT3) * 8);
+
+        hr = ComputeNormals(s_unused_all, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
+        if (FAILED(hr))
+        {
+            printe("ERROR: ComputeNormals(32 unused [angle all] failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(32) unused [angle all] not valid normals\n");
+            success = false;
+        }
 
         // equal weight
         memset( normals.get(), 0xff, sizeof(XMFLOAT3) * 8 );
@@ -1036,6 +1224,11 @@ bool Test11()
             printe("ERROR: ComputeNormals(32) unused [equal] failed (%08X)\n", hr );
             success = false;
         }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(32) unused [equal] not valid normals\n");
+            success = false;
+        }
 
         // by area
         memset( normals.get(), 0xff, sizeof(XMFLOAT3) * 8 );
@@ -1044,6 +1237,11 @@ bool Test11()
         if ( FAILED(hr) )
         {
             printe("ERROR: ComputeNormals(32) unused [area] failed (%08X)\n", hr );
+            success = false;
+        }
+        else if (!IsValidNormals(8, normals.get()))
+        {
+            printe("ERROR: ComputeNormals(32) unused [area] not valid normals\n");
             success = false;
         }
     }
