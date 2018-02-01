@@ -15,62 +15,65 @@
 using namespace DirectX;
 using namespace TestInputLayouts11;
 
-const uint32_t VSStarterKitAnimationStride1 = 52;
-const uint32_t VSStarterKitAnimationStride2 = 20;
-
-static const D3D11_INPUT_ELEMENT_DESC s_instlayout[] =
+namespace
 {
-    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-};
+    const uint32_t VSStarterKitAnimationStride1 = 52;
+    const uint32_t VSStarterKitAnimationStride2 = 20;
 
-static const D3D11_INPUT_ELEMENT_DESC s_leaflayout[] =
-{
-    { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-    { "fOcc",       0, DXGI_FORMAT_R32_FLOAT,          1, 64, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
-};
+    const D3D11_INPUT_ELEMENT_DESC s_instlayout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
+        { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
+        { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
+        { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
+    };
 
-struct TestDesc
-{
-    const char* name;
-    size_t elements;
-    const D3D11_INPUT_ELEMENT_DESC* desc;
-    uint32_t stride;
-    uint32_t offsets[ 8 ];
-};
+    const D3D11_INPUT_ELEMENT_DESC s_leaflayout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "fOcc",       0, DXGI_FORMAT_R32_FLOAT,          1, 64, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+    };
 
-static const TestDesc g_InputDescs[] = 
-{
-    { "VertexPositionColor", 2, g_VertexPositionColor, 28, 0, 12 },
-    { "VertexPositionTexture", 2, g_VertexPositionTexture, 20, 0, 12 },
-    { "VertexPositionNormal", 2, g_VertexPositionNormal, 24, 0, 12 },
-    { "VertexPositionColorTexture", 3, g_VertexPositionColorTexture, 36, 0, 12, 28 },
-    { "VertexPositionNormalColor", 3, g_VertexPositionNormalColor, 40, 0, 12, 24 },
-    { "VertexPositionNormalTexture", 3, g_VertexPositionNormalTexture, 32, 0, 12, 24 },
-    { "VertexPositionNormalColorTexture", 4, g_VertexPositionNormalColorTexture, 48, 0, 12, 24, 40 },
-    { "VertexPositionNormalTangentColorTexture", 5, g_VertexPositionNormalTangentColorTexture, 52, 0, 12, 24, 40, 44 },
-    { "VertexPositionNormalTangentColorTextureSkinning", 7, g_VertexPositionNormalTangentColorTextureSkinning, 60, 0, 12, 24, 40, 44, 52, 56 },
-    { "D3DTutorial", 2, g_D3DTutorial, 24, 0, 12 },
-    { "VSStarterKit", 5, g_VSStarterKit, 52, 0, 12, 24, 40, 44 },
-    { "tangentSpaceVertexLayout", 5, g_tangentspacevertexlayout, 56, 0, 12, 20, 32, 44 },
-    { "quadLayout", 2, g_quadlayout, 24, 0, 16 },
-    { "UncompressedLayout", 4, g_UncompressedLayout, 44, 0, 12, 24, 32 },
-    { "CompressedLayout", 4, g_CompressedLayout, 24, 0, 12, 16, 20 },
-    { "SkinnedLayout", 6, g_SkinnedLayout, 52, 0, 12, 16, 20, 32, 40 },
-    { "UnSkinnedLayout", 4, g_UnSkinnedLayout, 48, 0, 16, 28, 36 },
-    { "layout", 3, g_layout, 32, 0, 12, 24 },
-    { "colorLayout", 1, g_colorLayout, 16, 0, },
-};
+    struct TestDesc
+    {
+        const char* name;
+        size_t elements;
+        const D3D11_INPUT_ELEMENT_DESC* desc;
+        uint32_t stride;
+        uint32_t offsets[8];
+    };
+
+    const TestDesc g_InputDescs[] =
+    {
+        { "VertexPositionColor", 2, g_VertexPositionColor, 28, 0, 12 },
+        { "VertexPositionTexture", 2, g_VertexPositionTexture, 20, 0, 12 },
+        { "VertexPositionNormal", 2, g_VertexPositionNormal, 24, 0, 12 },
+        { "VertexPositionColorTexture", 3, g_VertexPositionColorTexture, 36, 0, 12, 28 },
+        { "VertexPositionNormalColor", 3, g_VertexPositionNormalColor, 40, 0, 12, 24 },
+        { "VertexPositionNormalTexture", 3, g_VertexPositionNormalTexture, 32, 0, 12, 24 },
+        { "VertexPositionNormalColorTexture", 4, g_VertexPositionNormalColorTexture, 48, 0, 12, 24, 40 },
+        { "VertexPositionNormalTangentColorTexture", 5, g_VertexPositionNormalTangentColorTexture, 52, 0, 12, 24, 40, 44 },
+        { "VertexPositionNormalTangentColorTextureSkinning", 7, g_VertexPositionNormalTangentColorTextureSkinning, 60, 0, 12, 24, 40, 44, 52, 56 },
+        { "D3DTutorial", 2, g_D3DTutorial, 24, 0, 12 },
+        { "VSStarterKit", 5, g_VSStarterKit, 52, 0, 12, 24, 40, 44 },
+        { "tangentSpaceVertexLayout", 5, g_tangentspacevertexlayout, 56, 0, 12, 20, 32, 44 },
+        { "quadLayout", 2, g_quadlayout, 24, 0, 16 },
+        { "UncompressedLayout", 4, g_UncompressedLayout, 44, 0, 12, 24, 32 },
+        { "CompressedLayout", 4, g_CompressedLayout, 24, 0, 12, 16, 20 },
+        { "SkinnedLayout", 6, g_SkinnedLayout, 52, 0, 12, 16, 20, 32, 40 },
+        { "UnSkinnedLayout", 4, g_UnSkinnedLayout, 48, 0, 16, 28, 36 },
+        { "layout", 3, g_layout, 32, 0, 12, 24 },
+        { "colorLayout", 1, g_colorLayout, 16, 0, },
+    };
+}
 
 
 //-------------------------------------------------------------------------------------

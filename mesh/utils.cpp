@@ -13,10 +13,13 @@
 
 using namespace DirectX;
 
-static const UINT DXGI_START = 1;
-static const UINT DXGI_END = 190; // as of DXGI 1.3
+namespace
+{
+    const UINT DXGI_START = 1;
+    const UINT DXGI_END = 190; // as of DXGI 1.3
 
-static const float g_Epsilon = 0.0001f;
+    const float g_Epsilon = 0.0001f;
+}
 
 //-------------------------------------------------------------------------------------
 // IsValidVB
