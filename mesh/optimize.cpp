@@ -1656,6 +1656,7 @@ bool Test25()
 
 //-------------------------------------------------------------------------------------
 // OptimizeVertices
+
 bool Test17()
 {
     bool success = true;
@@ -2056,6 +2057,30 @@ bool Test17()
             for (size_t j = 0; j < vertices.size(); ++j)
                 print("%Iu -> %u\n", j, remap[j]);
         }
+        else
+        {
+            std::unique_ptr<uint16_t[]> newIndices(new uint16_t[nFaces * 3]);
+            hr = FinalizeIB(indices.data(), nFaces, remap.get(), vertices.size(), newIndices.get());
+            if (FAILED(hr))
+            {
+                printe("ERROR: OptimizeVertices(16) torus failed finalize IB (%08X)\n", hr);
+                success = false;
+            }
+            else if (memcmp(indices.data(), newIndices.get(), sizeof(uint16_t) * nFaces *3) == 0)
+            {
+                printe("ERROR: OptimizeVertices(16) torus failed to change order of vertices\n");
+                success = false;
+            }
+            else
+            {
+                hr = FinalizeVB(vertices.data(), sizeof(ShapesGenerator<uint16_t>::Vertex), vertices.size(), remap.get());
+                if (FAILED(hr))
+                {
+                    printe("ERROR: OptimizeVertices(16) torus failed finalize VB (%08X)\n", hr);
+                    success = false;
+                }
+            }
+        }
     }
 
     // 32-bit torus
@@ -2081,6 +2106,30 @@ bool Test17()
             success = false;
             for (size_t j = 0; j < vertices.size(); ++j)
                 print("%Iu -> %u\n", j, remap[j]);
+        }
+        else
+        {
+            std::unique_ptr<uint32_t[]> newIndices(new uint32_t[nFaces * 3]);
+            hr = FinalizeIB(indices.data(), nFaces, remap.get(), vertices.size(), newIndices.get());
+            if (FAILED(hr))
+            {
+                printe("ERROR: OptimizeVertices(32) torus failed finalize IB (%08X)\n", hr);
+                success = false;
+            }
+            else if (memcmp(indices.data(), newIndices.get(), sizeof(uint32_t) * nFaces * 3) == 0)
+            {
+                printe("ERROR: OptimizeVertices(32) torus failed to change order of vertices\n");
+                success = false;
+            }
+            else
+            {
+                hr = FinalizeVB(vertices.data(), sizeof(ShapesGenerator<uint32_t>::Vertex), vertices.size(), remap.get());
+                if (FAILED(hr))
+                {
+                    printe("ERROR: OptimizeVertices(32) torus failed finalize VB (%08X)\n", hr);
+                    success = false;
+                }
+            }
         }
     }
 
