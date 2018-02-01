@@ -16,23 +16,25 @@
 using namespace DirectX;
 using namespace TestGeometry;
 
-// Face-mapped cube
-static const uint32_t s_fmCubeAdj[3 * 12] =
+namespace
 {
-    1, 9, 5, 
-    7, 0, 11,
-    3, 8, 6, 
-    4, 2, 10,
-    5, 3, 11,
-    8, 4, 0,
-    7, 2, 9,
-    10, 6, 1,
-    9, 2, 5, 
-    6, 8, 0,
-    11, 3, 7,
-    4, 10, 1
-};
-
+    // Face-mapped cube
+    const uint32_t s_fmCubeAdj[3 * 12] =
+    {
+        1, 9, 5,
+        7, 0, 11,
+        3, 8, 6,
+        4, 2, 10,
+        5, 3, 11,
+        8, 4, 0,
+        7, 2, 9,
+        10, 6, 1,
+        9, 2, 5,
+        6, 8, 0,
+        11, 3, 7,
+        4, 10, 1
+    };
+}
 
 //-------------------------------------------------------------------------------------
 // AttributeSort

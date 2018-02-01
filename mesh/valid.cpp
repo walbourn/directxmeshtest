@@ -14,24 +14,26 @@
 using namespace DirectX;
 using namespace TestGeometry;
 
-// Cube
-static const uint32_t s_cubeAdj[3 * 12] =
+namespace
 {
-    1, 6, 8,
-    2, 4, 0,
-    3, 5, 1,
-    9, 11, 2,
-    5, 6, 1,
-    2, 11, 4,
-    0, 4, 7,
-    6, 10, 8,
-    0, 7, 9,
-    8, 10, 3,
-    9, 7, 11,
-    10, 5, 3
-};
+    // Cube
+    const uint32_t s_cubeAdj[3 * 12] =
+    {
+        1, 6, 8,
+        2, 4, 0,
+        3, 5, 1,
+        9, 11, 2,
+        5, 6, 1,
+        2, 11, 4,
+        0, 4, 7,
+        6, 10, 8,
+        0, 7, 9,
+        8, 10, 3,
+        9, 7, 11,
+        10, 5, 3
+    };
 
-static const uint16_t g_degenCubeIndices16[ 12*3 ] =
+    const uint16_t g_degenCubeIndices16[12 * 3] =
     {
         0, 1, 2,
         0, 3, 1,
@@ -47,7 +49,7 @@ static const uint16_t g_degenCubeIndices16[ 12*3 ] =
         5, 6, 4,
     };
 
-static const uint16_t g_degenCubeIndices32[ 12*3 ] =
+    const uint16_t g_degenCubeIndices32[12 * 3] =
     {
         0, 1, 2,
         0, 3, 1,
@@ -63,92 +65,92 @@ static const uint16_t g_degenCubeIndices32[ 12*3 ] =
         5, 6, 4,
     };
 
-// Face-mapped cube
-static const uint32_t s_fmCubeAdj[3 * 12] =
-{
-    1, 9, 5, 
-    7, 0, 11,
-    3, 8, 6, 
-    4, 2, 10,
-    5, 3, 11,
-    8, 4, 0,
-    7, 2, 9,
-    10, 6, 1,
-    9, 2, 5, 
-    6, 8, 0,
-    11, 3, 7,
-    4, 10, 1
-};
+    // Face-mapped cube
+    const uint32_t s_fmCubeAdj[3 * 12] =
+    {
+        1, 9, 5,
+        7, 0, 11,
+        3, 8, 6,
+        4, 2, 10,
+        5, 3, 11,
+        8, 4, 0,
+        7, 2, 9,
+        10, 6, 1,
+        9, 2, 5,
+        6, 8, 0,
+        11, 3, 7,
+        4, 10, 1
+    };
 
-// Tetrahedron
-static const uint32_t s_tetraAdj[3 * 4] = 
-{
-    3, uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), 0
-};
+    // Tetrahedron
+    const uint32_t s_tetraAdj[3 * 4] =
+    {
+        3, uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), 0
+    };
 
-// Bowtie
-static const uint32_t s_bowtieAdj[3 * 2] =
-{
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-};
+    // Bowtie
+    const uint32_t s_bowtieAdj[3 * 2] =
+    {
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    };
 
-// Backface
-static const uint32_t s_backfaceAdj[3 * 2] =
-{
-    1, 1, 1,
-    0, 0, 0
-};
+    // Backface
+    const uint32_t s_backfaceAdj[3 * 2] =
+    {
+        1, 1, 1,
+        0, 0, 0
+    };
 
-// Invalid
-static const uint16_t s_badIndices16[3] =
+    // Invalid
+    const uint16_t s_badIndices16[3] =
     {
         435, 20, 1,
     };
 
-static const uint32_t s_badIndices32[3] =
+    const uint32_t s_badIndices32[3] =
     {
         435, 20, 1,
     };
 
-// Bad neighbors
-static const uint32_t s_badNeighborAdj1[3 * 12] =
-{
-    1, 6, 8,
-    2, 4, 0,
-    3, 5, 1,
-    9, 11, 2,
-    5, 6, 1,
-    2, 790, 4,
-    0, 4, 7,
-    6, 10, 8,
-    0, 7, 9,
-    8, 10, 3,
-    9, 7, 11,
-    10, 5, 3
-};
+    // Bad neighbors
+    const uint32_t s_badNeighborAdj1[3 * 12] =
+    {
+        1, 6, 8,
+        2, 4, 0,
+        3, 5, 1,
+        9, 11, 2,
+        5, 6, 1,
+        2, 790, 4,
+        0, 4, 7,
+        6, 10, 8,
+        0, 7, 9,
+        8, 10, 3,
+        9, 7, 11,
+        10, 5, 3
+    };
 
-static const uint32_t s_badNeighborAdj2[3 * 12] =
-{
-    1, 6, 8,
-    2, 4, 6,
-    3, 5, 1,
-    9, 11, 2,
-    5, 6, 1,
-    2, 11, 4,
-    uint32_t(-1), 4, 7,
-    6, 10, 8,
-    0, 7, 9,
-    8, 10, 3,
-    9, 7, 11,
-    10, 5, 3
-};
+    const uint32_t s_badNeighborAdj2[3 * 12] =
+    {
+        1, 6, 8,
+        2, 4, 6,
+        3, 5, 1,
+        9, 11, 2,
+        5, 6, 1,
+        2, 11, 4,
+        uint32_t(-1), 4, 7,
+        6, 10, 8,
+        0, 7, 9,
+        8, 10, 3,
+        9, 7, 11,
+        10, 5, 3
+    };
 
-// Unused
-static const uint16_t s_unusedIndices16[ 12*3 ] =
+    // Unused
+    const uint16_t s_unusedIndices16[12 * 3] =
     {
         0, 1, 2,
         0, 3, 1,
@@ -164,7 +166,7 @@ static const uint16_t s_unusedIndices16[ 12*3 ] =
         5, 6, 4,
     };
 
-static const uint32_t s_unusedIndices32[ 12*3 ] =
+    const uint32_t s_unusedIndices32[12 * 3] =
     {
         0, 1, 2,
         0, 3, 1,
@@ -180,149 +182,150 @@ static const uint32_t s_unusedIndices32[ 12*3 ] =
         5, 6, 4,
     };
 
-static const uint32_t s_unusedAdj[3 * 12] =
-{
-    1, uint32_t(-1), 8,
-    2, 4, 0,
-    3, 5, 1,
-    9, 11, 2,
-    5, uint32_t(-1), 1,
-    2, 11, 4,
-    uint32_t(-1), uint32_t(-1), 7,
-    6, 10, 8,
-    0, 7, 9,
-    8, 10, 3,
-    9, 7, 11,
-    10, 5, 3
-};
+    const uint32_t s_unusedAdj[3 * 12] =
+    {
+        1, uint32_t(-1), 8,
+        2, 4, 0,
+        3, 5, 1,
+        9, 11, 2,
+        5, uint32_t(-1), 1,
+        2, 11, 4,
+        uint32_t(-1), uint32_t(-1), 7,
+        6, 10, 8,
+        0, 7, 9,
+        8, 10, 3,
+        9, 7, 11,
+        10, 5, 3
+    };
 
-static const uint16_t s_unusedIndices16_2[ 12*3 ] =
-{
-    0, 1, 2,
-    0, 3, 1,
-    0, 4, 3,
-    0, 5, 4,
-    3, 6, 1,
-    3, 4, 6,
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    2, 6, 7,
-    0, 2, 7,
-    0, 7, 5,
-    5, 7, 6,
-    5, 6, 4,
-};
+    const uint16_t s_unusedIndices16_2[12 * 3] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        3, 4, 6,
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
 
-static const uint32_t s_unusedIndices32_2[ 12*3 ] =
-{
-    0, 1, 2,
-    0, 3, 1,
-    0, 4, 3,
-    0, 5, 4,
-    3, 6, 1,
-    3, 4, 6,
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    2, 6, 7,
-    0, 2, 7,
-    0, 7, 5,
-    5, 7, 6,
-    5, 6, 4,
-};
+    const uint32_t s_unusedIndices32_2[12 * 3] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        3, 4, 6,
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
 
-static const uint32_t s_unusedAdj_2[3 * 12] =
-{
-    1, 6, 8,
-    2, 4, 0,
-    3, 5, 1,
-    9, 11, 2,
-    5, 6, 1,
-    2, 11, 4,
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    6, 10, 8,
-    0, 7, 9,
-    8, 10, 3,
-    9, 7, 11,
-    10, 5, 3
-};
+    const uint32_t s_unusedAdj_2[3 * 12] =
+    {
+        1, 6, 8,
+        2, 4, 0,
+        3, 5, 1,
+        9, 11, 2,
+        5, 6, 1,
+        2, 11, 4,
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        6, 10, 8,
+        0, 7, 9,
+        8, 10, 3,
+        9, 7, 11,
+        10, 5, 3
+    };
 
-static const uint32_t s_unusedAdj_3[3 * 12] =
-{
-    1, uint32_t(-1), 8,
-    2, 4, 0,
-    3, 5, 1,
-    9, 11, 2,
-    5, uint32_t(-1), 1,
-    2, 11, 4,
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), 10, 8,
-    0, 7, 9,
-    8, 10, 3,
-    9, 7, 11,
-    10, 5, 3
-};
+    const uint32_t s_unusedAdj_3[3 * 12] =
+    {
+        1, uint32_t(-1), 8,
+        2, 4, 0,
+        3, 5, 1,
+        9, 11, 2,
+        5, uint32_t(-1), 1,
+        2, 11, 4,
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), 10, 8,
+        0, 7, 9,
+        8, 10, 3,
+        9, 7, 11,
+        10, 5, 3
+    };
 
-static const uint16_t s_unusedIndices16_3[12 * 3] =
-{
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    0, 3, 1,
-    0, 4, 3,
-    0, 5, 4,
-    3, 6, 1,
-    3, 4, 6,
-    2, 1, 6,
-    2, 6, 7,
-    0, 2, 7,
-    0, 7, 5,
-    5, 7, 6,
-    5, 6, 4,
-};
+    const uint16_t s_unusedIndices16_3[12 * 3] =
+    {
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        3, 4, 6,
+        2, 1, 6,
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
 
-static const uint32_t s_unusedIndices32_3[12 * 3] =
-{
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    0, 3, 1,
-    0, 4, 3,
-    0, 5, 4,
-    3, 6, 1,
-    3, 4, 6,
-    2, 1, 6,
-    2, 6, 7,
-    0, 2, 7,
-    0, 7, 5,
-    5, 7, 6,
-    5, 6, 4,
-};
+    const uint32_t s_unusedIndices32_3[12 * 3] =
+    {
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        3, 4, 6,
+        2, 1, 6,
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
 
-static const uint16_t s_unusedIndices16_4[12 * 3] =
-{
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-    uint16_t(-1), uint16_t(-1), uint16_t(-1),
-};
+    const uint16_t s_unusedIndices16_4[12 * 3] =
+    {
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+        uint16_t(-1), uint16_t(-1), uint16_t(-1),
+    };
 
-static const uint32_t s_unusedIndices32_4[12 * 3] =
-{
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-    uint32_t(-1), uint32_t(-1), uint32_t(-1),
-};
+    const uint32_t s_unusedIndices32_4[12 * 3] =
+    {
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        uint32_t(-1), uint32_t(-1), uint32_t(-1),
+    };
+}
 
 
 //-------------------------------------------------------------------------------------
