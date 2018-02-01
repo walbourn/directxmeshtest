@@ -172,6 +172,7 @@
     <ClCompile Include="tangentframe.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="valid.cpp" />
+    <ClCompile Include="weld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Utilities\WaveFrontReader.h" />
