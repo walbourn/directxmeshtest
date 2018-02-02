@@ -44,6 +44,34 @@ namespace
         18, 19,  7, 12, 22,  3,
     };
 
+    const XMFLOAT3 s_fmCubeNormals[24] =
+    {
+        XMFLOAT3(0.f, 1.f, 0.f),
+        XMFLOAT3(0.f, 1.f, 0.f),
+        XMFLOAT3(0.f, 1.f, 0.f),
+        XMFLOAT3(0.f, 1.f, 0.f),
+        XMFLOAT3(0.f, -1.f, 0.f),
+        XMFLOAT3(0.f, -1.f, 0.f),
+        XMFLOAT3(0.f, -1.f, 0.f),
+        XMFLOAT3(0.f, -1.f, 0.f),
+        XMFLOAT3(-1.f, 0.f, 0.f),
+        XMFLOAT3(-1.f, 0.f, 0.f),
+        XMFLOAT3(-1.f, 0.f, 0.f),
+        XMFLOAT3(-1.f, 0.f, 0.f),
+        XMFLOAT3(1.f, 0.f, 0.f),
+        XMFLOAT3(1.f, 0.f, 0.f),
+        XMFLOAT3(1.f, 0.f, 0.f),
+        XMFLOAT3(1.f, 0.f, 0.f),
+        XMFLOAT3(0.f, 0.f, -1.f),
+        XMFLOAT3(0.f, 0.f, -1.f),
+        XMFLOAT3(0.f, 0.f, -1.f),
+        XMFLOAT3(0.f, 0.f, -1.f),
+        XMFLOAT3(0.f, 0.f, 1.f),
+        XMFLOAT3(0.f, 0.f, 1.f),
+        XMFLOAT3(0.f, 0.f, 1.f),
+        XMFLOAT3(0.f, 0.f, 1.f),
+    };
+
     // Unused
     const uint32_t s_unused[8] =
     {
@@ -193,37 +221,79 @@ bool Test26()
             success = false;
         }
 
-        // Epsilon
+        // Position
         ntests = 0;
+        size_t nwelds = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
-        if (hr != S_FALSE)
+        hr = WeldVertices(24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool
+        {
+            ++ntests;
+
+            XMVECTOR vA = XMLoadFloat3(&g_fmCubeVerts[v0]);
+            XMVECTOR vB = XMLoadFloat3(&g_fmCubeVerts[v1]);
+
+            if (XMVector3NearEqual(vA, vB, s_Epsilon))
+            {
+                ++nwelds;
+                return true;
+            }
+            return false;
+        });
+        if (FAILED(hr))
         {
             printe("ERROR: WeldVertices fmcube C failed (%08X)\n", hr);
             success = false;
         }
-        else if (ntests != 32)
+        else if (ntests != 16 && nwelds != 16)
         {
-            printe("ERROR: WeldVertices fmcube C failed (%Iu .. 32)\n", ntests);
+            printe("ERROR: WeldVertices fmcube C failed (%Iu .. 16, %Iu .. 16)\n", ntests, nwelds);
             success = false;
         }
-        else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24))
+        else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
         {
             printe("ERROR: WeldVertices fmcube C remap invalid\n");
             success = false;
         }
 
+        // Position, Normal, & UV
         ntests = 0;
+        nwelds = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        hr = WeldVertices(24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool
+        {
+            ++ntests;
+
+            XMVECTOR vA = XMLoadFloat3(&g_fmCubeVerts[v0]);
+            XMVECTOR vB = XMLoadFloat3(&g_fmCubeVerts[v1]);
+
+            XMVECTOR nA = XMLoadFloat3(&s_fmCubeNormals[v0]);
+            XMVECTOR nB = XMLoadFloat3(&s_fmCubeNormals[v1]);
+
+            XMVECTOR uvA = XMLoadFloat2(&g_fmCubeUVs[v0]);
+            XMVECTOR uvB = XMLoadFloat2(&g_fmCubeUVs[v1]);
+
+            if (XMVector3NearEqual(vA, vB, s_Epsilon))
+            {
+                if (XMVector3NearEqual(nA, nB, s_Epsilon))
+                {
+                    if (XMVector2NearEqual(uvA, uvB, s_Epsilon))
+                    {
+                        ++nwelds;
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        });
         if (FAILED(hr))
         {
             printe("ERROR: WeldVertices fmcube D failed (%08X)\n", hr);
             success = false;
         }
-        else if (ntests != 16)
+        else if (ntests != 32 && nwelds != 0)
         {
-            printe("ERROR: WeldVertices fmcube D failed (%Iu .. 16)\n", ntests);
+            printe("ERROR: WeldVertices fmcube D failed (%Iu .. 32, %Iu .. 0)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
@@ -232,9 +302,89 @@ bool Test26()
             success = false;
         }
 
+        // Position & UV
+        ntests = 0;
+        nwelds = 0;
+        memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
+        hr = WeldVertices(24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool
+        {
+            ++ntests;
+
+            XMVECTOR vA = XMLoadFloat3(&g_fmCubeVerts[v0]);
+            XMVECTOR vB = XMLoadFloat3(&g_fmCubeVerts[v1]);
+
+            XMVECTOR uvA = XMLoadFloat2(&g_fmCubeUVs[v0]);
+            XMVECTOR uvB = XMLoadFloat2(&g_fmCubeUVs[v1]);
+
+            if (XMVector3NearEqual(vA, vB, s_Epsilon))
+            {
+                if (XMVector2NearEqual(uvA, uvB, s_Epsilon))
+                {
+                    ++nwelds;
+                    return true;
+                }
+            }
+
+            return false;
+        });
+        if (FAILED(hr))
+        {
+            printe("ERROR: WeldVertices fmcube E failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (ntests != 16 && nwelds != 4)
+        {
+            printe("ERROR: WeldVertices fmcube E failed (%Iu .. 16, %Iu .. 4)\n", ntests, nwelds);
+            success = false;
+        }
+        else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
+        {
+            printe("ERROR: WeldVertices fmcube E remap invalid\n");
+            success = false;
+        }
+
+        // Epsilon
+        ntests = 0;
+        memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
+        hr = WeldVertices(24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
+        if (hr != S_FALSE)
+        {
+            printe("ERROR: WeldVertices fmcube eps A failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (ntests != 32)
+        {
+            printe("ERROR: WeldVertices fmcube eps A failed (%Iu .. 32)\n", ntests);
+            success = false;
+        }
+        else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24))
+        {
+            printe("ERROR: WeldVertices fmcube eps A remap invalid\n");
+            success = false;
+        }
+
+        ntests = 0;
+        memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
+        hr = WeldVertices(24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        if (FAILED(hr))
+        {
+            printe("ERROR: WeldVertices fmcube eps B failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (ntests != 16)
+        {
+            printe("ERROR: WeldVertices fmcube eps B failed (%Iu .. 16)\n", ntests);
+            success = false;
+        }
+        else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
+        {
+            printe("ERROR: WeldVertices fmcube eps B remap invalid\n");
+            success = false;
+        }
+
         // Position epsilon
         ntests = 0;
-        size_t nwelds = 0;
+        nwelds = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
         hr = WeldVertices(24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool
         {
@@ -252,17 +402,17 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices fmcube E failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices fmcube eps C failed (%08X)\n", hr);
             success = false;
         }
         else if (ntests != 16 && nwelds != 16)
         {
-            printe("ERROR: WeldVertices fmcube E failed (%Iu .. 16, %Iu .. 16)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices fmcube eps C failed (%Iu .. 16, %Iu .. 16)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
         {
-            printe("ERROR: WeldVertices fmcube E remap invalid\n");
+            printe("ERROR: WeldVertices fmcube eps C remap invalid\n");
             success = false;
         }
         else
@@ -271,34 +421,66 @@ bool Test26()
             hr = FinalizeIB(g_fmCubeIndices16, 12, remap.get(), 24, newIndices.get());
             if (FAILED(hr))
             {
-                printe("ERROR: WeldVertices fmcube E failed finalize IB (%08X)\n", hr);
+                printe("ERROR: WeldVertices fmcube eps C failed finalize IB (%08X)\n", hr);
                 success = false;
             }
             else if (memcmp(g_fmCubeIndices16, newIndices.get(), sizeof(uint16_t) * 12 * 3) == 0)
             {
-                printe("ERROR: WeldVertices fmcube E failed to change order of vertices\n");
+                printe("ERROR: WeldVertices fmcube eps C failed to change order of vertices\n");
                 success = false;
             }
             else
             {
-                std::vector<TestVertex> vertices;
-                for (size_t j = 0; j < 24; ++j)
-                {
-                    TestVertex vert = { g_fmCubeVerts[j], g_fmCubeUVs[j] };
-                    vertices.push_back(vert);
-                }
-
-                hr = FinalizeVB(vertices.data(), sizeof(TestVertex), vertices.size(), remap.get());
-                if (FAILED(hr))
-                {
-                    printe("ERROR: WeldVertices fmcube E failed finalize VB (%08X)\n", hr);
-                    success = false;
-                }
+                // TODO -
             }
         }
 
         // Position, Normal, & UV epsilon
-        // TODO -
+        ntests = 0;
+        nwelds = 0;
+        memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
+        hr = WeldVertices(24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool
+        {
+            ++ntests;
+
+            XMVECTOR vA = XMLoadFloat3(&g_fmCubeVerts[v0]);
+            XMVECTOR vB = XMLoadFloat3(&g_fmCubeVerts[v1]);
+
+            XMVECTOR nA = XMLoadFloat3(&s_fmCubeNormals[v0]);
+            XMVECTOR nB = XMLoadFloat3(&s_fmCubeNormals[v1]);
+
+            XMVECTOR uvA = XMLoadFloat2(&g_fmCubeUVs[v0]);
+            XMVECTOR uvB = XMLoadFloat2(&g_fmCubeUVs[v1]);
+
+            if (XMVector3NearEqual(vA, vB, s_Epsilon))
+            {
+                if (XMVector3NearEqual(nA, nB, s_Epsilon))
+                {
+                    if (XMVector2NearEqual(uvA, uvB, s_Epsilon))
+                    {
+                        ++nwelds;
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        });
+        if (FAILED(hr))
+        {
+            printe("ERROR: WeldVertices fmcube eps D failed (%08X)\n", hr);
+            success = false;
+        }
+        else if (ntests != 32 && nwelds != 0)
+        {
+            printe("ERROR: WeldVertices fmcube eps D failed (%Iu .. 32, %Iu .. 0)\n", ntests, nwelds);
+            success = false;
+        }
+        else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
+        {
+            printe("ERROR: WeldVertices fmcube eps D remap invalid\n");
+            success = false;
+        }
 
         // Position & UV epsilon
         ntests = 0;
@@ -327,17 +509,17 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices fmcube F failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices fmcube eps F failed (%08X)\n", hr);
             success = false;
         }
         else if (ntests != 16 && nwelds != 4)
         {
-            printe("ERROR: WeldVertices fmcube F failed (%Iu .. 16, %Iu .. 4)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices fmcube eps F failed (%Iu .. 16, %Iu .. 4)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
         {
-            printe("ERROR: WeldVertices fmcube F remap invalid\n");
+            printe("ERROR: WeldVertices fmcube eps F remap invalid\n");
             success = false;
         }
         else
@@ -346,12 +528,12 @@ bool Test26()
             hr = FinalizeIB(g_fmCubeIndices16, 12, remap.get(), 24, newIndices.get());
             if (FAILED(hr))
             {
-                printe("ERROR: WeldVertices fmcube F failed finalize IB (%08X)\n", hr);
+                printe("ERROR: WeldVertices fmcube eps F failed finalize IB (%08X)\n", hr);
                 success = false;
             }
             else if (memcmp(g_fmCubeIndices16, newIndices.get(), sizeof(uint16_t) * 12 * 3) == 0)
             {
-                printe("ERROR: WeldVertices fmcube F failed to change order of vertices\n");
+                printe("ERROR: WeldVertices fmcube eps F failed to change order of vertices\n");
                 success = false;
             }
             else
@@ -360,24 +542,24 @@ bool Test26()
                 hr = OptimizeVertices(newIndices.get(), 12, 24, remap.get(), &trailingUnused);
                 if (FAILED(hr))
                 {
-                    printe("ERROR: WeldVertices fmcube F failed doing OptimizeVertices (%08X)\n", hr);
+                    printe("ERROR: WeldVertices fmcube eps F failed doing OptimizeVertices (%08X)\n", hr);
                     success = false;
                 }
                 else if (!IsValidVertexRemap(newIndices.get(), 12, remap.get(), 24))
                 {
-                    printe("ERROR: WeldVertices fmcube F failed remap invalid\n");
+                    printe("ERROR: WeldVertices fmcube eps F failed remap invalid\n");
                     success = false;
                     for (size_t j = 0; j < 24; ++j)
                         print("%Iu -> %u\n", j, remap[j]);
                 }
                 else if (trailingUnused != 4)
                 {
-                    printe("ERROR: WeldVertices fmcube F optimize failed to produce 4 unused slots\n");
+                    printe("ERROR: WeldVertices fmcube eps F optimize failed to produce 4 unused slots\n");
                     success = false;
                 }
                 else if (remap[23] != uint32_t(-1) || remap[22] != uint32_t(-1) || remap[21] != uint32_t(-1) || remap[20] != uint32_t(-1))
                 {
-                    printe("ERROR: WeldVertices fmcube F optimize failed to place unused slots at end\n");
+                    printe("ERROR: WeldVertices fmcube eps F optimize failed to place unused slots at end\n");
                     success = false;
                 }
                 else
@@ -386,13 +568,13 @@ bool Test26()
                     hr = FinalizeIB(newIndices.get(), 12, remap.get(), 24, finalIndices.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: WeldVertices fmcube F failed optimize IB (%08X)\n", hr);
+                        printe("ERROR: WeldVertices fmcube eps F failed optimize IB (%08X)\n", hr);
                         success = false;
                     }
                     else if (memcmp(g_fmCubeIndices16, finalIndices.get(), sizeof(uint16_t) * 12 * 3) == 0
                              || memcmp(newIndices.get(), finalIndices.get(), sizeof(uint16_t) * 12 * 3) == 0)
                     {
-                        printe("ERROR: WeldVertices fmcube F optimize failed to change order of vertices\n");
+                        printe("ERROR: WeldVertices fmcube eps F optimize failed to change order of vertices\n");
                         success = false;
                     }
                     else
@@ -404,12 +586,12 @@ bool Test26()
                             vertices.push_back(vert);
                         }
 
-                        // TODO - CompactVB instead of FinalizeVB
+                        std::unique_ptr<TestVertex> finalVertices(new TestVertex[20]);
 
-                        hr = FinalizeVB(vertices.data(), sizeof(TestVertex), vertices.size(), remap.get());
+                        hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), trailingUnused, remap.get(), finalVertices.get());
                         if (FAILED(hr))
                         {
-                            printe("ERROR: WeldVertices fmcube F failed finalize VB (%08X)\n", hr);
+                            printe("ERROR: WeldVertices fmcube eps F failed compact VB (%08X)\n", hr);
                             success = false;
                         }
                     }
