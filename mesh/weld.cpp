@@ -86,7 +86,7 @@ bool Test26()
         }
         else if (ntests > 0)
         {
-            printe("ERROR: WeldVertices cube identity failed (%u .. 0)\n", ntests);
+            printe("ERROR: WeldVertices cube identity failed (%Iu .. 0)\n", ntests);
             success = false;
         }
         else if (memcmp(s_cubePointReps, remap.get(), sizeof(uint32_t) * 8) != 0)
@@ -165,7 +165,7 @@ bool Test26()
         }
         else if (ntests != 32)
         {
-            printe("ERROR: WeldVertices fmcube A failed (%u .. 32)\n", ntests);
+            printe("ERROR: WeldVertices fmcube A failed (%Iu .. 32)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24))
@@ -184,7 +184,7 @@ bool Test26()
         }
         else if (ntests != 16)
         {
-            printe("ERROR: WeldVertices fmcube B failed (%u .. 16)\n", ntests);
+            printe("ERROR: WeldVertices fmcube B failed (%Iu .. 16)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
@@ -204,7 +204,7 @@ bool Test26()
         }
         else if (ntests != 32)
         {
-            printe("ERROR: WeldVertices fmcube C failed (%u .. 32)\n", ntests);
+            printe("ERROR: WeldVertices fmcube C failed (%Iu .. 32)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24))
@@ -223,7 +223,7 @@ bool Test26()
         }
         else if (ntests != 16)
         {
-            printe("ERROR: WeldVertices fmcube D failed (%u .. 16)\n", ntests);
+            printe("ERROR: WeldVertices fmcube D failed (%Iu .. 16)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
@@ -257,7 +257,7 @@ bool Test26()
         }
         else if (ntests != 16 && nwelds != 16)
         {
-            printe("ERROR: WeldVertices fmcube E failed (%u .. 16, %u .. 16)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices fmcube E failed (%Iu .. 16, %Iu .. 16)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
@@ -297,6 +297,9 @@ bool Test26()
             }
         }
 
+        // Position, Normal, & UV epsilon
+        // TODO -
+
         // Position & UV epsilon
         ntests = 0;
         nwelds = 0;
@@ -329,7 +332,7 @@ bool Test26()
         }
         else if (ntests != 16 && nwelds != 4)
         {
-            printe("ERROR: WeldVertices fmcube F failed (%u .. 16, %u .. 4)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices fmcube F failed (%Iu .. 16, %Iu .. 4)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
@@ -353,7 +356,8 @@ bool Test26()
             }
             else
             {
-                hr = OptimizeVertices(newIndices.get(), 12, 24, remap.get());
+                size_t trailingUnused;
+                hr = OptimizeVertices(newIndices.get(), 12, 24, remap.get(), &trailingUnused);
                 if (FAILED(hr))
                 {
                     printe("ERROR: WeldVertices fmcube F failed doing OptimizeVertices (%08X)\n", hr);
@@ -365,6 +369,16 @@ bool Test26()
                     success = false;
                     for (size_t j = 0; j < 24; ++j)
                         print("%Iu -> %u\n", j, remap[j]);
+                }
+                else if (trailingUnused != 4)
+                {
+                    printe("ERROR: WeldVertices fmcube F optimize failed to produce 4 unused slots\n");
+                    success = false;
+                }
+                else if (remap[23] != uint32_t(-1) || remap[22] != uint32_t(-1) || remap[21] != uint32_t(-1) || remap[20] != uint32_t(-1))
+                {
+                    printe("ERROR: WeldVertices fmcube F optimize failed to place unused slots at end\n");
+                    success = false;
                 }
                 else
                 {
@@ -383,26 +397,6 @@ bool Test26()
                     }
                     else
                     {
-                        size_t unused = 0;
-                        for (size_t j = 0; j < 24; ++j)
-                        {
-                            if (remap[j] == uint32_t(-1))
-                            {
-                                ++unused;
-                            }
-                        }
-
-                        if (unused != 4)
-                        {
-                            printe("ERROR: WeldVertices fmcube F optimize failed to produce 4 unused slots\n");
-                            success = false;
-                        }
-                        else if (remap[23] != uint32_t(-1) || remap[22] != uint32_t(-1) || remap[21] != uint32_t(-1) || remap[20] != uint32_t(-1))
-                        {
-                            printe("ERROR: WeldVertices fmcube F optimize failed to place unused slots at end\n");
-                            success = false;
-                        }
-
                         std::vector<TestVertex> vertices;
                         for (size_t j = 0; j < 24; ++j)
                         {
