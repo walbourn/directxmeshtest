@@ -2507,11 +2507,6 @@ bool Test19()
                                             19, 17, 16, 18,
                                             22, 20, 21, 23 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 10, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 17,
-                                            19, 16, 21, 22, 20, 23 };
-
         static const uint32_t s_preps[] = { 0, 1, 2, 3, 4, 5,
                                             6, 7, 3, 6, 2, 7,
                                             4, 1, 5, 0, 1, 4,
@@ -2523,13 +2518,13 @@ bool Test19()
             printe("ERROR: FinalizeVBAndPointReps fmcube failed (%08X)\n", hr );
             success = false;
         }
-        else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
+        else if ( memcmp( destvb.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: FinalizeVBAndPointReps fmcube vb failed\n" );
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_remap[ j ] );
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2556,13 +2551,13 @@ bool Test19()
             printe("ERROR: FinalizeVBAndPointReps fmcube [in-place] failed (%08X)\n", hr );
             success = false;
         }
-        else if ( memcmp( srcvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
+        else if ( memcmp( srcvb.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: FinalizeVBAndPointReps fmcube [in-place] vb failed\n" );
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
             }
         }        
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
