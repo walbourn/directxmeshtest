@@ -145,8 +145,8 @@ bool Test03()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
-        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[remap.size()]);
-        for (uint32_t j = 0; j < remap.size(); ++j)
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[1024]);
+        for (uint32_t j = 0; j < 1024; ++j)
         {
             inverseRemap[remap[j]] = j;
         }
@@ -463,8 +463,8 @@ bool Test03()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
-        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[remap.size()]);
-        for (uint32_t j = 0; j < remap.size(); ++j)
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[1024]);
+        for (uint32_t j = 0; j < 1024; ++j)
         {
             inverseRemap[remap[j]] = j;
         }
@@ -965,8 +965,8 @@ bool Test04()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
-        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[remap.size()]);
-        for (uint32_t j = 0; j < remap.size(); ++j)
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535]);
+        for (uint32_t j = 0; j < 65535; ++j)
         {
             inverseRemap[remap[j]] = j;
         }
@@ -1130,8 +1130,8 @@ bool Test04()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
-        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[remap.size()]);
-        for (uint32_t j = 0; j < remap.size(); ++j)
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535]);
+        for (uint32_t j = 0; j < 65535; ++j)
         {
             inverseRemap[remap[j]] = j;
         }
@@ -1310,7 +1310,7 @@ bool Test04()
             srcvb[ j ] = j;
 
         std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 24 ] );
-        memset( destvb.get(), 0xff, sizeof(uint32_t) * 24 );
+        memset( destvb.get(), 0, sizeof(uint32_t) * 24 );
 
         const static uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
@@ -1498,8 +1498,8 @@ bool Test05()
  
         std::random_shuffle( remap.begin(), remap.end() );
 
-        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[remap.size()]);
-        for (uint32_t j = 0; j < remap.size(); ++j)
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535 + 256]);
+        for (uint32_t j = 0; j < (65535 + 256); ++j)
         {
             inverseRemap[remap[j]] = j;
         }
