@@ -145,6 +145,12 @@ bool Test03()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[1024]);
+        for (uint32_t j = 0; j < 1024; ++j)
+        {
+            inverseRemap[remap[j]] = j;
+        }
+
         auto destib = CreateIndexBuffer<uint16_t>( 1023, IB_ZERO );
 
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024, destib.get() );
@@ -154,10 +160,10 @@ bool Test03()
             success = false;
         }
         else
-        {	
+        {
             for( size_t j = 0; j < 1023; ++j )
             {
-                if ( destib[ j ] != remap[ srcib[ j ] ] )
+                if ( destib[ j ] != inverseRemap[ srcib[ j ] ] )
                 {
                     printe("ERROR: FinalizeIB(16) shuffle failed\n" );
                     success = false;
@@ -178,7 +184,7 @@ bool Test03()
         {
             for( size_t j = 0; j < 1023; ++j )
             {
-                if ( srcib[ j ] != remap[ srcib2[ j ] ] )
+                if ( srcib[ j ] != inverseRemap[ srcib2[ j ] ] )
                 {
                     printe("ERROR: FinalizeIB(16) shuffle [in-place] failed\n" );
                     success = false;
@@ -204,18 +210,18 @@ bool Test03()
 
         static const uint16_t s_sorted[] =
         {
-            2, 1, 3,
             0, 1, 2,
-            5, 6, 4,
-            7, 6, 5,
-            10, 9, 11,
+            3, 1, 0,
+            4, 5, 6,
+            7, 5, 4,
             8, 9, 10,
-            13, 14, 12,
-            15, 14, 13,
-            18, 17, 19,
+            11, 9, 8,
+            12, 13, 14,
+            15, 13, 12,
             16, 17, 18,
-            21, 22, 20,
-            23, 22, 21
+            19, 17, 16,
+            20, 21, 22,
+            23, 21, 20,
         };
 
         HRESULT hr = FinalizeIB( g_fmCubeIndices16, 12, s_remap, 24, destib.get() );
@@ -396,6 +402,12 @@ bool Test03()
         for( uint32_t j = 0; j < 1024; ++j )
             remap[j] = 1023 - j;
 
+        uint32_t inverseRemap[1024];
+        for (uint32_t j = 0; j < 1024; ++j)
+        {
+            inverseRemap[remap[j]] = j;
+        }
+
         auto destib = CreateIndexBuffer<uint32_t>( 1023, IB_ZERO );
 
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap, 1024, destib.get() );
@@ -408,7 +420,7 @@ bool Test03()
         {	
             for( size_t j = 0; j < 1023; ++j )
             {
-                if ( destib[ j ] != remap[ srcib[ j ] ] )
+                if ( destib[ j ] != inverseRemap[ srcib[ j ] ] )
                 {
                     printe("ERROR: FinalizeIB(32) reverse failed\n" );
                     success = false;
@@ -429,7 +441,7 @@ bool Test03()
         {
             for( size_t j = 0; j < 1023; ++j )
             {
-                if ( srcib[ j ] != remap[ srcib2[ j ] ] )
+                if ( srcib[ j ] != inverseRemap[ srcib2[ j ] ] )
                 {
                     printe("ERROR: FinalizeIB(32) reverse [in-place] failed\n" );
                     success = false;
@@ -451,6 +463,12 @@ bool Test03()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[1024]);
+        for (uint32_t j = 0; j < 1024; ++j)
+        {
+            inverseRemap[remap[j]] = j;
+        }
+
         auto destib = CreateIndexBuffer<uint32_t>( 1023, IB_ZERO );
 
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024, destib.get() );
@@ -463,7 +481,7 @@ bool Test03()
         {	
             for( size_t j = 0; j < 1023; ++j )
             {
-                if ( destib[ j ] != remap[ srcib[ j ] ] )
+                if ( destib[ j ] != inverseRemap[ srcib[ j ] ] )
                 {
                     printe("ERROR: FinalizeIB(32) shuffle failed\n" );
                     success = false;
@@ -484,7 +502,7 @@ bool Test03()
         {
             for( size_t j = 0; j < 1023; ++j )
             {
-                if ( srcib[ j ] != remap[ srcib2[ j ] ] )
+                if ( srcib[ j ] != inverseRemap[ srcib2[ j ] ] )
                 {
                     printe("ERROR: FinalizeIB(32) shuffle [in-place] failed\n" );
                     success = false;
@@ -510,18 +528,18 @@ bool Test03()
 
         static const uint32_t s_sorted[] =
         {
-            2, 1, 3,
             0, 1, 2,
-            5, 6, 4,
-            7, 6, 5,
-            10, 9, 11,
+            3, 1, 0,
+            4, 5, 6,
+            7, 5, 4,
             8, 9, 10,
-            13, 14, 12,
-            15, 14, 13,
-            18, 17, 19,
+            11, 9, 8,
+            12, 13, 14,
+            15, 13, 12,
             16, 17, 18,
-            21, 22, 20,
-            23, 22, 21
+            19, 17, 16,
+            20, 21, 22,
+            23, 21, 20,
         };
 
         HRESULT hr = FinalizeIB( g_fmCubeIndices32, 12, s_remap, 24, destib.get() );
@@ -681,18 +699,18 @@ bool Test03()
 
         static const uint16_t s_sorted[] =
         {
-            2, 1, 3,
             0, 1, 2,
-            5, 6, 4,
-            7, 6, 5,
-            10, 9, 11,
+            3, 1, 0,
+            4, 5, 6,
+            7, 5, 4,
+            8, 9, 10,
             uint16_t(-1), uint16_t(-1), uint16_t(-1),
-            14, 14, 12,
-            15, 14, 14,
-            18, 17, 19,
+            12, 13, 13,
+            15, 13, 12,
             16, 17, 18,
-            21, 22, 20,
-            23, 22, 21
+            19, 17, 16,
+            20, 21, 22,
+            23, 21, 20,
         };
 
         HRESULT hr = FinalizeIB( s_unused, 12, s_remap, 24, destib.get() );
@@ -776,18 +794,18 @@ bool Test03()
 
         static const uint32_t s_sorted[] =
         {
-            2, 1, 3,
             0, 1, 2,
-            5, 6, 4,
-            7, 6, 5,
-            10, 9, 11,
+            3, 1, 0,
+            4, 5, 6,
+            7, 5, 4,
+            8, 9, 10,
             uint32_t(-1), uint32_t(-1), uint32_t(-1),
-            14, 14, 12,
-            15, 14, 14,
-            18, 17, 19,
+            12, 13, 13,
+            15, 13, 12,
             16, 17, 18,
-            21, 22, 20,
-            23, 22, 21
+            19, 17, 16,
+            20, 21, 22,
+            23, 21, 20,
         };
 
         HRESULT hr = FinalizeIB( s_unused, 12, s_remap, 24, destib.get() );
@@ -947,6 +965,12 @@ bool Test04()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535]);
+        for (uint32_t j = 0; j < 65535; ++j)
+        {
+            inverseRemap[remap[j]] = j;
+        }
+
         auto destvb = CreateVertexBuffer( 32, 65535 );
 
         HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, remap.data(), destvb.get() );
@@ -960,7 +984,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = destvb.get() + 32*remap[j];
+                auto ptr = destvb.get() + 32* inverseRemap[j];
                 if ( !IsTestVBCorrect32( ptr, DWORD( j ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) shuffle failed\n" );
@@ -982,7 +1006,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = srcvb.get() + 32*remap[j];
+                auto ptr = srcvb.get() + 32* inverseRemap[j];
                 if ( !IsTestVBCorrect32( ptr, DWORD( j ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) shuffle [in-place] failed\n" );
@@ -1106,6 +1130,12 @@ bool Test04()
 
         std::random_shuffle( remap.begin(), remap.end() );
 
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535]);
+        for (uint32_t j = 0; j < 65535; ++j)
+        {
+            inverseRemap[remap[j]] = j;
+        }
+
         auto destvb = CreateVertexBuffer( 16, 65535 );
 
         HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, remap.data(), destvb.get() );
@@ -1119,7 +1149,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = destvb.get() + 16*remap[j];
+                auto ptr = destvb.get() + 16* inverseRemap[j];
                 if ( !IsTestVBCorrect16( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(16) shuffle failed\n" );
@@ -1141,7 +1171,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = srcvb.get() + 16*remap[j];
+                auto ptr = srcvb.get() + 16* inverseRemap[j];
                 if ( !IsTestVBCorrect16( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(16) shuffle [in-place] failed\n" );
@@ -1171,24 +1201,19 @@ bool Test04()
                                             19, 17, 16, 18,
                                             22, 20, 21, 23 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 10, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 17,
-                                            19, 16, 21, 22, 20, 23 };
-
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, nullptr, 0, s_remap, destvb.get() );
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB fmcube failed (%08X)\n", hr );
             success = false;
         }
-        else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
+        else if ( memcmp( destvb.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: FinalizeVB fmcube failed\n" );
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_remap[ j ] );
             }
         }
 
@@ -1202,13 +1227,13 @@ bool Test04()
             printe("ERROR: FinalizeVB fmcube [in-place] failed (%08X)\n", hr );
             success = false;
         }
-        else if ( memcmp( srcvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
+        else if ( memcmp( srcvb.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: FinalizeVB fmcube [in-place] failed\n" );
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
             }
         }        
 
@@ -1294,10 +1319,12 @@ bool Test04()
                                             19, uint32_t(-1), 16, 18,
                                             22, 20, 21, 23 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 0, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 0,
-                                            19, 16, 21, 22, 20, 23 };
+        const static uint32_t s_sorted[] = { 3, 1, 0, 2,
+                                            6, 4, 5, 7,
+                                            11, 9, 0, 10,
+                                            14, 12, 13, 15,
+                                            19, 0, 16, 18,
+                                            22, 20, 21, 23 };
 
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, nullptr, 0, s_remap, destvb.get() );
         if ( FAILED(hr) )
@@ -1311,7 +1338,7 @@ bool Test04()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
     }
@@ -1471,6 +1498,12 @@ bool Test05()
  
         std::random_shuffle( remap.begin(), remap.end() );
 
+        std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535 + 256]);
+        for (uint32_t j = 0; j < (65535 + 256); ++j)
+        {
+            inverseRemap[remap[j]] = j;
+        }
+
         std::vector<uint32_t> dups;
         dups.reserve( 256 );
         for( uint32_t j = 0; j < 256; ++j )
@@ -1488,7 +1521,7 @@ bool Test05()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = destvb.get() + 32*remap[j];
+                auto ptr = destvb.get() + 32* inverseRemap[j];
                 if ( !IsTestVBCorrect32( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(32) dups shuffle [remap] failed\n" );
@@ -1500,7 +1533,7 @@ bool Test05()
 
             for( size_t j = 65536; j < (65535 + 256); ++j )
             {
-                auto ptr = destvb.get() + 32*remap[j];
+                auto ptr = destvb.get() + 32* inverseRemap[j];
                 if ( !IsTestVBCorrect32( ptr, DWORD( j - 65535 ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) dups shuffle [remap] failed (2)\n" );
@@ -1536,11 +1569,13 @@ bool Test05()
                                             22, 20, 21, 23,
                                             27, 26, 25, 24 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 10, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 17,
-                                            19, 16, 21, 22, 20, 23,
-                                             3, 2, 1, 0 };
+        const static uint32_t s_sorted[] = { 3, 1, 0, 2,
+                                            6, 4, 5, 7,
+                                            11, 9, 8, 10,
+                                            14, 12, 13, 15,
+                                            19, 17, 16, 18,
+                                            22, 20, 21, 23,
+                                             3,  2,  1,  0 };
 
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, dups.data(), dups.size(), s_remap, destvb.get() );
         if ( FAILED(hr) )
@@ -1554,7 +1589,7 @@ bool Test05()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
     }
@@ -1583,11 +1618,13 @@ bool Test05()
                                             22, 20, 21, 23,
                                             27, 26, uint32_t(-1), 24 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 0, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 0,
-                                            19, 16, 21, 22, 20, 23,
-                                            3, 0, 1, 0 };
+        const static uint32_t s_sorted[] = { 3, 1, 0, 2,
+                                             6, 4, 5, 7,
+                                             11, 9, 0, 10,
+                                             14, 12, 13, 15,
+                                             19, 0, 16, 18,
+                                             22, 20, 21, 23,
+                                             3,  2,  0,  0 };
 
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, dups.data(), dups.size(), s_remap, destvb.get() );
         if ( FAILED(hr) )

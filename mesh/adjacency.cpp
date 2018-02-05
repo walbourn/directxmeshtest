@@ -2378,7 +2378,7 @@ bool Test19()
                     success = false;
                     break;
                 }
-                if ( destvb[ j ] != remap[ srcvb[ j ] ] )
+                if ( srcvb[ j ] != remap[ destvb[ j ] ] )
                 {
                     printe("\nERROR: FinalizeVBAndPointReps cube identify vb failed\n" );
                     success = false;
@@ -2507,15 +2507,10 @@ bool Test19()
                                             19, 17, 16, 18,
                                             22, 20, 21, 23 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 10, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 17,
-                                            19, 16, 21, 22, 20, 23 };
-
         static const uint32_t s_preps[] = { 0, 1, 2, 3, 4, 5,
-                                            6, 7, 3, 6, 2, 7,
-                                            4, 1, 5, 0, 1, 4,
-                                            3, 6, 5, 0, 7, 2 };
+                                            6, 7, 0, 5, 7, 2,
+                                            1, 4, 6, 3, 2, 6,
+                                            5, 1, 3, 7, 4, 0 };
 
         HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, nullptr, 0, s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
@@ -2523,13 +2518,13 @@ bool Test19()
             printe("ERROR: FinalizeVBAndPointReps fmcube failed (%08X)\n", hr );
             success = false;
         }
-        else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
+        else if ( memcmp( destvb.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: FinalizeVBAndPointReps fmcube vb failed\n" );
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_remap[ j ] );
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2556,13 +2551,13 @@ bool Test19()
             printe("ERROR: FinalizeVBAndPointReps fmcube [in-place] failed (%08X)\n", hr );
             success = false;
         }
-        else if ( memcmp( srcvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
+        else if ( memcmp( srcvb.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: FinalizeVBAndPointReps fmcube [in-place] vb failed\n" );
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_sorted[ j ] );  
+                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
             }
         }        
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2597,15 +2592,17 @@ bool Test19()
                                             19, uint32_t(-1), 16, 18,
                                             22, 20, 21, 23 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 0, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 0,
-                                            19, 16, 21, 22, 20, 23 };
+        static const uint32_t s_sorted[] = { 3, 1, 0, 2,
+                                            6, 4, 5, 7,
+                                            11, 9, 0, 10,
+                                            14, 12, 13, 15,
+                                            19, 0, 16, 18,
+                                            22, 20, 21, 23 };
 
         static const uint32_t s_preps[] = { 0, 1, 2, 3, 4, 5,
-                                            6, 7, uint32_t(-1), 6, 2, 7,
-                                            4, 1, 5, 0, 1, uint32_t(-1),
-                                            3, 6, 5, 0, 7, 2 };
+                                            6, 7, 0, 5, uint32_t(-1), 2,
+                                            1, 4, 6, 3, 2, uint32_t(-1),
+                                            5, 1, 3, 7, 4, 0 };
 
         HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, nullptr, 0, s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
@@ -2683,7 +2680,7 @@ bool Test20()
                     success = false;
                     break;
                 }
-                if ( destvb[ j ] != remap[ srcvb[ j ] ] )
+                if ( srcvb[ j ] != remap[ destvb[ j ] ] )
                 {
                     printe("\nERROR: FinalizeVBAndPointReps dups cube identify vb failed\n" );
                     success = false;
@@ -2699,7 +2696,7 @@ bool Test20()
                     success = false;
                     break;
                 }
-                if ( destvb[ j ] != remap[ srcvb[ i ] ] )
+                if ( srcvb[ i ] != remap[ destvb[ j ] ] )
                 {
                     printe("\nERROR: FinalizeVBAndPointReps dups cube identify vb failed (2)\n" );
                     success = false;
@@ -2733,17 +2730,19 @@ bool Test20()
                                             22, 20, 21, 23,
                                             27, 26, 25, 24 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 10, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 17,
-                                            19, 16, 21, 22, 20, 23,
+        static const uint32_t s_sorted[] = { 3, 1, 0, 2,
+                                            6, 4, 5, 7,
+                                            11, 9, 8, 10,
+                                            14, 12, 13, 15,
+                                            19, 17, 16, 18,
+                                            22, 20, 21, 23,
                                             3, 2, 1, 0 };
 
         static const uint32_t s_preps[] = { 0, 1, 2, 3, 4, 5,
-                                            6, 7, 3, 6, 2, 7,
-                                            4, 1, 5, 0, 1, 4,
-                                            3, 6, 5, 0, 7, 2,
-                                            2, 0, 1, 3 };
+                                            6, 7, 0, 5, 7, 2,
+                                            1, 4, 6, 3, 2, 6,
+                                            5, 1, 3, 7, 4, 0,
+                                            0, 3, 1, 2 };
 
         std::vector<uint32_t> dups;
         dups.reserve( 4 );
@@ -2798,17 +2797,19 @@ bool Test20()
                                             22, 20, 21, 23,
                                             27, 26, uint32_t(-1), 24 };
 
-        static const uint32_t s_sorted[] = { 2, 1, 3, 0, 5, 6,
-                                             4, 7, 0, 9, 11, 8,
-                                            13, 14, 12, 15, 18, 0,
-                                            19, 16, 21, 22, 20, 23,
-                                            3, 0, 1, 0 };
+        static const uint32_t s_sorted[] = { 3, 1, 0, 2,
+                                            6, 4, 5, 7,
+                                            11, 9, 0, 10,
+                                            14, 12, 13, 15,
+                                            19, 0, 16, 18,
+                                            22, 20, 21, 23,
+                                            3, 2, 0, 0 };
 
         static const uint32_t s_preps[] = { 0, 1, 2, 3, 4, 5,
-                                            6, 7, uint32_t(-1), 6, 2, 7,
-                                            4, 1, 5, 0, 1, uint32_t(-1),
-                                            3, 6, 5, 0, 7, 2,
-                                            2, uint32_t(-1), 1, 3 };
+                                            6, 7, 0, 5, uint32_t(-1), 2,
+                                            1, 4, 6, 3, 2, uint32_t(-1),
+                                            5, 1, 3, 7, 4, 0,
+                                            0, 3, uint32_t(-1), 2 };
 
         std::vector<uint32_t> dups;
         dups.reserve( 4 );
