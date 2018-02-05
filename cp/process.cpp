@@ -17,7 +17,6 @@ enum
 {
     FLAGS_NONE                  = 0x0,
     FLAGS_IGNORE_SLOWDOWN_AT    = 0x1,
-    FLAGS_IGNORE_SLOWDOWN_VF    = 0x2,
 };
 
 static const float g_Epsilon = 0.0001f;
@@ -46,11 +45,11 @@ static const TestMedia g_TestMedia[] =
     { FLAGS_NONE,               MEDIA_PATH L"SuperSimpleRunner._obj",   1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        0,  0   },
     { FLAGS_NONE,               MEDIA_PATH L"shuttle._obj",             0.878247f, 1.745161f,  0.696429f, 1.383871f,  0.870130f, 1.285372f,  0.798701f, 1.179856f,  0,  107 },
     { FLAGS_NONE,               MEDIA_PATH L"player_ship_a._obj",       1.102867f, 1.053140f,  1.091062f, 1.041868f,  1.102867f, 1.053140f,  1.091062f, 1.041868f,  0,  0   },
-    { FLAGS_IGNORE_SLOWDOWN_VF, MEDIA_PATH L"FSEngineGeo._obj",         1.689465f, 1.013975f,  1.676662f, 1.006291f,  1.689465f, 1.013975f,  1.676662f, 1.006291f,  10, 0   },
+    { FLAGS_NONE,               MEDIA_PATH L"FSEngineGeo._obj",         1.689465f, 1.013975f,  1.676662f, 1.006291f,  1.689465f, 1.013975f,  1.676662f, 1.006291f,  10, 0   },
     { FLAGS_NONE,               MEDIA_PATH L"sphere.vbo",               1.001894f, 1.885918f,  0.630682f, 1.187166f,  1.001894f, 1.885918f,  0.630682f, 1.187166f,  0,  0   },
     { FLAGS_NONE,               MEDIA_PATH L"cylinder.vbo",             1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  0,  0   },
     { FLAGS_NONE,               MEDIA_PATH L"torus.vbo",                1.000918f, 2.001837f,  0.642332f, 1.284665f,  1.000918f, 2.001837f,  0.642332f, 1.284665f,  0,  0   },
-    { FLAGS_IGNORE_SLOWDOWN_VF, MEDIA_PATH L"Head_Big_Ears.vbo",        0.815828f, 1.604267f,  0.664554f, 1.306799f,  0.815828f, 1.604267f,  0.664554f, 1.306799f,  0,  0   },
+    { FLAGS_NONE,               MEDIA_PATH L"Head_Big_Ears.vbo",        0.815828f, 1.604267f,  0.664554f, 1.306799f,  0.815828f, 1.604267f,  0.664554f, 1.306799f,  0,  0   },
 };
 
 namespace
@@ -896,14 +895,11 @@ bool Test03()
 
                         if (ratio > ratioOrig)
                         {
-                            if (!(g_TestMedia[index].options & FLAGS_IGNORE_SLOWDOWN_VF))
-                            {
-                                pass = false;
-                                success = false;
-                                printe("\nERROR: OptimizeVertices %u vcache, %u failed compared to original:\n%S\n", s_vcache[vindex], s_restart[vindex], szPath);
-                                print("\toriginal: vertex fetch ratio %f\n", ratioOrig);
-                                print("\toptimized: vertex fetch ratio %f\n", ratio);
-                            }
+                            pass = false;
+                            success = false;
+                            printe("\nERROR: OptimizeVertices %u vcache, %u failed compared to original:\n%S\n", s_vcache[vindex], s_restart[vindex], szPath);
+                            print("\toriginal: vertex fetch ratio %f\n", ratioOrig);
+                            print("\toptimized: vertex fetch ratio %f\n", ratio);
                         }
                     }
                 }
@@ -1274,14 +1270,11 @@ bool Test04()
 
                         if (ratio > ratioOrig)
                         {
-                            if (!(g_TestMedia[index].options & FLAGS_IGNORE_SLOWDOWN_VF))
-                            {
-                                pass = false;
-                                success = false;
-                                printe("ERROR: OptimizeVertices %u vcache, %u remap failed compared to original:\n%S\n", s_vcache[vindex], s_restart[vindex], szPath);
-                                print("\toriginal: vertex fetch ratio %f\n", ratioOrig);
-                                print("\toptimized: vertex fetch ratio %f\n", ratio);
-                            }
+                            pass = false;
+                            success = false;
+                            printe("ERROR: OptimizeVertices %u vcache, %u remap failed compared to original:\n%S\n", s_vcache[vindex], s_restart[vindex], szPath);
+                            print("\toriginal: vertex fetch ratio %f\n", ratioOrig);
+                            print("\toptimized: vertex fetch ratio %f\n", ratio);
                         }
                     }
                 }

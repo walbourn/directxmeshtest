@@ -97,6 +97,8 @@ bool RunTests()
             ++nFail;
             print("FAIL\n");
         }
+
+        _CrtDumpMemoryLeaks();
     }
 
     print("Ran %d tests, %d pass, %d fail\n", nPass+nFail, nPass, nFail);
