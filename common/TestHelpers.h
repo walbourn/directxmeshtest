@@ -508,7 +508,7 @@ inline bool IsValidFaceRemap( _In_reads_(nFaces*3) const index_t* indices, _In_r
 //--------------------------------------------------------------------------------------
 template<typename index_t>
 inline bool IsValidVertexRemap( _In_reads_(nFaces*3) const index_t* indices, size_t nFaces,
-                                _In_reads_(nVerts) const uint32_t* vertexRemap, size_t nVerts, bool allowdups = false )
+                                _In_reads_(nVerts) const uint32_t* vertexRemap, size_t nVerts, bool allowdups = false, bool welded = false )
 {
     if ( !indices || !nFaces || !vertexRemap || !nVerts )
         return false;
@@ -549,16 +549,19 @@ inline bool IsValidVertexRemap( _In_reads_(nFaces*3) const index_t* indices, siz
         if ( i2 < nVerts )  vused[ i2 ] = true;
     }
 
-    size_t expectedUnused = 0;
-
-    for( size_t j = 0; j < nVerts; ++j )
+    if (!welded)
     {
-        if ( !vused[ j ] )
-            ++expectedUnused;
-    }
+        size_t expectedUnused = 0;
 
-    if ( unused > expectedUnused )
-        return false;
+        for (size_t j = 0; j < nVerts; ++j)
+        {
+            if (!vused[j])
+                ++expectedUnused;
+        }
+
+        if (unused > expectedUnused)
+            return false;
+    }
 
     if ( allowdups )
         return true;
