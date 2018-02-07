@@ -59,6 +59,8 @@ namespace
         _In_reads_(nFaces * 3) const index_t* indices, size_t nFaces, size_t nVerts, size_t vertexSize,
         float& ratio)
     {
+        // Code borrowed from https://github.com/zeux/meshoptimizer
+
         ratio = 0.f;
 
         if (!indices || !nFaces || !nVerts || !vertexSize)
@@ -67,7 +69,6 @@ namespace
         const size_t kCacheLine = 64;
         const size_t kCacheSize = 128 * 1024;
 
-        // simple direct mapped cache; on typical mesh data this is close to 4-way cache, and this model is a gross approximation anyway
         size_t cache[kCacheSize / kCacheLine] = {};
 
         size_t bytes_fetched = 0;
