@@ -1886,7 +1886,8 @@ bool Test17()
 
         static const uint32_t s_uforder[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 
-        HRESULT hr = OptimizeVertices( s_unusedIB, 12, 8, remap.get() );
+        size_t trailingUnused = 0xff;
+        HRESULT hr = OptimizeVertices( s_unusedIB, 12, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
             printe("ERROR: OptimizeVertices(16) unused faces failed (%08X)\n", hr );
@@ -1906,6 +1907,11 @@ bool Test17()
             for(size_t j=0; j < 8; ++j)
                 print("%Iu -> %u .. %u\n", j, remap[j], s_uforder[j]);
         }
+        else if (trailingUnused != 0)
+        {
+            printe("ERROR: OptimizeVertices(16) unused faces produced expected number of trailing unsed (%Iu .. 0)\n", trailingUnused);
+            success = false;
+        }
 
         // Vertices
         memset( remap.get(), 0xcd, sizeof(uint32_t) * 8 );
@@ -1922,7 +1928,7 @@ bool Test17()
 
         static const uint32_t s_uvorder[] = { 0, 1, 2, 3, 4, 6, 7, uint32_t(-1) } ;
 
-        hr = OptimizeVertices( s_unusedVerts, 7, 8, remap.get() );
+        hr = OptimizeVertices( s_unusedVerts, 7, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
             printe("ERROR: OptimizeVertices(16) unused verts failed (%08X)\n", hr );
@@ -1941,6 +1947,11 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) unused verts failed\n" );
             for(size_t j=0; j < 8; ++j)
                 print("%Iu -> %u .. %u\n", j, remap[j], s_uvorder[j]);
+        }
+        else if (trailingUnused != 1)
+        {
+            printe("ERROR: OptimizeVertices(16) unused faces produced expected number of trailing unsed (%Iu .. 1)\n", trailingUnused);
+            success = false;
         }
     }
 
@@ -1977,7 +1988,8 @@ bool Test17()
 
         static const uint32_t s_uforder[] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 
-        HRESULT hr = OptimizeVertices( s_unusedIB, 12, 8, remap.get() );
+        size_t trailingUnused = 0xff;
+        HRESULT hr = OptimizeVertices( s_unusedIB, 12, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
             printe("ERROR: OptimizeVertices(32) unused faces failed (%08X)\n", hr );
@@ -1997,7 +2009,11 @@ bool Test17()
             for(size_t j=0; j < 8; ++j)
                 print("%Iu -> %u .. %u\n", j, remap[j], s_uforder[j]);
         }
-
+        else if (trailingUnused != 0)
+        {
+            printe("ERROR: OptimizeVertices(32) unused faces produced expected number of trailing unsed (%Iu .. 0)\n", trailingUnused);
+            success = false;
+        }
         // Vertices
         memset( remap.get(), 0xcd, sizeof(uint32_t) * 8 );
         static const uint32_t s_unusedVerts[ 7*3 ] =
@@ -2013,7 +2029,7 @@ bool Test17()
 
         static const uint32_t s_uvorder[] = { 0, 1, 2, 3, 4, 6, 7, uint32_t(-1) } ;
 
-        hr = OptimizeVertices( s_unusedVerts, 7, 8, remap.get() );
+        hr = OptimizeVertices( s_unusedVerts, 7, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
             printe("ERROR: OptimizeVertices(32) unused verts failed (%08X)\n", hr );
@@ -2032,6 +2048,11 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) unused verts failed\n" );
             for(size_t j=0; j < 8; ++j)
                 print("%Iu -> %u .. %u\n", j, remap[j], s_uvorder[j]);
+        }
+        else if (trailingUnused != 1)
+        {
+            printe("ERROR: OptimizeVertices(32) unused faces produced expected number of trailing unsed (%Iu .. 1)\n", trailingUnused);
+            success = false;
         }
     }
 

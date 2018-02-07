@@ -46,6 +46,8 @@ extern bool Test22();
 extern bool Test23();
 extern bool Test24();
 extern bool Test25();
+extern bool Test26();
+extern bool Test27();
 
 TestInfo g_Tests[] =
 {
@@ -74,6 +76,8 @@ TestInfo g_Tests[] =
     { "OptimizeFaces", Test16 },
     { "OptimizeFacesLRU", Test25 },
     { "OptimizeVertices", Test17 },
+    { "WeldVertices", Test26 },
+    { "CompactVB", Test27 }
 };
 
 
