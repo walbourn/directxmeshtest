@@ -154,7 +154,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &tangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -165,7 +165,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -184,7 +184,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -197,7 +197,7 @@ bool Test13()
 
                 if ( !XMVector3NearEqual( t, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4/binormal] failed compare of tangents\n" );
                     success = false;
                 }
@@ -207,7 +207,7 @@ bool Test13()
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4/binormal] failed compare of computed bitangents\n" );
                     success = false;
                 }
@@ -232,7 +232,7 @@ bool Test13()
 
                 if ( !XMVector3NearEqual( t, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4] failed compare of tangents\n" );
                     success = false;
                 }
@@ -242,7 +242,7 @@ bool Test13()
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4] failed compare of computed bitangents\n" );
                     success = false;
                 }
@@ -266,7 +266,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -287,7 +287,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -308,7 +308,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &tangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -390,7 +390,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &tangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -401,7 +401,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -420,7 +420,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -433,7 +433,7 @@ bool Test13()
 
                 if ( !XMVector3NearEqual( t, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4/binormal] failed compare of tangents\n" );
                     success = false;
                 }
@@ -443,7 +443,7 @@ bool Test13()
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4/binormal] failed compare of computed bitangents\n" );
                     success = false;
                 }
@@ -468,7 +468,7 @@ bool Test13()
 
                 if ( !XMVector3NearEqual( t, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4] failed compare of tangents\n" );
                     success = false;
                 }
@@ -478,7 +478,7 @@ bool Test13()
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {
-                    print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                    print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
                     printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4] failed compare of computed bitangents\n" );
                     success = false;
                 }
@@ -502,7 +502,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -523,7 +523,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &bitangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -544,7 +544,7 @@ bool Test13()
             {
                 XMVECTOR v = XMLoadFloat3( &tangents[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeTangents[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }

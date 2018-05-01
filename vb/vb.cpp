@@ -645,7 +645,7 @@ bool Test03()
                         if ( !XMVector3NearEqual( chk, v, g_VBEpsilon ) )
                         {
                             success = false;
-                            printe( "ERROR: Failed comparing VB POSITION %Iu: %f,%f,%f ... %f,%f,%f\n", j,
+                            printe( "ERROR: Failed comparing VB POSITION %zu: %f,%f,%f ... %f,%f,%f\n", j,
                                     XMVectorGetX( v ), XMVectorGetY( v ), XMVectorGetZ( v ),
                                     s_cubeVB[ j ].Pos.x, s_cubeVB[ j ].Pos.y, s_cubeVB[ j ].Pos.z );
                         }
@@ -671,7 +671,7 @@ bool Test03()
                         if ( !XMVector2NearEqual( chk, v, g_VBEpsilon ) )
                         {
                             success = false;
-                            printe( "ERROR: Failed comparing VB TEXCOORD %Iu: %f,%f ... %f,%f \n", j,
+                            printe( "ERROR: Failed comparing VB TEXCOORD %zu: %f,%f ... %f,%f \n", j,
                                     XMVectorGetX( v ), XMVectorGetY( v ),
                                     s_cubeVB[ j ].Tex.x, s_cubeVB[ j ].Tex.y );
                         }
@@ -697,7 +697,7 @@ bool Test03()
                         if ( !XMVector3NearEqual( chk, v, g_VBEpsilon ) )
                         {
                             success = false;
-                            printe( "ERROR: Failed comparing VB SV_Position %Iu: %f,%f,%f ... %f,%f,%f\n", j,
+                            printe( "ERROR: Failed comparing VB SV_Position %zu: %f,%f,%f ... %f,%f,%f\n", j,
                                     XMVectorGetX( v ), XMVectorGetY( v ), XMVectorGetZ( v ),
                                     s_cubeVB[ j ].Pos.x, s_cubeVB[ j ].Pos.y, s_cubeVB[ j ].Pos.z );
                         }
@@ -725,7 +725,7 @@ bool Test03()
                             if ( !XMVector3NearEqual( chk, v, g_VBEpsilon ) )
                             {
                                 success = false;
-                                printe( "ERROR: Failed comparing VB XMFLOAT3 %Iu: %f,%f,%f ... %f,%f,%f\n", j,
+                                printe( "ERROR: Failed comparing VB XMFLOAT3 %zu: %f,%f,%f ... %f,%f,%f\n", j,
                                         XMVectorGetX( v ), XMVectorGetY( v ), XMVectorGetZ( v ),
                                         s_cubeVB[ j ].Pos.x, s_cubeVB[ j ].Pos.y, s_cubeVB[ j ].Pos.z );
                             }
@@ -754,7 +754,7 @@ bool Test03()
                             if ( !XMVector2NearEqual( chk, v, g_VBEpsilon ) )
                             {
                                 success = false;
-                                printe( "ERROR: Failed comparing VB XMFLOAT2 %Iu: %f,%f ... %f,%f \n", j,
+                                printe( "ERROR: Failed comparing VB XMFLOAT2 %zu: %f,%f ... %f,%f \n", j,
                                         XMVectorGetX( v ), XMVectorGetY( v ),
                                         s_cubeVB[ j ].Tex.x, s_cubeVB[ j ].Tex.y );
                             }
@@ -843,7 +843,7 @@ bool Test03()
                             if ( !XMVector3NearEqual( chk, v, g_VBEpsilon ) )
                             {
                                 success = false;
-                                printe( "ERROR: Failed comparing m/s VB POSITION %Iu: %f,%f,%f ... %f,%f,%f\n", j,
+                                printe( "ERROR: Failed comparing m/s VB POSITION %zu: %f,%f,%f ... %f,%f,%f\n", j,
                                         XMVectorGetX( v ), XMVectorGetY( v ), XMVectorGetZ( v ),
                                         s_VSStarterKitVB1[ j ].position.x, s_VSStarterKitVB1[ j ].position.y, s_VSStarterKitVB1[ j ].position.z );
                             }
@@ -869,7 +869,7 @@ bool Test03()
                             if ( !XMVector2NearEqual( chk, v, g_VBEpsilon ) )
                             {
                                 success = false;
-                                printe( "ERROR: Failed comparing m/s VB TEXCOORD %Iu: %f,%f ... %f,%f \n", j,
+                                printe( "ERROR: Failed comparing m/s VB TEXCOORD %zu: %f,%f ... %f,%f \n", j,
                                         XMVectorGetX( v ), XMVectorGetY( v ),
                                         s_VSStarterKitVB1[ j ].texureCoordinate.x, s_VSStarterKitVB1[ j ].texureCoordinate.y );
                             }
@@ -895,7 +895,7 @@ bool Test03()
                             if ( !XMVector4NearEqual( chk, v, g_VBEpsilon ) )
                             {
                                 success = false;
-                                printe( "ERROR: Failed comparing m/s VB BLENDWEIGHT %Iu: %f,%f ... %f,%f \n", j,
+                                printe( "ERROR: Failed comparing m/s VB BLENDWEIGHT %zu: %f,%f ... %f,%f \n", j,
                                         XMVectorGetX( v ), XMVectorGetY( v ),
                                         s_VSStarterKitVB1[ j ].texureCoordinate.x, s_VSStarterKitVB1[ j ].texureCoordinate.y );
                             }
@@ -1362,7 +1362,7 @@ bool Test05()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB reader for format %S, index %Iu (%08X)\n", GetName( v.format ), index, hr );
+            printe( "ERROR: Failed setting up VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
         }
         else
         {
@@ -1370,7 +1370,7 @@ bool Test05()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB reader for format %S, index %Iu (%08X)\n", GetName( v.format ), index, hr );
+                printe( "ERROR: Failed setting up stream for VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
             }
             else
             {
@@ -1379,7 +1379,7 @@ bool Test05()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed reading VB format %S, index %Iu (%08X)\n", GetName( v.format ), index, hr );
+                    printe( "ERROR: Failed reading VB format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
                 }
                 else
                 {
@@ -1388,7 +1388,7 @@ bool Test05()
                     if ( !XMVector4NearEqual( chk, temp, g_VBEpsilon ) )
                     {
                         success = false;
-                        printe( "ERROR: Failed reading VB format %S, index %Iu: %f %f %f %f ... %f %f %f %f\n", GetName( v.format ), index,
+                        printe( "ERROR: Failed reading VB format %S, index %zu: %f %f %f %f ... %f %f %f %f\n", GetName( v.format ), index,
                                 XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
                                 v.vector.x, v.vector.y, v.vector.z, v.vector.w );
                     }
@@ -1399,7 +1399,7 @@ bool Test05()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed reading VB format %S (x2bias), index %Iu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed reading VB format %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, hr);
                 }
                 else
                 {
@@ -1412,7 +1412,7 @@ bool Test05()
                         if (!isx2bias || (fabs(XMVectorGetX(chk) - 1.f) > 0.001f))
                         {
                             success = false;
-                            printe("ERROR: Failed reading VB format %S (x2bias %u), index %Iu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), isx2bias, index,
+                            printe("ERROR: Failed reading VB format %S (x2bias %u), index %zu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), isx2bias, index,
                                 XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
                                 v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                         }
@@ -1437,7 +1437,7 @@ bool Test05()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: Failed setting up VB reader for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+            printe("ERROR: Failed setting up VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
         }
         else
         {
@@ -1445,7 +1445,7 @@ bool Test05()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: Failed setting up stream for VB reader for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+                printe("ERROR: Failed setting up stream for VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
             }
             else
             {
@@ -1454,7 +1454,7 @@ bool Test05()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed reading VB format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed reading VB format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
                 }
                 else
                 {
@@ -1463,7 +1463,7 @@ bool Test05()
                     if (!XMVector4NearEqual(chk, temp, g_VBEpsilon))
                     {
                         success = false;
-                        printe("ERROR: Failed reading VB format %S X2BIAS, index %Iu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), index,
+                        printe("ERROR: Failed reading VB format %S X2BIAS, index %zu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), index,
                             XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
                             v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                     }
@@ -1497,7 +1497,7 @@ bool Test06()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB writer for format %S, index %Iu (%08X)\n", GetName( v.format ), index, hr );
+            printe( "ERROR: Failed setting up VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
         }
         else
         {
@@ -1507,7 +1507,7 @@ bool Test06()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB writer for format %S, index %Iu (%08X)\n", GetName( v.format ), index, hr );
+                printe( "ERROR: Failed setting up stream for VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
             }
             else
             {
@@ -1516,12 +1516,12 @@ bool Test06()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB writer %S, index %Iu (%08X)\n", GetName( v.format ), index, hr );
+                    printe( "ERROR: Failed writing VB writer %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
                 }
                 else if ( memcmp( buff, &v.bytes[0], v.stride ) != 0 )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB format %S, index %Iu: %f %f %f %f\n", GetName( v.format ), index,
+                    printe( "ERROR: Failed writing VB format %S, index %zu: %f %f %f %f\n", GetName( v.format ), index,
                             v.vector.x, v.vector.y, v.vector.z, v.vector.w );
                     printe( "    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
                             buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
@@ -1535,7 +1535,7 @@ bool Test06()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB writer %S (x2bias), index %Iu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed writing VB writer %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, hr);
                 }
                 {
                     bool isx2bias = IsX2BiasSupported(v.format);
@@ -1544,7 +1544,7 @@ bool Test06()
                          || (isx2bias && memcpy(buff, &v.bytes[0], v.stride) == 0) )
                     {
                         success = false;
-                        printe("ERROR: Failed writing VB format %S (x2bais %u), index %Iu: %f %f %f %f\n", GetName(v.format), isx2bias, index,
+                        printe("ERROR: Failed writing VB format %S (x2bais %u), index %zu: %f %f %f %f\n", GetName(v.format), isx2bias, index,
                             v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                         printe("    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
                             buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
@@ -1572,7 +1572,7 @@ bool Test06()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: Failed setting up VB writer for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+            printe("ERROR: Failed setting up VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
         }
         else
         {
@@ -1582,7 +1582,7 @@ bool Test06()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: Failed setting up stream for VB writer for format %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+                printe("ERROR: Failed setting up stream for VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
             }
             else
             {
@@ -1591,12 +1591,12 @@ bool Test06()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB writer %S X2BIAS, index %Iu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed writing VB writer %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
                 }
                 else if (memcmp(buff, &v.bytes[0], v.stride) != 0)
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB format %S X2BIAS, index %Iu: %f %f %f %f\n", GetName(v.format), index,
+                    printe("ERROR: Failed writing VB format %S X2BIAS, index %zu: %f %f %f %f\n", GetName(v.format), index,
                         v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                     printe("    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
                         buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
@@ -1734,7 +1734,7 @@ bool Test07()
         }
     }
 
-    print("%Iu meshes tested, %Iu meshes passed ", ncount, npass );
+    print("%zu meshes tested, %zu meshes passed ", ncount, npass );
 
     return success;
 }

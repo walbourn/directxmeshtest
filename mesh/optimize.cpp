@@ -74,21 +74,21 @@ bool Test15()
             success = false;
             printe("ERROR: Attribute sort failed attributes\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu: %u .. %u\n", j, attributes[j], s_attributes[j]);
+                print("%zu: %u .. %u\n", j, attributes[j], s_attributes[j]);
         }
         else if ( !IsValidFaceRemap( g_cubeIndices16, remap.get(), 12 ) )
         {
             success = false;
             printe("ERROR: Attribute sort failed, remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_faceRemap, sizeof(s_faceRemap) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort failed remap\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_faceRemap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_faceRemap[j]);
         }
 
         // identity
@@ -105,14 +105,14 @@ bool Test15()
             success = false;
             printe("ERROR: Attribute sort identity failed attributes\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu: %u .. %u\n", j, attributesId[j], s_attributesId[j]);
+                print("%zu: %u .. %u\n", j, attributesId[j], s_attributesId[j]);
         }
         else if ( memcmp( remap.get(), s_faceRemapId, sizeof(s_faceRemapId) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort identity failed\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_faceRemapId[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_faceRemapId[j]);
         }
 
         // zero
@@ -129,14 +129,14 @@ bool Test15()
             success = false;
             printe("ERROR: Attribute sort zero failed attributes\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu: %u .. %u\n", j, attributesZero[j], s_attributesZero[j]);
+                print("%zu: %u .. %u\n", j, attributesZero[j], s_attributesZero[j]);
         }
         else if ( memcmp( remap.get(), s_faceRemapId, sizeof(s_faceRemapId) ) != 0 )
         {
             success = false;
             printe("ERROR: Attribute sort zero failed\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_faceRemapId[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_faceRemapId[j]);
         }
 
         // invalid args
@@ -179,7 +179,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) fmcube failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_reverse, sizeof(s_reverse) ) != 0 )
         {
@@ -187,7 +187,7 @@ bool Test16()
             printe("ERROR: OptimizeFaces(16) fmcube failed\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_reverse[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_reverse[j]);
             }
         }
 
@@ -207,7 +207,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) fmcube failed [striporder] remap invalid [striporder]\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_strip, sizeof(s_strip) ) != 0 )
         {
@@ -215,7 +215,7 @@ bool Test16()
             printe("ERROR: OptimizeFaces(16) fmcube failed [striporder]\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_strip[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_strip[j]);
             }
         }
 
@@ -249,7 +249,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) fmcube failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_reverse, sizeof(s_reverse) ) != 0 )
         {
@@ -257,7 +257,7 @@ bool Test16()
             printe("ERROR: OptimizeFaces(32) fmcube failed\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_reverse[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_reverse[j]);
             }
         }
 
@@ -277,7 +277,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) fmcube failed [striporder] remap invalid [striporder]\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_strip, sizeof(s_strip) ) != 0 )
         {
@@ -285,7 +285,7 @@ bool Test16()
             printe("ERROR: OptimizeFaces(32) fmcube failed [striporder]\n" );
             for( size_t j = 0; j < 12; ++j )
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_strip[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_strip[j]);
             }
         }
 
@@ -434,14 +434,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) unused failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_vcremap, sizeof(s_vcremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(16) unused failed\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -457,7 +457,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) unused 1st failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -473,7 +473,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) unused all failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
 
         // striporder
@@ -492,14 +492,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(16) unused [striporder] failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_soremap, sizeof(s_soremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(16) unused [striporder] failed\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_soremap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_soremap[j]);
         }
     }
 
@@ -636,14 +636,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) unused failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_vcremap, sizeof(s_vcremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(32) unused failed\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -659,7 +659,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) unused 1st failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -675,7 +675,7 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) unused all failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
 
         // striporder
@@ -694,14 +694,14 @@ bool Test16()
             success = false;
             printe("ERROR: OptimizeFaces(32) unused [striporder] failed remap invalid\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_soremap, sizeof(s_soremap) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeFaces(32) unused [striporder] failed\n" );
             for(size_t j=0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_soremap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_soremap[j]);
         }
     }
 
@@ -753,7 +753,7 @@ bool Test16()
                 success = false;
                 printe("ERROR: OptimizeFaces(16) torus failed remap invalid\n");
                 for (size_t j = 0; j < nFaces; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else
             {
@@ -790,7 +790,7 @@ bool Test16()
                 success = false;
                 printe("ERROR: OptimizeFaces(16) torus strip failed remap invalid\n");
                 for (size_t j = 0; j < nFaces; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else
             {
@@ -835,7 +835,7 @@ bool Test16()
                 success = false;
                 printe("ERROR: OptimizeFaces(16) torus intel failed remap invalid\n");
                 for (size_t j = 0; j < nFaces; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else
             {
@@ -919,7 +919,7 @@ bool Test16()
                 success = false;
                 printe("ERROR: OptimizeFaces(32) torus failed remap invalid\n");
                 for (size_t j = 0; j < nFaces; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else
             {
@@ -956,7 +956,7 @@ bool Test16()
                 success = false;
                 printe("ERROR: OptimizeFaces(32) torus strip failed remap invalid\n");
                 for (size_t j = 0; j < nFaces; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else
             {
@@ -1001,7 +1001,7 @@ bool Test16()
                 success = false;
                 printe("ERROR: OptimizeFaces(32) torus intel failed remap invalid\n");
                 for (size_t j = 0; j < nFaces; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else
             {
@@ -1063,7 +1063,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) fmcube failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
         {
@@ -1071,7 +1071,7 @@ bool Test25()
             printe("ERROR: OptimizeFacesLRU(16) fmcube failed\n");
             for (size_t j = 0; j < 12; ++j)
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
             }
         }
 
@@ -1089,7 +1089,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) fmcube lru4 failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
         {
@@ -1097,7 +1097,7 @@ bool Test25()
             printe("ERROR: OptimizeFacesLRU(16) fmcube lru4 failed\n");
             for (size_t j = 0; j < 12; ++j)
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
             }
         }
 
@@ -1138,7 +1138,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) fmcube failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
         {
@@ -1146,7 +1146,7 @@ bool Test25()
             printe("ERROR: OptimizeFacesLRU(32) fmcube failed\n");
             for (size_t j = 0; j < 12; ++j)
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
             }
         }
 
@@ -1164,7 +1164,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) fmcube lru4 failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
         {
@@ -1172,7 +1172,7 @@ bool Test25()
             printe("ERROR: OptimizeFacesLRU(32) fmcube lru4 failed\n");
             for (size_t j = 0; j < 12; ++j)
             {
-                print("\t%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
             }
         }
 
@@ -1280,14 +1280,14 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) unused failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
         {
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) unused failed\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -1303,7 +1303,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) unused 1st failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -1319,7 +1319,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) unused all failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
     }
 
@@ -1408,14 +1408,14 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) unused failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
         {
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) unused failed\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -1431,7 +1431,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) unused 1st failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
 
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
@@ -1447,7 +1447,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) unused all failed remap invalid\n");
             for (size_t j = 0; j < 12; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
     }
 
@@ -1479,7 +1479,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) torus failed remap invalid\n");
             for (size_t j = 0; j < nFaces; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else
         {
@@ -1518,7 +1518,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) torus lru4 failed remap invalid\n");
             for (size_t j = 0; j < nFaces; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else
         {
@@ -1580,7 +1580,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) torus failed remap invalid\n");
             for (size_t j = 0; j < nFaces; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else
         {
@@ -1619,7 +1619,7 @@ bool Test25()
             success = false;
             printe("ERROR: OptimizeFacesLRU(32) torus lru4 failed remap invalid\n");
             for (size_t j = 0; j < nFaces; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else
         {
@@ -1681,14 +1681,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) cube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(16) cube failed\n" );
             success = false;
             for (size_t j = 0; j < 8; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_remap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_remap[j]);
         }
 
         // invalid args
@@ -1747,14 +1747,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) fmcube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 24; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(16) fmcube failed\n" );
             success = false;
             for (size_t j = 0; j < 24; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_remap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_remap[j]);
         }
     }
 
@@ -1776,14 +1776,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) cube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(32) cube failed\n" );
             success = false;
             for (size_t j = 0; j < 8; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_remap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_remap[j]);
         }
 
         // invalid args
@@ -1842,14 +1842,14 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) fmcube failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 24; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_remap, sizeof(s_remap) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(32) fmcube failed\n" );
             success = false;
             for (size_t j = 0; j < 24; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_remap[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_remap[j]);
         }
     }
 
@@ -1898,18 +1898,18 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) unused faces failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uforder, sizeof(s_uforder) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(16) unused faces failed\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_uforder[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_uforder[j]);
         }
         else if (trailingUnused != 0)
         {
-            printe("ERROR: OptimizeVertices(16) unused faces produced expected number of trailing unsed (%Iu .. 0)\n", trailingUnused);
+            printe("ERROR: OptimizeVertices(16) unused faces produced expected number of trailing unsed (%zu .. 0)\n", trailingUnused);
             success = false;
         }
 
@@ -1939,18 +1939,18 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) unused verts failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uvorder, sizeof(s_uvorder) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeVertices(16) unused verts failed\n" );
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_uvorder[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_uvorder[j]);
         }
         else if (trailingUnused != 1)
         {
-            printe("ERROR: OptimizeVertices(16) unused faces produced expected number of trailing unsed (%Iu .. 1)\n", trailingUnused);
+            printe("ERROR: OptimizeVertices(16) unused faces produced expected number of trailing unsed (%zu .. 1)\n", trailingUnused);
             success = false;
         }
     }
@@ -2000,18 +2000,18 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) unused faces failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uforder, sizeof(s_uforder) ) != 0 )
         {
             printe("ERROR: OptimizeVertices(32) unused faces failed\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_uforder[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_uforder[j]);
         }
         else if (trailingUnused != 0)
         {
-            printe("ERROR: OptimizeVertices(32) unused faces produced expected number of trailing unsed (%Iu .. 0)\n", trailingUnused);
+            printe("ERROR: OptimizeVertices(32) unused faces produced expected number of trailing unsed (%zu .. 0)\n", trailingUnused);
             success = false;
         }
         // Vertices
@@ -2040,18 +2040,18 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) unused verts failed remap invalid\n" );
             success = false;
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else if ( memcmp( remap.get(), s_uvorder, sizeof(s_uvorder) ) != 0 )
         {
             success = false;
             printe("ERROR: OptimizeVertices(32) unused verts failed\n" );
             for(size_t j=0; j < 8; ++j)
-                print("%Iu -> %u .. %u\n", j, remap[j], s_uvorder[j]);
+                print("%zu -> %u .. %u\n", j, remap[j], s_uvorder[j]);
         }
         else if (trailingUnused != 1)
         {
-            printe("ERROR: OptimizeVertices(32) unused faces produced expected number of trailing unsed (%Iu .. 1)\n", trailingUnused);
+            printe("ERROR: OptimizeVertices(32) unused faces produced expected number of trailing unsed (%zu .. 1)\n", trailingUnused);
             success = false;
         }
     }
@@ -2078,7 +2078,7 @@ bool Test17()
             printe("ERROR: OptimizeVertices(16) torus failed remap invalid\n");
             success = false;
             for (size_t j = 0; j < vertices.size(); ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else
         {
@@ -2128,7 +2128,7 @@ bool Test17()
             printe("ERROR: OptimizeVertices(32) torus failed remap invalid\n");
             success = false;
             for (size_t j = 0; j < vertices.size(); ++j)
-                print("%Iu -> %u\n", j, remap[j]);
+                print("%zu -> %u\n", j, remap[j]);
         }
         else
         {

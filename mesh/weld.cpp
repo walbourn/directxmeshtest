@@ -117,7 +117,7 @@ bool Test26()
         }
         else if (ntests > 0)
         {
-            printe("ERROR: WeldVertices(16) cube identity failed (%Iu .. 0)\n", ntests);
+            printe("ERROR: WeldVertices(16) cube identity failed (%zu .. 0)\n", ntests);
             success = false;
         }
         else if (memcmp(s_cubePointReps, remap.get(), sizeof(uint32_t) * 8) != 0)
@@ -137,7 +137,7 @@ bool Test26()
         }
         else if (ntests > 0)
         {
-            printe("ERROR: WeldVertices(16) cube identity [null remap] failed (%Iu .. 0)\n", ntests);
+            printe("ERROR: WeldVertices(16) cube identity [null remap] failed (%zu .. 0)\n", ntests);
             success = false;
         }
 
@@ -222,7 +222,7 @@ bool Test26()
         }
         else if (ntests != 32)
         {
-            printe("ERROR: WeldVertices(16) fmcube A failed (%Iu .. 32)\n", ntests);
+            printe("ERROR: WeldVertices(16) fmcube A failed (%zu .. 32)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24))
@@ -242,7 +242,7 @@ bool Test26()
         }
         else if (ntests != 16)
         {
-            printe("ERROR: WeldVertices(16) fmcube B failed (%Iu .. 16)\n", ntests);
+            printe("ERROR: WeldVertices(16) fmcube B failed (%zu .. 16)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true, true))
@@ -277,7 +277,7 @@ bool Test26()
         }
         else if (ntests != 16 && nwelds != 16)
         {
-            printe("ERROR: WeldVertices(16) fmcube C failed (%Iu .. 16, %Iu .. 16)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices(16) fmcube C failed (%zu .. 16, %zu .. 16)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true, true))
@@ -330,7 +330,7 @@ bool Test26()
         }
         else if (ntests != 32 && nwelds != 0)
         {
-            printe("ERROR: WeldVertices(16) fmcube D failed (%Iu .. 32, %Iu .. 0)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices(16) fmcube D failed (%zu .. 32, %zu .. 0)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true))
@@ -377,7 +377,7 @@ bool Test26()
         }
         else if (ntests != 16 && nwelds != 4)
         {
-            printe("ERROR: WeldVertices(16) fmcube E failed (%Iu .. 16, %Iu .. 4)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices(16) fmcube E failed (%zu .. 16, %zu .. 4)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true, true))
@@ -398,7 +398,7 @@ bool Test26()
         }
         else if (ntests != 32)
         {
-            printe("ERROR: WeldVertices(16) fmcube eps A failed (%Iu .. 32)\n", ntests);
+            printe("ERROR: WeldVertices(16) fmcube eps A failed (%zu .. 32)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24))
@@ -418,7 +418,7 @@ bool Test26()
         }
         else if (ntests != 16)
         {
-            printe("ERROR: WeldVertices(16) fmcube eps B failed (%Iu .. 16)\n", ntests);
+            printe("ERROR: WeldVertices(16) fmcube eps B failed (%zu .. 16)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices16, 12, remap.get(), 24, true, true))
@@ -446,7 +446,7 @@ bool Test26()
         }
         else if (ntests > 0)
         {
-            printe("ERROR: WeldVertices(32) cube identity failed (%Iu .. 0)\n", ntests);
+            printe("ERROR: WeldVertices(32) cube identity failed (%zu .. 0)\n", ntests);
             success = false;
         }
         else if (memcmp(s_cubePointReps, remap.get(), sizeof(uint32_t) * 8) != 0)
@@ -466,7 +466,7 @@ bool Test26()
         }
         else if (ntests > 0)
         {
-            printe("ERROR: WeldVertices(32) cube identity [null remap] failed (%Iu .. 0)\n", ntests);
+            printe("ERROR: WeldVertices(32) cube identity [null remap] failed (%zu .. 0)\n", ntests);
             success = false;
         }
 
@@ -551,7 +551,7 @@ bool Test26()
         }
         else if (ntests != 32)
         {
-            printe("ERROR: WeldVertices(32) fmcube A failed (%Iu .. 32)\n", ntests);
+            printe("ERROR: WeldVertices(32) fmcube A failed (%zu .. 32)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices32, 12, remap.get(), 24))
@@ -571,7 +571,7 @@ bool Test26()
         }
         else if (ntests != 16)
         {
-            printe("ERROR: WeldVertices(32) fmcube B failed (%Iu .. 16)\n", ntests);
+            printe("ERROR: WeldVertices(32) fmcube B failed (%zu .. 16)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices32, 12, remap.get(), 24, true, true))
@@ -606,7 +606,7 @@ bool Test26()
         }
         else if (ntests != 16 && nwelds != 16)
         {
-            printe("ERROR: WeldVertices(32) fmcube C failed (%Iu .. 16, %Iu .. 16)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices(32) fmcube C failed (%zu .. 16, %zu .. 16)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices32, 12, remap.get(), 24, true, true))
@@ -659,7 +659,7 @@ bool Test26()
         }
         else if (ntests != 32 && nwelds != 0)
         {
-            printe("ERROR: WeldVertices(32) fmcube D failed (%Iu .. 32, %Iu .. 0)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices(32) fmcube D failed (%zu .. 32, %zu .. 0)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices32, 12, remap.get(), 24, true))
@@ -706,7 +706,7 @@ bool Test26()
         }
         else if (ntests != 16 && nwelds != 4)
         {
-            printe("ERROR: WeldVertices(32) fmcube E failed (%Iu .. 16, %Iu .. 4)\n", ntests, nwelds);
+            printe("ERROR: WeldVertices(32) fmcube E failed (%zu .. 16, %zu .. 4)\n", ntests, nwelds);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices32, 12, remap.get(), 24, true, true))
@@ -727,7 +727,7 @@ bool Test26()
         }
         else if (ntests != 32)
         {
-            printe("ERROR: WeldVertices(32) fmcube eps A failed (%Iu .. 32)\n", ntests);
+            printe("ERROR: WeldVertices(32) fmcube eps A failed (%zu .. 32)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices32, 12, remap.get(), 24))
@@ -747,7 +747,7 @@ bool Test26()
         }
         else if (ntests != 16)
         {
-            printe("ERROR: WeldVertices(32) fmcube eps B failed (%Iu .. 16)\n", ntests);
+            printe("ERROR: WeldVertices(32) fmcube eps B failed (%zu .. 16)\n", ntests);
             success = false;
         }
         else if (!IsValidVertexRemap(g_fmCubeIndices32, 12, remap.get(), 24, true, true))
@@ -805,7 +805,7 @@ bool Test27()
             }
             else if (trailingUnused != 16)
             {
-                printe("ERROR: OptimizeVertices(16) failed to produce enough unused slots (%Iu .. 16)\n", trailingUnused);
+                printe("ERROR: OptimizeVertices(16) failed to produce enough unused slots (%zu .. 16)\n", trailingUnused);
                 success = false;
             }
             else if (!IsValidVertexRemap(newIndices.get(), 12, remap.get(), 24))
@@ -813,7 +813,7 @@ bool Test27()
                 printe("ERROR: OptimizeVertices(16) failed remap invalid\n");
                 success = false;
                 for (size_t j = 0; j < 24; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else if (remap[23] != uint32_t(-1) || remap[22] != uint32_t(-1) || remap[21] != uint32_t(-1) || remap[20] != uint32_t(-1)
                 || remap[19] != uint32_t(-1) || remap[18] != uint32_t(-1) || remap[17] != uint32_t(-1) || remap[16] != uint32_t(-1)
@@ -884,13 +884,13 @@ bool Test27()
                         {
                             if (finalUInt[j] != 0xcdcdcdcd)
                             {
-                                printe("ERROR: CompactVB(4) 16-bit failed creating correct new VB (%Iu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
+                                printe("ERROR: CompactVB(4) 16-bit failed creating correct new VB (%zu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
                                 success = false;
                             }
                         }
                         else if (remap[j] != finalUInt[j])
                         {
-                            printe("ERROR: CompactVB(4) 16-bit failed creating correct new VB (%Iu: %u .. %u)\n", j, finalUInt[j], remap[j]);
+                            printe("ERROR: CompactVB(4) 16-bit failed creating correct new VB (%zu: %u .. %u)\n", j, finalUInt[j], remap[j]);
                             success = false;
                         }
                     }
@@ -982,7 +982,7 @@ bool Test27()
             }
             else if (trailingUnused != 4)
             {
-                printe("ERROR: OptimizeVertices(16) position & uv failed to produce enough unused slots (%Iu .. 16)\n", trailingUnused);
+                printe("ERROR: OptimizeVertices(16) position & uv failed to produce enough unused slots (%zu .. 16)\n", trailingUnused);
                 success = false;
             }
             else if (!IsValidVertexRemap(newIndices.get(), 12, remap.get(), 24))
@@ -990,7 +990,7 @@ bool Test27()
                 printe("ERROR: OptimizeVertices(16) position & uv failed remap invalid\n");
                 success = false;
                 for (size_t j = 0; j < 24; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else if (remap[23] != uint32_t(-1) || remap[22] != uint32_t(-1) || remap[21] != uint32_t(-1) || remap[20] != uint32_t(-1)
                 || remap[19] == uint32_t(-1) || remap[18] == uint32_t(-1) || remap[17] == uint32_t(-1) || remap[16] == uint32_t(-1)
@@ -1061,13 +1061,13 @@ bool Test27()
                         {
                             if (finalUInt[j] != 0xcdcdcdcd)
                             {
-                                printe("ERROR: CompactVB(4) 16-bit position & uv failed creating correct new VB (%Iu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
+                                printe("ERROR: CompactVB(4) 16-bit position & uv failed creating correct new VB (%zu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
                                 success = false;
                             }
                         }
                         else if (remap[j] != finalUInt[j])
                         {
-                            printe("ERROR: CompactVB(4) 16-bit position & uv failed creating correct new VB (%Iu: %u .. %u)\n", j, finalUInt[j], remap[j]);
+                            printe("ERROR: CompactVB(4) 16-bit position & uv failed creating correct new VB (%zu: %u .. %u)\n", j, finalUInt[j], remap[j]);
                             success = false;
                         }
                     }
@@ -1116,7 +1116,7 @@ bool Test27()
             }
             else if (trailingUnused != 16)
             {
-                printe("ERROR: OptimizeVertices(32) failed to produce enough unused slots (%Iu .. 16)\n", trailingUnused);
+                printe("ERROR: OptimizeVertices(32) failed to produce enough unused slots (%zu .. 16)\n", trailingUnused);
                 success = false;
             }
             else if (!IsValidVertexRemap(newIndices.get(), 12, remap.get(), 24))
@@ -1124,7 +1124,7 @@ bool Test27()
                 printe("ERROR: OptimizeVertices(32) failed remap invalid\n");
                 success = false;
                 for (size_t j = 0; j < 24; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else if (remap[23] != uint32_t(-1) || remap[22] != uint32_t(-1) || remap[21] != uint32_t(-1) || remap[20] != uint32_t(-1)
                 || remap[19] != uint32_t(-1) || remap[18] != uint32_t(-1) || remap[17] != uint32_t(-1) || remap[16] != uint32_t(-1)
@@ -1195,13 +1195,13 @@ bool Test27()
                         {
                             if (finalUInt[j] != 0xcdcdcdcd)
                             {
-                                printe("ERROR: CompactVB(4) 32-bit failed creating correct new VB (%Iu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
+                                printe("ERROR: CompactVB(4) 32-bit failed creating correct new VB (%zu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
                                 success = false;
                             }
                         }
                         else if (remap[j] != finalUInt[j])
                         {
-                            printe("ERROR: CompactVB(4) 32-bit failed creating correct new VB (%Iu: %u .. %u)\n", j, finalUInt[j], remap[j]);
+                            printe("ERROR: CompactVB(4) 32-bit failed creating correct new VB (%zu: %u .. %u)\n", j, finalUInt[j], remap[j]);
                             success = false;
                         }
                     }
@@ -1252,7 +1252,7 @@ bool Test27()
             }
             else if (trailingUnused != 4)
             {
-                printe("ERROR: OptimizeVertices(32) position & uv failed to produce enough unused slots (%Iu .. 16)\n", trailingUnused);
+                printe("ERROR: OptimizeVertices(32) position & uv failed to produce enough unused slots (%zu .. 16)\n", trailingUnused);
                 success = false;
             }
             else if (!IsValidVertexRemap(newIndices.get(), 12, remap.get(), 24))
@@ -1260,7 +1260,7 @@ bool Test27()
                 printe("ERROR: OptimizeVertices(32) position & uv failed remap invalid\n");
                 success = false;
                 for (size_t j = 0; j < 24; ++j)
-                    print("%Iu -> %u\n", j, remap[j]);
+                    print("%zu -> %u\n", j, remap[j]);
             }
             else if (remap[23] != uint32_t(-1) || remap[22] != uint32_t(-1) || remap[21] != uint32_t(-1) || remap[20] != uint32_t(-1)
                 || remap[19] == uint32_t(-1) || remap[18] == uint32_t(-1) || remap[17] == uint32_t(-1) || remap[16] == uint32_t(-1)
@@ -1331,13 +1331,13 @@ bool Test27()
                         {
                             if (finalUInt[j] != 0xcdcdcdcd)
                             {
-                                printe("ERROR: CompactVB(4) 32-bit position & uv failed creating correct new VB (%Iu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
+                                printe("ERROR: CompactVB(4) 32-bit position & uv failed creating correct new VB (%zu: %u .. 0xcdcdcdcd)\n", j, finalUInt[j]);
                                 success = false;
                             }
                         }
                         else if (remap[j] != finalUInt[j])
                         {
-                            printe("ERROR: CompactVB(4) 32-bit position & uv failed creating correct new VB (%Iu: %u .. %u)\n", j, finalUInt[j], remap[j]);
+                            printe("ERROR: CompactVB(4) 32-bit position & uv failed creating correct new VB (%zu: %u .. %u)\n", j, finalUInt[j], remap[j]);
                             success = false;
                         }
                     }

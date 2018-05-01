@@ -395,7 +395,7 @@ bool Test24()
         auto subsets = ComputeSubsets( nullptr, 0 );
         if ( !subsets.empty() )
         {
-            printe("ERROR: ComputeSubsets empty failed count %Iu .. 0\n", subsets.size() );
+            printe("ERROR: ComputeSubsets empty failed count %zu .. 0\n", subsets.size() );
             success = false;
         }
     }
@@ -409,14 +409,14 @@ bool Test24()
         auto subsets = ComputeSubsets( nullptr, 12 );
         if ( subsets.size() != 1 )
         {
-            printe("ERROR: ComputeSubsets null failed count %Iu .. 1\n", subsets.size() );
+            printe("ERROR: ComputeSubsets null failed count %zu .. 1\n", subsets.size() );
             success = false;
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
-                printe("ERROR: ComputeSubsets null failed %Iu,%Iu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets null failed %zu,%zu\n", it->first, it->second );
             }
             success = false;
         }
@@ -444,14 +444,14 @@ bool Test24()
         auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
         if ( subsets.size() != 12 )
         {
-            printe("ERROR: ComputeSubsets identity failed count %Iu .. 12\n", subsets.size() );
+            printe("ERROR: ComputeSubsets identity failed count %zu .. 12\n", subsets.size() );
             success = false;
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
-                printe("ERROR: ComputeSubsets identity failed %Iu,%Iu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets identity failed %zu,%zu\n", it->first, it->second );
             }
             success = false;
         }
@@ -468,14 +468,14 @@ bool Test24()
         auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
         if ( subsets.size() != 1 )
         {
-            printe("ERROR: ComputeSubsets zero failed count %Iu .. 1\n", subsets.size() );
+            printe("ERROR: ComputeSubsets zero failed count %zu .. 1\n", subsets.size() );
             success = false;
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
-                printe("ERROR: ComputeSubsets zero failed %Iu,%Iu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets zero failed %zu,%zu\n", it->first, it->second );
             }
             success = false;
         }
@@ -502,14 +502,14 @@ bool Test24()
         auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
         if ( subsets.size() != 11 )
         {
-            printe("ERROR: ComputeSubsets unsorted failed count %Iu .. 11\n", subsets.size() );
+            printe("ERROR: ComputeSubsets unsorted failed count %zu .. 11\n", subsets.size() );
             success = false;
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
-                printe("ERROR: ComputeSubsets unsorted failed %Iu,%Iu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets unsorted failed %zu,%zu\n", it->first, it->second );
             }
             success = false;
         }
@@ -531,14 +531,14 @@ bool Test24()
         auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
         if ( subsets.size() != 6 )
         {
-            printe("ERROR: ComputeSubsets sorted failed count %Iu .. 6\n", subsets.size() );
+            printe("ERROR: ComputeSubsets sorted failed count %zu .. 6\n", subsets.size() );
             success = false;
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
-                printe("ERROR: ComputeSubsets sorted failed %Iu,%Iu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets sorted failed %zu,%zu\n", it->first, it->second );
             }
             success = false;
         }
@@ -559,14 +559,14 @@ bool Test24()
         auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
         if ( subsets.size() != 5 )
         {
-            printe("ERROR: ComputeSubsets sorted (2) failed count %Iu .. 5\n", subsets.size() );
+            printe("ERROR: ComputeSubsets sorted (2) failed count %zu .. 5\n", subsets.size() );
             success = false;
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
             for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
             {
-                printe("ERROR: ComputeSubsets sorted (2) failed %Iu,%Iu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets sorted (2) failed %zu,%zu\n", it->first, it->second );
             }
             success = false;
         }

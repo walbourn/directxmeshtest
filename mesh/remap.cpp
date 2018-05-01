@@ -236,7 +236,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -254,7 +254,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }        
 
@@ -554,7 +554,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -572,7 +572,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }        
 
@@ -725,7 +725,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -743,7 +743,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }        
     }
@@ -820,7 +820,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -838,7 +838,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }        
     }
@@ -977,7 +977,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) shuffle failed (%08X)\n", hr );
-            printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+            printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
         else
@@ -988,7 +988,7 @@ bool Test04()
                 if ( !IsTestVBCorrect32( ptr, DWORD( j ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) shuffle failed\n" );
-                    printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+                    printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
                     success = false;
                     break;
                 }
@@ -999,7 +999,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(32) shuffle [in-place] failed (%08X)\n", hr );
-            printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+            printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
         else
@@ -1010,7 +1010,7 @@ bool Test04()
                 if ( !IsTestVBCorrect32( ptr, DWORD( j ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) shuffle [in-place] failed\n" );
-                    printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+                    printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
                     success = false;
                     break;
                 }
@@ -1142,7 +1142,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) shuffle failed (%08X)\n", hr );
-            printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+            printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
         else
@@ -1153,7 +1153,7 @@ bool Test04()
                 if ( !IsTestVBCorrect16( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(16) shuffle failed\n" );
-                    printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+                    printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
                     success = false;
                     break;
                 }
@@ -1164,7 +1164,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             printe("ERROR: FinalizeVB(16) shuffle [in-place] failed (%08X)\n", hr );
-            printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+            printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
         else
@@ -1175,7 +1175,7 @@ bool Test04()
                 if ( !IsTestVBCorrect16( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(16) shuffle [in-place] failed\n" );
-                    printe("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
+                    printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
                     success = false;
                     break;
                 }
@@ -1213,7 +1213,7 @@ bool Test04()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_remap[ j ] );
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_remap[ j ] );
             }
         }
 
@@ -1233,7 +1233,7 @@ bool Test04()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
+                printe("\t%zu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
             }
         }        
 
@@ -1338,7 +1338,7 @@ bool Test04()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
     }
@@ -1589,7 +1589,7 @@ bool Test05()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
     }
@@ -1638,7 +1638,7 @@ bool Test05()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
             }
         }
     }
@@ -1772,7 +1772,7 @@ bool Test18()
         if ( FAILED(hr) )
         {
             printe("ERROR: ReorderIB(16) shuffle failed (%08X)\n", hr );
-            print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+            print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
         else
@@ -1795,7 +1795,7 @@ bool Test18()
             if ( !matches )
             {
                 printe("ERROR: ReorderIB(16) shuffle failed\n" );
-                print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+                print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
                 success = false;
             }
         }
@@ -1804,7 +1804,7 @@ bool Test18()
         if ( FAILED(hr) )
         {
             printe("ERROR: ReorderIB(16) shuffle [in-place] failed (%08X)\n", hr );
-            print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+            print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
         else
@@ -1827,7 +1827,7 @@ bool Test18()
             if ( !matches )
             {
                 printe("ERROR: ReorderIB(16) shuffle [in-place] failed\n" );
-                print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+                print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
                 success = false;
             }
         }
@@ -1870,7 +1870,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -1889,7 +1889,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -2047,7 +2047,7 @@ bool Test18()
         if ( FAILED(hr) )
         {
             printe("ERROR: ReorderIB(32) shuffle failed (%08X)\n", hr );
-            print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+            print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
         else
@@ -2070,7 +2070,7 @@ bool Test18()
             if ( !matches )
             {
                 printe("ERROR: ReorderIB(32) shuffle failed\n" );
-                print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+                print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
                 success = false;
             }
         }
@@ -2079,7 +2079,7 @@ bool Test18()
         if ( FAILED(hr) )
         {
             printe("ERROR: ReorderIB(32) shuffle [in-place] failed (%08X)\n", hr );
-            print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+            print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
         else
@@ -2102,7 +2102,7 @@ bool Test18()
             if ( !matches )
             {
                 printe("ERROR: ReorderIB(32) shuffle [in-place] failed\n" );
-                print("\t[%Iu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
+                print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
                 success = false;
             }
         }
@@ -2145,7 +2145,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -2164,7 +2164,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
 
@@ -2240,7 +2240,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
     }
@@ -2298,7 +2298,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
     }

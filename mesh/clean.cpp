@@ -395,7 +395,7 @@ bool Test14()
         }
         else if ( !dups.empty() )
         {
-            printe("ERROR: Clean(16) tetra failed no dups expected %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) tetra failed no dups expected %zu\n", dups.size() );
             success = false;
         }
         else
@@ -461,7 +461,7 @@ bool Test14()
         }
         else if ( dups.size() != _countof(s_cleanDups) )
         {
-            printe("ERROR: Clean(16) tetra [bowties] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) tetra [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
@@ -523,7 +523,7 @@ bool Test14()
         }
         else if ( !dups.empty() )
         {
-            printe("ERROR: Clean(16) bface failed expected no dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) bface failed expected no dups %zu\n", dups.size() );
             success = false;
         }
         else
@@ -579,7 +579,7 @@ bool Test14()
         }
         else if ( dups.size() != _countof(s_cleanDups) )
         {
-            printe("ERROR: Clean(16) bface [bowties] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) bface [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
@@ -635,7 +635,7 @@ bool Test14()
         }
         else if ( !dups.empty() )
         {
-            printe("ERROR: Clean(16) bowtie failed expected no dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) bowtie failed expected no dups %zu\n", dups.size() );
             success = false;
         }
         else
@@ -697,7 +697,7 @@ bool Test14()
         }
         else if ( dups.size() != _countof(s_cleanDups) )
         {
-            printe("ERROR: Clean(16) bowtie [bowties] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) bowtie [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
@@ -975,7 +975,7 @@ bool Test14()
         }
         else if ( !dups.empty() )
         {
-            printe("ERROR: Clean(32) tetra failed no dups expected %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) tetra failed no dups expected %zu\n", dups.size() );
             success = false;
         }
         else
@@ -1041,7 +1041,7 @@ bool Test14()
         }
         else if ( dups.size() != _countof(s_cleanDups) )
         {
-            printe("ERROR: Clean(32) tetra [bowties] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) tetra [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
@@ -1103,7 +1103,7 @@ bool Test14()
         }
         else if ( !dups.empty() )
         {
-            printe("ERROR: Clean(32) bface failed expected no dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) bface failed expected no dups %zu\n", dups.size() );
             success = false;
         }
         else
@@ -1159,7 +1159,7 @@ bool Test14()
         }
         else if ( dups.size() != _countof(s_cleanDups) )
         {
-            printe("ERROR: Clean(32) bface [bowties] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) bface [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
@@ -1215,7 +1215,7 @@ bool Test14()
         }
         else if ( !dups.empty() )
         {
-            printe("ERROR: Clean(32) bowtie failed expected no dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) bowtie failed expected no dups %zu\n", dups.size() );
             success = false;
         }
         else
@@ -1277,7 +1277,7 @@ bool Test14()
         }
         else if ( dups.size() != _countof(s_cleanDups) )
         {
-            printe("ERROR: Clean(32) bowtie [bowties] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) bowtie [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else if ( memcmp( dups.data(), s_cleanDups, sizeof(s_cleanDups) ) != 0 )
@@ -1402,7 +1402,7 @@ bool Test21()
         }
         else if ( dups.size() != 16 )
         {
-            printe("ERROR: Clean(16) cube attr failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) cube attr failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else
@@ -1428,7 +1428,7 @@ bool Test21()
         }
         else if ( dups.size() != 16 )
         {
-            printe("ERROR: Clean(16) cube attr [null adj] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(16) cube attr [null adj] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else
@@ -1589,7 +1589,7 @@ bool Test21()
         }
         else if ( dups.size() != 16 )
         {
-            printe("ERROR: Clean(32) cube attr failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) cube attr failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else
@@ -1615,7 +1615,7 @@ bool Test21()
         }
         else if ( dups.size() != 16 )
         {
-            printe("ERROR: Clean(32) cube attr [null adj] failed unexpected number of dups %Iu\n", dups.size() );
+            printe("ERROR: Clean(32) cube attr [null adj] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
         }
         else

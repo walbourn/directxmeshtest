@@ -317,7 +317,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -342,7 +342,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -429,7 +429,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_fmCubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
                 }
             }
         }
@@ -454,7 +454,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_fmCubePointRepsEps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
                 }
             }
         }
@@ -484,7 +484,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -509,7 +509,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -539,7 +539,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -564,7 +564,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -651,7 +651,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_fmCubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
                 }
             }
         }
@@ -676,7 +676,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_fmCubePointRepsEps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
                 }
             }
         }
@@ -706,7 +706,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -731,7 +731,7 @@ bool Test07()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -769,7 +769,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -781,7 +781,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -801,7 +801,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -864,7 +864,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -876,7 +876,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -904,7 +904,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_fmCubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
                 }
             }
         }
@@ -916,7 +916,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -936,7 +936,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -956,7 +956,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_fmCubePointRepsEps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
                 }
             }
         }
@@ -968,7 +968,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -996,7 +996,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -1008,7 +1008,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_tetraAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
                 }
             }
         }
@@ -1028,7 +1028,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_tetraAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
                 }
             }
         }
@@ -1048,7 +1048,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -1060,7 +1060,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_tetraAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
                 }
             }
         }
@@ -1088,7 +1088,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -1100,7 +1100,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -1120,7 +1120,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -1183,7 +1183,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_cubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_cubePointReps[j] );
                 }
             }
         }
@@ -1195,7 +1195,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -1223,7 +1223,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_fmCubePointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointReps[j] );
                 }
             }
         }
@@ -1235,7 +1235,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -1255,7 +1255,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -1275,7 +1275,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_fmCubePointRepsEps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_fmCubePointRepsEps[j] );
                 }
             }
         }
@@ -1287,7 +1287,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -1315,7 +1315,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -1327,7 +1327,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_tetraAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
                 }
             }
         }
@@ -1347,7 +1347,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_tetraAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
                 }
             }
         }
@@ -1367,7 +1367,7 @@ bool Test08()
             {
                 if ( preps[ j ] != s_tetraPointReps[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
+                    print("%zu: %u ... %u\n", j, preps[j], s_tetraPointReps[j] );
                 }
             }
         }
@@ -1379,7 +1379,7 @@ bool Test08()
             {
                 if ( adj[ j ] != s_tetraAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_tetraAdj[j] );
                 }
             }
         }
@@ -1414,7 +1414,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_cubeGSAdj16[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_cubeGSAdj16[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_cubeGSAdj16[j] );
                 }
             }
         }
@@ -1471,7 +1471,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_fmCubeGSAdj16[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_fmCubeGSAdj16[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_fmCubeGSAdj16[j] );
                 }
             }
         }
@@ -1496,7 +1496,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_tetraGSAdj16[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_tetraGSAdj16[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_tetraGSAdj16[j] );
                 }
             }
         }
@@ -1521,7 +1521,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_cubeGSAdj32[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_cubeGSAdj32[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_cubeGSAdj32[j] );
                 }
             }
         }
@@ -1578,7 +1578,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_fmCubeGSAdj32[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_fmCubeGSAdj32[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_fmCubeGSAdj32[j] );
                 }
             }
         }
@@ -1603,7 +1603,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_tetraGSAdj32[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_tetraGSAdj32[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_tetraGSAdj32[j] );
                 }
             }
         }
@@ -1654,7 +1654,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_unusedGSAdj[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_unusedGSAdj[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_unusedGSAdj[j] );
                 }
             }
         }
@@ -1704,7 +1704,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_unusedGSAdj[j] )
                 {
-                    print("%Iu: %u ... %u\n", j, gsadj[j], s_unusedGSAdj[j] );
+                    print("%zu: %u ... %u\n", j, gsadj[j], s_unusedGSAdj[j] );
                 }
             }
         }
@@ -1739,7 +1739,7 @@ bool Test12()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -1759,7 +1759,7 @@ bool Test12()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -1816,7 +1816,7 @@ bool Test12()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -1841,7 +1841,7 @@ bool Test12()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -1861,7 +1861,7 @@ bool Test12()
             {
                 if ( adj[ j ] != s_cubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
         }
@@ -1918,7 +1918,7 @@ bool Test12()
             {
                 if ( adj[ j ] != s_fmCubeAdj[j] )
                 {
-                    print("%Iu (%Iu/%Iu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
+                    print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_fmCubeAdj[j] );
                 }
             }
         }
@@ -1988,7 +1988,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -1997,7 +1997,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
             }
         }
 
@@ -2017,7 +2017,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2026,7 +2026,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
             }
         }
 
@@ -2120,7 +2120,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2129,7 +2129,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
             }
         }
 
@@ -2149,7 +2149,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2158,7 +2158,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
             }
         }
 
@@ -2252,7 +2252,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2261,7 +2261,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
             }
         }
     }
@@ -2320,7 +2320,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2329,7 +2329,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%Iu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
             }
         }
     }
@@ -2524,7 +2524,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_remap[ j ] );
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_remap[ j ] );
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2533,7 +2533,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
             }
         }
 
@@ -2557,7 +2557,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
+                printe("\t%zu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
             }
         }        
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2566,7 +2566,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
             }
         }
     }
@@ -2616,7 +2616,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2625,7 +2625,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
             }
         }
     }
@@ -2761,7 +2761,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2770,7 +2770,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
             }
         }
     }
@@ -2828,7 +2828,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2837,7 +2837,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%Iu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
             }
         }
     }

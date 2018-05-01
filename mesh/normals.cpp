@@ -197,7 +197,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngle[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -218,7 +218,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -239,7 +239,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -260,7 +260,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngleCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -318,7 +318,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormals[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -339,7 +339,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormals[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -360,7 +360,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormals[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -381,7 +381,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormalsCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -407,7 +407,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngle[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -428,7 +428,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -449,7 +449,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_boxNormalsArea[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -470,7 +470,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngleCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -496,7 +496,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsAngle[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -517,7 +517,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -538,7 +538,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -559,7 +559,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsAngleCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -585,7 +585,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngle[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -606,7 +606,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -627,7 +627,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -648,7 +648,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngleCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -706,7 +706,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormals[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -727,7 +727,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormals[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -748,7 +748,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormals[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -769,7 +769,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeNormalsCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -795,7 +795,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngle[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -816,7 +816,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -837,7 +837,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_boxNormalsArea[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -858,7 +858,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_cubeNormalsAngleCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -884,7 +884,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsAngle[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -905,7 +905,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -926,7 +926,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsEqual[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }
@@ -947,7 +947,7 @@ bool Test11()
             {
                 XMVECTOR v = XMLoadFloat3( &normals[j] );
                 XMVECTOR r = XMLoadFloat3( &s_tetraNormalsAngleCW[j] );
-                print( "%Iu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
+                print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
             success = false;
         }

@@ -160,7 +160,7 @@ bool Test01()
 
 #ifdef _DEBUG
         char output[ 256 ] = {};
-        sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
+        sprintf_s( output, "INFO: %zu verts, %zu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
 
@@ -415,7 +415,7 @@ bool Test01()
         ++npass;
     }
 
-    print("\n%Iu meshes tested, %Iu meshes passed ", ncount, npass );
+    print("\n%zu meshes tested, %zu meshes passed ", ncount, npass );
 
     return success;
 }
@@ -476,7 +476,7 @@ bool Test02()
 
 #ifdef _DEBUG
         char output[ 256 ] = {};
-        sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
+        sprintf_s( output, "INFO: %zu verts, %zu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
 
@@ -531,7 +531,7 @@ bool Test02()
         if ( g_TestMedia[index].bowtieDups != dupVerts.size() )
         {
             success = false;
-            printe( "\nERROR: Unexpected duplicate count for bowties %Iu .. %Iu:\n%S\n", dupVerts.size(), g_TestMedia[index].bowtieDups, szPath );
+            printe( "\nERROR: Unexpected duplicate count for bowties %zu .. %zu:\n%S\n", dupVerts.size(), g_TestMedia[index].bowtieDups, szPath );
             continue;
         }
 
@@ -567,7 +567,7 @@ bool Test02()
             if ( g_TestMedia[index].attrDups != dupVerts.size() )
             {
                 success = false;
-                printe( "\nERROR: Unexpected duplicate count for attributes %Iu .. %Iu:\n%S\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
+                printe( "\nERROR: Unexpected duplicate count for attributes %zu .. %zu:\n%S\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
                 continue;
             }
 
@@ -601,7 +601,7 @@ bool Test02()
             if ( expectedDups != dupVerts.size() )
             {
                 success = false;
-                printe( "\nERROR: Unexpected duplicate [full] count %Iu .. %Iu:\n%S\n", dupVerts.size(), expectedDups, szPath );
+                printe( "\nERROR: Unexpected duplicate [full] count %zu .. %zu:\n%S\n", dupVerts.size(), expectedDups, szPath );
                 continue;
             }
 
@@ -619,7 +619,7 @@ bool Test02()
         ++npass;
     }
 
-    print("\n%Iu meshes tested, %Iu meshes passed ", ncount, npass );
+    print("\n%zu meshes tested, %zu meshes passed ", ncount, npass );
 
     return success;
 }
@@ -680,7 +680,7 @@ bool Test03()
 
 #ifdef _DEBUG
         char output[ 256 ] = {};
-        sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
+        sprintf_s( output, "INFO: %zu verts, %zu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
 
@@ -731,7 +731,7 @@ bool Test03()
             ComputeVertexCacheMissRate( mesh->indices.data(), nFaces, nVerts, cacheSize, acmr, atvr );
 
 #ifdef _DEBUG
-            sprintf_s( output, "INFO: original: %Iu vache, ACMR %f, ATVR %f\n", cacheSize, acmr, atvr );
+            sprintf_s( output, "INFO: original: %zu vache, ACMR %f, ATVR %f\n", cacheSize, acmr, atvr );
             OutputDebugStringA( output );
 #endif
 
@@ -777,7 +777,7 @@ bool Test03()
                     ComputeVertexCacheMissRate( newIndices.get(), nFaces, nVerts, cacheSize, acmr2, atvr2 );
 
 #ifdef _DEBUG
-                    sprintf_s( output, "optimized: %Iu vache, ACMR %f, ATVR %f\n", cacheSize, acmr2, atvr2 );
+                    sprintf_s( output, "optimized: %zu vache, ACMR %f, ATVR %f\n", cacheSize, acmr2, atvr2 );
                     OutputDebugStringA( output );
 #endif
 
@@ -911,7 +911,7 @@ bool Test03()
             ++npass;
     }
 
-    print("\n%Iu meshes tested, %Iu meshes passed ", ncount, npass );
+    print("\n%zu meshes tested, %zu meshes passed ", ncount, npass );
 
     return success;
 }
@@ -972,7 +972,7 @@ bool Test04()
 
 #ifdef _DEBUG
         char output[ 256 ] = {};
-        sprintf_s( output, "INFO: %Iu verts, %Iu faces\n", nVerts, nFaces );
+        sprintf_s( output, "INFO: %zu verts, %zu faces\n", nVerts, nFaces );
         OutputDebugStringA( output );
 #endif
 
@@ -1026,14 +1026,14 @@ bool Test04()
         }
 
 #ifdef _DEBUG
-        sprintf_s( output, "INFO: %Iu duplicated verts\n", dupVerts.size() );
+        sprintf_s( output, "INFO: %zu duplicated verts\n", dupVerts.size() );
         OutputDebugStringA( output );
 #endif
 
         if ( g_TestMedia[index].attrDups != dupVerts.size() )
         {
             success = false;
-            printe( "ERROR: Unexpected duplicate count %Iu .. %Iu:\n%S\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
+            printe( "ERROR: Unexpected duplicate count %zu .. %zu:\n%S\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
             continue;
         }
 
@@ -1096,16 +1096,16 @@ bool Test04()
 
 #ifdef _DEBUG
             auto subsets = ComputeSubsets( attributes.get(), nFaces );
-            sprintf_s( output, "INFO: %Iu attribute groups: ", subsets.size() );
+            sprintf_s( output, "INFO: %zu attribute groups: ", subsets.size() );
             OutputDebugStringA( output );
 
             for (auto it = subsets.cbegin(); it != subsets.cend(); ++it)
             {
-                sprintf_s(output, "(%Iu, %Iu) ", it->first, it->second);
+                sprintf_s(output, "(%zu, %zu) ", it->first, it->second);
                 OutputDebugStringA(output);
             }
 
-            sprintf_s(output, "\nINFO: original: %Iu vache, ACMR %f, ATVR %f\n", cacheSize, acmr, atvr);
+            sprintf_s(output, "\nINFO: original: %zu vache, ACMR %f, ATVR %f\n", cacheSize, acmr, atvr);
             OutputDebugStringA(output);
 #endif
 
@@ -1151,7 +1151,7 @@ bool Test04()
                     ComputeVertexCacheMissRate( newIndices.get(), nFaces, nTotalVerts, cacheSize, acmr2, atvr2 );
 
 #ifdef _DEBUG
-                    sprintf_s( output, "optimized: %Iu vache, ACMR %f, ATVR %f\n", cacheSize, acmr2, atvr2 );
+                    sprintf_s( output, "optimized: %zu vache, ACMR %f, ATVR %f\n", cacheSize, acmr2, atvr2 );
                     OutputDebugStringA( output );
 #endif
 
@@ -1286,7 +1286,7 @@ bool Test04()
             ++npass;
     }
 
-    print("\n%Iu meshes tested, %Iu meshes passed ", ncount, npass );
+    print("\n%zu meshes tested, %zu meshes passed ", ncount, npass );
 
     return success;
 }
