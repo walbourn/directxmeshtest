@@ -1623,7 +1623,7 @@ bool Test07()
 
     for( size_t index=0; index < _countof(g_VBMedia); ++index )
     {
-        wchar_t szPath[MAX_PATH];
+        wchar_t szPath[MAX_PATH] = {};
         DWORD ret = ExpandEnvironmentStringsW(g_VBMedia[index].fname, szPath, MAX_PATH);
         if ( !ret || ret > MAX_PATH )
         {
