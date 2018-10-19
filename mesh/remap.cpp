@@ -23,6 +23,9 @@ bool Test03()
 {
     bool success = true;
 
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+
     // Identity (16)
     {
         auto srcib = CreateIndexBuffer<uint16_t>( 1023, IB_IDENTITY );
@@ -143,7 +146,7 @@ bool Test03()
         for( uint32_t j = 0; j < 1024; ++j )
             remap.push_back( j );
 
-        std::random_shuffle( remap.begin(), remap.end() );
+        std::shuffle(std::begin(remap), std::end(remap), rng);
 
         std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[1024]);
         for (uint32_t j = 0; j < 1024; ++j)
@@ -461,7 +464,7 @@ bool Test03()
         for( uint32_t j = 0; j < 1024; ++j )
             remap.push_back( j );
 
-        std::random_shuffle( remap.begin(), remap.end() );
+        std::shuffle(std::begin(remap), std::end(remap), rng);
 
         std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[1024]);
         for (uint32_t j = 0; j < 1024; ++j)
@@ -853,6 +856,9 @@ bool Test04()
 {
     bool success = true;
 
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+
     // Identity (32)
     {
         auto srcvb = CreateVertexBuffer32( 65535, VB_IDENTITY );
@@ -963,7 +969,7 @@ bool Test04()
         for( uint32_t j = 0; j < 65535; ++j )
             remap.push_back( j );
 
-        std::random_shuffle( remap.begin(), remap.end() );
+        std::shuffle(std::begin(remap), std::end(remap), rng);
 
         std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535]);
         for (uint32_t j = 0; j < 65535; ++j)
@@ -1128,7 +1134,7 @@ bool Test04()
         for( uint32_t j = 0; j < 65535; ++j )
             remap.push_back( j );
 
-        std::random_shuffle( remap.begin(), remap.end() );
+        std::shuffle(std::begin(remap), std::end(remap), rng);
 
         std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535]);
         for (uint32_t j = 0; j < 65535; ++j)
@@ -1353,6 +1359,9 @@ bool Test05()
 {
     bool success = true;
 
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+
     // Identity (32)
     {
         auto srcvb = CreateVertexBuffer32( 65535, VB_IDENTITY );
@@ -1496,7 +1505,7 @@ bool Test05()
         for( uint32_t j = 0; j < (65535 + 256); ++j )
             remap.push_back( j );
  
-        std::random_shuffle( remap.begin(), remap.end() );
+        std::shuffle(std::begin(remap), std::end(remap), rng);
 
         std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535 + 256]);
         for (uint32_t j = 0; j < (65535 + 256); ++j)
@@ -1653,6 +1662,9 @@ bool Test18()
 {
     bool success = true;
 
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+
     // Identity (16)
     {
         auto srcib = CreateIndexBuffer<uint16_t>( 1023, IB_IDENTITY );
@@ -1764,7 +1776,7 @@ bool Test18()
         for( uint32_t j = 0; j < 341; ++j )
             remap[j] = j;
 
-        std::random_shuffle( std::begin(remap), std::end(remap) );
+        std::shuffle(std::begin(remap), std::end(remap), rng);
 
         auto destib = CreateIndexBuffer<uint16_t>( 1023, IB_ZERO );
 
@@ -2039,7 +2051,7 @@ bool Test18()
         for( uint32_t j = 0; j < 341; ++j )
             remap[j] = j;
 
-        std::random_shuffle( std::begin(remap), std::end(remap) );
+        std::shuffle(std::begin(remap), std::end(remap), rng);
 
         auto destib = CreateIndexBuffer<uint32_t>( 1023, IB_ZERO );
 
