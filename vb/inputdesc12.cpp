@@ -4,9 +4,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //-------------------------------------------------------------------------------------
 
+#include "directxtest.h"
+
 #include <d3d12.h>
 
-#include "directxtest.h"
 #include "TestHelpers.h"
 #include "TestInputLayouts.h"
 
