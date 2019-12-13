@@ -176,7 +176,7 @@ extern const __declspec(selectany) D3D11_INPUT_ELEMENT_DESC g_colorLayout[] =
 };
 #endif
 
-#if defined(__d3d12_h__) || defined(__d3d12_x_h__)
+#if defined(__d3d12_h__) || defined(__d3d12_x_h__) || defined(__XBOX_D3D12_X__)
 namespace TestInputLayouts12
 {
 
