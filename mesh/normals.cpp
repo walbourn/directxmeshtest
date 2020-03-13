@@ -187,7 +187,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) cube [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) cube [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngle, 8 ) )
@@ -208,7 +208,7 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, 8, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) cube [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) cube [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsEqual, 8 ) )
@@ -229,7 +229,7 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, 8, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) cube [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) cube [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsEqual, 8 ) )
@@ -250,7 +250,7 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, 8, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) cube [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) cube [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngleCW, 8 ) )
@@ -271,28 +271,28 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeNormals(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, UINT32_MAX, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeNormals(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ComputeNormals( g_cubeIndices16, UINT32_MAX, g_cubeVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ComputeNormals(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, 2, CNORM_DEFAULT, normals.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: ComputeNormals(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -308,7 +308,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) fmcube [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) fmcube [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormals, 24 ) )
@@ -329,7 +329,7 @@ bool Test11()
         hr = ComputeNormals( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) fmcube [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) fmcube [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormals, 24 ) )
@@ -350,7 +350,7 @@ bool Test11()
         hr = ComputeNormals( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) fmcube [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) fmcube [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormals, 24 ) )
@@ -371,7 +371,7 @@ bool Test11()
         hr = ComputeNormals( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) fmcube [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) fmcube [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormalsCW, 24 ) )
@@ -397,7 +397,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_boxIndices16, 12, g_boxVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) box [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) box [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngle, 8 ) )
@@ -418,7 +418,7 @@ bool Test11()
         hr = ComputeNormals( g_boxIndices16, 12, g_boxVerts, 8, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) box [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) box [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsEqual, 8 ) )
@@ -439,7 +439,7 @@ bool Test11()
         hr = ComputeNormals( g_boxIndices16, 12, g_boxVerts, 8, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) box [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) box [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_boxNormalsArea, 8 ) )
@@ -460,7 +460,7 @@ bool Test11()
         hr = ComputeNormals( g_boxIndices16, 12, g_boxVerts, 8, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) box [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) box [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngleCW, 8 ) )
@@ -486,7 +486,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_tetraIndices16, 4, g_tetraVerts, 4, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) tetra [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) tetra [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsAngle, 4 ) )
@@ -507,7 +507,7 @@ bool Test11()
         hr = ComputeNormals( g_tetraIndices16, 4, g_tetraVerts, 4, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) tetra [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) tetra [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsEqual, 4 ) )
@@ -528,7 +528,7 @@ bool Test11()
         hr = ComputeNormals( g_tetraIndices16, 4, g_tetraVerts, 4, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) tetra [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) tetra [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsEqual, 4 ) )
@@ -549,7 +549,7 @@ bool Test11()
         hr = ComputeNormals( g_tetraIndices16, 4, g_tetraVerts, 4, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) tetra [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) tetra [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsAngleCW, 4 ) )
@@ -575,7 +575,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) cube failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngle, 8 ) )
@@ -596,7 +596,7 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, 8, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) cube [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) cube [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsEqual, 8 ) )
@@ -617,7 +617,7 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, 8, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) cube [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) cube [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsEqual, 8 ) )
@@ -638,7 +638,7 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, 8, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) cube [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) cube [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngleCW, 8 ) )
@@ -659,28 +659,28 @@ bool Test11()
         hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeNormals(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeNormals(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ComputeNormals( g_cubeIndices32, UINT32_MAX, g_cubeVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ComputeNormals(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, 2, CNORM_DEFAULT, normals.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: ComputeNormals(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: ComputeNormals(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -696,7 +696,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) fmcube [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) fmcube [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormals, 24 ) )
@@ -717,7 +717,7 @@ bool Test11()
         hr = ComputeNormals( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) fmcube [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) fmcube [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormals, 24 ) )
@@ -738,7 +738,7 @@ bool Test11()
         hr = ComputeNormals( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) fmcube [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) fmcube [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormals, 24 ) )
@@ -759,7 +759,7 @@ bool Test11()
         hr = ComputeNormals( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) fmcube [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) fmcube [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_fmCubeNormalsCW, 24 ) )
@@ -785,7 +785,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_boxIndices32, 12, g_boxVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) box failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) box failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngle, 8 ) )
@@ -806,7 +806,7 @@ bool Test11()
         hr = ComputeNormals( g_boxIndices32, 12, g_boxVerts, 8, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) box [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) box [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsEqual, 8 ) )
@@ -827,7 +827,7 @@ bool Test11()
         hr = ComputeNormals( g_boxIndices32, 12, g_boxVerts, 8, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) box [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) box [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_boxNormalsArea, 8 ) )
@@ -848,7 +848,7 @@ bool Test11()
         hr = ComputeNormals( g_boxIndices32, 12, g_boxVerts, 8, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) box [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) box [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_cubeNormalsAngleCW, 8 ) )
@@ -874,7 +874,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( g_tetraIndices32, 4, g_tetraVerts, 4, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) tetra [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) tetra [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsAngle, 4 ) )
@@ -895,7 +895,7 @@ bool Test11()
         hr = ComputeNormals( g_tetraIndices32, 4, g_tetraVerts, 4, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) tetra [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) tetra [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsEqual, 4 ) )
@@ -916,7 +916,7 @@ bool Test11()
         hr = ComputeNormals( g_tetraIndices32, 4, g_tetraVerts, 4, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) tetra [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) tetra [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsEqual, 4 ) )
@@ -937,7 +937,7 @@ bool Test11()
         hr = ComputeNormals( g_tetraIndices32, 4, g_tetraVerts, 4, CNORM_WIND_CW, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) tetra [cw] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) tetra [cw] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( normals.get(), s_tetraNormalsAngleCW, 4 ) )
@@ -1032,7 +1032,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( s_unused, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) unused [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) unused [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1046,7 +1046,7 @@ bool Test11()
         hr = ComputeNormals(s_unused_1st, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeNormals(16) unused [angle 1st] failed (%08X)\n", hr);
+            printe("ERROR: ComputeNormals(16) unused [angle 1st] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1060,7 +1060,7 @@ bool Test11()
         hr = ComputeNormals(s_unused_all, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeNormals(16) unused [angle all] failed (%08X)\n", hr);
+            printe("ERROR: ComputeNormals(16) unused [angle all] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1075,7 +1075,7 @@ bool Test11()
         hr = ComputeNormals( s_unused, 12, g_cubeVerts, 8, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) unused [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) unused [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1090,7 +1090,7 @@ bool Test11()
         hr = ComputeNormals( s_unused, 12, g_cubeVerts, 8, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(16) unused [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(16) unused [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1178,7 +1178,7 @@ bool Test11()
         HRESULT hr = ComputeNormals( s_unused, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) unused [angle] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) unused [angle] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1192,7 +1192,7 @@ bool Test11()
         hr = ComputeNormals(s_unused_1st, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeNormals(32) unused [angle 1st] failed (%08X)\n", hr);
+            printe("ERROR: ComputeNormals(32) unused [angle 1st] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1206,7 +1206,7 @@ bool Test11()
         hr = ComputeNormals(s_unused_all, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeNormals(32 unused [angle all] failed (%08X)\n", hr);
+            printe("ERROR: ComputeNormals(32 unused [angle all] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1221,7 +1221,7 @@ bool Test11()
         hr = ComputeNormals( s_unused, 12, g_cubeVerts, 8, CNORM_WEIGHT_EQUAL, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) unused [equal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) unused [equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))
@@ -1236,7 +1236,7 @@ bool Test11()
         hr = ComputeNormals( s_unused, 12, g_cubeVerts, 8, CNORM_WEIGHT_BY_AREA, normals.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeNormals(32) unused [area] failed (%08X)\n", hr );
+            printe("ERROR: ComputeNormals(32) unused [area] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if (!IsValidNormals(8, normals.get()))

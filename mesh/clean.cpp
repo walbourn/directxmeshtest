@@ -158,7 +158,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 12, 8, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) cube failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -177,7 +177,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -186,28 +186,28 @@ bool Test14()
         hr = Clean( indices.get(), 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, adj.get(), nullptr, dups );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Clean(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: Clean(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Clean( indices.get(), 12, UINT32_MAX, adj.get(), nullptr, dups );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Clean(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: Clean(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Clean( indices.get(), UINT32_MAX, 8, adj.get(), nullptr, dups );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: Clean(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: Clean(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Clean( indices.get(), 12, 2, adj.get(), nullptr, dups );
         if ( hr != E_FAIL )
         {
-            printe("\nERROR: Clean(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: Clean(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -233,7 +233,7 @@ bool Test14()
         hr = Clean( indices.get(), 12, 8, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) cube [asymmetric] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) cube [asymmetric] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -257,7 +257,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube [asymmetric] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube [asymmetric] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -300,7 +300,7 @@ bool Test14()
         hr = Clean( indices.get(), 12, 8, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) cube [unused] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) cube [unused] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -324,7 +324,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube [unused] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube [unused] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
 
@@ -343,7 +343,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 12, 24, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) fmcube failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -362,7 +362,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 24, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) fmcube validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) fmcube validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -380,7 +380,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 4, 4, adj.get(), nullptr, dups, false );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) tetra failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) tetra failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), g_tetraIndices16, sizeof(g_tetraIndices16) ) != 0 )
@@ -404,7 +404,7 @@ bool Test14()
             hr = Validate( indices.get(), 4, 4, adj.get(), VALIDATE_BACKFACING, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) tetra validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) tetra validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -412,7 +412,7 @@ bool Test14()
                 hr = Validate( indices.get(), 4, 4, adj.get(), VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(16) tetra validation (2) unexpected result (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(16) tetra validation (2) unexpected result (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -446,7 +446,7 @@ bool Test14()
         hr = Clean( indices.get(), 4, 4, adj.get(), nullptr, dups, true );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) tetra [bowties] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) tetra [bowties] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), s_cleanIndices, sizeof(s_cleanIndices) ) != 0 )
@@ -475,7 +475,7 @@ bool Test14()
             hr = Validate( indices.get(), 4, 4 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) tetra [bowties] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) tetra [bowties] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -483,7 +483,7 @@ bool Test14()
                 hr = Validate( indices.get(), 4, 4, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(16) tetra [bowties] expected a validate failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(16) tetra [bowties] expected a validate failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -508,7 +508,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 2, 3, adj.get(), nullptr, dups, false );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) bface failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) bface failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), g_backfaceIndices16, sizeof(g_backfaceIndices16) ) != 0 )
@@ -532,7 +532,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 3, adj.get(), VALIDATE_BACKFACING, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) bface validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) bface validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -540,7 +540,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 3, adj.get(), VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(16) bface validation (2) expected to fail (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(16) bface validation (2) expected to fail (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -564,7 +564,7 @@ bool Test14()
         hr = Clean( indices.get(), 2, 3, adj.get(), nullptr, dups, true );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) bface [bowties] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) bface [bowties] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), s_cleanIndices, sizeof(s_cleanIndices) ) != 0 )
@@ -593,7 +593,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 3 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) bface [bowties] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) bface [bowties] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -601,7 +601,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 3, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(16) bface [bowties] expected a validate failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(16) bface [bowties] expected a validate failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -620,7 +620,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 2, 5, adj.get(), nullptr, dups, false );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) bowtie failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) bowtie failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), g_bowtieIndices16, sizeof(g_bowtieIndices16) ) != 0 )
@@ -644,7 +644,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 5, adj.get(), VALIDATE_BACKFACING, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) bowtie validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) bowtie validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -652,7 +652,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 5, adj.get(), VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(16) bowtie validation (2) expected failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(16) bowtie validation (2) expected failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -682,7 +682,7 @@ bool Test14()
         hr = Clean( indices.get(), 2, 5, adj.get(), nullptr, dups, true );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) bowtie [bowties] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) bowtie [bowties] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), s_cleanIndices, sizeof(s_cleanIndices) ) != 0 )
@@ -711,7 +711,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 5 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) bowtie [bowties] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) bowtie [bowties] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -719,7 +719,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 5, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(16) bowtie [bowties] expected a validate failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(16) bowtie [bowties] expected a validate failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -738,7 +738,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 12, 8, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) cube failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -757,7 +757,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) cube validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) cube validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -766,28 +766,28 @@ bool Test14()
         hr = Clean( indices.get(), 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, adj.get(), nullptr, dups );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Clean(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: Clean(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Clean( indices.get(), 12, UINT32_MAX, adj.get(), nullptr, dups );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Clean(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: Clean(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Clean( indices.get(), UINT32_MAX, 8, adj.get(), nullptr, dups );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: Clean(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: Clean(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Clean( indices.get(), 12, 2, adj.get(), nullptr, dups );
         if ( hr != E_FAIL )
         {
-            printe("\nERROR: Clean(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: Clean(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -813,7 +813,7 @@ bool Test14()
         hr = Clean( indices.get(), 12, 8, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) cube [asymmetric] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) cube [asymmetric] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -837,7 +837,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) cube [asymmetric] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) cube [asymmetric] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -880,7 +880,7 @@ bool Test14()
         hr = Clean( indices.get(), 12, 8, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) cube [unused] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) cube [unused] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -904,7 +904,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) cube [unused] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) cube [unused] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
 
@@ -923,7 +923,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 12, 24, adj.get(), nullptr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) fmcube failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -942,7 +942,7 @@ bool Test14()
             hr = Validate( indices.get(), 12, 24, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) fmcube validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) fmcube validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -960,7 +960,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 4, 4, adj.get(), nullptr, dups, false );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) tetra failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) tetra failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), g_tetraIndices32, sizeof(g_tetraIndices32) ) != 0 )
@@ -984,7 +984,7 @@ bool Test14()
             hr = Validate( indices.get(), 4, 4, adj.get(), VALIDATE_BACKFACING, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) tetra validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) tetra validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -992,7 +992,7 @@ bool Test14()
                 hr = Validate( indices.get(), 4, 4, adj.get(), VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(32) tetra validation (2) unexpected result (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(32) tetra validation (2) unexpected result (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -1026,7 +1026,7 @@ bool Test14()
         hr = Clean( indices.get(), 4, 4, adj.get(), nullptr, dups, true );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) tetra [bowties] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) tetra [bowties] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), s_cleanIndices, sizeof(s_cleanIndices) ) != 0 )
@@ -1055,7 +1055,7 @@ bool Test14()
             hr = Validate( indices.get(), 4, 4 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) tetra [bowties] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) tetra [bowties] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -1063,7 +1063,7 @@ bool Test14()
                 hr = Validate( indices.get(), 4, 4, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(32) tetra [bowties] expected a validate failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(32) tetra [bowties] expected a validate failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -1088,7 +1088,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 2, 3, adj.get(), nullptr, dups, false );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) bface failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) bface failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), g_backfaceIndices32, sizeof(g_backfaceIndices32) ) != 0 )
@@ -1112,7 +1112,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 3, adj.get(), VALIDATE_BACKFACING, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) bface validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) bface validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -1120,7 +1120,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 3, adj.get(), VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(32) bface validation (2) expected to fail (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(32) bface validation (2) expected to fail (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -1144,7 +1144,7 @@ bool Test14()
         hr = Clean( indices.get(), 2, 3, adj.get(), nullptr, dups, true );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) bface [bowties] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) bface [bowties] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), s_cleanIndices, sizeof(s_cleanIndices) ) != 0 )
@@ -1173,7 +1173,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 3 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) bface [bowties] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) bface [bowties] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -1181,7 +1181,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 3, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(32) bface [bowties] expected a validate failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(32) bface [bowties] expected a validate failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -1200,7 +1200,7 @@ bool Test14()
         HRESULT hr = Clean( indices.get(), 2, 5, adj.get(), nullptr, dups, false );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) bowtie failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) bowtie failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), g_bowtieIndices32, sizeof(g_bowtieIndices32) ) != 0 )
@@ -1224,7 +1224,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 5, adj.get(), VALIDATE_BACKFACING , &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) bowtie validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) bowtie validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -1232,7 +1232,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 5, adj.get(), VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(32) bowtie validation (2) expected failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(32) bowtie validation (2) expected failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -1262,7 +1262,7 @@ bool Test14()
         hr = Clean( indices.get(), 2, 5, adj.get(), nullptr, dups, true );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) bowtie [bowties] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) bowtie [bowties] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( indices.get(), s_cleanIndices, sizeof(s_cleanIndices) ) != 0 )
@@ -1291,7 +1291,7 @@ bool Test14()
             hr = Validate( indices.get(), 2, 5 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) bowtie [bowties] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) bowtie [bowties] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
             else
@@ -1299,7 +1299,7 @@ bool Test14()
                 hr = Validate( indices.get(), 2, 5, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
                 if ( hr != E_FAIL )
                 {
-                    printe("ERROR: Clean(32) bowtie [bowties] expected a validate failure (%08X)\n%S\n", hr, msgs.c_str() );
+                    printe("ERROR: Clean(32) bowtie [bowties] expected a validate failure (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                     success = false;
                 }
             }
@@ -1330,7 +1330,7 @@ bool Test21()
         HRESULT hr = Clean( indices.get(), 12, 8, adj.get(), attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) cube identity failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) cube identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1349,7 +1349,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube identity validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube identity validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1358,7 +1358,7 @@ bool Test21()
         hr = Clean( indices.get(), 12, 8, nullptr, attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) cube [null adj] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) cube [null adj] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1377,7 +1377,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube [null adj] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube [null adj] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1397,7 +1397,7 @@ bool Test21()
         HRESULT hr = Clean( indices.get(), 12, 8, adj.get(), attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) cube attr failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) cube attr failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( dups.size() != 16 )
@@ -1411,7 +1411,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube attr validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube attr validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1423,7 +1423,7 @@ bool Test21()
         hr = Clean( indices.get(), 12, 8, nullptr, attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) cube attr [null adj] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) cube attr [null adj] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( dups.size() != 16 )
@@ -1437,7 +1437,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8 + dups.size(), nullptr, VALIDATE_DEFAULT, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube attr [null adj] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube attr [null adj] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1457,7 +1457,7 @@ bool Test21()
         HRESULT hr = Clean( indices.get(), 12, 24, adj.get(), attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) fmcube attr failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) fmcube attr failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1471,7 +1471,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 24, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) fmcube attr validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) fmcube attr validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1483,7 +1483,7 @@ bool Test21()
         hr = Clean( indices.get(), 12, 24, nullptr, attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(16) fmcube attr [null adj] failed (%08X)\n", hr );
+            printe("ERROR: Clean(16) fmcube attr [null adj] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1497,7 +1497,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 24, nullptr, VALIDATE_DEFAULT, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) fmcube attr [null adj] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) fmcube attr [null adj] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1517,7 +1517,7 @@ bool Test21()
         HRESULT hr = Clean( indices.get(), 12, 8, adj.get(), attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) cube identity failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) cube identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1536,7 +1536,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) cube identity validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) cube identity validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1545,7 +1545,7 @@ bool Test21()
         hr = Clean( indices.get(), 12, 8, nullptr, attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) cube identity [null adj] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) cube identity [null adj] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1564,7 +1564,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) cube identity [null adj] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) cube identity [null adj] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1584,7 +1584,7 @@ bool Test21()
         HRESULT hr = Clean( indices.get(), 12, 8, adj.get(), attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) cube attr failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) cube attr failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( dups.size() != 16 )
@@ -1598,7 +1598,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8 + dups.size(), adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(16) cube attr validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(16) cube attr validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1610,7 +1610,7 @@ bool Test21()
         hr = Clean( indices.get(), 12, 8, nullptr, attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) cube attr [null adj] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) cube attr [null adj] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( dups.size() != 16 )
@@ -1624,7 +1624,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 8 + dups.size(), nullptr, VALIDATE_DEFAULT, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) cube attr [null adj] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) cube attr [null adj] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1644,7 +1644,7 @@ bool Test21()
         HRESULT hr = Clean( indices.get(), 12, 24, adj.get(), attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) fmcube attr failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) fmcube attr failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1658,7 +1658,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 24, adj.get(), VALIDATE_BACKFACING | VALIDATE_BOWTIES, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) fmcube attr validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) fmcube attr validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }
@@ -1670,7 +1670,7 @@ bool Test21()
         hr = Clean( indices.get(), 12, 24, nullptr, attr, dups );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Clean(32) fmcube attr [null adj] failed (%08X)\n", hr );
+            printe("ERROR: Clean(32) fmcube attr [null adj] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !dups.empty() )
@@ -1684,7 +1684,7 @@ bool Test21()
             hr = Validate( indices.get(), 12, 24, nullptr, VALIDATE_DEFAULT, &msgs );
             if ( FAILED(hr) )
             {
-                printe("ERROR: Clean(32) fmcube attr [null adj] validation failed (%08X)\n%S\n", hr, msgs.c_str() );
+                printe("ERROR: Clean(32) fmcube attr [null adj] validation failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
         }

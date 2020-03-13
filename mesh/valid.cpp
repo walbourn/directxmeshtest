@@ -342,7 +342,7 @@ bool Test06()
         HRESULT hr = Validate( ib.get(), 341, 1023, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) identity failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) identity failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -351,7 +351,7 @@ bool Test06()
         hr = Validate( ib.get(), 341, 1023, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) reverse failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) reverse failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -359,28 +359,28 @@ bool Test06()
         hr = Validate( g_cubeIndices16, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) cube failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) cube failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_boxIndices16, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) box failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) box failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_fmCubeIndices16, 12, 24, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) fmcube failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) fmcube failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices16, 4, 4, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) tetra failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) tetra failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -388,7 +388,7 @@ bool Test06()
         hr = Validate( g_fmCubeIndices16, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) fmcube [wrong vert] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) fmcube [wrong vert] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -396,21 +396,21 @@ bool Test06()
         hr = Validate( g_degenCubeIndices16, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) degencube failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) degencube failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_cubeIndices16, 12, 8, nullptr, VALIDATE_DEGENERATE, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) cube [degen] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) cube [degen] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_degenCubeIndices16, 12, 8, nullptr, VALIDATE_DEGENERATE, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) degencube [degen] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) degencube [degen] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -418,56 +418,56 @@ bool Test06()
         hr = Validate( s_unusedIndices16, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [ignore unused] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [ignore unused] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16_2, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [ignore unused 2] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [ignore unused 2] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate(s_unusedIndices16_3, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(16) [ignore unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(16) [ignore unused 3] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
         hr = Validate(s_unusedIndices16_4, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(16) [ignore unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(16) [ignore unused 4] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
         hr = Validate( s_unusedIndices16, 12, 8, nullptr, VALIDATE_UNUSED, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) [unused] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [unused] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16_2, 12, 8, nullptr, VALIDATE_UNUSED, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [unused 2] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [unused 2] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate(s_unusedIndices16_3, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(16) [unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(16) [unused 3] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
         hr = Validate(s_unusedIndices16_4, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(16) [unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(16) [unused 4] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
@@ -475,7 +475,7 @@ bool Test06()
         hr = Validate( s_badIndices16, 1, 20, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) [bad indices] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [bad indices] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -485,21 +485,21 @@ bool Test06()
         hr = Validate( g_cubeIndices16, 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Validate(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: Validate(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Validate( g_cubeIndices16, 12, UINT32_MAX, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Validate(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: Validate(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Validate( g_cubeIndices16, UINT32_MAX, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: Validate(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: Validate(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -513,7 +513,7 @@ bool Test06()
         HRESULT hr = Validate( ib.get(), 341, 1023, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) identity failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) identity failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -522,7 +522,7 @@ bool Test06()
         hr = Validate( ib.get(), 341, 1023, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) reverse failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) reverse failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -530,28 +530,28 @@ bool Test06()
         hr = Validate( g_cubeIndices32, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) cube failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) cube failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_boxIndices32, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) box failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) box failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_fmCubeIndices32, 12, 24, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) fmcube failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) fmcube failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices32, 4, 4, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) tetra failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) tetra failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -559,7 +559,7 @@ bool Test06()
         hr = Validate( g_fmCubeIndices32, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) fmcube [wrong vert] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) fmcube [wrong vert] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -567,21 +567,21 @@ bool Test06()
         hr = Validate( g_degenCubeIndices32, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) degencube failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) degencube failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_cubeIndices32, 12, 8, nullptr, VALIDATE_DEGENERATE, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) cube [degen] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) cube [degen] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_degenCubeIndices32, 12, 8, nullptr, VALIDATE_DEGENERATE, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) degencube [degen] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) degencube [degen] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -589,56 +589,56 @@ bool Test06()
         hr = Validate( s_unusedIndices32, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [ignore unused] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [ignore unused] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32_2, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [ignore unused 2] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [ignore unused 2] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate(s_unusedIndices32_3, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(32) [ignore unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(32) [ignore unused 3] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
         hr = Validate(s_unusedIndices32_4, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(32) [ignore unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(32) [ignore unused 4] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
         hr = Validate( s_unusedIndices32, 12, 8, nullptr, VALIDATE_UNUSED, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) [unused] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [unused] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32_2, 12, 8, nullptr, VALIDATE_UNUSED, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [unused 2] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [unused 2] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate(s_unusedIndices32_3, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(32) [unused 3] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(32) [unused 3] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
         hr = Validate(s_unusedIndices32_4, 12, 8, nullptr, VALIDATE_UNUSED, &msgs);
         if (FAILED(hr))
         {
-            printe("ERROR: Validate(32) [unused 4] failed (%08X)\n%S\n", hr, msgs.c_str());
+            printe("ERROR: Validate(32) [unused 4] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
@@ -646,7 +646,7 @@ bool Test06()
         hr = Validate( s_badIndices32, 1, 20, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) [bad indices] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [bad indices] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -656,21 +656,21 @@ bool Test06()
         hr = Validate( g_cubeIndices32, 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Validate(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: Validate(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Validate( g_cubeIndices32, 12, UINT32_MAX, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: Validate(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: Validate(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = Validate( g_cubeIndices32, UINT32_MAX, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: Validate(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: Validate(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -694,42 +694,42 @@ bool Test09()
         HRESULT hr = Validate( g_cubeIndices16, 12, 8, s_cubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) cube adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) cube adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_boxIndices16, 12, 8, s_cubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) box adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) box adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_fmCubeIndices16, 12, 24, s_fmCubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) fmcube adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) fmcube adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices16, 4, 4, s_tetraAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) tetra adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) tetra adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_bowtieIndices16, 2, 5, s_bowtieAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) bowtie adj [default] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) bowtie adj [default] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_backfaceIndices16, 2, 3, s_backfaceAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) backface adj [default] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) backface adj [default] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -737,7 +737,7 @@ bool Test09()
         hr = Validate( g_fmCubeIndices16, 12, 8, s_fmCubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) fmcube adj [wrong vert] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) fmcube adj [wrong vert] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -745,7 +745,7 @@ bool Test09()
         hr = Validate( g_fmCubeIndices16, 4, 24, s_fmCubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) fmcube adj [wrong face] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) fmcube adj [wrong face] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -753,28 +753,28 @@ bool Test09()
         hr = Validate( g_cubeIndices16, 12, 8, s_cubeAdj, VALIDATE_BACKFACING, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) cube adj [bface] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) cube adj [bface] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices16, 4, 4, s_tetraAdj, VALIDATE_BACKFACING, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) tetra adj [bface] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) tetra adj [bface] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_backfaceIndices16, 2, 3, s_backfaceAdj, VALIDATE_BACKFACING, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) backface adj [bface] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) backface adj [bface] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_bowtieIndices16, 2, 5, s_bowtieAdj, VALIDATE_BACKFACING, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) bowtie adj [bface] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) bowtie adj [bface] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -782,21 +782,21 @@ bool Test09()
         hr = Validate( g_cubeIndices16, 12, 8, s_cubeAdj, VALIDATE_BOWTIES, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) cube adj [bowties] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) cube adj [bowties] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices16, 4, 4, s_tetraAdj, VALIDATE_BOWTIES, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) tetra adj [bowties] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) tetra adj [bowties] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_bowtieIndices16, 2, 5, s_bowtieAdj, VALIDATE_BOWTIES, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) bowtie adj [bowties] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) bowtie adj [bowties] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -804,49 +804,49 @@ bool Test09()
         hr = Validate( s_unusedIndices16, 12, 8, s_unusedAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [ignore unused] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [ignore unused] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16_2, 12, 8, s_unusedAdj_2, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [ignore unused 2] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [ignore unused 2] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16_2, 12, 8, s_unusedAdj_3, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [ignore unused 3] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [ignore unused 3] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16, 12, 8, s_unusedAdj, VALIDATE_UNUSED, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) [unused] adj didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [unused] adj didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16_2, 12, 8, s_unusedAdj_2, VALIDATE_UNUSED, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [unused 2B] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [unused 2B] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16_2, 12, 8, s_unusedAdj_3, VALIDATE_UNUSED, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [unused 3] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [unused 3] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices16_2, 12, 8, s_unusedAdj_2, VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) [unused 2C] adj didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [unused 2C] adj didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -854,21 +854,21 @@ bool Test09()
         hr = Validate( g_cubeIndices16, 12, 8, s_badNeighborAdj1, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) [bad neighbhor] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [bad neighbhor] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_cubeIndices16, 12, 8, s_badNeighborAdj2, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(16) [bad neighbhor 2] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [bad neighbhor 2] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_cubeIndices16, 12, 8, s_badNeighborAdj2, VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(16) [asymmetric neighbhor] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(16) [asymmetric neighbhor] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
     }
@@ -881,42 +881,42 @@ bool Test09()
         HRESULT hr = Validate( g_cubeIndices32, 12, 8, s_cubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) cube adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) cube adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_boxIndices32, 12, 8, s_cubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) box adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) box adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_fmCubeIndices32, 12, 24, s_fmCubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) fmcube adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) fmcube adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices32, 4, 4, s_tetraAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) tetra adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) tetra adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_bowtieIndices32, 2, 5, s_bowtieAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) bowtie adj [default] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) bowtie adj [default] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_backfaceIndices32, 2, 3, s_backfaceAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) backface adj [default] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) backface adj [default] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -924,7 +924,7 @@ bool Test09()
         hr = Validate( g_fmCubeIndices32, 12, 8, s_fmCubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) fmcube adj [wrong vert] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) fmcube adj [wrong vert] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -932,7 +932,7 @@ bool Test09()
         hr = Validate( g_fmCubeIndices32, 4, 24, s_fmCubeAdj, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) fmcube adj [wrong face] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) fmcube adj [wrong face] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -940,28 +940,28 @@ bool Test09()
         hr = Validate( g_cubeIndices32, 12, 8, s_cubeAdj, VALIDATE_BACKFACING, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) cube adj [bface] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) cube adj [bface] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices32, 4, 4, s_tetraAdj, VALIDATE_BACKFACING, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) tetra adj [bface] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) tetra adj [bface] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_backfaceIndices32, 2, 3, s_backfaceAdj, VALIDATE_BACKFACING, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) backface adj [bface] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) backface adj [bface] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_bowtieIndices32, 2, 5, s_bowtieAdj, VALIDATE_BACKFACING, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) bowtie adj [bface] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) bowtie adj [bface] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -969,21 +969,21 @@ bool Test09()
         hr = Validate( g_cubeIndices32, 12, 8, s_cubeAdj, VALIDATE_BOWTIES, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) cube adj [bowties] failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) cube adj [bowties] failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_tetraIndices32, 4, 4, s_tetraAdj, VALIDATE_BOWTIES, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) tetra adj [bowties] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) tetra adj [bowties] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_bowtieIndices32, 2, 5, s_bowtieAdj, VALIDATE_BOWTIES, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) bowtie adj [bowties] didn't fail as expected(%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) bowtie adj [bowties] didn't fail as expected(%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -991,49 +991,49 @@ bool Test09()
         hr = Validate( s_unusedIndices32, 12, 8, s_unusedAdj, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [ignore unused] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [ignore unused] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32_2, 12, 8, s_unusedAdj_2, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [ignore unused 2] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [ignore unused 2] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32_2, 12, 8, s_unusedAdj_3, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [ignore unused 3] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [ignore unused 3] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32, 12, 8, s_unusedAdj, VALIDATE_UNUSED, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) [unused] adj didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [unused] adj didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32_2, 12, 8, s_unusedAdj_2, VALIDATE_UNUSED, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [unused 2B] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [unused 2B] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32_2, 12, 8, s_unusedAdj_3, VALIDATE_UNUSED, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [unused 3] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [unused 3] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( s_unusedIndices32_2, 12, 8, s_unusedAdj_2, VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) [unused 2C] adj didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [unused 2C] adj didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
@@ -1041,21 +1041,21 @@ bool Test09()
         hr = Validate( g_cubeIndices32, 12, 8, s_badNeighborAdj1, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) [bad neighbhor] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [bad neighbhor] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_cubeIndices32, 12, 8, s_badNeighborAdj2, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
         {
-            printe("ERROR: Validate(32) [bad neighbhor 2] adj failed (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [bad neighbhor 2] adj failed (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
 
         hr = Validate( g_cubeIndices32, 12, 8, s_badNeighborAdj2, VALIDATE_ASYMMETRIC_ADJ, &msgs );
         if ( hr != E_FAIL )
         {
-            printe("ERROR: Validate(32) [asymmetric neighbhor] didn't fail as expected (%08X)\n%S\n", hr, msgs.c_str() );
+            printe("ERROR: Validate(32) [asymmetric neighbhor] didn't fail as expected (%08X)\n%S\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
     }

@@ -151,7 +151,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", hr, szPath );
+            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -169,7 +169,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -193,7 +193,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps [preps] (%08X)\n:%S", hr, szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps [preps] (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
         else if ( !IsValidPointReps( preps.get(), nVerts ) )
@@ -211,7 +211,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", hr, szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -219,7 +219,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -230,7 +230,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed ComputeNormals (%08X):\n%S\n", hr, szPath );
+            printe( "\nERROR: Failed ComputeNormals (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
         else
@@ -299,7 +299,7 @@ bool Test01()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "\nERROR: Failed ComputeTangentFrame (%08X):\n%S\n", hr, szPath );
+                printe( "\nERROR: Failed ComputeTangentFrame (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
                 continue;
             }
             else
@@ -467,7 +467,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", hr, szPath );
+            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -485,7 +485,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -500,7 +500,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", hr, szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -508,7 +508,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate [adjacency] (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate [adjacency] (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -524,7 +524,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: Clean [bowties] failed (%08X)\n:%S", hr, szPath );
+            printe("\nERROR: Clean [bowties] failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -541,7 +541,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate cleaned [bowties] mesh (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate cleaned [bowties] mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -560,7 +560,7 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe("\nERROR: Clean [attributes] failed (%08X)\n:%S", hr, szPath );
+                printe("\nERROR: Clean [attributes] failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
                 continue;
             }
 
@@ -577,7 +577,7 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
                 continue;
             }
 
@@ -593,7 +593,7 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe("\nERROR: Clean [full] failed (%08X)\n:%S", hr, szPath );
+                printe("\nERROR: Clean [full] failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
                 continue;
             }
 
@@ -611,7 +611,7 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
                 continue;
             }
         }
@@ -671,7 +671,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", hr, szPath );
+            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -689,7 +689,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -704,7 +704,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", hr, szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -712,7 +712,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -750,7 +750,7 @@ bool Test03()
             {
                 pass = false;
                 success = false;
-                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 continue;
             }
             else if ( !IsValidFaceRemap( mesh->indices.data(), faceRemap.get(), nFaces ) )
@@ -768,7 +768,7 @@ bool Test03()
                 {
                     pass = false;
                     success = false;
-                    printe("\nERROR: ReorderIB %u vcache, %u restart failed (%08X)\n", s_vcache[ vindex ], s_restart[ vindex ], hr );
+                    printe("\nERROR: ReorderIB %u vcache, %u restart failed (%08X)\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr) );
                     continue;
                 }
                 else
@@ -861,7 +861,7 @@ bool Test03()
                 {
                     pass = false;
                     success = false;
-                    printe("\nERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                    printe("\nERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 }
                 else if ( !IsValidVertexRemap( newIndices.get(), nFaces, vertRemap.get(), nVerts ) )
                 {
@@ -876,7 +876,7 @@ bool Test03()
                     {
                         pass = false;
                         success = false;
-                        printe("\nERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                        printe("\nERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nVerts ] );
@@ -886,7 +886,7 @@ bool Test03()
                     {
                         pass = false;
                         success = false;
-                        printe("\nERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                        printe("\nERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     if (SUCCEEDED(hr))
@@ -963,7 +963,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed loading mesh data (%08X):\n%S\n", hr, szPath );
+            printe( "ERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -981,7 +981,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -996,7 +996,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: failed to generate required adj (%08X)\n:%S", hr, szPath );
+            printe("ERROR: failed to generate required adj (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1004,7 +1004,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -1021,7 +1021,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: Clean failed (%08X)\n:%S", hr, szPath );
+            printe("ERROR: Clean failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1043,7 +1043,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate cleaned mesh (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate cleaned mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -1054,7 +1054,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: AttributeSort failed (%08X)\n:%S", hr, szPath );
+            printe("ERROR: AttributeSort failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
             continue;
         }
         else if ( !IsValidFaceRemap( sortedIndices.get(), faceRemap.get(), nFaces ) )
@@ -1068,7 +1068,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: AttributeSort application failed (%08X)\n", hr );
+            printe("ERROR: AttributeSort application failed (%08X)\n", static_cast<unsigned int>(hr) );
             continue;
         }
 
@@ -1076,7 +1076,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate attribute sorted mesh (%08X):\n%S\n%S\n", hr, szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate attribute sorted mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -1123,7 +1123,7 @@ bool Test04()
             {
                 pass = false;
                 success = false;
-                printe("ERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                printe("ERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 continue;
             }
             else if ( !IsValidFaceRemap( sortedIndices.get(), faceRemap.get(), nFaces ) )
@@ -1142,7 +1142,7 @@ bool Test04()
                 {
                     pass = false;
                     success = false;
-                    printe("ERROR: ReorderIB %u vcache, %u restart failed (%08X)\n", s_vcache[ vindex ], s_restart[ vindex ], hr );
+                    printe("ERROR: ReorderIB %u vcache, %u restart failed (%08X)\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr) );
                     continue;
                 }
                 else
@@ -1235,7 +1235,7 @@ bool Test04()
                 {
                     pass = false;
                     success = false;
-                    printe("ERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                    printe("ERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 }
                 else if ( !IsValidVertexRemap( newIndices.get(), nFaces, vertRemap.get(), nTotalVerts ) )
                 {
@@ -1250,7 +1250,7 @@ bool Test04()
                     {
                         pass = false;
                         success = false;
-                        printe("ERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                        printe("ERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nTotalVerts ] );
@@ -1261,7 +1261,7 @@ bool Test04()
                     {
                         pass = false;
                         success = false;
-                        printe("ERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], hr, szPath );
+                        printe("ERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     if (SUCCEEDED(hr))

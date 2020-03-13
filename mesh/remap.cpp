@@ -39,7 +39,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap, 1024, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) identity failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( destib.get(), 1023, IB_IDENTITY ) )
@@ -63,7 +63,7 @@ bool Test03()
         hr = FinalizeIB( srcib.get(), 341, remap, 1024 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) identity [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) identity [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( srcib.get(), 1023, IB_IDENTITY ) )
@@ -98,7 +98,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap, 1024, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) reverse failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) reverse failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -119,7 +119,7 @@ bool Test03()
         hr = FinalizeIB( srcib.get(), 341, remap, 1024 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) reverse [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) reverse [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -159,7 +159,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) shuffle failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) shuffle failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -180,7 +180,7 @@ bool Test03()
         hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) shuffle [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) shuffle [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -230,7 +230,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( g_fmCubeIndices16, 12, s_remap, 24, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) fmcube failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -248,7 +248,7 @@ bool Test03()
         hr = FinalizeIB( destib.get(), 12, s_remap, 24 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) fmcube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) fmcube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -274,28 +274,28 @@ bool Test03()
         hr = FinalizeIB( g_fmCubeIndices16, 12, s_remap, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, destib.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( g_fmCubeIndices16, 12, s_remap, UINT32_MAX, destib.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( g_fmCubeIndices16, UINT32_MAX, s_remap, 24, destib.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: FinalizeIB(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( g_fmCubeIndices16, 12, s_remap, 2, destib.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: FinalizeIB(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -311,28 +311,28 @@ bool Test03()
         hr = FinalizeIB( destib.get(), 12, s_remap, D3D11_16BIT_INDEX_STRIP_CUT_VALUE );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( destib.get(), 12, s_remap, UINT32_MAX );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( destib.get(), UINT32_MAX, s_remap, 24 );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( destib.get(), 12, s_remap, 2 );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(16) [in-place] expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -351,7 +351,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap, 1024, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) identity failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( destib.get(), 1023, IB_IDENTITY ) )
@@ -375,7 +375,7 @@ bool Test03()
         hr = FinalizeIB( srcib.get(), 341, remap, 1024 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) identity [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) identity [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( srcib.get(), 1023, IB_IDENTITY ) )
@@ -416,7 +416,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap, 1024, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) reverse failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) reverse failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -437,7 +437,7 @@ bool Test03()
         hr = FinalizeIB( srcib.get(), 341, remap, 1024 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) reverse [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) reverse [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -477,7 +477,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) shuffle failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) shuffle failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -498,7 +498,7 @@ bool Test03()
         hr = FinalizeIB( srcib.get(), 341, remap.data(), 1024 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) shuffle [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) shuffle [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -548,7 +548,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( g_fmCubeIndices32, 12, s_remap, 24, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) fmcube failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -566,7 +566,7 @@ bool Test03()
         hr = FinalizeIB( destib.get(), 12, s_remap, 24 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) fmcube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) fmcube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -592,28 +592,28 @@ bool Test03()
         hr = FinalizeIB( g_fmCubeIndices32, 12, s_remap, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, destib.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( g_fmCubeIndices32, 12, s_remap, UINT32_MAX, destib.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( g_fmCubeIndices32, UINT32_MAX, s_remap, 24, destib.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: FinalizeIB(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( g_fmCubeIndices32, 12, s_remap, 2, destib.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: FinalizeIB(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -629,28 +629,28 @@ bool Test03()
         hr = FinalizeIB( destib.get(), 12, s_remap, D3D11_32BIT_INDEX_STRIP_CUT_VALUE );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( destib.get(), 12, s_remap, UINT32_MAX );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( destib.get(), UINT32_MAX, s_remap, 24 );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeIB( destib.get(), 12, s_remap, 2 );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: FinalizeIB(32) [in-place] expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -719,7 +719,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( s_unused, 12, s_remap, 24, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) unused failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -737,7 +737,7 @@ bool Test03()
         hr = FinalizeIB( destib.get(), 12, s_remap, 24 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(16) unused [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(16) unused [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -814,7 +814,7 @@ bool Test03()
         HRESULT hr = FinalizeIB( s_unused, 12, s_remap, 24, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) unused failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -832,7 +832,7 @@ bool Test03()
         hr = FinalizeIB( destib.get(), 12, s_remap, 24 );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeIB(32) unused [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeIB(32) unused [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -873,7 +873,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) identity failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect32( destvb.get(), 65535, VB_IDENTITY ) )
@@ -899,7 +899,7 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), 32, 65535, remap.data() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) identity [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) identity [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect32( srcvb.get(), 65535, VB_IDENTITY ) )
@@ -937,7 +937,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) reverse failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) reverse failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect32( destvb.get(), 65535, VB_REVERSE ) )
@@ -949,7 +949,7 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), 32, 65535, remap.data() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) reverse [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) reverse [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect32( srcvb.get(), 65535, VB_REVERSE ) )
@@ -982,7 +982,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) shuffle failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) shuffle failed (%08X)\n", static_cast<unsigned int>(hr) );
             printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
@@ -1004,7 +1004,7 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), 32, 65535, remap.data() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) shuffle [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) shuffle [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
@@ -1038,7 +1038,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(16) identity failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(16) identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect16( destvb.get(), 65535, VB_IDENTITY ) )
@@ -1064,7 +1064,7 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), 16, 65535, remap.data() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(16) identity [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(16) identity [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect16( srcvb.get(), 65535, VB_IDENTITY ) )
@@ -1102,7 +1102,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(16) reverse failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(16) reverse failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect16( destvb.get(), 65535, VB_REVERSE ) )
@@ -1114,7 +1114,7 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), 16, 65535, remap.data() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(16) reverse [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(16) reverse [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestVBCorrect16( srcvb.get(), 65535, VB_REVERSE ) )
@@ -1147,7 +1147,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), 16, 65535, nullptr, 0, remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(16) shuffle failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(16) shuffle failed (%08X)\n", static_cast<unsigned int>(hr) );
             printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
@@ -1169,7 +1169,7 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), 16, 65535, remap.data() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(16) shuffle [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(16) shuffle [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             printe("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[65532], remap[65533], remap[65534] );
             success = false;
         }
@@ -1210,7 +1210,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, nullptr, 0, s_remap, destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB fmcube failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_remap, sizeof(s_remap) ) != 0 )
@@ -1230,7 +1230,7 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, s_remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB fmcube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB fmcube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( srcvb.get(), s_remap, sizeof(s_remap) ) != 0 )
@@ -1256,21 +1256,21 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), UINT32_MAX, 24, nullptr, 0, s_remap, destvb.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVB expected failure for bad stride value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVB expected failure for bad stride value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, nullptr, 0, s_remap, destvb.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVB expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVB expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), UINT32_MAX, nullptr, 0, s_remap, destvb.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVB expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeVB expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -1287,21 +1287,21 @@ bool Test04()
         hr = FinalizeVB( srcvb.get(), UINT32_MAX, 24, s_remap );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVB [in-place] expected failure for bad stride value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVB [in-place] expected failure for bad stride value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_remap );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVB [in-place] expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVB [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), UINT32_MAX, s_remap );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVB [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeVB [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1335,7 +1335,7 @@ bool Test04()
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, nullptr, 0, s_remap, destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(4) unused failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(4) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -1381,7 +1381,7 @@ bool Test05()
         HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) dups identity [remap] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) dups identity [remap] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -1415,7 +1415,7 @@ bool Test05()
         hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), nullptr, destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) dups identity failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) dups identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -1464,7 +1464,7 @@ bool Test05()
         HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) dups reverse [remap] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) dups reverse [remap] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -1523,7 +1523,7 @@ bool Test05()
         HRESULT hr = FinalizeVB( srcvb.get(), 32, 65535, dups.data(), dups.size(), remap.data(), destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(32) dups shuffle [remap] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(32) dups shuffle [remap] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -1589,7 +1589,7 @@ bool Test05()
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, dups.data(), dups.size(), s_remap, destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(4) dups fmcube failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(4) dups fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -1638,7 +1638,7 @@ bool Test05()
         HRESULT hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, dups.data(), dups.size(), s_remap, destvb.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVB(4) dups unused failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVB(4) dups unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -1678,7 +1678,7 @@ bool Test18()
         HRESULT hr = ReorderIB( srcib.get(), 341, remap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) identity failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( destib.get(), 1023, IB_IDENTITY ) )
@@ -1706,7 +1706,7 @@ bool Test18()
         hr = ReorderIB( srcib.get(), 341, remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) identity [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) identity [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( srcib.get(), 1023, IB_IDENTITY ) )
@@ -1745,7 +1745,7 @@ bool Test18()
         HRESULT hr = ReorderIB( srcib.get(), 341, remap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) reverse failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) reverse failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( destib.get(), 1023, IB_REVERSE ) )
@@ -1757,7 +1757,7 @@ bool Test18()
         hr = ReorderIB( srcib.get(), 341, remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) reverse [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) reverse [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( srcib.get(), 1023, IB_REVERSE ) )
@@ -1783,7 +1783,7 @@ bool Test18()
         HRESULT hr = ReorderIB( srcib.get(), 341, remap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) shuffle failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) shuffle failed (%08X)\n", static_cast<unsigned int>(hr) );
             print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
@@ -1815,7 +1815,7 @@ bool Test18()
         hr = ReorderIB( srcib.get(), 341, remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) shuffle [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) shuffle [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
@@ -1873,7 +1873,7 @@ bool Test18()
         HRESULT hr = ReorderIB( g_cubeIndices16, 12, s_faceRemap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) cube failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -1892,7 +1892,7 @@ bool Test18()
         hr = ReorderIB( destib.get(), 12, s_faceRemap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) cube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) cube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -1918,7 +1918,7 @@ bool Test18()
         hr = ReorderIB( g_cubeIndices16, UINT32_MAX, s_faceRemap, destib.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIB(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIB(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -1934,7 +1934,7 @@ bool Test18()
         hr = ReorderIB( destib.get(), UINT32_MAX, s_faceRemap );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIB(16) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIB(16) [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1953,7 +1953,7 @@ bool Test18()
         HRESULT hr = ReorderIB( srcib.get(), 341, remap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) identity failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( destib.get(), 1023, IB_IDENTITY ) )
@@ -1981,7 +1981,7 @@ bool Test18()
         hr = ReorderIB( srcib.get(), 341, remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) identity [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) identity [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( srcib.get(), 1023, IB_IDENTITY ) )
@@ -2020,7 +2020,7 @@ bool Test18()
         HRESULT hr = ReorderIB( srcib.get(), 341, remap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) reverse failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) reverse failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( destib.get(), 1023, IB_REVERSE ) )
@@ -2032,7 +2032,7 @@ bool Test18()
         hr = ReorderIB( srcib.get(), 341, remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) reverse [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) reverse [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsTestIBCorrect( srcib.get(), 1023, IB_REVERSE ) )
@@ -2058,7 +2058,7 @@ bool Test18()
         HRESULT hr = ReorderIB( srcib.get(), 341, remap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) shuffle failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) shuffle failed (%08X)\n", static_cast<unsigned int>(hr) );
             print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
@@ -2090,7 +2090,7 @@ bool Test18()
         hr = ReorderIB( srcib.get(), 341, remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) shuffle [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) shuffle [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             print("\t[%zu] %u %u %u .. %u %u %u\n", retry, remap[0], remap[1], remap[2], remap[338], remap[339], remap[340] );
             success = false;
         }
@@ -2148,7 +2148,7 @@ bool Test18()
         HRESULT hr = ReorderIB( g_cubeIndices32, 12, s_faceRemap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) cube failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2167,7 +2167,7 @@ bool Test18()
         hr = ReorderIB( destib.get(), 12, s_faceRemap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) cube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) cube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2193,7 +2193,7 @@ bool Test18()
         hr = ReorderIB( g_cubeIndices32, UINT32_MAX, s_faceRemap, destib.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIB(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIB(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -2209,7 +2209,7 @@ bool Test18()
         hr = ReorderIB( destib.get(), UINT32_MAX, s_faceRemap );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIB(32) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIB(32) [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -2243,7 +2243,7 @@ bool Test18()
         HRESULT hr = ReorderIB( g_cubeIndices16, 12, s_faceRemap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(16) unused faces failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(16) unused faces failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2301,7 +2301,7 @@ bool Test18()
         HRESULT hr = ReorderIB( g_cubeIndices32, 12, s_faceRemap, destib.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIB(32) unused faces failed (%08X)\n", hr );
+            printe("ERROR: ReorderIB(32) unused faces failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )

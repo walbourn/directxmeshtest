@@ -144,7 +144,7 @@ bool Test13()
                                           tangents.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) fmcube failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( tangents.get(), s_fmCubeTangents, 24 ) )
@@ -174,7 +174,7 @@ bool Test13()
                                   tangents4.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4/binormal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4/binormal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( bitangents.get(), s_fmCubeBiTangents, 24 ) )
@@ -220,7 +220,7 @@ bool Test13()
                                   tangents4.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) fmcube [tangents4] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -256,7 +256,7 @@ bool Test13()
                                   static_cast<XMFLOAT3*>(nullptr), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) fmcube [3/binormal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) fmcube [3/binormal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( bitangents.get(), s_fmCubeBiTangents, 24 ) )
@@ -277,7 +277,7 @@ bool Test13()
                                   static_cast<XMFLOAT4*>(nullptr), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) fmcube [4/binormal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) fmcube [4/binormal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( bitangents.get(), s_fmCubeBiTangents, 24 ) )
@@ -298,7 +298,7 @@ bool Test13()
                                   tangents.get(), nullptr );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) fmcube [tangent] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) fmcube [tangent] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( tangents.get(), s_fmCubeTangents, 24 ) )
@@ -320,7 +320,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -328,7 +328,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -336,7 +336,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ComputeTangentFrame(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -344,7 +344,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: ComputeTangentFrame(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -352,7 +352,7 @@ bool Test13()
                                   static_cast<XMFLOAT3*>(nullptr), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(16) [3] expected failure for both nullptr outputs (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(16) [3] expected failure for both nullptr outputs (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -360,7 +360,7 @@ bool Test13()
                                   static_cast<XMFLOAT4*>(nullptr), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(16) [4] expected failure for both nullptr outputs (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(16) [4] expected failure for both nullptr outputs (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -380,7 +380,7 @@ bool Test13()
                                           tangents.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(32) fmcube failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( tangents.get(), s_fmCubeTangents, 24 ) )
@@ -410,7 +410,7 @@ bool Test13()
                                   tangents4.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4/binormal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4/binormal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( bitangents.get(), s_fmCubeBiTangents, 24 ) )
@@ -456,7 +456,7 @@ bool Test13()
                                   tangents4.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(32) fmcube [tangents4] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -492,7 +492,7 @@ bool Test13()
                                   static_cast<XMFLOAT3*>(nullptr), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(32) fmcube [3/binormal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(32) fmcube [3/binormal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( bitangents.get(), s_fmCubeBiTangents, 24 ) )
@@ -513,7 +513,7 @@ bool Test13()
                                   static_cast<XMFLOAT4*>(nullptr), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(32) fmcube [4/binormal] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(32) fmcube [4/binormal] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( bitangents.get(), s_fmCubeBiTangents, 24 ) )
@@ -534,7 +534,7 @@ bool Test13()
                                   tangents.get(), nullptr );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(32) fmcube [tangent] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(32) fmcube [tangent] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !CompareArray( tangents.get(), s_fmCubeTangents, 24 ) )
@@ -556,7 +556,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -564,7 +564,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -572,7 +572,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ComputeTangentFrame(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -580,7 +580,7 @@ bool Test13()
                                   tangents.get(), bitangents.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: ComputeTangentFrame(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -588,7 +588,7 @@ bool Test13()
                                   static_cast<XMFLOAT3*>(nullptr), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(32) [3] expected failure for both nullptr outputs (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(32) [3] expected failure for both nullptr outputs (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -596,7 +596,7 @@ bool Test13()
                                   static_cast<XMFLOAT4*>(nullptr), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ComputeTangentFrame(32) [4] expected failure for both nullptr outputs (%08X)\n", hr );
+            printe("\nERROR: ComputeTangentFrame(32) [4] expected failure for both nullptr outputs (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -693,7 +693,7 @@ bool Test13()
             tangents.get(), bitangents.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeTangentFrame(16) unused failed (%08X)\n", hr);
+            printe("ERROR: ComputeTangentFrame(16) unused failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidCoVector(24, tangents.get()))
@@ -711,7 +711,7 @@ bool Test13()
             tangents.get(), bitangents.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeTangentFrame(16) unused 1st failed (%08X)\n", hr);
+            printe("ERROR: ComputeTangentFrame(16) unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidCoVector(24, tangents.get()))
@@ -729,7 +729,7 @@ bool Test13()
             tangents.get(), bitangents.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeTangentFrame(16) unused all failed (%08X)\n", hr);
+            printe("ERROR: ComputeTangentFrame(16) unused all failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidCoVector(24, tangents.get()))
@@ -834,7 +834,7 @@ bool Test13()
                                           tangents.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(32) unused failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(32) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if (!IsValidCoVector(24, tangents.get()))
@@ -852,7 +852,7 @@ bool Test13()
             tangents.get(), bitangents.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeTangentFrame(32) unused 1st failed (%08X)\n", hr);
+            printe("ERROR: ComputeTangentFrame(32) unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidCoVector(24, tangents.get()))
@@ -870,7 +870,7 @@ bool Test13()
             tangents.get(), bitangents.get());
         if (FAILED(hr))
         {
-            printe("ERROR: ComputeTangentFrame(32) unused all failed (%08X)\n", hr);
+            printe("ERROR: ComputeTangentFrame(32) unused all failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidCoVector(24, tangents.get()))
@@ -900,7 +900,7 @@ bool Test13()
                                           tangents.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) [degenerate zero UV] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) [degenerate zero UV] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -972,7 +972,7 @@ bool Test13()
                                           tangents.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) [degenerate zero U] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) [degenerate zero U] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -1044,7 +1044,7 @@ bool Test13()
                                           tangents.get(), bitangents.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ComputeTangentFrame(16) [degenerate zero V] failed (%08X)\n", hr );
+            printe("ERROR: ComputeTangentFrame(16) [degenerate zero V] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else

@@ -301,7 +301,7 @@ bool Test07()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 8 ) )
@@ -326,7 +326,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.0001f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 8 ) )
@@ -351,7 +351,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps(s_unused16_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -363,7 +363,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps(s_unused16_all, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -378,28 +378,28 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, UINT32_MAX, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, UINT32_MAX, g_cubeVerts, 8, 0.f, preps.get(), nullptr );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 2, 0.f, preps.get(), nullptr );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -413,7 +413,7 @@ bool Test07()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 24 ) )
@@ -438,7 +438,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 24 ) )
@@ -468,7 +468,7 @@ bool Test07()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 4 ) )
@@ -493,7 +493,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.0001f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 4 ) )
@@ -523,7 +523,7 @@ bool Test07()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 8 ) )
@@ -548,7 +548,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.0001f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 8 ) )
@@ -573,7 +573,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps(s_unused32_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -585,7 +585,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps(s_unused32_all, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -600,28 +600,28 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, UINT32_MAX, g_cubeVerts, 8, 0.f, preps.get(), nullptr );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 2, 0.f, preps.get(), nullptr );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -635,7 +635,7 @@ bool Test07()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 24 ) )
@@ -660,7 +660,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 24 ) )
@@ -690,7 +690,7 @@ bool Test07()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 4 ) )
@@ -715,7 +715,7 @@ bool Test07()
         hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.0001f, preps.get(), nullptr );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidPointReps( preps.get(), 4 ) )
@@ -758,7 +758,7 @@ bool Test08()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_cubePointReps, sizeof(s_cubePointReps) ) != 0 )
@@ -790,7 +790,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [nullpr exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_cubeAdj, sizeof(s_cubeAdj) ) != 0 )
@@ -810,7 +810,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps(s_unused16_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -831,7 +831,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps(s_unused16_all, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -853,7 +853,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.0001f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_cubePointReps, sizeof(s_cubePointReps) ) != 0 )
@@ -893,7 +893,7 @@ bool Test08()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_fmCubePointReps, sizeof(s_fmCubePointReps) ) != 0 )
@@ -925,7 +925,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [nullpr exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_fmCubeAdj, sizeof(s_fmCubeAdj) ) != 0 )
@@ -945,7 +945,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_fmCubePointRepsEps, sizeof(s_fmCubePointRepsEps) ) != 0 )
@@ -985,7 +985,7 @@ bool Test08()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_tetraPointReps, sizeof(s_tetraPointReps) ) != 0 )
@@ -1017,7 +1017,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [nullpr exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_tetraAdj, sizeof(s_tetraAdj) ) != 0 )
@@ -1037,7 +1037,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.0001f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_tetraPointReps, sizeof(s_tetraPointReps) ) != 0 )
@@ -1077,7 +1077,7 @@ bool Test08()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_cubePointReps, sizeof(s_cubePointReps) ) != 0 )
@@ -1109,7 +1109,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [nullpr exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_cubeAdj, sizeof(s_cubeAdj) ) != 0 )
@@ -1129,7 +1129,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps(s_unused32_1st, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -1150,7 +1150,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps(s_unused32_all, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
         if (FAILED(hr))
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] failed (%08X)\n", hr);
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidPointReps(preps.get(), 8))
@@ -1172,7 +1172,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.0001f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_cubePointReps, sizeof(s_cubePointReps) ) != 0 )
@@ -1212,7 +1212,7 @@ bool Test08()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_fmCubePointReps, sizeof(s_fmCubePointReps) ) != 0 )
@@ -1244,7 +1244,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [nullpr exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_fmCubeAdj, sizeof(s_fmCubeAdj) ) != 0 )
@@ -1264,7 +1264,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_fmCubePointRepsEps, sizeof(s_fmCubePointRepsEps) ) != 0 )
@@ -1304,7 +1304,7 @@ bool Test08()
         HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_tetraPointReps, sizeof(s_tetraPointReps) ) != 0 )
@@ -1336,7 +1336,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [nullpr exact] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_tetraAdj, sizeof(s_tetraAdj) ) != 0 )
@@ -1356,7 +1356,7 @@ bool Test08()
         hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.0001f, preps.get(), adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [epsilon] failed (%08X)\n", hr );
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( preps.get(), s_tetraPointReps, sizeof(s_tetraPointReps) ) != 0 )
@@ -1403,7 +1403,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( g_cubeIndices16, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) cube failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_cubeGSAdj16, sizeof(s_cubeGSAdj16) ) != 0 )
@@ -1425,28 +1425,28 @@ bool Test10()
         hr = GenerateGSAdjacency( g_cubeIndices16, 12, s_cubePointReps, s_cubeAdj, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateGSAdjacency( g_cubeIndices16, 12, s_cubePointReps, s_cubeAdj, UINT32_MAX, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateGSAdjacency( g_cubeIndices16, UINT32_MAX, s_cubePointReps, s_cubeAdj, 8, gsadj.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateGSAdjacency( g_cubeIndices16, 12, s_cubePointReps, s_cubeAdj, 2, gsadj.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1460,7 +1460,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( g_fmCubeIndices16, 12, s_fmCubePointReps, s_fmCubeAdj, 24, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) fmcube failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_fmCubeGSAdj16, sizeof(s_fmCubeGSAdj16) ) != 0 )
@@ -1485,7 +1485,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( g_tetraIndices16, 4, s_tetraPointReps, s_tetraAdj, 4, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) tetra failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) tetra failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_tetraGSAdj16, sizeof(s_tetraGSAdj16) ) != 0 )
@@ -1510,7 +1510,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( g_cubeIndices32, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) cube failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_cubeGSAdj32, sizeof(s_cubeGSAdj32) ) != 0 )
@@ -1532,28 +1532,28 @@ bool Test10()
         hr = GenerateGSAdjacency( g_cubeIndices32, 12, s_cubePointReps, s_cubeAdj, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateGSAdjacency( g_cubeIndices32, 12, s_cubePointReps, s_cubeAdj, UINT32_MAX, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateGSAdjacency( g_cubeIndices32, UINT32_MAX, s_cubePointReps, s_cubeAdj, 8, gsadj.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = GenerateGSAdjacency( g_cubeIndices32, 12, s_cubePointReps, s_cubeAdj, 2, gsadj.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1567,7 +1567,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( g_fmCubeIndices32, 12, s_fmCubePointReps, s_fmCubeAdj, 24, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) fmcube failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_fmCubeGSAdj32, sizeof(s_fmCubeGSAdj32) ) != 0 )
@@ -1592,7 +1592,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( g_tetraIndices32, 4, s_tetraPointReps, s_tetraAdj, 4, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) tetra failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) tetra failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_tetraGSAdj32, sizeof(s_tetraGSAdj32) ) != 0 )
@@ -1643,7 +1643,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( s_unused16, 12, s_unusedPR, s_unusedAdj, 8, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(16) unused failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(16) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_unusedGSAdj, sizeof(s_unusedGSAdj) ) != 0 )
@@ -1693,7 +1693,7 @@ bool Test10()
         HRESULT hr = GenerateGSAdjacency( s_unused32, 12, s_unusedPR, s_unusedAdj, 8, gsadj.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: GenerateGSAdjacency(32) unused failed (%08X)\n", hr );
+            printe("\nERROR: GenerateGSAdjacency(32) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( gsadj.get(), s_unusedGSAdj, sizeof(s_unusedGSAdj) ) != 0 )
@@ -1728,7 +1728,7 @@ bool Test12()
         HRESULT hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 8, s_cubePointReps, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(16) cube failed (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_cubeAdj, sizeof(s_cubeAdj) ) != 0 )
@@ -1748,7 +1748,7 @@ bool Test12()
         hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 8, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(16) cube [identity] failed (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) cube [identity] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_cubeAdj, sizeof(s_cubeAdj) ) != 0 )
@@ -1770,28 +1770,28 @@ bool Test12()
         hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, nullptr, adj.get() );   
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, UINT32_MAX, nullptr, adj.get() );   
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ConvertPointRepsToAdjacency( g_cubeIndices16, UINT32_MAX, g_cubeVerts, 8, nullptr, adj.get() );   
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 2, nullptr, adj.get() );   
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1805,7 +1805,7 @@ bool Test12()
         HRESULT hr = ConvertPointRepsToAdjacency( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, s_fmCubePointReps, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(16) fmcube failed (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_fmCubeAdj, sizeof(s_fmCubeAdj) ) != 0 )
@@ -1830,7 +1830,7 @@ bool Test12()
         HRESULT hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 8, s_cubePointReps, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(32) cube failed (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_cubeAdj, sizeof(s_cubeAdj) ) != 0 )
@@ -1850,7 +1850,7 @@ bool Test12()
         hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 8, nullptr, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(32) cube [identity] failed (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) cube [identity] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_cubeAdj, sizeof(s_cubeAdj) ) != 0 )
@@ -1872,28 +1872,28 @@ bool Test12()
         hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, nullptr, adj.get() );   
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX, nullptr, adj.get() );   
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ConvertPointRepsToAdjacency( g_cubeIndices32, UINT32_MAX, g_cubeVerts, 8, nullptr, adj.get() );   
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 2, nullptr, adj.get() );   
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1907,7 +1907,7 @@ bool Test12()
         HRESULT hr = ConvertPointRepsToAdjacency( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, s_fmCubePointReps, adj.get() );   
         if ( FAILED(hr) )
         {
-            printe("\nERROR: ConvertPointRepsToAdjacency(32) fmcube failed (%08X)\n", hr );
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( adj.get(), s_fmCubeAdj, sizeof(s_fmCubeAdj) ) != 0 )
@@ -1979,7 +1979,7 @@ bool Test23()
         HRESULT hr = ReorderIBAndAdjacency( g_cubeIndices16, 12, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIBAndAdjacency(16) cube failed (%08X)\n", hr );
+            printe("ERROR: ReorderIBAndAdjacency(16) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2008,7 +2008,7 @@ bool Test23()
         hr = ReorderIBAndAdjacency( destib.get(), 12, adj.get(), s_faceRemap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIBAndAdjacency(16) cube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIBAndAdjacency(16) cube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2043,7 +2043,7 @@ bool Test23()
         hr = ReorderIBAndAdjacency( g_cubeIndices16, UINT32_MAX, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIBAndAdjacency(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIBAndAdjacency(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -2060,7 +2060,7 @@ bool Test23()
         hr = ReorderIBAndAdjacency( destib.get(), UINT32_MAX, adj.get(), s_faceRemap );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIBAndAdjacency(16) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIBAndAdjacency(16) [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -2111,7 +2111,7 @@ bool Test23()
         HRESULT hr = ReorderIBAndAdjacency( g_cubeIndices32, 12, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIBAndAdjacency(32) cube failed (%08X)\n", hr );
+            printe("ERROR: ReorderIBAndAdjacency(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2140,7 +2140,7 @@ bool Test23()
         hr = ReorderIBAndAdjacency( destib.get(), 12, adj.get(), s_faceRemap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIBAndAdjacency(32) cube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: ReorderIBAndAdjacency(32) cube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2175,7 +2175,7 @@ bool Test23()
         hr = ReorderIBAndAdjacency( g_cubeIndices32, UINT32_MAX, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIBAndAdjacency(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIBAndAdjacency(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -2192,7 +2192,7 @@ bool Test23()
         hr = ReorderIBAndAdjacency( destib.get(), UINT32_MAX, adj.get(), s_faceRemap );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: ReorderIBAndAdjacency(32) [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: ReorderIBAndAdjacency(32) [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -2243,7 +2243,7 @@ bool Test23()
         HRESULT hr = ReorderIBAndAdjacency( g_cubeIndices16, 12, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIBAndAdjacency(16) unused faces failed (%08X)\n", hr );
+            printe("ERROR: ReorderIBAndAdjacency(16) unused faces failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2311,7 +2311,7 @@ bool Test23()
         HRESULT hr = ReorderIBAndAdjacency( g_cubeIndices32, 12, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: ReorderIBAndAdjacency(32) unused faces failed (%08X)\n", hr );
+            printe("ERROR: ReorderIBAndAdjacency(32) unused faces failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destib.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2365,7 +2365,7 @@ bool Test19()
                                              destvb.get(), preps.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: FinalizeVBAndPointReps cube identity failed (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps cube identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -2396,7 +2396,7 @@ bool Test19()
         hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, preps.get(), remap.data() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: FinalizeVBAndPointReps cube identity [in-place] failed (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps cube identity [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -2431,21 +2431,21 @@ bool Test19()
         hr = FinalizeVBAndPointReps( srcvb.get(), UINT32_MAX, 8, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVBAndPointReps expected failure for bad stride value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps expected failure for bad stride value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVBAndPointReps expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVBAndPointReps expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
@@ -2464,21 +2464,21 @@ bool Test19()
         hr = FinalizeVBAndPointReps( srcvb.get(), UINT32_MAX, 8, preps.get(), remap.data() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for bad stride value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for bad stride value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, preps.get(), remap.data() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX, preps.get(), remap.data() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -2515,7 +2515,7 @@ bool Test19()
         HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, nullptr, 0, s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVBAndPointReps fmcube failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVBAndPointReps fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_remap, sizeof(s_remap) ) != 0 )
@@ -2548,7 +2548,7 @@ bool Test19()
         hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, prout.get(), s_remap );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVBAndPointReps fmcube [in-place] failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVBAndPointReps fmcube [in-place] failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( srcvb.get(), s_remap, sizeof(s_remap) ) != 0 )
@@ -2607,7 +2607,7 @@ bool Test19()
         HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, nullptr, 0, s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVBAndPointReps unused failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVBAndPointReps unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2666,7 +2666,7 @@ bool Test20()
                                              destvb.get(), preps.get() );
         if ( FAILED(hr) )
         {
-            printe("\nERROR: FinalizeVBAndPointReps dups cube identity failed (%08X)\n", hr );
+            printe("\nERROR: FinalizeVBAndPointReps dups cube identity failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else
@@ -2752,7 +2752,7 @@ bool Test20()
         HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, dups.data(), dups.size(), s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVBAndPointReps dups fmcube failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVBAndPointReps dups fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )
@@ -2819,7 +2819,7 @@ bool Test20()
         HRESULT hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 24, s_fmCubePointReps, dups.data(), dups.size(), s_remap, destvb.get(), prout.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: FinalizeVBAndPointReps dups unused failed (%08X)\n", hr );
+            printe("ERROR: FinalizeVBAndPointReps dups unused failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( memcmp( destvb.get(), s_sorted, sizeof(s_sorted) ) != 0 )

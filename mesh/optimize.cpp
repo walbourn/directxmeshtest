@@ -67,7 +67,7 @@ bool Test15()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: Attribute sort failed (%08X)\n", hr );
+            printe("ERROR: Attribute sort failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( memcmp( attributes.data(), s_attributes, sizeof(s_attributes) ) != 0 )
         {
@@ -98,7 +98,7 @@ bool Test15()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: Attribute sort identity failed (%08X)\n", hr );
+            printe("ERROR: Attribute sort identity failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( memcmp( attributesId.data(), s_attributesId, sizeof(s_attributesId) ) != 0 )
         {
@@ -122,7 +122,7 @@ bool Test15()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: Attribute sort zero failed (%08X)\n", hr );
+            printe("ERROR: Attribute sort zero failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( memcmp( attributesZero.data(), s_attributesZero, sizeof(s_attributesZero) ) != 0 )
         {
@@ -145,7 +145,7 @@ bool Test15()
         hr = AttributeSort( UINT32_MAX, attributesZero.data(), remap.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: AttributeSort expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: AttributeSort expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -172,7 +172,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(16) fmcube failed (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( g_fmCubeIndices16, remap.get(), 12 ) )
         {
@@ -200,7 +200,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(16) fmcube failed [striporder] (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(16) fmcube failed [striporder] (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( g_fmCubeIndices16, remap.get(), 12 ) )
         {
@@ -225,7 +225,7 @@ bool Test16()
         hr = OptimizeFaces( g_fmCubeIndices16, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: OptimizeFaces(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: OptimizeFaces(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -242,7 +242,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(32) fmcube failed (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( g_fmCubeIndices32, remap.get(), 12 ) )
         {
@@ -270,7 +270,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(32) fmcube failed [striporder] (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(32) fmcube failed [striporder] (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( g_fmCubeIndices32, remap.get(), 12 ) )
         {
@@ -295,7 +295,7 @@ bool Test16()
         hr = OptimizeFaces( g_fmCubeIndices32, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: OptimizeFaces(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: OptimizeFaces(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -427,7 +427,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(16) unused failed (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(16) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( s_unusedIB, remap.get(), 12 ) )
         {
@@ -450,7 +450,7 @@ bool Test16()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFaces(16) unused 1st failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFaces(16) unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_1st, remap.get(), 12))
         {
@@ -466,7 +466,7 @@ bool Test16()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFaces(16) unused all failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFaces(16) unused all failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_all, remap.get(), 12))
         {
@@ -485,7 +485,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(16) unused [striporder] failed (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(16) unused [striporder] failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( s_unusedIB, remap.get(), 12 ) )
         {
@@ -629,7 +629,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(32) unused failed (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(32) unused failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( s_unusedIB, remap.get(), 12 ) )
         {
@@ -652,7 +652,7 @@ bool Test16()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFaces(32) unused 1st failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFaces(32) unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_1st, remap.get(), 12))
         {
@@ -668,7 +668,7 @@ bool Test16()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFaces(32) unused all failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFaces(32) unused all failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_all, remap.get(), 12))
         {
@@ -687,7 +687,7 @@ bool Test16()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: OptimizeFaces(32) unused [striporder] failed (%08X)\n", hr );
+            printe("ERROR: OptimizeFaces(32) unused [striporder] failed (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else if ( !IsValidFaceRemap( s_unusedIB, remap.get(), 12 ) )
         {
@@ -737,7 +737,7 @@ bool Test16()
         HRESULT hr = GenerateAdjacencyAndPointReps(indices.data(), nFaces, positions.get(), vertices.size(), 0.f, nullptr, adj.get());
         if (FAILED(hr))
         {
-            printe("\nERROR: OptimizeFaces(16) torus adjacency failed (%08X)\n", hr);
+            printe("\nERROR: OptimizeFaces(16) torus adjacency failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else
@@ -746,7 +746,7 @@ bool Test16()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFaces(16) torus failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFaces(16) torus failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
             {
@@ -763,7 +763,7 @@ bool Test16()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: OptimizeFaces(16) torus reorder failed (%08X)\n", hr);
+                    printe("ERROR: OptimizeFaces(16) torus reorder failed (%08X)\n", static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -783,7 +783,7 @@ bool Test16()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFaces(16) torus strip failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFaces(16) torus strip failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
             {
@@ -800,7 +800,7 @@ bool Test16()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: OptimizeFaces(16) torus strip reorder failed (%08X)\n", hr);
+                    printe("ERROR: OptimizeFaces(16) torus strip reorder failed (%08X)\n", static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -828,7 +828,7 @@ bool Test16()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFaces(16) torus intel failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFaces(16) torus intel failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
             {
@@ -845,7 +845,7 @@ bool Test16()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: OptimizeFaces(16) torus intel reorder failed (%08X)\n", hr);
+                    printe("ERROR: OptimizeFaces(16) torus intel reorder failed (%08X)\n", static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -903,7 +903,7 @@ bool Test16()
         HRESULT hr = GenerateAdjacencyAndPointReps(indices.data(), nFaces, positions.get(), vertices.size(), 0.f, nullptr, adj.get());
         if (FAILED(hr))
         {
-            printe("\nERROR: OptimizeFaces(32) torus adjacency failed (%08X)\n", hr);
+            printe("\nERROR: OptimizeFaces(32) torus adjacency failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else
@@ -912,7 +912,7 @@ bool Test16()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFaces(32) torus failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFaces(32) torus failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
             {
@@ -929,7 +929,7 @@ bool Test16()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: OptimizeFaces(32) torus reorder failed (%08X)\n", hr);
+                    printe("ERROR: OptimizeFaces(32) torus reorder failed (%08X)\n", static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -949,7 +949,7 @@ bool Test16()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFaces(32) torus strip failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFaces(32) torus strip failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
             {
@@ -966,7 +966,7 @@ bool Test16()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: OptimizeFaces(32) torus strip reorder failed (%08X)\n", hr);
+                    printe("ERROR: OptimizeFaces(32) torus strip reorder failed (%08X)\n", static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -994,7 +994,7 @@ bool Test16()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFaces(32) torus intel failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFaces(32) torus intel failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
             {
@@ -1011,7 +1011,7 @@ bool Test16()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: OptimizeFaces(32) torus intel reorder failed (%08X)\n", hr);
+                    printe("ERROR: OptimizeFaces(32) torus intel reorder failed (%08X)\n", static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -1056,7 +1056,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(16) fmcube failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(g_fmCubeIndices16, remap.get(), 12))
         {
@@ -1082,7 +1082,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(16) fmcube lru4 failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(16) fmcube lru4 failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(g_fmCubeIndices16, remap.get(), 12))
         {
@@ -1107,14 +1107,14 @@ bool Test25()
         hr = OptimizeFacesLRU(g_fmCubeIndices16, UINT32_MAX, remap.get());
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
-            printe("\nERROR: OptimizeFacesLRU(16) expected failure for 32-max value faces (%08X)\n", hr);
+            printe("\nERROR: OptimizeFacesLRU(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
         hr = OptimizeFacesLRU(g_fmCubeIndices16, 12, remap.get(), 128);
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFacesLRU(16) expected failure for too large a cache size (%08X)\n", hr);
+            printe("\nERROR: OptimizeFacesLRU(16) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 #pragma warning(pop)
@@ -1131,7 +1131,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(32) fmcube failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(g_fmCubeIndices32, remap.get(), 12))
         {
@@ -1157,7 +1157,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(32) fmcube lru4 failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(32) fmcube lru4 failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(g_fmCubeIndices32, remap.get(), 12))
         {
@@ -1182,14 +1182,14 @@ bool Test25()
         hr = OptimizeFacesLRU(g_fmCubeIndices32, UINT32_MAX, remap.get());
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
-            printe("\nERROR: OptimizeFacesLRU(32) expected failure for 32-max value faces (%08X)\n", hr);
+            printe("\nERROR: OptimizeFacesLRU(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
         hr = OptimizeFacesLRU(g_fmCubeIndices32, 12, remap.get(), 128);
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFacesLRU(32) expected failure for too large a cache size (%08X)\n", hr);
+            printe("\nERROR: OptimizeFacesLRU(32) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 #pragma warning(pop)
@@ -1273,7 +1273,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(16) unused failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(16) unused failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB, remap.get(), 12))
         {
@@ -1296,7 +1296,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(16) unused 1st failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(16) unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_1st, remap.get(), 12))
         {
@@ -1312,7 +1312,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(16) unused all failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(16) unused all failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_all, remap.get(), 12))
         {
@@ -1401,7 +1401,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(32) unused failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(32) unused failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB, remap.get(), 12))
         {
@@ -1424,7 +1424,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(32) unused 1st failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(32) unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_1st, remap.get(), 12))
         {
@@ -1440,7 +1440,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(32) unused all failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(32) unused all failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(s_unusedIB_all, remap.get(), 12))
         {
@@ -1472,7 +1472,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(16) torus failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(16) torus failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
         {
@@ -1489,7 +1489,7 @@ bool Test25()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFacesLRU(16) torus reorder failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFacesLRU(16) torus reorder failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1511,7 +1511,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(16) torus lru4 failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(16) torus lru4 failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
         {
@@ -1528,7 +1528,7 @@ bool Test25()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFacesLRU(16) torus lru4 reorder failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFacesLRU(16) torus lru4 reorder failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1573,7 +1573,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(32) torus failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(32) torus failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
         {
@@ -1590,7 +1590,7 @@ bool Test25()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFacesLRU(32) torus reorder failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFacesLRU(32) torus reorder failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1612,7 +1612,7 @@ bool Test25()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: OptimizeFacesLRU(32) torus lru4 failed (%08X)\n", hr);
+            printe("ERROR: OptimizeFacesLRU(32) torus lru4 failed (%08X)\n", static_cast<unsigned int>(hr));
         }
         else if (!IsValidFaceRemap(indices.data(), remap.get(), nFaces))
         {
@@ -1629,7 +1629,7 @@ bool Test25()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: OptimizeFacesLRU(32) torus lru4 reorder failed (%08X)\n", hr);
+                printe("ERROR: OptimizeFacesLRU(32) torus lru4 reorder failed (%08X)\n", static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1673,7 +1673,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices( g_cubeIndices16, 12, 8, remap.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(16) cube failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(16) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( g_cubeIndices16, 12, remap.get(), 8 ) )
@@ -1697,28 +1697,28 @@ bool Test17()
         hr = OptimizeVertices( g_cubeIndices16, 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, remap.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: OptimizeVertices(16) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = OptimizeVertices( g_cubeIndices16, 12, UINT32_MAX, remap.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: OptimizeVertices(16) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = OptimizeVertices( g_cubeIndices16, UINT32_MAX, 8, remap.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: OptimizeVertices(16) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = OptimizeVertices( g_cubeIndices16, 12, 2, remap.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: OptimizeVertices(16) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1739,7 +1739,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices( g_fmCubeIndices16, 12, 24, remap.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(16) fmcube failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( g_fmCubeIndices16, 12, remap.get(), 24 ) )
@@ -1768,7 +1768,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices( g_cubeIndices32, 12, 8, remap.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(32) cube failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( g_cubeIndices32, 12, remap.get(), 8 ) )
@@ -1792,28 +1792,28 @@ bool Test17()
         hr = OptimizeVertices( g_cubeIndices32, 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, remap.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: OptimizeVertices(32) expected failure for strip cut value (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = OptimizeVertices( g_cubeIndices32, 12, UINT32_MAX, remap.get() );
         if ( hr != E_INVALIDARG )
         {
-            printe("\nERROR: OptimizeVertices(32) expected failure for 32-max value verts (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = OptimizeVertices( g_cubeIndices32, UINT32_MAX, 8, remap.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
-            printe("\nERROR: OptimizeVertices(32) expected failure for 32-max value faces (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
         hr = OptimizeVertices( g_cubeIndices32, 12, 2, remap.get() );
         if ( hr != E_UNEXPECTED )
         {
-            printe("\nERROR: OptimizeVertices(32) expected failure for bad vert count (%08X)\n", hr );
+            printe("\nERROR: OptimizeVertices(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1834,7 +1834,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices( g_fmCubeIndices32, 12, 24, remap.get() );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(32) fmcube failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( g_fmCubeIndices32, 12, remap.get(), 24 ) )
@@ -1890,7 +1890,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices( s_unusedIB, 12, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(16) unused faces failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(16) unused faces failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( s_unusedIB, 12, remap.get(), 8 ) )
@@ -1931,7 +1931,7 @@ bool Test17()
         hr = OptimizeVertices( s_unusedVerts, 7, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(16) unused verts failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(16) unused verts failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( s_unusedVerts, 7, remap.get(), 8 ) )
@@ -1992,7 +1992,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices( s_unusedIB, 12, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(32) unused faces failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(32) unused faces failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( s_unusedIB, 12, remap.get(), 8 ) )
@@ -2032,7 +2032,7 @@ bool Test17()
         hr = OptimizeVertices( s_unusedVerts, 7, 8, remap.get(), &trailingUnused );
         if ( FAILED(hr) )
         {
-            printe("ERROR: OptimizeVertices(32) unused verts failed (%08X)\n", hr );
+            printe("ERROR: OptimizeVertices(32) unused verts failed (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         else if ( !IsValidVertexRemap( s_unusedVerts, 7, remap.get(), 8 ) )
@@ -2070,7 +2070,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices(indices.data(), nFaces, vertices.size(), remap.get());
         if (FAILED(hr))
         {
-            printe("ERROR: OptimizeVertices(16) torus failed (%08X)\n", hr);
+            printe("ERROR: OptimizeVertices(16) torus failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidVertexRemap(indices.data(), nFaces, remap.get(), vertices.size()))
@@ -2086,7 +2086,7 @@ bool Test17()
             hr = FinalizeIB(indices.data(), nFaces, remap.get(), vertices.size(), newIndices.get());
             if (FAILED(hr))
             {
-                printe("ERROR: OptimizeVertices(16) torus failed finalize IB (%08X)\n", hr);
+                printe("ERROR: OptimizeVertices(16) torus failed finalize IB (%08X)\n", static_cast<unsigned int>(hr));
                 success = false;
             }
             else if (memcmp(indices.data(), newIndices.get(), sizeof(uint16_t) * nFaces *3) == 0)
@@ -2099,7 +2099,7 @@ bool Test17()
                 hr = FinalizeVB(vertices.data(), sizeof(ShapesGenerator<uint16_t>::Vertex), vertices.size(), remap.get());
                 if (FAILED(hr))
                 {
-                    printe("ERROR: OptimizeVertices(16) torus failed finalize VB (%08X)\n", hr);
+                    printe("ERROR: OptimizeVertices(16) torus failed finalize VB (%08X)\n", static_cast<unsigned int>(hr));
                     success = false;
                 }
             }
@@ -2120,7 +2120,7 @@ bool Test17()
         HRESULT hr = OptimizeVertices(indices.data(), nFaces, vertices.size(), remap.get());
         if (FAILED(hr))
         {
-            printe("ERROR: OptimizeVertices(32) torus failed (%08X)\n", hr);
+            printe("ERROR: OptimizeVertices(32) torus failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (!IsValidVertexRemap(indices.data(), nFaces, remap.get(), vertices.size()))
@@ -2136,7 +2136,7 @@ bool Test17()
             hr = FinalizeIB(indices.data(), nFaces, remap.get(), vertices.size(), newIndices.get());
             if (FAILED(hr))
             {
-                printe("ERROR: OptimizeVertices(32) torus failed finalize IB (%08X)\n", hr);
+                printe("ERROR: OptimizeVertices(32) torus failed finalize IB (%08X)\n", static_cast<unsigned int>(hr));
                 success = false;
             }
             else if (memcmp(indices.data(), newIndices.get(), sizeof(uint32_t) * nFaces * 3) == 0)
@@ -2149,7 +2149,7 @@ bool Test17()
                 hr = FinalizeVB(vertices.data(), sizeof(ShapesGenerator<uint32_t>::Vertex), vertices.size(), remap.get());
                 if (FAILED(hr))
                 {
-                    printe("ERROR: OptimizeVertices(32) torus failed finalize VB (%08X)\n", hr);
+                    printe("ERROR: OptimizeVertices(32) torus failed finalize VB (%08X)\n", static_cast<unsigned int>(hr));
                     success = false;
                 }
             }

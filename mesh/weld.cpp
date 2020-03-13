@@ -112,7 +112,7 @@ bool Test26()
         HRESULT hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(16) cube identity failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) cube identity failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests > 0)
@@ -132,7 +132,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, nullptr, [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(16) cube identity [null remap] failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) cube identity [null remap] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests > 0)
@@ -149,25 +149,25 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
-            printe("ERROR: WeldVertices(16) expected failure for strip cut verts (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) expected failure for strip cut verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, UINT32_MAX, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
-            printe("ERROR: WeldVertices(16) expected failure for 32-max value verts (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), UINT32_MAX, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
-            printe("\nERROR: WeldVertices(16) expected failure for 32-max value faces (%08X)\n", hr);
+            printe("\nERROR: WeldVertices(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, 8, nullptr, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
-            printe("ERROR: WeldVertices(16) expected failure for nullptr point reps (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) expected failure for nullptr point reps (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         #pragma warning(pop)
@@ -180,7 +180,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 8, s_badReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_UNEXPECTED)
         {
-            printe("ERROR: WeldVertices(16) expected failure for  bad vert count (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) expected failure for  bad vert count (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -188,19 +188,19 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 8, s_unused, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(16) cube unused failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) cube unused failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, 8, s_unusedfirst, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(16) cube unused 1st failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) cube unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, 8, s_unusedall, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(16) cube unused all failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) cube unused all failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
     }
@@ -217,7 +217,7 @@ bool Test26()
         HRESULT hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(16) fmcube A failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) fmcube A failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 32)
@@ -237,7 +237,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (hr != S_OK)
         {
-            printe("ERROR: WeldVertices(16) fmcube B failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) fmcube B failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16)
@@ -272,7 +272,7 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(16) fmcube C failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) fmcube C failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16 && nwelds != 16)
@@ -325,7 +325,7 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(16) fmcube D failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) fmcube D failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 32 && nwelds != 0)
@@ -372,7 +372,7 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(16) fmcube E failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) fmcube E failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16 && nwelds != 4)
@@ -393,7 +393,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(16) fmcube eps A failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) fmcube eps A failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 32)
@@ -413,7 +413,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(16) fmcube eps B failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) fmcube eps B failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16)
@@ -441,7 +441,7 @@ bool Test26()
         HRESULT hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(32) cube identity failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) cube identity failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests > 0)
@@ -461,7 +461,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, nullptr, [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(32) cube identity [null remap] failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) cube identity [null remap] failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests > 0)
@@ -478,25 +478,25 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
-            printe("ERROR: WeldVertices(32) expected failure for strip cut verts (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) expected failure for strip cut verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, UINT32_MAX, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
-            printe("ERROR: WeldVertices(32) expected failure for 32-max value verts (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), UINT32_MAX, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
-            printe("\nERROR: WeldVertices(32) expected failure for 32-max value faces (%08X)\n", hr);
+            printe("\nERROR: WeldVertices(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, 8, nullptr, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
-            printe("ERROR: WeldVertices(32) expected failure for nullptr point reps (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) expected failure for nullptr point reps (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         #pragma warning(pop)
@@ -509,7 +509,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 8, s_badReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != E_UNEXPECTED)
         {
-            printe("ERROR: WeldVertices(32) expected failure for  bad vert count (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) expected failure for  bad vert count (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -517,19 +517,19 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 8, s_unused, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(32) cube unused failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) cube unused failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, 8, s_unusedfirst, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(32) cube unused 1st failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) cube unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         hr = WeldVertices(newIndices.get(), 12, 8, s_unusedall, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(32) cube unused all failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) cube unused all failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
     }
@@ -546,7 +546,7 @@ bool Test26()
         HRESULT hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(32) fmcube A failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) fmcube A failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 32)
@@ -566,7 +566,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (hr != S_OK)
         {
-            printe("ERROR: WeldVertices(32) fmcube B failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) fmcube B failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16)
@@ -601,7 +601,7 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(32) fmcube C failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) fmcube C failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16 && nwelds != 16)
@@ -654,7 +654,7 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(32) fmcube D failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) fmcube D failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 32 && nwelds != 0)
@@ -701,7 +701,7 @@ bool Test26()
         });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(32) fmcube E failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) fmcube E failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16 && nwelds != 4)
@@ -722,7 +722,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
-            printe("ERROR: WeldVertices(32) fmcube eps A failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) fmcube eps A failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 32)
@@ -742,7 +742,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
         if (FAILED(hr))
         {
-            printe("ERROR: WeldVertices(32) fmcube eps B failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) fmcube eps B failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (ntests != 16)
@@ -784,7 +784,7 @@ bool Test27()
         });
         if (hr != S_OK)
         {
-            printe("ERROR: WeldVertices(16) failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (memcmp(g_fmCubeIndices16, newIndices.get(), sizeof(g_fmCubeIndices16)) == 0)
@@ -800,7 +800,7 @@ bool Test27()
             hr = OptimizeVertices(newIndices.get(), 12, 24, remap.get(), &trailingUnused);
             if (FAILED(hr))
             {
-                printe("ERROR: OptimizeVertices(16) failed (%08X)\n", hr);
+                printe("ERROR: OptimizeVertices(16) failed (%08X)\n", static_cast<unsigned int>(hr));
                 success = false;
             }
             else if (trailingUnused != 16)
@@ -832,7 +832,7 @@ bool Test27()
                 hr = FinalizeIB(newIndices.get(), 12, remap.get(), 24, finalIndices.get());
                 if (FAILED(hr))
                 {
-                    printe("ERROR: FinalizeIB(16) failed (%08X)\n", hr);
+                    printe("ERROR: FinalizeIB(16) failed (%08X)\n", static_cast<unsigned int>(hr));
                     success = false;
                 }
                 else if (memcmp(g_fmCubeIndices16, finalIndices.get(), sizeof(uint16_t) * 12 * 3) == 0
@@ -857,7 +857,7 @@ bool Test27()
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), trailingUnused, remap.get(), finalVertices.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(20) 16-bit failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(20) 16-bit failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 
@@ -874,7 +874,7 @@ bool Test27()
                     hr = CompactVB(vertUInt.get(), 4, 24, trailingUnused, remap.get(), finalUInt.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(4) 16-bit failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(4) 16-bit failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 
@@ -907,31 +907,31 @@ bool Test27()
                     hr = CompactVB(vertices.data(), UINT32_MAX, vertices.size(), trailingUnused, remap.get(), finalVertices.get());
                     if (hr != E_INVALIDARG)
                     {
-                        printe("\nERROR: CompactVB expected failure for bad stride value (%08X)\n", hr);
+                        printe("\nERROR: CompactVB expected failure for bad stride value (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, trailingUnused, remap.get(), finalVertices.get());
                     if (hr != E_INVALIDARG)
                     {
-                        printe("\nERROR: CompactVB expected failure for strip cut value (%08X)\n", hr);
+                        printe("\nERROR: CompactVB expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), UINT32_MAX, trailingUnused, remap.get(), finalVertices.get());
                     if (hr != E_INVALIDARG)
                     {
-                        printe("\nERROR: CompactVB expected failure for 32-max value verts (%08X)\n", hr);
+                        printe("\nERROR: CompactVB expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), UINT32_MAX, remap.get(), finalVertices.get());
                     if (hr != E_INVALIDARG)
                     {
-                        printe("\nERROR: CompactVB expected failure for 32-max value trailing unused (%08X)\n", hr);
+                        printe("\nERROR: CompactVB expected failure for 32-max value trailing unused (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), vertices.size() + 12, remap.get(), finalVertices.get());
                     if (hr != E_INVALIDARG)
                     {
-                        printe("\nERROR: CompactVB expected failure for too many unused(%08X)\n", hr);
+                        printe("\nERROR: CompactVB expected failure for too many unused(%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
                     #pragma warning(pop)
@@ -961,7 +961,7 @@ bool Test27()
         });
         if (hr != S_OK)
         {
-            printe("ERROR: WeldVertices(16) position & uv failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(16) position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (memcmp(g_fmCubeIndices16, newIndices.get(), sizeof(g_fmCubeIndices16)) == 0)
@@ -977,7 +977,7 @@ bool Test27()
             hr = OptimizeVertices(newIndices.get(), 12, 24, remap.get(), &trailingUnused);
             if (FAILED(hr))
             {
-                printe("ERROR: OptimizeVertices(16) position & uv failed (%08X)\n", hr);
+                printe("ERROR: OptimizeVertices(16) position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                 success = false;
             }
             else if (trailingUnused != 4)
@@ -1009,7 +1009,7 @@ bool Test27()
                 hr = FinalizeIB(newIndices.get(), 12, remap.get(), 24, finalIndices.get());
                 if (FAILED(hr))
                 {
-                    printe("ERROR: FinalizeIB(16) position & uv failed (%08X)\n", hr);
+                    printe("ERROR: FinalizeIB(16) position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                     success = false;
                 }
                 else if (memcmp(g_fmCubeIndices16, finalIndices.get(), sizeof(uint16_t) * 12 * 3) == 0
@@ -1034,7 +1034,7 @@ bool Test27()
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), trailingUnused, remap.get(), finalVertices.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(20) 16-bit position & uv failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(20) 16-bit position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 
@@ -1051,7 +1051,7 @@ bool Test27()
                     hr = CompactVB(vertUInt.get(), 4, 24, trailingUnused, remap.get(), finalUInt.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(4) 16-bit position & uv failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(4) 16-bit position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 
@@ -1095,7 +1095,7 @@ bool Test27()
         });
         if (hr != S_OK)
         {
-            printe("ERROR: WeldVertices(32) failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (memcmp(g_fmCubeIndices32, newIndices.get(), sizeof(g_fmCubeIndices32)) == 0)
@@ -1111,7 +1111,7 @@ bool Test27()
             hr = OptimizeVertices(newIndices.get(), 12, 24, remap.get(), &trailingUnused);
             if (FAILED(hr))
             {
-                printe("ERROR: OptimizeVertices(32) failed (%08X)\n", hr);
+                printe("ERROR: OptimizeVertices(32) failed (%08X)\n", static_cast<unsigned int>(hr));
                 success = false;
             }
             else if (trailingUnused != 16)
@@ -1143,7 +1143,7 @@ bool Test27()
                 hr = FinalizeIB(newIndices.get(), 12, remap.get(), 24, finalIndices.get());
                 if (FAILED(hr))
                 {
-                    printe("ERROR: FinalizeIB(32) failed (%08X)\n", hr);
+                    printe("ERROR: FinalizeIB(32) failed (%08X)\n", static_cast<unsigned int>(hr));
                     success = false;
                 }
                 else if (memcmp(g_fmCubeIndices32, finalIndices.get(), sizeof(uint32_t) * 12 * 3) == 0
@@ -1168,7 +1168,7 @@ bool Test27()
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), trailingUnused, remap.get(), finalVertices.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(20) 32-bit failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(20) 32-bit failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 
@@ -1185,7 +1185,7 @@ bool Test27()
                     hr = CompactVB(vertUInt.get(), 4, 24, trailingUnused, remap.get(), finalUInt.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(4) 32-bit failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(4) 32-bit failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 
@@ -1231,7 +1231,7 @@ bool Test27()
         });
         if (hr != S_OK)
         {
-            printe("ERROR: WeldVertices(32) position & uv failed (%08X)\n", hr);
+            printe("ERROR: WeldVertices(32) position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (memcmp(g_fmCubeIndices32, newIndices.get(), sizeof(g_fmCubeIndices32)) == 0)
@@ -1247,7 +1247,7 @@ bool Test27()
             hr = OptimizeVertices(newIndices.get(), 12, 24, remap.get(), &trailingUnused);
             if (FAILED(hr))
             {
-                printe("ERROR: OptimizeVertices(32) position & uv failed (%08X)\n", hr);
+                printe("ERROR: OptimizeVertices(32) position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                 success = false;
             }
             else if (trailingUnused != 4)
@@ -1279,7 +1279,7 @@ bool Test27()
                 hr = FinalizeIB(newIndices.get(), 12, remap.get(), 24, finalIndices.get());
                 if (FAILED(hr))
                 {
-                    printe("ERROR: FinalizeIB(32) position & uv failed (%08X)\n", hr);
+                    printe("ERROR: FinalizeIB(32) position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                     success = false;
                 }
                 else if (memcmp(g_fmCubeIndices32, finalIndices.get(), sizeof(uint32_t) * 12 * 3) == 0
@@ -1304,7 +1304,7 @@ bool Test27()
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), trailingUnused, remap.get(), finalVertices.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(20) 32-bit position & uv failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(20) 32-bit position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 
@@ -1321,7 +1321,7 @@ bool Test27()
                     hr = CompactVB(vertUInt.get(), 4, 24, trailingUnused, remap.get(), finalUInt.get());
                     if (FAILED(hr))
                     {
-                        printe("ERROR: CompactVB(4) 32-bit position & uv failed (%08X)\n", hr);
+                        printe("ERROR: CompactVB(4) 32-bit position & uv failed (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
 

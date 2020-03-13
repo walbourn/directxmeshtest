@@ -611,7 +611,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB reader (%08X)\n", hr );
+            printe( "ERROR: Failed setting up VB reader (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -621,7 +621,7 @@ bool Test03()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB reader (%08X)\n", hr );
+                printe( "ERROR: Failed setting up stream for VB reader (%08X)\n", static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -634,7 +634,7 @@ bool Test03()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed reading VB POSITION (%08X)\n", hr );
+                    printe( "ERROR: Failed reading VB POSITION (%08X)\n", static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -660,7 +660,7 @@ bool Test03()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed reading VB TEXCOORD (%08X)\n", hr );
+                    printe( "ERROR: Failed reading VB TEXCOORD (%08X)\n", static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -686,7 +686,7 @@ bool Test03()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed reading VB SV_Position (%08X)\n", hr );
+                    printe( "ERROR: Failed reading VB SV_Position (%08X)\n", static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -714,7 +714,7 @@ bool Test03()
                     if ( FAILED(hr) )
                     {
                         success = false;
-                        printe( "ERROR: Failed reading VB XMFLOAT3 (%08X)\n", hr );
+                        printe( "ERROR: Failed reading VB XMFLOAT3 (%08X)\n", static_cast<unsigned int>(hr) );
                     }
                     else
                     {
@@ -743,7 +743,7 @@ bool Test03()
                     if ( FAILED(hr) )
                     {
                         success = false;
-                        printe( "ERROR: Failed reading VB XMFLOAT2 (%08X)\n", hr );
+                        printe( "ERROR: Failed reading VB XMFLOAT2 (%08X)\n", static_cast<unsigned int>(hr) );
                     }
                     else
                     {
@@ -801,7 +801,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB m/s reader (%08X)\n", hr );
+            printe( "ERROR: Failed setting up VB m/s reader (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -811,7 +811,7 @@ bool Test03()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up m/s stream 0 for VB reader (%08X)\n", hr );
+                printe( "ERROR: Failed setting up m/s stream 0 for VB reader (%08X)\n", static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -819,7 +819,7 @@ bool Test03()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed setting up m/s stream 1 for VB reader (%08X)\n", hr );
+                    printe( "ERROR: Failed setting up m/s stream 1 for VB reader (%08X)\n", static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -832,7 +832,7 @@ bool Test03()
                     if ( FAILED(hr) )
                     {
                         success = false;
-                        printe( "ERROR: Failed reading m/s VB POSITION (%08X)\n", hr );
+                        printe( "ERROR: Failed reading m/s VB POSITION (%08X)\n", static_cast<unsigned int>(hr) );
                     }
                     else
                     {
@@ -858,7 +858,7 @@ bool Test03()
                     if ( FAILED(hr) )
                     {
                         success = false;
-                        printe( "ERROR: Failed reading m/s VB TEXCOORD (%08X)\n", hr );
+                        printe( "ERROR: Failed reading m/s VB TEXCOORD (%08X)\n", static_cast<unsigned int>(hr) );
                     }
                     else
                     {
@@ -884,7 +884,7 @@ bool Test03()
                     if ( FAILED(hr) )
                     {
                         success = false;
-                        printe( "ERROR: Failed reading m/s VB BLENDWEIGHT (%08X)\n", hr );
+                        printe( "ERROR: Failed reading m/s VB BLENDWEIGHT (%08X)\n", static_cast<unsigned int>(hr) );
                     }
                     else
                     {
@@ -915,7 +915,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB m/s reader (%08X)\n", hr );
+            printe( "ERROR: Failed setting up VB m/s reader (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1004,7 +1004,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB writer (%08X)\n", hr );
+            printe( "ERROR: Failed setting up VB writer (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1016,7 +1016,7 @@ bool Test04()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB writer (%08X)\n", hr );
+                printe( "ERROR: Failed setting up stream for VB writer (%08X)\n", static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -1035,7 +1035,7 @@ bool Test04()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB POSITION (%08X)\n", hr );
+                    printe( "ERROR: Failed writing VB POSITION (%08X)\n", static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -1043,7 +1043,7 @@ bool Test04()
                     if ( FAILED(hr) )
                     {
                         success = false;
-                        printe( "ERROR: Failed writing VB TEXCOORD (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB TEXCOORD (%08X)\n", static_cast<unsigned int>(hr) );
                     }
                     else if ( memcmp( vb.get(), s_cubeVB, sizeof(s_cubeVB) ) != 0 )
                     {
@@ -1057,7 +1057,7 @@ bool Test04()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB SV_Position (%08X)\n", hr );
+                    printe( "ERROR: Failed writing VB SV_Position (%08X)\n", static_cast<unsigned int>(hr) );
                 }
                 else if ( memcmp( vb.get(), s_cubeVB, sizeof(s_cubeVB) ) != 0 )
                 {
@@ -1084,7 +1084,7 @@ bool Test04()
                     if ( FAILED(hr) )
                     {
                         success = false;
-                        printe( "ERROR: Failed writing VB POSITION (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB POSITION (%08X)\n", static_cast<unsigned int>(hr) );
                     }
                     else
                     {
@@ -1092,7 +1092,7 @@ bool Test04()
                         if ( FAILED(hr) )
                         {
                             success = false;
-                            printe( "ERROR: Failed writing VB TEXCOORD (%08X)\n", hr );
+                            printe( "ERROR: Failed writing VB TEXCOORD (%08X)\n", static_cast<unsigned int>(hr) );
                         }
                         else if ( memcmp( vb.get(), s_cubeVB, sizeof(s_cubeVB) ) != 0 )
                         {
@@ -1135,7 +1135,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB m/s writer (%08X)\n", hr );
+            printe( "ERROR: Failed setting up VB m/s writer (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1148,7 +1148,7 @@ bool Test04()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream 0 for VB m/s writer (%08X)\n", hr );
+                printe( "ERROR: Failed setting up stream 0 for VB m/s writer (%08X)\n", static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -1156,7 +1156,7 @@ bool Test04()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed setting up stream 1 for VB m/s writer (%08X)\n", hr );
+                    printe( "ERROR: Failed setting up stream 1 for VB m/s writer (%08X)\n", static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -1191,7 +1191,7 @@ bool Test04()
                     {
                         success = false;
                         pass = false;
-                        printe( "ERROR: Failed writing VB m/s POSITION (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB m/s POSITION (%08X)\n", static_cast<unsigned int>(hr) );
                     }
 
                     hr = writer->Write( normalBuff.get(), "NORMAL", 0, nVerts );
@@ -1199,7 +1199,7 @@ bool Test04()
                     {
                         success = false;
                         pass = false;
-                        printe( "ERROR: Failed writing VB m/s NORMAL (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB m/s NORMAL (%08X)\n", static_cast<unsigned int>(hr) );
                     }
 
                     hr = writer->Write( texBuff.get(), "TEXCOORD", 0, nVerts );
@@ -1207,7 +1207,7 @@ bool Test04()
                     {
                         success = false;
                         pass = false;
-                        printe( "ERROR: Failed writing VB m/s TEXCOORD (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB m/s TEXCOORD (%08X)\n", static_cast<unsigned int>(hr) );
                     }
 
                     hr = writer->Write( tangentBuff.get(), "TANGENT", 0, nVerts );
@@ -1215,7 +1215,7 @@ bool Test04()
                     {
                         success = false;
                         pass = false;
-                        printe( "ERROR: Failed writing VB m/s TANGENT (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB m/s TANGENT (%08X)\n", static_cast<unsigned int>(hr) );
                     }
 
                     hr = writer->Write( colorBuff.get(), "COLOR", 0, nVerts );
@@ -1223,7 +1223,7 @@ bool Test04()
                     {
                         success = false;
                         pass = false;
-                        printe( "ERROR: Failed writing VB m/s COLOR (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB m/s COLOR (%08X)\n", static_cast<unsigned int>(hr) );
                     }
 
                     hr = writer->Write( boneIndexBuff.get(), "BLENDINDICES", 0, nVerts );
@@ -1231,7 +1231,7 @@ bool Test04()
                     {
                         success = false;
                         pass = false;
-                        printe( "ERROR: Failed writing VB m/s BLENDINDICES (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB m/s BLENDINDICES (%08X)\n", static_cast<unsigned int>(hr) );
                     }
 
                     hr = writer->Write( boneWeightsBuff.get(), "BLENDWEIGHT", 0, nVerts );
@@ -1239,7 +1239,7 @@ bool Test04()
                     {
                         success = false;
                         pass = false;
-                        printe( "ERROR: Failed writing VB m/s BLENDWEIGHT (%08X)\n", hr );
+                        printe( "ERROR: Failed writing VB m/s BLENDWEIGHT (%08X)\n", static_cast<unsigned int>(hr) );
                     }
 
                     if ( pass )
@@ -1268,7 +1268,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB m/s reader (%08X)\n", hr );
+            printe( "ERROR: Failed setting up VB m/s reader (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1363,7 +1363,7 @@ bool Test05()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
+            printe( "ERROR: Failed setting up VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1371,7 +1371,7 @@ bool Test05()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
+                printe( "ERROR: Failed setting up stream for VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -1380,7 +1380,7 @@ bool Test05()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed reading VB format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
+                    printe( "ERROR: Failed reading VB format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -1400,7 +1400,7 @@ bool Test05()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed reading VB format %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed reading VB format %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -1438,7 +1438,7 @@ bool Test05()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: Failed setting up VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
+            printe("ERROR: Failed setting up VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
         }
         else
         {
@@ -1446,7 +1446,7 @@ bool Test05()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: Failed setting up stream for VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
+                printe("ERROR: Failed setting up stream for VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1455,7 +1455,7 @@ bool Test05()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed reading VB format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed reading VB format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -1498,7 +1498,7 @@ bool Test06()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
+            printe( "ERROR: Failed setting up VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1508,7 +1508,7 @@ bool Test06()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
+                printe( "ERROR: Failed setting up stream for VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -1517,7 +1517,7 @@ bool Test06()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB writer %S, index %zu (%08X)\n", GetName( v.format ), index, hr );
+                    printe( "ERROR: Failed writing VB writer %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
                 }
                 else if ( memcmp( buff, &v.bytes[0], v.stride ) != 0 )
                 {
@@ -1536,7 +1536,7 @@ bool Test06()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB writer %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed writing VB writer %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 {
                     bool isx2bias = IsX2BiasSupported(v.format);
@@ -1573,7 +1573,7 @@ bool Test06()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: Failed setting up VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
+            printe("ERROR: Failed setting up VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
         }
         else
         {
@@ -1583,7 +1583,7 @@ bool Test06()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: Failed setting up stream for VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
+                printe("ERROR: Failed setting up stream for VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1592,7 +1592,7 @@ bool Test06()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB writer %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, hr);
+                    printe("ERROR: Failed writing VB writer %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 else if (memcmp(buff, &v.bytes[0], v.stride) != 0)
                 {
@@ -1657,7 +1657,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed loading mesh data (%08X):\n%S\n", hr, szPath );
+            printe( "ERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1666,7 +1666,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB reader (%08X):\n%S\n", hr, szPath );
+            printe( "ERROR: Failed setting up VB reader (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1676,7 +1676,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up stream for VB reader (%08X):\n%S\n", hr, szPath );
+            printe( "ERROR: Failed setting up stream for VB reader (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1685,7 +1685,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB writer (%08X):\n%S\n", hr, szPath );
+            printe( "ERROR: Failed setting up VB writer (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1695,7 +1695,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up stream for VB writer (%08X):\n%S\n", hr, szPath );
+            printe( "ERROR: Failed setting up stream for VB writer (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1710,7 +1710,7 @@ bool Test07()
             {
                 success = false;
                 printe( "ERROR: Failed reading VB %s %u (%08X):\n%S\n",
-                        g_VBMedia[index].ilDesc[ j ].SemanticName, g_VBMedia[index].ilDesc[ j ].SemanticIndex, hr, szPath );
+                        g_VBMedia[index].ilDesc[ j ].SemanticName, g_VBMedia[index].ilDesc[ j ].SemanticIndex, static_cast<unsigned int>(hr), szPath );
             }
             else
             {
@@ -1719,7 +1719,7 @@ bool Test07()
                 {
                     success = false;
                     printe( "ERROR: Failed writing VB writer %s %u (%08X):\n%S\n",
-                            g_VBMedia[index].ilDesc[ j ].SemanticName, g_VBMedia[index].ilDesc[ j ].SemanticIndex, hr, szPath );
+                            g_VBMedia[index].ilDesc[ j ].SemanticName, g_VBMedia[index].ilDesc[ j ].SemanticIndex, static_cast<unsigned int>(hr), szPath );
                 }
             }
         }
