@@ -990,7 +990,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = destvb.get() + 32* inverseRemap[j];
+                auto ptr = destvb.get() + 32 * size_t(inverseRemap[j]);
                 if ( !IsTestVBCorrect32( ptr, DWORD( j ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) shuffle failed\n" );
@@ -1012,7 +1012,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = srcvb.get() + 32* inverseRemap[j];
+                auto ptr = srcvb.get() + 32 * size_t(inverseRemap[j]);
                 if ( !IsTestVBCorrect32( ptr, DWORD( j ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) shuffle [in-place] failed\n" );
@@ -1155,7 +1155,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = destvb.get() + 16* inverseRemap[j];
+                auto ptr = destvb.get() + 16 * size_t(inverseRemap[j]);
                 if ( !IsTestVBCorrect16( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(16) shuffle failed\n" );
@@ -1177,7 +1177,7 @@ bool Test04()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = srcvb.get() + 16* inverseRemap[j];
+                auto ptr = srcvb.get() + 16 * size_t(inverseRemap[j]);
                 if ( !IsTestVBCorrect16( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(16) shuffle [in-place] failed\n" );
@@ -1530,7 +1530,7 @@ bool Test05()
         {
             for( size_t j = 0; j < 65535; ++j )
             {
-                auto ptr = destvb.get() + 32* inverseRemap[j];
+                auto ptr = destvb.get() + 32 * size_t(inverseRemap[j]);
                 if ( !IsTestVBCorrect32( ptr, DWORD(j) ) )
                 {
                     printe("ERROR: FinalizeVB(32) dups shuffle [remap] failed\n" );
@@ -1542,7 +1542,7 @@ bool Test05()
 
             for( size_t j = 65536; j < (65535 + 256); ++j )
             {
-                auto ptr = destvb.get() + 32* inverseRemap[j];
+                auto ptr = destvb.get() + 32 * size_t(inverseRemap[j]);
                 if ( !IsTestVBCorrect32( ptr, DWORD( j - 65535 ) ) )
                 {
                     printe("ERROR: FinalizeVB(32) dups shuffle [remap] failed (2)\n" );
