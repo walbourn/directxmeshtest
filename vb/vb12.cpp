@@ -7,13 +7,12 @@
 #include "directxtest.h"
 
 #include <d3d12.h>
+#include "directxmesh.h"
 
 #include "TestHelpers.h"
 #include "TestInputLayouts.h"
 #include "WaveFrontReader.h"
 #include "scoped.h"
-
-#include "directxmesh.h"
 
 using namespace DirectX;
 using namespace TestInputLayouts12;
