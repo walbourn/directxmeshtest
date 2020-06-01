@@ -5,10 +5,11 @@
 //-------------------------------------------------------------------------------------
 
 #include "directxtest.h"
-#include "TestHelpers.h"
-#include "TestGeometry.h"
 
 #include "directxmesh.h"
+
+#include "TestHelpers.h"
+#include "TestGeometry.h"
 
 #include <algorithm>
 #include <random>

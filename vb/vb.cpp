@@ -8,12 +8,12 @@
 
 #include <d3d11_1.h>
 
+#include "directxmesh.h"
+
 #include "TestHelpers.h"
 #include "TestInputLayouts.h"
 #include "WaveFrontReader.h"
 #include "scoped.h"
-
-#include "directxmesh.h"
 
 using namespace DirectX;
 using namespace TestInputLayouts11;
@@ -1410,7 +1410,7 @@ bool Test05()
 
                     if (XMVector4NearEqual(chk, temp, g_VBEpsilon) == isx2bias)
                     {
-                        if (!isx2bias || (fabs(XMVectorGetX(chk) - 1.f) > 0.001f))
+                        if (!isx2bias || (fabsf(XMVectorGetX(chk) - 1.f) > 0.001f))
                         {
                             success = false;
                             printe("ERROR: Failed reading VB format %S (x2bias %u), index %zu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), isx2bias, index,

@@ -11,6 +11,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="valid.cpp" />
     <ClCompile Include="weld.cpp" />
+    <ClCompile Include="meshlets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

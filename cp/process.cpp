@@ -807,8 +807,8 @@ bool Test03()
                         break;
 
                     case OPTFACES_V_STRIPORDER:
-                        if ( ( (acmr2 > g_TestMedia[index].stripOrderACMR) && fabs(acmr2 - g_TestMedia[index].stripOrderACMR) > g_Epsilon )
-                             || ( (atvr2 > g_TestMedia[index].stripOrderATVR) && fabs(atvr2 - g_TestMedia[index].stripOrderATVR) > g_Epsilon ) )
+                        if ( ( (acmr2 > g_TestMedia[index].stripOrderACMR) && fabsf(acmr2 - g_TestMedia[index].stripOrderACMR) > g_Epsilon )
+                             || ( (atvr2 > g_TestMedia[index].stripOrderATVR) && fabsf(atvr2 - g_TestMedia[index].stripOrderATVR) > g_Epsilon ) )
                         {
                             pass = false;
                             success = false;
@@ -820,8 +820,8 @@ bool Test03()
                         break;
 
                     case OPTFACES_V_DEFAULT:
-                        if ( ( (acmr2 > g_TestMedia[index].independentACMR) && fabs(acmr2 - g_TestMedia[index].independentACMR) > g_Epsilon )
-                            || ( (atvr2 > g_TestMedia[index].independentATVR) && fabs(atvr2 - g_TestMedia[index].independentATVR) > g_Epsilon ) )
+                        if ( ( (acmr2 > g_TestMedia[index].independentACMR) && fabsf(acmr2 - g_TestMedia[index].independentACMR) > g_Epsilon )
+                            || ( (atvr2 > g_TestMedia[index].independentATVR) && fabsf(atvr2 - g_TestMedia[index].independentATVR) > g_Epsilon ) )
                         {
                             pass = false;
                             success = false;
@@ -835,8 +835,8 @@ bool Test03()
                     default:
                         if ( !( g_TestMedia[index].options & FLAGS_IGNORE_SLOWDOWN_AT ) )
                         {
-                            if ( ( (acmr2 > acmr) && fabs( acmr2 - acmr ) > g_Epsilon )
-                                 || ( (atvr2 > atvr) && fabs( atvr2 - atvr ) > g_Epsilon ) )
+                            if ( ( (acmr2 > acmr) && fabsf( acmr2 - acmr ) > g_Epsilon )
+                                 || ( (atvr2 > atvr) && fabsf( atvr2 - atvr ) > g_Epsilon ) )
                             {
                                 pass = false;
                                 success = false;
@@ -1181,8 +1181,8 @@ bool Test04()
                         break;
 
                     case OPTFACES_V_STRIPORDER:
-                        if ( ( (acmr2 > g_TestMedia[index].attrStripOrderACMR) && fabs(acmr2 - g_TestMedia[index].attrStripOrderACMR) > g_Epsilon )
-                             || ( (atvr2 > g_TestMedia[index].attrStripOrderATVR) && fabs(atvr2 - g_TestMedia[index].attrStripOrderATVR) > g_Epsilon ) )
+                        if ( ( (acmr2 > g_TestMedia[index].attrStripOrderACMR) && fabsf(acmr2 - g_TestMedia[index].attrStripOrderACMR) > g_Epsilon )
+                             || ( (atvr2 > g_TestMedia[index].attrStripOrderATVR) && fabsf(atvr2 - g_TestMedia[index].attrStripOrderATVR) > g_Epsilon ) )
                         {
                             pass = false;
                             success = false;
@@ -1194,8 +1194,8 @@ bool Test04()
                         break;
 
                     case OPTFACES_V_DEFAULT:
-                        if ( ( (acmr2 > g_TestMedia[index].attrIndependentACMR) && fabs(acmr2 - g_TestMedia[index].attrIndependentACMR) > g_Epsilon )
-                            || ( (atvr2 > g_TestMedia[index].attrIndependentATVR) && fabs(atvr2 - g_TestMedia[index].attrIndependentATVR) > g_Epsilon ) )
+                        if ( ( (acmr2 > g_TestMedia[index].attrIndependentACMR) && fabsf(acmr2 - g_TestMedia[index].attrIndependentACMR) > g_Epsilon )
+                            || ( (atvr2 > g_TestMedia[index].attrIndependentATVR) && fabsf(atvr2 - g_TestMedia[index].attrIndependentATVR) > g_Epsilon ) )
                         {
                             pass = false;
                             success = false;
@@ -1209,8 +1209,8 @@ bool Test04()
                     default:
                         if ( !( g_TestMedia[index].options & FLAGS_IGNORE_SLOWDOWN_AT) )
                         {
-                            if ( ( (acmr2 > acmr) && fabs( acmr2 - acmr ) > g_Epsilon )
-                                 || ( (atvr2 > atvr) && fabs( atvr2 - atvr ) > g_Epsilon ) )
+                            if ( ( (acmr2 > acmr) && fabsf( acmr2 - acmr ) > g_Epsilon )
+                                 || ( (atvr2 > atvr) && fabsf( atvr2 - atvr ) > g_Epsilon ) )
                             {
                                 pass = false;
                                 success = false;

@@ -5,11 +5,12 @@
 //-------------------------------------------------------------------------------------
 
 #include "directxtest.h"
+
+#include "directxmeshp.h"
+
 #include "TestHelpers.h"
 #include "TestGeometry.h"
 #include "ShapesGenerator.h"
-
-#include "directxmeshp.h"
 
 using namespace DirectX;
 
@@ -207,8 +208,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( g_fmCubeIndices16, 12, 24, OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 2.f) > g_Epsilon
-             || fabs(atvr - 1.f) > g_Epsilon )
+        if ( fabsf(acmr - 2.f) > g_Epsilon
+             || fabsf(atvr - 1.f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(16) fmcube ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 2.f, atvr, 1.f );
             success = false;
@@ -249,8 +250,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 1.016098f) > g_Epsilon
-             || fabs(atvr - 1.912656f) > g_Epsilon )
+        if ( fabsf(acmr - 1.016098f) > g_Epsilon
+             || fabsf(atvr - 1.912656f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(16) sphere ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 1.016098f, atvr, 1.912656f );
             success = false;
@@ -266,8 +267,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 1.079365f) > g_Epsilon
-             || fabs(atvr - 1.046154f) > g_Epsilon )
+        if ( fabsf(acmr - 1.079365f) > g_Epsilon
+             || fabsf(atvr - 1.046154f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(16) cylinder ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 1.079365f, atvr, 1.046154f );
             success = false;
@@ -283,8 +284,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 1.015611f) > g_Epsilon
-             || fabs(atvr - 2.031221f) > g_Epsilon )
+        if ( fabsf(acmr - 1.015611f) > g_Epsilon
+             || fabsf(atvr - 2.031221f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(16) torus ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 1.015611f, atvr, 2.031221f );
             success = false;
@@ -296,8 +297,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( g_fmCubeIndices32, 12, 24, OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 2.f) > g_Epsilon
-             || fabs(atvr - 1.f) > g_Epsilon )
+        if ( fabsf(acmr - 2.f) > g_Epsilon
+             || fabsf(atvr - 1.f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(32) fmcube ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 2.f, atvr, 1.f );
             success = false;
@@ -338,8 +339,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 1.016098f) > g_Epsilon
-             || fabs(atvr - 1.912656f) > g_Epsilon )
+        if ( fabsf(acmr - 1.016098f) > g_Epsilon
+             || fabsf(atvr - 1.912656f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(32) sphere ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 1.016098f, atvr, 1.912656f );
             success = false;
@@ -355,8 +356,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 1.079365f) > g_Epsilon
-             || fabs(atvr - 1.046154f) > g_Epsilon )
+        if ( fabsf(acmr - 1.079365f) > g_Epsilon
+             || fabsf(atvr - 1.046154f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(32) cylinder ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 1.079365f, atvr, 1.046154f );
             success = false;
@@ -372,8 +373,8 @@ bool Test22()
         float acmr, atvr;
         ComputeVertexCacheMissRate( indices.data(), indices.size() / 3, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr );
 
-        if ( fabs(acmr - 1.015611f) > g_Epsilon
-             || fabs(atvr - 2.031221f) > g_Epsilon )
+        if ( fabsf(acmr - 1.015611f) > g_Epsilon
+             || fabsf(atvr - 2.031221f) > g_Epsilon )
         {
             printe("ERROR: ComputeVertexCacheMissRate(32) torus ACMR: %f .. %f, ATVR: %f .. %f\n", acmr, 1.015611f, atvr, 2.031221f );
             success = false;

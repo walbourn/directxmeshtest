@@ -166,6 +166,7 @@
     <ClCompile Include="adjacency.cpp" />
     <ClCompile Include="clean.cpp" />
     <ClCompile Include="directxtest.cpp" />
+    <ClCompile Include="meshlets.cpp" />
     <ClCompile Include="normals.cpp" />
     <ClCompile Include="optimize.cpp" />
     <ClCompile Include="remap.cpp" />

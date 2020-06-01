@@ -5,11 +5,12 @@
 //-------------------------------------------------------------------------------------
 
 #include "directxtest.h"
+
+#include "directxmesh.h"
+
 #include "TestHelpers.h"
 #include "TestGeometry.h"
 #include "ShapesGenerator.h"
-
-#include "directxmesh.h"
 
 #include "TestHelpers.h"
 #include "TestGeometry.h"
@@ -96,6 +97,7 @@ namespace
 }
 
 //-------------------------------------------------------------------------------------
+// WeldVertices
 bool Test26()
 {
     bool success = true;
@@ -761,6 +763,7 @@ bool Test26()
 }
 
 //-------------------------------------------------------------------------------------
+// CompactVB
 bool Test27()
 {
     bool success = true;

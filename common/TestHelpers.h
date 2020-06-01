@@ -586,3 +586,23 @@ inline bool IsValidVertexRemap( _In_reads_(nFaces*3) const index_t* indices, siz
 
     return true;
 }
+
+
+//--------------------------------------------------------------------------------------
+inline bool IsValidMeshlet(const DirectX::Meshlet& meshlet, size_t nVerts, size_t nPrims)
+{
+    if (meshlet.VertOffset + meshlet.VertCount > nVerts)
+        return false;
+
+    if (meshlet.PrimOffset + meshlet.PrimCount > nPrims)
+        return false;
+
+    return true;
+}
+
+
+//--------------------------------------------------------------------------------------
+inline bool IsValidMeshletTriangle(const DirectX::MeshletTriangle& mtri, size_t nVerts)
+{
+    return (mtri.i0 < nVerts && mtri.i1 < nVerts && mtri.i2 < nVerts);
+}

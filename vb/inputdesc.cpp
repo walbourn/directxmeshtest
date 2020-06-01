@@ -8,10 +8,10 @@
 
 #include <d3d11_1.h>
 
+#include "directxmesh.h"
+
 #include "TestHelpers.h"
 #include "TestInputLayouts.h"
-
-#include "directxmesh.h"
 
 using namespace DirectX;
 using namespace TestInputLayouts11;
