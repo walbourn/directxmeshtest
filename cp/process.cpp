@@ -11,6 +11,8 @@
 #include "TestHelpers.h"
 #include "WaveFrontReader.h"
 
+#pragma warning(disable : 6262)
+
 using namespace DirectX;
 
 enum
