@@ -47,17 +47,17 @@ bool Test28()
     // 16-bit single submesh
     {
         std::vector<Meshlet> meshlets;
-        std::vector<uint8_t> uniqueVertexIndices;
+        std::vector<uint8_t> uniqueVertexIB;
         std::vector<MeshletTriangle> primitiveIndices;
         HRESULT hr = ComputeMeshlets(g_fmCubeIndices16, 12, g_fmCubeVerts, 24, nullptr,
-            meshlets, uniqueVertexIndices, primitiveIndices);
+            meshlets, uniqueVertexIB, primitiveIndices);
         if (FAILED(hr))
         {
             printe("\nERROR: ComputeMeshlets(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (meshlets.size() != 1
-            || uniqueVertexIndices.size() != (24 * sizeof(uint16_t))
+            || uniqueVertexIB.size() != (24 * sizeof(uint16_t))
             || primitiveIndices.size() != 12)
         {
             printe("\nERROR: ComputeMeshlets(16) fmcube failed producing correctg numbers of meshlets\n");
@@ -79,9 +79,12 @@ bool Test28()
                 }
             }
 
-            for (auto it : uniqueVertexIndices)
+            auto uniqueVertexIndices = reinterpret_cast<const uint16_t*>(uniqueVertexIB.data());
+            size_t vertIndices = uniqueVertexIB.size() / sizeof(uint16_t);
+
+            for(size_t j = 0; j < vertIndices; ++j)
             {
-                if (it >= 24)
+                if (uniqueVertexIndices[j] >= 24)
                 {
                     printe("\nERROR: ComputeMeshlets(16) fmcube produced invalid unique verts\n");
                     success = false;
@@ -93,25 +96,25 @@ bool Test28()
     // 16-bit single submesh w/ adj provided
     {
         std::vector<Meshlet> meshlets;
-        std::vector<uint8_t> uniqueVertexIndices;
+        std::vector<uint8_t> uniqueVertexIB;
         std::vector<MeshletTriangle> primitiveIndices;
         HRESULT hr = ComputeMeshlets(g_fmCubeIndices16, 12, g_fmCubeVerts, 24, s_fmCubeAdj,
-            meshlets, uniqueVertexIndices, primitiveIndices);
+            meshlets, uniqueVertexIB, primitiveIndices);
         if (FAILED(hr))
         {
-            printe("\nERROR: ComputeMeshlets(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: ComputeMeshlets(16) fmcube adj failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (meshlets.size() != 1
-            || uniqueVertexIndices.size() != (24 * sizeof(uint16_t))
+            || uniqueVertexIB.size() != (24 * sizeof(uint16_t))
             || primitiveIndices.size() != 12)
         {
-            printe("\nERROR: ComputeMeshlets(16) fmcube failed producing correctg numbers of meshlets\n");
+            printe("\nERROR: ComputeMeshlets(16) fmcube adj failed producing correctg numbers of meshlets\n");
             success = false;
         }
         else if (!IsValidMeshlet(*meshlets.cbegin(), 24, primitiveIndices.size()))
         {
-            printe("\nERROR: ComputeMeshlets(16) fmcube produced an invalid meshlet\n");
+            printe("\nERROR: ComputeMeshlets(16) fmcube adj produced an invalid meshlet\n");
             success = false;
         }
         else
@@ -120,16 +123,19 @@ bool Test28()
             {
                 if (!IsValidMeshletTriangle(it, 24))
                 {
-                    printe("\nERROR: ComputeMeshlets(16) fmcube produced invalid meshlet triangles\n");
+                    printe("\nERROR: ComputeMeshlets(16) fmcube adj produced invalid meshlet triangles\n");
                     success = false;
                 }
             }
 
-            for (auto it : uniqueVertexIndices)
+            auto uniqueVertexIndices = reinterpret_cast<const uint16_t*>(uniqueVertexIB.data());
+            size_t vertIndices = uniqueVertexIB.size() / sizeof(uint16_t);
+
+            for (size_t j = 0; j < vertIndices; ++j)
             {
-                if (it >= 24)
+                if (uniqueVertexIndices[j] >= 24)
                 {
-                    printe("\nERROR: ComputeMeshlets(16) fmcube produced invalid unique verts\n");
+                    printe("\nERROR: ComputeMeshlets(16) fmcube adj produced invalid unique verts\n");
                     success = false;
                 }
             }
@@ -139,17 +145,17 @@ bool Test28()
     // 32-bit single submesh
     {
         std::vector<Meshlet> meshlets;
-        std::vector<uint8_t> uniqueVertexIndices;
+        std::vector<uint8_t> uniqueVertexIB;
         std::vector<MeshletTriangle> primitiveIndices;
         HRESULT hr = ComputeMeshlets(g_fmCubeIndices32, 12, g_fmCubeVerts, 24, nullptr,
-            meshlets, uniqueVertexIndices, primitiveIndices);
+            meshlets, uniqueVertexIB, primitiveIndices);
         if (FAILED(hr))
         {
             printe("\nERROR: ComputeMeshlets(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (meshlets.size() != 1
-            || uniqueVertexIndices.size() != (24 * sizeof(uint32_t))
+            || uniqueVertexIB.size() != (24 * sizeof(uint32_t))
             || primitiveIndices.size() != 12)
         {
             printe("\nERROR: ComputeMeshlets(32) fmcube failed producing correctg numbers of meshlets\n");
@@ -171,9 +177,12 @@ bool Test28()
                 }
             }
 
-            for (auto it : uniqueVertexIndices)
+            auto uniqueVertexIndices = reinterpret_cast<const uint32_t*>(uniqueVertexIB.data());
+            size_t vertIndices = uniqueVertexIB.size() / sizeof(uint32_t);
+
+            for (size_t j = 0; j < vertIndices; ++j)
             {
-                if (it >= 24)
+                if (uniqueVertexIndices[j] >= 24)
                 {
                     printe("\nERROR: ComputeMeshlets(32) fmcube produced invalid unique verts\n");
                     success = false;
@@ -185,25 +194,25 @@ bool Test28()
     // 32-bit single submesh w/ adj provided
     {
         std::vector<Meshlet> meshlets;
-        std::vector<uint8_t> uniqueVertexIndices;
+        std::vector<uint8_t> uniqueVertexIB;
         std::vector<MeshletTriangle> primitiveIndices;
         HRESULT hr = ComputeMeshlets(g_fmCubeIndices32, 12, g_fmCubeVerts, 24, s_fmCubeAdj,
-            meshlets, uniqueVertexIndices, primitiveIndices);
+            meshlets, uniqueVertexIB, primitiveIndices);
         if (FAILED(hr))
         {
-            printe("\nERROR: ComputeMeshlets(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: ComputeMeshlets(32) fmcube adj failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         else if (meshlets.size() != 1
-            || uniqueVertexIndices.size() != (24 * sizeof(uint32_t))
+            || uniqueVertexIB.size() != (24 * sizeof(uint32_t))
             || primitiveIndices.size() != 12)
         {
-            printe("\nERROR: ComputeMeshlets(32) fmcube failed producing correctg numbers of meshlets\n");
+            printe("\nERROR: ComputeMeshlets(32) fmcube adj failed producing correctg numbers of meshlets\n");
             success = false;
         }
         else if (!IsValidMeshlet(*meshlets.cbegin(), 24, primitiveIndices.size()))
         {
-            printe("\nERROR: ComputeMeshlets(32) fmcube produced an invalid meshlet\n");
+            printe("\nERROR: ComputeMeshlets(32) fmcube adj produced an invalid meshlet\n");
             success = false;
         }
         else
@@ -212,16 +221,19 @@ bool Test28()
             {
                 if (!IsValidMeshletTriangle(it, 24))
                 {
-                    printe("\nERROR: ComputeMeshlets(32) fmcube produced invalid meshlet triangles\n");
+                    printe("\nERROR: ComputeMeshlets(32) fmcube adj produced invalid meshlet triangles\n");
                     success = false;
                 }
             }
 
-            for (auto it : uniqueVertexIndices)
+            auto uniqueVertexIndices = reinterpret_cast<const uint32_t*>(uniqueVertexIB.data());
+            size_t vertIndices = uniqueVertexIB.size() / sizeof(uint32_t);
+
+            for (size_t j = 0; j < vertIndices; ++j)
             {
-                if (it >= 24)
+                if (uniqueVertexIndices[j] >= 24)
                 {
-                    printe("\nERROR: ComputeMeshlets(32) fmcube produced invalid unique verts\n");
+                    printe("\nERROR: ComputeMeshlets(32) fmcube adj produced invalid unique verts\n");
                     success = false;
                 }
             }
@@ -247,10 +259,10 @@ bool Test29()
     // 16-bit
     {
         std::vector<Meshlet> meshlets;
-        std::vector<uint8_t> uniqueVertexIndices;
+        std::vector<uint8_t> uniqueVertexIB;
         std::vector<MeshletTriangle> primitiveIndices;
         HRESULT hr = ComputeMeshlets(g_fmCubeIndices16, 12, g_fmCubeVerts, 24, s_fmCubeAdj,
-            meshlets, uniqueVertexIndices, primitiveIndices);
+            meshlets, uniqueVertexIB, primitiveIndices);
         if (FAILED(hr))
         {
             printe("\nERROR: ComputeMeshlets(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -258,14 +270,13 @@ bool Test29()
         }
         else
         {
-
-            auto ib = reinterpret_cast<const uint16_t*>(uniqueVertexIndices.data());
-            size_t count = uniqueVertexIndices.size() / sizeof(uint16_t);
+            auto uniqueVertexIndices = reinterpret_cast<const uint16_t*>(uniqueVertexIB.data());
+            size_t vertIndices = uniqueVertexIB.size() / sizeof(uint16_t);
 
             CullData cull = {};
             hr = ComputeCullData(g_fmCubeVerts, 24,
                 meshlets.data(), meshlets.size(),
-                ib, count,
+                uniqueVertexIndices, vertIndices,
                 primitiveIndices.data(), primitiveIndices.size(), &cull);
             if (FAILED(hr))
             {
@@ -284,10 +295,10 @@ bool Test29()
     // 32-bit
     {
         std::vector<Meshlet> meshlets;
-        std::vector<uint8_t> uniqueVertexIndices;
+        std::vector<uint8_t> uniqueVertexIB;
         std::vector<MeshletTriangle> primitiveIndices;
         HRESULT hr = ComputeMeshlets(g_fmCubeIndices32, 12, g_fmCubeVerts, 24, s_fmCubeAdj,
-            meshlets, uniqueVertexIndices, primitiveIndices);
+            meshlets, uniqueVertexIB, primitiveIndices);
         if (FAILED(hr))
         {
             printe("\nERROR: ComputeMeshlets(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -295,14 +306,13 @@ bool Test29()
         }
         else
         {
-
-            auto ib = reinterpret_cast<const uint32_t*>(uniqueVertexIndices.data());
-            size_t count = uniqueVertexIndices.size() / sizeof(uint32_t);
+            auto uniqueVertexIndices = reinterpret_cast<const uint32_t*>(uniqueVertexIB.data());
+            size_t vertIndices = uniqueVertexIB.size() / sizeof(uint32_t);
 
             CullData cull = {};
             hr = ComputeCullData(g_fmCubeVerts, 24,
                 meshlets.data(), meshlets.size(),
-                ib, count,
+                uniqueVertexIndices, vertIndices,
                 primitiveIndices.data(), primitiveIndices.size(), &cull);
             if (FAILED(hr))
             {
