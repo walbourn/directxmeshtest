@@ -6,7 +6,7 @@
 
 #include "directxtest.h"
 
-#include "directxmeshp.h"
+#include "DirectXMeshP.h"
 
 #include "TestHelpers.h"
 #include "TestGeometry.h"

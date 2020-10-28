@@ -8,7 +8,7 @@
 
 #include <d3d11_1.h>
 
-#include "directxmesh.h"
+#include "DirectXMesh.h"
 
 #include "TestHelpers.h"
 #include "TestInputLayouts.h"
@@ -54,25 +54,24 @@ namespace
 
     const TestDesc g_InputDescs[] =
     {
-        { "VertexPositionColor", 2, g_VertexPositionColor, 28, 0, 12 },
-        { "VertexPositionTexture", 2, g_VertexPositionTexture, 20, 0, 12 },
-        { "VertexPositionNormal", 2, g_VertexPositionNormal, 24, 0, 12 },
-        { "VertexPositionColorTexture", 3, g_VertexPositionColorTexture, 36, 0, 12, 28 },
-        { "VertexPositionNormalColor", 3, g_VertexPositionNormalColor, 40, 0, 12, 24 },
-        { "VertexPositionNormalTexture", 3, g_VertexPositionNormalTexture, 32, 0, 12, 24 },
-        { "VertexPositionNormalColorTexture", 4, g_VertexPositionNormalColorTexture, 48, 0, 12, 24, 40 },
-        { "VertexPositionNormalTangentColorTexture", 5, g_VertexPositionNormalTangentColorTexture, 52, 0, 12, 24, 40, 44 },
-        { "VertexPositionNormalTangentColorTextureSkinning", 7, g_VertexPositionNormalTangentColorTextureSkinning, 60, 0, 12, 24, 40, 44, 52, 56 },
-        { "D3DTutorial", 2, g_D3DTutorial, 24, 0, 12 },
-        { "VSStarterKit", 5, g_VSStarterKit, 52, 0, 12, 24, 40, 44 },
-        { "tangentSpaceVertexLayout", 5, g_tangentspacevertexlayout, 56, 0, 12, 20, 32, 44 },
-        { "quadLayout", 2, g_quadlayout, 24, 0, 16 },
-        { "UncompressedLayout", 4, g_UncompressedLayout, 44, 0, 12, 24, 32 },
-        { "CompressedLayout", 4, g_CompressedLayout, 24, 0, 12, 16, 20 },
-        { "SkinnedLayout", 6, g_SkinnedLayout, 52, 0, 12, 16, 20, 32, 40 },
-        { "UnSkinnedLayout", 4, g_UnSkinnedLayout, 48, 0, 16, 28, 36 },
-        { "layout", 3, g_layout, 32, 0, 12, 24 },
-        { "colorLayout", 1, g_colorLayout, 16, 0, },
+        { "VertexPositionColor", 2, g_VertexPositionColor, 28, { 0, 12 } },
+        { "VertexPositionTexture", 2, g_VertexPositionTexture, 20, { 0, 12 } },
+        { "VertexPositionNormal", 2, g_VertexPositionNormal, 24, { 0, 12 } },
+        { "VertexPositionColorTexture", 3, g_VertexPositionColorTexture, 36, { 0, 12, 28 } },
+        { "VertexPositionNormalColor", 3, g_VertexPositionNormalColor, 40, { 0, 12, 24 } },
+        { "VertexPositionNormalTexture", 3, g_VertexPositionNormalTexture, 32, { 0, 12, 24 } },
+        { "VertexPositionNormalColorTexture", 4, g_VertexPositionNormalColorTexture, 48, { 0, 12, 24, 40 } },
+        { "VertexPositionNormalTangentColorTexture", 5, g_VertexPositionNormalTangentColorTexture, 52, { 0, 12, 24, 40, 44 } },
+        { "VertexPositionNormalTangentColorTextureSkinning", 7, g_VertexPositionNormalTangentColorTextureSkinning, 60, { 0, 12, 24, 40, 44, 52, 56 } },        { "D3DTutorial", 2, g_D3DTutorial, 24, { 0, 12 } },
+        { "VSStarterKit", 5, g_VSStarterKit, 52, { 0, 12, 24, 40, 44 } },
+        { "tangentSpaceVertexLayout", 5, g_tangentspacevertexlayout, 56, { 0, 12, 20, 32, 44 } },
+        { "quadLayout", 2, g_quadlayout, 24, { 0, 16 } },
+        { "UncompressedLayout", 4, g_UncompressedLayout, 44, { 0, 12, 24, 32 } },
+        { "CompressedLayout", 4, g_CompressedLayout, 24, { 0, 12, 16, 20 } },
+        { "SkinnedLayout", 6, g_SkinnedLayout, 52, { 0, 12, 16, 20, 32, 40 } },
+        { "UnSkinnedLayout", 4, g_UnSkinnedLayout, 48, { 0, 16, 28, 36 } },
+        { "layout", 3, g_layout, 32, { 0, 12, 24 } },
+        { "colorLayout", 1, g_colorLayout, 16, { 0 } }
     };
 }
 

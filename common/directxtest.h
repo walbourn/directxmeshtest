@@ -22,10 +22,11 @@
 #include <crtdbg.h>
 #include <stdio.h>
 
-#include <windows.h>
+#include <Windows.h>
 
-#include <directxmath.h>
-#include <directxpackedvector.h>
+#define _XM_NO_XMVECTOR_OVERLOADS_
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
 
 #define _DIRECTX_TEST_NAME_ "DirectXMesh"
 
