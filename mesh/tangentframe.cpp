@@ -203,7 +203,7 @@ bool Test13()
                 }
 
                 XMVECTOR n = XMLoadFloat3( &s_fmCubeNormals[j] );
-                XMVECTOR b = XMVector3Cross( n, t ) * tangents4[j].w;
+                XMVECTOR b = XMVectorScale( XMVector3Cross( n, t ), tangents4[j].w );
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {
@@ -238,7 +238,7 @@ bool Test13()
                 }
 
                 XMVECTOR n = XMLoadFloat3( &s_fmCubeNormals[j] );
-                XMVECTOR b = XMVector3Cross( n, t ) * tangents4[j].w;
+                XMVECTOR b = XMVectorScale( XMVector3Cross( n, t ), tangents4[j].w );
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {
@@ -439,7 +439,7 @@ bool Test13()
                 }
 
                 XMVECTOR n = XMLoadFloat3( &s_fmCubeNormals[j] );
-                XMVECTOR b = XMVector3Cross( n, t ) * tangents4[j].w;
+                XMVECTOR b = XMVectorScale( XMVector3Cross( n, t ), tangents4[j].w );
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {
@@ -474,7 +474,7 @@ bool Test13()
                 }
 
                 XMVECTOR n = XMLoadFloat3( &s_fmCubeNormals[j] );
-                XMVECTOR b = XMVector3Cross( n, t ) * tangents4[j].w;
+                XMVECTOR b = XMVectorScale( XMVector3Cross( n, t ), tangents4[j].w );
                 r = XMLoadFloat3( &s_fmCubeBiTangents[j] );
                 if ( !XMVector3NearEqual( b, r, g_MeshEpsilon ) )
                 {

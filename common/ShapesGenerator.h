@@ -152,7 +152,7 @@ public:
                 XMVECTOR normal = XMVectorSet(dx, dy, dz, 0);
                 XMVECTOR textureCoordinate = XMVectorSet(u, v, 0, 0);
 
-                vertices.push_back(Vertex(normal * radius, normal, textureCoordinate));
+                vertices.push_back(Vertex(XMVectorScale(normal, radius), normal, textureCoordinate));
             }
         }
 
@@ -201,7 +201,7 @@ public:
         {
             XMVECTOR normal = GetCircleVector(i, tessellation);
 
-            XMVECTOR sideOffset = normal * radius;
+            XMVECTOR sideOffset = XMVectorScale(normal, radius);
 
             float u = (float)i / tessellation;
 
@@ -261,7 +261,7 @@ public:
 
                 // Create a vertex.
                 XMVECTOR normal = XMVectorSet(dx, dy, 0, 0);
-                XMVECTOR position = normal * thickness / 2;
+                XMVECTOR position = XMVectorScale(normal, thickness / 2.f);
                 XMVECTOR textureCoordinate = XMVectorSet(u, v, 0, 0);
 
                 position = XMVector3Transform(position, transform);
@@ -364,7 +364,7 @@ private:
         {
             XMVECTOR circleVector = GetCircleVector(i, tessellation);
 
-            XMVECTOR position = (circleVector * radius) + (normal * height);
+            XMVECTOR position = XMVectorAdd( XMVectorScale(circleVector, radius), XMVectorScale(normal, height) );
 
             XMVECTOR textureCoordinate = XMVectorMultiplyAdd(XMVectorSwizzle<0, 2, 3, 3>(circleVector), textureScale, g_XMOneHalf);
 
