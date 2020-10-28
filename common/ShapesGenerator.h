@@ -18,16 +18,17 @@
 #include <algorithm>
 #include <vector>
 
-#include <stdint.h>
+#include <cstdint>
 
-#include <directxmath.h>
-#include <directxcollision.h>
+#define _XM_NO_XMVECTOR_OVERLOADS_
+#include <DirectXMath.h>
+#include <DirectXCollision.h>
 
-template<class index_t>
+template<typename T>
 class ShapesGenerator
 {
 public:
-    typedef index_t index_t;
+    using index_t = T;
 
     struct Vertex
     {
@@ -190,7 +191,7 @@ public:
 
         height /= 2;
 
-        XMVECTOR topOffset = g_XMIdentityR1 * height;
+        XMVECTOR topOffset = XMVectorScale(g_XMIdentityR1, height);
 
         float radius = diameter / 2;
         size_t stride = tessellation + 1;
@@ -206,8 +207,8 @@ public:
 
             XMVECTOR textureCoordinate = XMLoadFloat(&u);
 
-            vertices.push_back(Vertex(sideOffset + topOffset, normal, textureCoordinate));
-            vertices.push_back(Vertex(sideOffset - topOffset, normal, textureCoordinate + g_XMIdentityR1));
+            vertices.push_back(Vertex(XMVectorAdd(sideOffset, topOffset), normal, textureCoordinate));
+            vertices.push_back(Vertex(XMVectorSubtract(sideOffset, topOffset), normal, XMVectorAdd(textureCoordinate, g_XMIdentityR1)));
 
             indices.push_back( index_t(i * 2) );
             indices.push_back( index_t((i * 2 + 2) % (stride * 2)) );
@@ -310,7 +311,7 @@ private:
 
         XMScalarSinCos(&dx, &dz, angle);
 
-        XMVECTORF32 v = { dx, 0, dz, 0 };
+        XMVECTORF32 v = { { { dx, 0, dz, 0 } } };
         return v;
     }
 
@@ -354,8 +355,8 @@ private:
 
         if (!isTop)
         {
-            normal = -normal;
-            textureScale *= g_XMNegateX;
+            normal = XMVectorNegate(normal);
+            textureScale = XMVectorMultiply(textureScale, g_XMNegateX);
         }
 
         // Create cap vertices.

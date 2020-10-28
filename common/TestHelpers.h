@@ -20,11 +20,11 @@
 #include <algorithm>
 #include <memory>
 
-#include <stdint.h>
+#include <cstdint>
 
-#include <directxmath.h>
-#include <directxcollision.h>
-
+#define _XM_NO_XMVECTOR_OVERLOADS_
+#include <DirectXMath.h>
+#include <DirectXCollision.h>
 
 //--------------------------------------------------------------------------------------
 enum IB_TEST_TYPE
@@ -410,7 +410,7 @@ inline bool IsTestVBCorrect16( const uint8_t* vb, size_t count, VB_FILL_TYPE fil
 
 
 //--------------------------------------------------------------------------------------
-extern const __declspec(selectany) DirectX::XMVECTORF32 g_MeshEpsilon = { 1.192092896e-6f, 1.192092896e-6f, 1.192092896e-6f, 1.192092896e-6f };
+extern const __declspec(selectany) DirectX::XMVECTORF32 g_MeshEpsilon = { { { 1.192092896e-6f, 1.192092896e-6f, 1.192092896e-6f, 1.192092896e-6f } } };
 
 inline bool CompareArray( const DirectX::XMFLOAT3* a, const DirectX::XMFLOAT3* b, size_t count )
 {

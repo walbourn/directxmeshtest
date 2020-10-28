@@ -6,7 +6,7 @@
 
 #include "directxtest.h"
 
-#include "directxmesh.h"
+#include "DirectXMesh.h"
 
 #include "TestHelpers.h"
 #include "TestGeometry.h"
@@ -2281,22 +2281,6 @@ bool Test18()
             3, 4, 6,
             0, 1, 2,
             2, 6, 7
-        };
-
-        static const uint32_t s_sortedAdj[] = 
-        {
-            5, 6, 1,
-            0, 4, 7,
-            9, 7, 11,
-            uint32_t(-1), uint32_t(-1), uint32_t(-1),
-            2, 4, 0,
-            9, 11, 2,
-            0, 7, 9,
-            8, 10, 3,
-            3, 5, 1,
-            2, 11, 4,
-            1, 6, 8,
-            6, 10, 8,
         };
 
         HRESULT hr = ReorderIB( g_cubeIndices32, 12, s_faceRemap, destib.get() );
