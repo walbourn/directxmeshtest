@@ -562,13 +562,13 @@ namespace
 
     const VBMedia g_VBMedia[] =
     {
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cube._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cup._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"tetrahedron._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"teapot._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"sphere.vbo" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cylinder.vbo" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"torus.vbo" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cube._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cup._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"tetrahedron._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"teapot._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"sphere.vbo" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cylinder.vbo" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"torus.vbo" },
     };
 }
 
@@ -586,7 +586,7 @@ bool Test03()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        HRESULT hr = reader->Initialize( s_cubeIL, _countof(s_cubeIL) );
+        HRESULT hr = reader->Initialize( s_cubeIL, std::size(s_cubeIL) );
         if ( FAILED(hr) )
         {
             success = false;
@@ -594,7 +594,7 @@ bool Test03()
         }
         else
         {
-            size_t nVerts = _countof(s_cubeVB);
+            size_t nVerts = std::size(s_cubeVB);
 
             hr = reader->AddStream( &s_cubeVB, nVerts, 0, sizeof(SimpleVertex) );
             if ( FAILED(hr) )
@@ -776,7 +776,7 @@ bool Test03()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
         {
             success = false;
@@ -784,7 +784,7 @@ bool Test03()
         }
         else
         {
-            size_t nVerts = _countof(s_VSStarterKitVB1);
+            size_t nVerts = std::size(s_VSStarterKitVB1);
 
             hr = reader->AddStream( &s_VSStarterKitVB1, nVerts, 0, sizeof(VSStarterKitVertex1) );
             if ( FAILED(hr) )
@@ -890,7 +890,7 @@ bool Test03()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
         {
             success = false;
@@ -979,7 +979,7 @@ bool Test04()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        HRESULT hr = writer->Initialize( s_cubeIL, _countof(s_cubeIL) );
+        HRESULT hr = writer->Initialize( s_cubeIL, std::size(s_cubeIL) );
         if ( FAILED(hr) )
         {
             success = false;
@@ -987,7 +987,7 @@ bool Test04()
         }
         else
         {
-            size_t nVerts = _countof(s_cubeVB);
+            size_t nVerts = std::size(s_cubeVB);
 
             std::unique_ptr<uint8_t[]> vb( new uint8_t[ sizeof(SimpleVertex) * nVerts ] );
 
@@ -1110,7 +1110,7 @@ bool Test04()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1118,7 +1118,7 @@ bool Test04()
         }
         else
         {
-            size_t nVerts = _countof(s_VSStarterKitVB1);
+            size_t nVerts = std::size(s_VSStarterKitVB1);
 
             std::unique_ptr<uint8_t[]> vb1( new uint8_t[ sizeof(VSStarterKitVertex1) * nVerts ] );
             std::unique_ptr<uint8_t[]> vb2( new uint8_t[ sizeof(VSStarterKitVertex2) * nVerts ] );
@@ -1243,7 +1243,7 @@ bool Test04()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) );
+        HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
         {
             success = false;
@@ -1328,7 +1328,7 @@ bool Test05()
 {
     bool success = true;
 
-    for( size_t index=0; index < _countof(g_TestVBs); ++index )
+    for( size_t index=0; index < std::size(g_TestVBs); ++index )
     {
         auto& v = g_TestVBs[index];
 
@@ -1402,7 +1402,7 @@ bool Test05()
         }
     }
 
-    for (size_t index = 0; index < _countof(g_TestVBs_x2Bias); ++index)
+    for (size_t index = 0; index < std::size(g_TestVBs_x2Bias); ++index)
     {
         auto& v = g_TestVBs_x2Bias[index];
 
@@ -1463,7 +1463,7 @@ bool Test06()
     bool success = true;
     uint8_t buff[16];
 
-    for( size_t index=0; index < _countof(g_TestVBs); ++index )
+    for( size_t index=0; index < std::size(g_TestVBs); ++index )
     {
         auto& v = g_TestVBs[index];
 
@@ -1537,7 +1537,7 @@ bool Test06()
         }
     }
 
-    for (size_t index = 0; index < _countof(g_TestVBs_x2Bias); ++index)
+    for (size_t index = 0; index < std::size(g_TestVBs_x2Bias); ++index)
     {
         auto& v = g_TestVBs_x2Bias[index];
 
@@ -1601,7 +1601,7 @@ bool Test07()
     size_t ncount = 0;
     size_t npass = 0;
 
-    for( size_t index=0; index < _countof(g_VBMedia); ++index )
+    for( size_t index=0; index < std::size(g_VBMedia); ++index )
     {
         wchar_t szPath[MAX_PATH] = {};
         DWORD ret = ExpandEnvironmentStringsW(g_VBMedia[index].fname, szPath, MAX_PATH);

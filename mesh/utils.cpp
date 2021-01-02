@@ -442,7 +442,7 @@ bool Test24()
             std::pair<size_t,size_t>( 11, 1 ),
         };
 
-        auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
+        auto subsets = ComputeSubsets( s_attr, std::size(s_attr) );
         if ( subsets.size() != 12 )
         {
             printe("ERROR: ComputeSubsets identity failed count %zu .. 12\n", subsets.size() );
@@ -466,7 +466,7 @@ bool Test24()
             std::pair<size_t,size_t>( 0, 12 ),
         };
 
-        auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
+        auto subsets = ComputeSubsets( s_attr, std::size(s_attr) );
         if ( subsets.size() != 1 )
         {
             printe("ERROR: ComputeSubsets zero failed count %zu .. 1\n", subsets.size() );
@@ -500,7 +500,7 @@ bool Test24()
             std::pair<size_t,size_t>( 10, 2 ),
         };
 
-        auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
+        auto subsets = ComputeSubsets( s_attr, std::size(s_attr) );
         if ( subsets.size() != 11 )
         {
             printe("ERROR: ComputeSubsets unsorted failed count %zu .. 11\n", subsets.size() );
@@ -529,7 +529,7 @@ bool Test24()
             std::pair<size_t,size_t>( 10, 2 ),
         };
 
-        auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
+        auto subsets = ComputeSubsets( s_attr, std::size(s_attr) );
         if ( subsets.size() != 6 )
         {
             printe("ERROR: ComputeSubsets sorted failed count %zu .. 6\n", subsets.size() );
@@ -557,7 +557,7 @@ bool Test24()
             std::pair<size_t,size_t>( 9, 3 ),
         };
 
-        auto subsets = ComputeSubsets( s_attr, _countof(s_attr) );
+        auto subsets = ComputeSubsets( s_attr, std::size(s_attr) );
         if ( subsets.size() != 5 )
         {
             printe("ERROR: ComputeSubsets sorted (2) failed count %zu .. 5\n", subsets.size() );

@@ -82,7 +82,7 @@ bool Test01()
 {
     bool success = true;
 
-    for( size_t j = 0; j < _countof(g_InputDescs); ++j )
+    for( size_t j = 0; j < std::size(g_InputDescs); ++j )
     {
         if ( !IsValid( g_InputDescs[ j ].desc, g_InputDescs[ j ].elements ) )
         {
@@ -92,20 +92,20 @@ bool Test01()
     }
 
     // Multi-stream
-    if ( !IsValid( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) ) )
+    if ( !IsValid( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) ) )
     {
         printe("ERROR: IsValid failed for desc VSStarterKitAnimation\n" );
         success = false;
     }
 
     // Instance
-    if ( !IsValid( s_instlayout, _countof(s_instlayout) ) )
+    if ( !IsValid( s_instlayout, std::size(s_instlayout) ) )
     {
         printe("ERROR: IsValid failed for desc instlayout\n" );
         success = false;
     }
 
-    if ( !IsValid( s_leaflayout, _countof(s_leaflayout) ) )
+    if ( !IsValid( s_leaflayout, std::size(s_leaflayout) ) )
     {
         printe("ERROR: IsValid failed for desc leaflayout\n" );
         success = false;
@@ -121,7 +121,7 @@ bool Test02()
 {
     bool success = true;
 
-    for( size_t j = 0; j < _countof(g_InputDescs); ++j )
+    for( size_t j = 0; j < std::size(g_InputDescs); ++j )
     {
         uint32_t offsets[ D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
         memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
@@ -197,7 +197,7 @@ bool Test02()
 
         uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
 
-        ComputeInputLayout( g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation), offsets, strides );
+        ComputeInputLayout( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation), offsets, strides );
 
         if ( strides[0] != VSStarterKitAnimationStride1
              || strides[1] != VSStarterKitAnimationStride2 )
@@ -224,7 +224,7 @@ bool Test02()
             success = false;
 
             print("\toffsets:" );
-            for( size_t k = 0; k < _countof(g_VSStarterKitAnimation); ++k )
+            for( size_t k = 0; k < std::size(g_VSStarterKitAnimation); ++k )
             {
                 print( "%u   ", offsets[ k ] );
             }
@@ -239,7 +239,7 @@ bool Test02()
 
         uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
 
-        ComputeInputLayout( s_instlayout, _countof(s_instlayout), offsets, strides );
+        ComputeInputLayout( s_instlayout, std::size(s_instlayout), offsets, strides );
 
         if ( strides[0] != 32
              || strides[1] != 64 )
@@ -266,7 +266,7 @@ bool Test02()
             success = false;
 
             print("\toffsets:" );
-            for( size_t k = 0; k < _countof(s_instlayout); ++k )
+            for( size_t k = 0; k < std::size(s_instlayout); ++k )
             {
                 print( "%u   ", offsets[ k ] );
             }
@@ -275,7 +275,7 @@ bool Test02()
 
         memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-        ComputeInputLayout( s_leaflayout, _countof(s_leaflayout), offsets, strides );
+        ComputeInputLayout( s_leaflayout, std::size(s_leaflayout), offsets, strides );
 
         if ( strides[0] != 20
              || strides[1] != 68 )
@@ -302,7 +302,7 @@ bool Test02()
             success = false;
 
             print("\toffsets:" );
-            for( size_t k = 0; k < _countof(s_leaflayout); ++k )
+            for( size_t k = 0; k < std::size(s_leaflayout); ++k )
             {
                 print( "%u   ", offsets[ k ] );
             }

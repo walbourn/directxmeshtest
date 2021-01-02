@@ -94,7 +94,7 @@ namespace
 
             for (size_t tag = start_tag; tag < end_tag; ++tag)
             {
-                size_t line = tag % _countof(cache);
+                size_t line = tag % std::size(cache);
 
                 // we store +1 since cache is filled with 0 by default
                 bytes_fetched += (cache[line] != tag + 1) * kCacheLine;
@@ -116,7 +116,7 @@ bool Test01()
     size_t ncount = 0;
     size_t npass = 0;
 
-    for( size_t index=0; index < _countof(g_TestMedia); ++index )
+    for( size_t index=0; index < std::size(g_TestMedia); ++index )
     {
         wchar_t szPath[MAX_PATH] = {};
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
@@ -432,7 +432,7 @@ bool Test02()
     size_t ncount = 0;
     size_t npass = 0;
 
-    for( size_t index=0; index < _countof(g_TestMedia); ++index )
+    for( size_t index=0; index < std::size(g_TestMedia); ++index )
     {
         wchar_t szPath[MAX_PATH] = {};
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
@@ -636,7 +636,7 @@ bool Test03()
     size_t ncount = 0;
     size_t npass = 0;
 
-    for( size_t index=0; index < _countof(g_TestMedia); ++index )
+    for( size_t index=0; index < std::size(g_TestMedia); ++index )
     {
         wchar_t szPath[MAX_PATH] = {};
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
@@ -721,11 +721,11 @@ bool Test03()
         static const uint32_t s_vcache[] = { uint32_t(-1) /*LRU*/, OPTFACES_V_STRIPORDER, OPTFACES_V_DEFAULT, 24, 32 };
         static const uint32_t s_restart[] = { 0, 0, OPTFACES_R_DEFAULT, 20, 16 };
 
-        static_assert(_countof(s_vcache) == _countof(s_restart), "Array mismatch");
+        static_assert(std::size(s_vcache) == std::size(s_restart), "Array mismatch");
 
         bool pass = true;
 
-        for( size_t vindex = 0; vindex < _countof( s_vcache ); ++vindex )
+        for( size_t vindex = 0; vindex < std::size( s_vcache ); ++vindex )
         {
             size_t cacheSize = (!s_vcache[vindex] || s_vcache[vindex] == uint32_t(-1)) ? OPTFACES_V_DEFAULT : s_vcache[vindex];
 
@@ -928,7 +928,7 @@ bool Test04()
     size_t ncount = 0;
     size_t npass = 0;
 
-    for( size_t index=0; index < _countof(g_TestMedia); ++index )
+    for( size_t index=0; index < std::size(g_TestMedia); ++index )
     {
         wchar_t szPath[MAX_PATH] = {};
         DWORD ret = ExpandEnvironmentStringsW(g_TestMedia[index].fname, szPath, MAX_PATH);
@@ -1085,11 +1085,11 @@ bool Test04()
         static const uint32_t s_vcache[] = { uint32_t(-1), OPTFACES_V_STRIPORDER, OPTFACES_V_DEFAULT, 24, 32 };
         static const uint32_t s_restart[] = { 0, 0, OPTFACES_R_DEFAULT, 20, 16 };
 
-        static_assert(_countof(s_vcache) == _countof(s_restart), "Array mismatch");
+        static_assert(std::size(s_vcache) == std::size(s_restart), "Array mismatch");
 
         bool pass = true;
 
-        for( size_t vindex = 0; vindex < _countof( s_vcache ); ++vindex )
+        for( size_t vindex = 0; vindex < std::size( s_vcache ); ++vindex )
         {
             size_t cacheSize = (!s_vcache[vindex] || s_vcache[vindex] == uint32_t(-1)) ? OPTFACES_V_DEFAULT : s_vcache[vindex];
 

@@ -583,13 +583,13 @@ namespace
 
     const VBMedia g_VBMedia[] =
     {
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cube._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cup._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"tetrahedron._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"teapot._obj" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"sphere.vbo" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cylinder.vbo" },
-        { g_layout, _countof(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"torus.vbo" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cube._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cup._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"tetrahedron._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"teapot._obj" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"sphere.vbo" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cylinder.vbo" },
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"torus.vbo" },
     };
 }
 
@@ -607,7 +607,7 @@ bool Test03_DX12()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        D3D12_INPUT_LAYOUT_DESC desc = { s_cubeIL, _countof(s_cubeIL) };
+        D3D12_INPUT_LAYOUT_DESC desc = { s_cubeIL, static_cast<UINT>(std::size(s_cubeIL)) };
         HRESULT hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
@@ -616,7 +616,7 @@ bool Test03_DX12()
         }
         else
         {
-            size_t nVerts = _countof(s_cubeVB);
+            size_t nVerts = std::size(s_cubeVB);
 
             hr = reader->AddStream( &s_cubeVB, nVerts, 0, sizeof(SimpleVertex) );
             if ( FAILED(hr) )
@@ -798,7 +798,7 @@ bool Test03_DX12()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, static_cast<UINT>(std::size(g_VSStarterKitAnimation)) };
         HRESULT hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
@@ -807,7 +807,7 @@ bool Test03_DX12()
         }
         else
         {
-            size_t nVerts = _countof(s_VSStarterKitVB1);
+            size_t nVerts = std::size(s_VSStarterKitVB1);
 
             hr = reader->AddStream( &s_VSStarterKitVB1, nVerts, 0, sizeof(VSStarterKitVertex1) );
             if ( FAILED(hr) )
@@ -913,7 +913,7 @@ bool Test03_DX12()
     {
         std::unique_ptr<VBReader> reader( new VBReader() );
 
-        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, static_cast<UINT>(std::size(g_VSStarterKitAnimation)) };
         HRESULT hr = reader->Initialize( desc );
         if ( FAILED(hr) )
         {
@@ -1003,7 +1003,7 @@ bool Test04_DX12()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        D3D12_INPUT_LAYOUT_DESC desc = { s_cubeIL, _countof(s_cubeIL) };
+        D3D12_INPUT_LAYOUT_DESC desc = { s_cubeIL, static_cast<UINT>(std::size(s_cubeIL)) };
         HRESULT hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
@@ -1012,7 +1012,7 @@ bool Test04_DX12()
         }
         else
         {
-            size_t nVerts = _countof(s_cubeVB);
+            size_t nVerts = std::size(s_cubeVB);
 
             std::unique_ptr<uint8_t[]> vb( new uint8_t[ sizeof(SimpleVertex) * nVerts ] );
 
@@ -1135,7 +1135,7 @@ bool Test04_DX12()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, static_cast<UINT>(std::size(g_VSStarterKitAnimation)) };
         HRESULT hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
@@ -1144,7 +1144,7 @@ bool Test04_DX12()
         }
         else
         {
-            size_t nVerts = _countof(s_VSStarterKitVB1);
+            size_t nVerts = std::size(s_VSStarterKitVB1);
 
             std::unique_ptr<uint8_t[]> vb1( new uint8_t[ sizeof(VSStarterKitVertex1) * nVerts ] );
             std::unique_ptr<uint8_t[]> vb2( new uint8_t[ sizeof(VSStarterKitVertex2) * nVerts ] );
@@ -1269,7 +1269,7 @@ bool Test04_DX12()
     {
         std::unique_ptr<VBWriter> writer( new VBWriter() );
 
-        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, _countof(g_VSStarterKitAnimation) };
+        D3D12_INPUT_LAYOUT_DESC desc = { g_VSStarterKitAnimation, static_cast<UINT>(std::size(g_VSStarterKitAnimation)) };
         HRESULT hr = writer->Initialize( desc );
         if ( FAILED(hr) )
         {
@@ -1355,7 +1355,7 @@ bool Test05_DX12()
 {
     bool success = true;
 
-    for( size_t index=0; index < _countof(g_TestVBs); ++index )
+    for( size_t index=0; index < std::size(g_TestVBs); ++index )
     {
         auto& v = g_TestVBs[index];
 
@@ -1430,7 +1430,7 @@ bool Test05_DX12()
         }
     }
 
-    for (size_t index = 0; index < _countof(g_TestVBs_x2Bias); ++index)
+    for (size_t index = 0; index < std::size(g_TestVBs_x2Bias); ++index)
     {
         auto& v = g_TestVBs_x2Bias[index];
 
@@ -1492,7 +1492,7 @@ bool Test06_DX12()
     bool success = true;
     uint8_t buff[16];
 
-    for( size_t index=0; index < _countof(g_TestVBs); ++index )
+    for( size_t index=0; index < std::size(g_TestVBs); ++index )
     {
         auto& v = g_TestVBs[index];
 
@@ -1567,7 +1567,7 @@ bool Test06_DX12()
         }
     }
 
-    for (size_t index = 0; index < _countof(g_TestVBs_x2Bias); ++index)
+    for (size_t index = 0; index < std::size(g_TestVBs_x2Bias); ++index)
     {
         auto& v = g_TestVBs_x2Bias[index];
 
@@ -1632,7 +1632,7 @@ bool Test07_DX12()
     size_t ncount = 0;
     size_t npass = 0;
 
-    for( size_t index=0; index < _countof(g_VBMedia); ++index )
+    for( size_t index=0; index < std::size(g_VBMedia); ++index )
     {
         wchar_t szPath[MAX_PATH];
         DWORD ret = ExpandEnvironmentStringsW(g_VBMedia[index].fname, szPath, MAX_PATH);

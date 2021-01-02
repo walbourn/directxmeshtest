@@ -459,7 +459,7 @@ bool Test14()
             printe("ERROR: Clean(16) tetra [bowties] failed (2)\n" );
             success = false;
         }
-        else if ( dups.size() != _countof(s_cleanDups) )
+        else if ( dups.size() != std::size(s_cleanDups) )
         {
             printe("ERROR: Clean(16) tetra [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
@@ -577,7 +577,7 @@ bool Test14()
             printe("ERROR: Clean(16) bface [bowties] failed (2)\n" );
             success = false;
         }
-        else if ( dups.size() != _countof(s_cleanDups) )
+        else if ( dups.size() != std::size(s_cleanDups) )
         {
             printe("ERROR: Clean(16) bface [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
@@ -695,7 +695,7 @@ bool Test14()
             printe("ERROR: Clean(16) bowtie [bowties] failed (2)\n" );
             success = false;
         }
-        else if ( dups.size() != _countof(s_cleanDups) )
+        else if ( dups.size() != std::size(s_cleanDups) )
         {
             printe("ERROR: Clean(16) bowtie [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
@@ -1039,7 +1039,7 @@ bool Test14()
             printe("ERROR: Clean(32) tetra [bowties] failed (2)\n" );
             success = false;
         }
-        else if ( dups.size() != _countof(s_cleanDups) )
+        else if ( dups.size() != std::size(s_cleanDups) )
         {
             printe("ERROR: Clean(32) tetra [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
@@ -1157,7 +1157,7 @@ bool Test14()
             printe("ERROR: Clean(32) bface [bowties] failed (2)\n" );
             success = false;
         }
-        else if ( dups.size() != _countof(s_cleanDups) )
+        else if ( dups.size() != std::size(s_cleanDups) )
         {
             printe("ERROR: Clean(32) bface [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;
@@ -1275,7 +1275,7 @@ bool Test14()
             printe("ERROR: Clean(32) bowtie [bowties] failed (2)\n" );
             success = false;
         }
-        else if ( dups.size() != _countof(s_cleanDups) )
+        else if ( dups.size() != std::size(s_cleanDups) )
         {
             printe("ERROR: Clean(32) bowtie [bowties] failed unexpected number of dups %zu\n", dups.size() );
             success = false;

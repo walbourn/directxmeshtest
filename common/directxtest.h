@@ -18,9 +18,11 @@
 #pragma warning(pop)
 
 #define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
 #include <crtdbg.h>
-#include <stdio.h>
+
+#include <cstdlib>
+#include <cstdio>
+#include <iterator>
 
 #include <Windows.h>
 
