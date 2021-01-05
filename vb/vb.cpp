@@ -604,7 +604,7 @@ bool Test03()
             }
             else
             {
-                ScopedAlignedArrayXMVECTOR buff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
+                auto buff = make_AlignedArrayXMVECTOR(nVerts);
 
                 // Position data
                 memset( buff.get(), 0xff, sizeof(XMVECTOR) * nVerts );
@@ -802,7 +802,7 @@ bool Test03()
                 }
                 else
                 {
-                    ScopedAlignedArrayXMVECTOR buff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
+                    auto buff = make_AlignedArrayXMVECTOR(nVerts);
 
                     // Position data
                     memset( buff.get(), 0xff, sizeof(XMVECTOR) * nVerts );
@@ -1001,8 +1001,8 @@ bool Test04()
             {
                 memset( vb.get(), 0xff, sizeof(SimpleVertex) * nVerts );
 
-                ScopedAlignedArrayXMVECTOR posbuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
-                ScopedAlignedArrayXMVECTOR texbuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
+                auto posbuff = make_AlignedArrayXMVECTOR(nVerts);
+                auto texbuff = make_AlignedArrayXMVECTOR(nVerts);
 
                 for( size_t j = 0; j < nVerts; ++j )
                 {
@@ -1144,13 +1144,13 @@ bool Test04()
                     memset( vb1.get(), 0xff, sizeof(VSStarterKitVertex1) * nVerts );
                     memset( vb2.get(), 0xff, sizeof(VSStarterKitVertex2) * nVerts );
 
-                    ScopedAlignedArrayXMVECTOR posBuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
-                    ScopedAlignedArrayXMVECTOR normalBuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
-                    ScopedAlignedArrayXMVECTOR tangentBuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
-                    ScopedAlignedArrayXMVECTOR colorBuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
-                    ScopedAlignedArrayXMVECTOR texBuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
-                    ScopedAlignedArrayXMVECTOR boneIndexBuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
-                    ScopedAlignedArrayXMVECTOR boneWeightsBuff( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
+                    auto posBuff = make_AlignedArrayXMVECTOR(nVerts);
+                    auto normalBuff = make_AlignedArrayXMVECTOR(nVerts);
+                    auto tangentBuff = make_AlignedArrayXMVECTOR(nVerts);
+                    auto colorBuff = make_AlignedArrayXMVECTOR(nVerts);
+                    auto texBuff = make_AlignedArrayXMVECTOR(nVerts);
+                    auto boneIndexBuff = make_AlignedArrayXMVECTOR(nVerts);
+                    auto boneWeightsBuff = make_AlignedArrayXMVECTOR(nVerts);
 
                     for( size_t j = 0; j < nVerts; ++j )
                     {
@@ -1678,7 +1678,7 @@ bool Test07()
             continue;
         }
 
-        ScopedAlignedArrayXMVECTOR temp( reinterpret_cast<XMVECTOR*>( _aligned_malloc( sizeof(XMVECTOR) * nVerts, 16 ) ) );
+        auto temp = make_AlignedArrayXMVECTOR(nVerts);
 
         for( size_t j = 0; j < g_VBMedia[index].ilNumElements; ++j )
         {
