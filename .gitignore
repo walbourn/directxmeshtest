@@ -17,10 +17,15 @@
 *.ilk
 *.VC.db
 .vs
-Bin
+[Bb]in
 out
 /ipch
 Debug
 Profile
 Release
 x64
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake/
+cmake_install.cmake

@@ -38,6 +38,12 @@ if(MSVC)
     endif()
 endif()
 
+if (NOT WIN32)
+    find_package(directx-headers CONFIG REQUIRED)
+    find_package(directxmath CONFIG REQUIRED)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectX-Headers Microsoft::DirectXMath)
+endif()
+
 if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
     set(WarningsEXE "-Wpedantic" "-Wextra" "-Wno-c++98-compat" "-Wno-c++98-compat-pedantic" "-Wno-float-equal" "-Wno-global-constructors" "-Wno-language-extension-token" "-Wno-missing-prototypes" "-Wno-missing-variable-declarations" "-Wno-reserved-id-macro")
     target_compile_options(${PROJECT_NAME} PRIVATE ${WarningsEXE})
