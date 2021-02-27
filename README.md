@@ -1,6 +1,6 @@
 # Test Suite for _DirectXMesh geometry processing library_
 
-Copyright (c) Microsoft Corporation. All rights reserved.
+Copyright (c) Microsoft Corporation.
 
 This repo contains the test suite for the [DirectXMesh](https://github.com/Microsoft/DirectXMesh). For setup instructions, see the [wiki](https://github.com/walbourn/directxmeshtest/wiki).
 
