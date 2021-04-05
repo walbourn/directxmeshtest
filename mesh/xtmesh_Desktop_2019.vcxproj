@@ -169,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="adjacency.cpp" />
     <ClCompile Include="clean.cpp" />
+    <ClCompile Include="concat.cpp" />
     <ClCompile Include="directxtest.cpp" />
     <ClCompile Include="meshlets.cpp" />
     <ClCompile Include="normals.cpp" />
