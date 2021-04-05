@@ -32,30 +32,30 @@ enum IB_TEST_TYPE
 
 
 template <typename T>
-inline std::unique_ptr<T[]> CreateIndexBuffer( size_t count, IB_TEST_TYPE fillType )
+inline std::unique_ptr<T[]> CreateIndexBuffer(size_t count, IB_TEST_TYPE fillType)
 {
-    std::unique_ptr<T[]> ib( new T[ count ] );
+    std::unique_ptr<T[]> ib(new T[count]);
 
-    switch( fillType )
+    switch (fillType)
     {
     case IB_IDENTITY:
-        for( size_t j = 0; j < count; ++j )
+        for (size_t j = 0; j < count; ++j)
         {
-            ib[ j ] = T( j );
+            ib[j] = T(j);
         }
         break;
 
     case IB_REVERSE:
-        for( size_t j = 0; j < (count / 3); ++j )
+        for (size_t j = 0; j < (count / 3); ++j)
         {
-            ib[ j * 3 ] = T( count - (j*3) - 3 );
-            ib[ j * 3 + 1 ] = T( count - (j*3) - 2 );
-            ib[ j * 3 + 2 ] = T( count - (j*3) - 1 );
+            ib[j * 3] = T(count - (j * 3) - 3);
+            ib[j * 3 + 1] = T(count - (j * 3) - 2);
+            ib[j * 3 + 2] = T(count - (j * 3) - 1);
         }
         break;
 
     default:
-        memset( ib.get(), 0, sizeof(T) * count );
+        memset(ib.get(), 0, sizeof(T) * count);
         break;
     }
 
@@ -64,35 +64,35 @@ inline std::unique_ptr<T[]> CreateIndexBuffer( size_t count, IB_TEST_TYPE fillTy
 
 
 template <typename T>
-inline bool IsTestIBCorrect( const T* ib, size_t count, IB_TEST_TYPE fillType )
+inline bool IsTestIBCorrect(const T* ib, size_t count, IB_TEST_TYPE fillType)
 {
-    if ( !ib || !count )
+    if (!ib || !count)
         return false;
 
-    switch( fillType )
+    switch (fillType)
     {
     case IB_IDENTITY:
-        for( size_t j = 0; j < count; ++j )
+        for (size_t j = 0; j < count; ++j)
         {
-            if ( ib[ j ] != T( j ) )
+            if (ib[j] != T(j))
                 return false;
         }
         break;
 
     case IB_REVERSE:
-        for( size_t j = 0; j < (count / 3); ++j )
+        for (size_t j = 0; j < (count / 3); ++j)
         {
-            if ( ib[ j * 3 ] != T( count - (j*3) - 3 )
-                 || ib[ j * 3 + 1 ] != T( count - (j*3) - 2 )
-                 || ib[ j * 3 + 2 ] != T( count - (j*3) - 1 ) )
-                 return false;
+            if (ib[j * 3] != T(count - (j * 3) - 3)
+                || ib[j * 3 + 1] != T(count - (j * 3) - 2)
+                || ib[j * 3 + 2] != T(count - (j * 3) - 1))
+                return false;
         }
         break;
 
     default:
-        for( size_t j = 0; j < count; ++j )
+        for (size_t j = 0; j < count; ++j)
         {
-            if ( ib[ j ] != T( 0 ) )
+            if (ib[j] != T(0))
                 return false;
         }
         break;
@@ -106,13 +106,13 @@ inline bool IsTestIBCorrect( const T* ib, size_t count, IB_TEST_TYPE fillType )
 extern const __declspec(selectany) GUID g_VBGuid = { 0xc129d450, 0x922e, 0x4655, { 0xb0, 0x98, 0xf6, 0x1e, 0xfe, 0xd7, 0xb7, 0x6d } };
 extern const __declspec(selectany) GUID g_VBGuid2 = { 0x92f9af91, 0xe870, 0x45f2, { 0x98, 0x8c, 0x29, 0xb4, 0x34, 0x82, 0xc6, 0x14 } };
 
-static_assert ( sizeof(GUID) == 16, "Size mismatch" );
+static_assert (sizeof(GUID) == 16, "Size mismatch");
 
 //--------------------------------------------------------------------------------------
-inline std::unique_ptr<uint8_t[]> CreateVertexBuffer( size_t stride, size_t count )
+inline std::unique_ptr<uint8_t[]> CreateVertexBuffer(size_t stride, size_t count)
 {
-    std::unique_ptr<uint8_t[]> vb( new uint8_t[ stride * count ] );
-    memset( vb.get(), 0, stride * count );
+    std::unique_ptr<uint8_t[]> vb(new uint8_t[stride * count]);
+    memset(vb.get(), 0, stride * count);
     return vb;
 }
 
@@ -125,52 +125,52 @@ enum VB_FILL_TYPE
 };
 
 
-inline std::unique_ptr<uint8_t[]> CreateVertexBuffer32( size_t count, VB_FILL_TYPE fillType )
+inline std::unique_ptr<uint8_t[]> CreateVertexBuffer32(size_t count, VB_FILL_TYPE fillType)
 {
-    static_assert( sizeof(GUID)*2 == 32, "Mismatch size" );
-    std::unique_ptr<uint8_t[]> vb( new uint8_t[ sizeof(GUID) * 2 * count ] );
+    static_assert(sizeof(GUID) * 2 == 32, "Mismatch size");
+    std::unique_ptr<uint8_t[]> vb(new uint8_t[sizeof(GUID) * 2 * count]);
 
-    switch( fillType )
+    switch (fillType)
     {
     case VB_IDENTITY:
+    {
+        auto ptr = reinterpret_cast<GUID*>(vb.get());
+        auto ptr2 = reinterpret_cast<GUID*>(vb.get() + 16);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<GUID*>( vb.get() );
-            auto ptr2 = reinterpret_cast<GUID*>( vb.get() + 16 );
-            for( size_t j = 0; j < count; ++j )
-            {
-                memcpy( ptr, &g_VBGuid, sizeof(GUID) );
-                memcpy( ptr2, &g_VBGuid2, sizeof(GUID) );
+            memcpy(ptr, &g_VBGuid, sizeof(GUID));
+            memcpy(ptr2, &g_VBGuid2, sizeof(GUID));
 
-                ptr->Data1 = DWORD( j );
-                ptr += 2;
+            ptr->Data1 = DWORD(j);
+            ptr += 2;
 
-                ptr2->Data1 = DWORD( j );
-                ptr2 += 2;
-            }
+            ptr2->Data1 = DWORD(j);
+            ptr2 += 2;
         }
-        break;
+    }
+    break;
 
     case VB_REVERSE:
+    {
+        auto ptr = reinterpret_cast<GUID*>(vb.get());
+        auto ptr2 = reinterpret_cast<GUID*>(vb.get() + 16);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<GUID*>( vb.get() );
-            auto ptr2 = reinterpret_cast<GUID*>( vb.get() + 16 );
-            for( size_t j = 0; j < count; ++j )
-            {
-                memcpy( ptr, &g_VBGuid, sizeof(GUID) );
-                memcpy( ptr2, &g_VBGuid2, sizeof(GUID) );
+            memcpy(ptr, &g_VBGuid, sizeof(GUID));
+            memcpy(ptr2, &g_VBGuid2, sizeof(GUID));
 
-                DWORD sentinal = DWORD( count - j - 1 );
-                ptr->Data1 = sentinal;
-                ptr += 2;
+            DWORD sentinal = DWORD(count - j - 1);
+            ptr->Data1 = sentinal;
+            ptr += 2;
 
-                ptr2->Data1 = sentinal;
-                ptr2 += 2;
-            }
+            ptr2->Data1 = sentinal;
+            ptr2 += 2;
         }
-        break;
+    }
+    break;
 
     default:
-        memset( vb.get(), 0, sizeof(GUID) * 2 * count );
+        memset(vb.get(), 0, sizeof(GUID) * 2 * count);
         break;
     }
 
@@ -178,151 +178,151 @@ inline std::unique_ptr<uint8_t[]> CreateVertexBuffer32( size_t count, VB_FILL_TY
 }
 
 
-inline bool IsTestVBCorrect32( const uint8_t* vert, DWORD sentinal )
+inline bool IsTestVBCorrect32(const uint8_t* vert, DWORD sentinal)
 {
-    auto ptr = reinterpret_cast<const GUID*>( vert );
+    auto ptr = reinterpret_cast<const GUID*>(vert);
 
-    if ( memcmp( reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
-                 reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
+    if (memcmp(reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
+        reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
         return false;
 
-    if ( ptr->Data1 != sentinal )
+    if (ptr->Data1 != sentinal)
         return false;
 
     ++ptr;
 
-    if ( memcmp( reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
-                 reinterpret_cast<const BYTE*>(&g_VBGuid2) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
+    if (memcmp(reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
+        reinterpret_cast<const BYTE*>(&g_VBGuid2) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
         return false;
 
-    if ( ptr->Data1 != sentinal )
+    if (ptr->Data1 != sentinal)
         return false;
 
     return true;
 }
 
 
-inline bool IsTestVBCorrect32( const uint8_t* vb, size_t count, VB_FILL_TYPE fillType )
+inline bool IsTestVBCorrect32(const uint8_t* vb, size_t count, VB_FILL_TYPE fillType)
 {
-    if ( !vb || !count )
+    if (!vb || !count)
         return false;
 
-    switch( fillType )
+    switch (fillType)
     {
     case VB_IDENTITY:
+    {
+        auto ptr = reinterpret_cast<const GUID*>(vb);
+        auto ptr2 = reinterpret_cast<const GUID*>(vb + 16);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<const GUID*>( vb );
-            auto ptr2 = reinterpret_cast<const GUID*>( vb + 16 );
-            for( size_t j = 0; j < count; ++j )
-            {
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
-                             reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
-                     return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
+                reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
+                return false;
 
-                if ( ptr->Data1 != DWORD( j ) )
-                    return false;
+            if (ptr->Data1 != DWORD(j))
+                return false;
 
-                ptr += 2;
+            ptr += 2;
 
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr2) + sizeof(DWORD),
-                             reinterpret_cast<const BYTE*>(&g_VBGuid2) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
-                     return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr2) + sizeof(DWORD),
+                reinterpret_cast<const BYTE*>(&g_VBGuid2) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
+                return false;
 
-                if ( ptr2->Data1 != DWORD( j ) )
-                    return false;
+            if (ptr2->Data1 != DWORD(j))
+                return false;
 
-                ptr2 += 2;
-            }
+            ptr2 += 2;
         }
-        break;
+    }
+    break;
 
     case VB_REVERSE:
+    {
+        auto ptr = reinterpret_cast<const GUID*>(vb);
+        auto ptr2 = reinterpret_cast<const GUID*>(vb + 16);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<const GUID*>( vb );
-            auto ptr2 = reinterpret_cast<const GUID*>( vb + 16 );
-            for( size_t j = 0; j < count; ++j )
-            {
-                DWORD sentinal = DWORD( count - j - 1 );
+            DWORD sentinal = DWORD(count - j - 1);
 
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
-                             reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
-                    return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
+                reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
+                return false;
 
-                if ( ptr->Data1 != sentinal )
-                    return false;
+            if (ptr->Data1 != sentinal)
+                return false;
 
-                ptr += 2;
+            ptr += 2;
 
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr2) + sizeof(DWORD),
-                             reinterpret_cast<const BYTE*>(&g_VBGuid2) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
-                    return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr2) + sizeof(DWORD),
+                reinterpret_cast<const BYTE*>(&g_VBGuid2) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
+                return false;
 
-                if ( ptr2->Data1 != sentinal )
-                    return false;
+            if (ptr2->Data1 != sentinal)
+                return false;
 
-                ptr2 += 2;
-            }
+            ptr2 += 2;
         }
-        break;
+    }
+    break;
 
     default:
+    {
+        auto ptr = reinterpret_cast<const GUID*>(vb);
+        auto ptr2 = reinterpret_cast<const GUID*>(vb + 16);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<const GUID*>( vb );
-            auto ptr2 = reinterpret_cast<const GUID*>( vb + 16 );
-            for( size_t j = 0; j < count; ++j )
-            {
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr),
-                             reinterpret_cast<const BYTE*>(&GUID_NULL), sizeof(GUID) ) != 0 )
-                    return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr),
+                reinterpret_cast<const BYTE*>(&GUID_NULL), sizeof(GUID)) != 0)
+                return false;
 
-                ptr += 2;
+            ptr += 2;
 
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr2),
-                             reinterpret_cast<const BYTE*>(&GUID_NULL), sizeof(GUID) ) != 0 )
-                    return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr2),
+                reinterpret_cast<const BYTE*>(&GUID_NULL), sizeof(GUID)) != 0)
+                return false;
 
-                ptr2 += 2;
-            }
+            ptr2 += 2;
         }
-        break;
+    }
+    break;
     }
 
     return true;
 }
 
 
-inline std::unique_ptr<uint8_t[]> CreateVertexBuffer16( size_t count, VB_FILL_TYPE fillType )
+inline std::unique_ptr<uint8_t[]> CreateVertexBuffer16(size_t count, VB_FILL_TYPE fillType)
 {
-    std::unique_ptr<uint8_t[]> vb( new uint8_t[ sizeof(GUID) * count ] );
+    std::unique_ptr<uint8_t[]> vb(new uint8_t[sizeof(GUID) * count]);
 
-    switch( fillType )
+    switch (fillType)
     {
     case VB_IDENTITY:
+    {
+        auto ptr = reinterpret_cast<GUID*>(vb.get());
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<GUID*>( vb.get() );
-            for( size_t j = 0; j < count; ++j )
-            {
-                memcpy( ptr, &g_VBGuid, sizeof(GUID) );
-                ptr->Data1 = DWORD( j );
-                ++ptr;
-            }
+            memcpy(ptr, &g_VBGuid, sizeof(GUID));
+            ptr->Data1 = DWORD(j);
+            ++ptr;
         }
-        break;
+    }
+    break;
 
     case VB_REVERSE:
+    {
+        auto ptr = reinterpret_cast<GUID*>(vb.get());
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<GUID*>( vb.get() );
-            for( size_t j = 0; j < count; ++j )
-            {
-                memcpy( ptr, &g_VBGuid, sizeof(GUID) );
-                ptr->Data1 = DWORD( count - j - 1 );
-                ++ptr;
-            }
+            memcpy(ptr, &g_VBGuid, sizeof(GUID));
+            ptr->Data1 = DWORD(count - j - 1);
+            ++ptr;
         }
-        break;
+    }
+    break;
 
     default:
-        memset( vb.get(), 0, sizeof(GUID) * count );
+        memset(vb.get(), 0, sizeof(GUID) * count);
         break;
     }
 
@@ -330,75 +330,75 @@ inline std::unique_ptr<uint8_t[]> CreateVertexBuffer16( size_t count, VB_FILL_TY
 }
 
 
-inline bool IsTestVBCorrect16( const uint8_t* vert, DWORD sentinal )
+inline bool IsTestVBCorrect16(const uint8_t* vert, DWORD sentinal)
 {
-    auto ptr = reinterpret_cast<const GUID*>( vert );
+    auto ptr = reinterpret_cast<const GUID*>(vert);
 
-    if ( memcmp( reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
-                 reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
+    if (memcmp(reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
+        reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
         return false;
 
-    if ( ptr->Data1 != sentinal )
+    if (ptr->Data1 != sentinal)
         return false;
 
     return true;
 }
 
 
-inline bool IsTestVBCorrect16( const uint8_t* vb, size_t count, VB_FILL_TYPE fillType )
+inline bool IsTestVBCorrect16(const uint8_t* vb, size_t count, VB_FILL_TYPE fillType)
 {
-    if ( !vb || !count )
+    if (!vb || !count)
         return false;
 
-    switch( fillType )
+    switch (fillType)
     {
     case VB_IDENTITY:
+    {
+        auto ptr = reinterpret_cast<const GUID*>(vb);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<const GUID*>( vb );
-            for( size_t j = 0; j < count; ++j )
-            {
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
-                             reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
-                     return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
+                reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
+                return false;
 
-                if ( ptr->Data1 != DWORD( j ) )
-                    return false;
+            if (ptr->Data1 != DWORD(j))
+                return false;
 
-                ++ptr;
-            }
+            ++ptr;
         }
-        break;
+    }
+    break;
 
     case VB_REVERSE:
+    {
+        auto ptr = reinterpret_cast<const GUID*>(vb);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<const GUID*>( vb );
-            for( size_t j = 0; j < count; ++j )
-            {
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
-                             reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD) ) != 0 )
-                    return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr) + sizeof(DWORD),
+                reinterpret_cast<const BYTE*>(&g_VBGuid) + sizeof(DWORD), sizeof(GUID) - sizeof(DWORD)) != 0)
+                return false;
 
-                if ( ptr->Data1 != DWORD( count - j - 1 ) )
-                    return false;
+            if (ptr->Data1 != DWORD(count - j - 1))
+                return false;
 
-                ++ptr;
-            }
+            ++ptr;
         }
-        break;
+    }
+    break;
 
     default:
+    {
+        auto ptr = reinterpret_cast<const GUID*>(vb);
+        for (size_t j = 0; j < count; ++j)
         {
-            auto ptr = reinterpret_cast<const GUID*>( vb );
-            for( size_t j = 0; j < count; ++j )
-            {
-                if ( memcmp( reinterpret_cast<const BYTE*>(ptr),
-                             reinterpret_cast<const BYTE*>(&GUID_NULL), sizeof(GUID) ) != 0 )
-                    return false;
+            if (memcmp(reinterpret_cast<const BYTE*>(ptr),
+                reinterpret_cast<const BYTE*>(&GUID_NULL), sizeof(GUID)) != 0)
+                return false;
 
-                ++ptr;
-            }
+            ++ptr;
         }
-        break;
+    }
+    break;
     }
 
     return true;
@@ -408,16 +408,16 @@ inline bool IsTestVBCorrect16( const uint8_t* vb, size_t count, VB_FILL_TYPE fil
 //--------------------------------------------------------------------------------------
 extern const __declspec(selectany) DirectX::XMVECTORF32 g_MeshEpsilon = { { { 1.192092896e-6f, 1.192092896e-6f, 1.192092896e-6f, 1.192092896e-6f } } };
 
-inline bool CompareArray( const DirectX::XMFLOAT3* a, const DirectX::XMFLOAT3* b, size_t count )
+inline bool CompareArray(const DirectX::XMFLOAT3* a, const DirectX::XMFLOAT3* b, size_t count)
 {
     using namespace DirectX;
 
-    for( size_t j = 0; j < count; ++j )
+    for (size_t j = 0; j < count; ++j)
     {
-        XMVECTOR v1 = XMLoadFloat3( &a[j] );
-        XMVECTOR v2 = XMLoadFloat3( &b[j] );
+        XMVECTOR v1 = XMLoadFloat3(&a[j]);
+        XMVECTOR v2 = XMLoadFloat3(&b[j]);
 
-        if ( !XMVector3NearEqual( v1, v2, g_MeshEpsilon ) )
+        if (!XMVector3NearEqual(v1, v2, g_MeshEpsilon))
             return false;
     }
 
@@ -426,17 +426,17 @@ inline bool CompareArray( const DirectX::XMFLOAT3* a, const DirectX::XMFLOAT3* b
 
 
 //--------------------------------------------------------------------------------------
-inline bool IsValidPointReps( _In_reads_(nVerts) const uint32_t* pointRep, size_t nVerts )
+inline bool IsValidPointReps(_In_reads_(nVerts) const uint32_t* pointRep, size_t nVerts)
 {
-    if ( !pointRep || !nVerts )
+    if (!pointRep || !nVerts)
         return false;
 
-    for( size_t j = 0; j < nVerts; ++j )
+    for (size_t j = 0; j < nVerts; ++j)
     {
-        if ( pointRep[ j ] == uint32_t(-1) )
+        if (pointRep[j] == uint32_t(-1))
             continue;
 
-        if ( pointRep[ j ] >= nVerts )
+        if (pointRep[j] >= nVerts)
             return false;
     }
 
@@ -446,55 +446,58 @@ inline bool IsValidPointReps( _In_reads_(nVerts) const uint32_t* pointRep, size_
 
 //--------------------------------------------------------------------------------------
 template<typename index_t>
-inline bool IsValidFaceRemap( _In_reads_(nFaces*3) const index_t* indices, _In_reads_(nFaces) const uint32_t* faceRemap, size_t nFaces )
+inline bool IsValidFaceRemap(
+    _In_reads_(nFaces * 3) const index_t* indices,
+    _In_reads_(nFaces) const uint32_t* faceRemap,
+    size_t nFaces)
 {
-    if ( !indices || !faceRemap || !nFaces )
+    if (!indices || !faceRemap || !nFaces)
         return false;
 
     size_t unused = 0;
 
-    for( size_t j = 0; j < nFaces; ++j )
+    for (size_t j = 0; j < nFaces; ++j)
     {
-        if ( faceRemap[j] == uint32_t(-1) )
+        if (faceRemap[j] == uint32_t(-1))
             ++unused;
-        else if ( faceRemap[j] >= nFaces )
+        else if (faceRemap[j] >= nFaces)
             return false;
     }
 
-    std::unique_ptr<uint32_t[]> temp( new (std::nothrow) uint32_t[ nFaces ] );
-    if ( !temp )
+    std::unique_ptr<uint32_t[]> temp(new (std::nothrow) uint32_t[nFaces]);
+    if (!temp)
         return false;
 
     // check that each 'used' face is used and only used once
-    memcpy( temp.get(), faceRemap, sizeof(uint32_t) * nFaces );
+    memcpy(temp.get(), faceRemap, sizeof(uint32_t) * nFaces);
 
-    std::sort( temp.get(), temp.get() + nFaces );
+    std::sort(temp.get(), temp.get() + nFaces);
 
     size_t curface = 0;
     size_t expectedUnused = 0;
 
-    for( uint32_t j = 0; j < nFaces; ++j )
+    for (uint32_t j = 0; j < nFaces; ++j)
     {
-        index_t i0 = indices[ j*3 ];
-        index_t i1 = indices[ j*3 + 1 ];
-        index_t i2 = indices[ j*3 + 2 ];
+        index_t i0 = indices[j * 3];
+        index_t i1 = indices[j * 3 + 1];
+        index_t i2 = indices[j * 3 + 2];
 
-        if ( i0 == index_t(-1)
-             || i1 == index_t(-1)
-             || i2 == index_t(-1 ) )
+        if (i0 == index_t(-1)
+            || i1 == index_t(-1)
+            || i2 == index_t(-1))
         {
-             // ignore unused faces
-             ++expectedUnused;
-             continue;
+            // ignore unused faces
+            ++expectedUnused;
+            continue;
         }
 
-        if ( temp[ curface ] != j )
+        if (temp[curface] != j)
             return false;
 
         ++curface;
     }
 
-    if ( unused > expectedUnused )
+    if (unused > expectedUnused)
         return false;
 
     return true;
@@ -503,46 +506,115 @@ inline bool IsValidFaceRemap( _In_reads_(nFaces*3) const index_t* indices, _In_r
 
 //--------------------------------------------------------------------------------------
 template<typename index_t>
-inline bool IsValidVertexRemap( _In_reads_(nFaces*3) const index_t* indices, size_t nFaces,
-                                _In_reads_(nVerts) const uint32_t* vertexRemap, size_t nVerts, bool allowdups = false, bool welded = false )
+inline bool IsValidFaceDestMap(
+    _In_reads_(nFaces * 3) const index_t* indices,
+    _In_reads_(nFaces) const uint32_t* faceDestMap,
+    size_t nFaces,
+    size_t baseFace)
 {
-    if ( !indices || !nFaces || !vertexRemap || !nVerts )
+    if (!indices || !faceDestMap || !nFaces)
+        return false;
+
+    size_t maxFaces = baseFace + nFaces;
+    size_t unused = 0;
+
+    for (size_t j = 0; j < nFaces; ++j)
+    {
+        if (faceDestMap[j] == uint32_t(-1))
+            ++unused;
+        else if (faceDestMap[j] < baseFace)
+            return false;
+        else if (faceDestMap[j] >= maxFaces)
+            return false;
+    }
+
+    std::unique_ptr<uint32_t[]> temp(new (std::nothrow) uint32_t[nFaces]);
+    if (!temp)
+        return false;
+
+    // check that each 'used' face is used and only used once
+    memcpy(temp.get(), faceDestMap, sizeof(uint32_t) * nFaces);
+
+    std::sort(temp.get(), temp.get() + nFaces);
+
+    size_t curface = 0;
+    size_t expectedUnused = 0;
+
+    for (uint32_t j = 0; j < nFaces; ++j)
+    {
+        index_t i0 = indices[j * 3];
+        index_t i1 = indices[j * 3 + 1];
+        index_t i2 = indices[j * 3 + 2];
+
+        if (i0 == index_t(-1)
+            || i1 == index_t(-1)
+            || i2 == index_t(-1))
+        {
+            // ignore unused faces
+            ++expectedUnused;
+            continue;
+        }
+
+        if (temp[curface] != j + baseFace)
+            return false;
+
+        ++curface;
+    }
+
+    if (unused > expectedUnused)
+        return false;
+
+    return true;
+}
+
+
+//--------------------------------------------------------------------------------------
+template<typename index_t>
+inline bool IsValidVertexRemap(
+    _In_reads_(nFaces * 3) const index_t* indices,
+    size_t nFaces,
+    _In_reads_(nVerts) const uint32_t* vertexRemap,
+    size_t nVerts,
+    bool allowdups = false,
+    bool welded = false)
+{
+    if (!indices || !nFaces || !vertexRemap || !nVerts)
         return false;
 
     size_t unused = 0;
 
-    for( size_t j = 0; j < nVerts; ++j )
+    for (size_t j = 0; j < nVerts; ++j)
     {
-        if ( vertexRemap[j] == uint32_t(-1) )
+        if (vertexRemap[j] == uint32_t(-1))
             ++unused;
-        else if ( vertexRemap[j] >= nVerts )
+        else if (vertexRemap[j] >= nVerts)
             return false;
     }
 
-    std::unique_ptr<uint8_t[]> temp( new (std::nothrow) uint8_t[ ( sizeof(bool) + sizeof(uint32_t) ) * nVerts ] );
-    if ( !temp )
+    std::unique_ptr<uint8_t[]> temp(new (std::nothrow) uint8_t[(sizeof(bool) + sizeof(uint32_t)) * nVerts]);
+    if (!temp)
         return false;
 
-    auto vused = reinterpret_cast<bool*>( temp.get() );
-    memset( vused, 0, sizeof(bool) * nVerts );
+    auto vused = reinterpret_cast<bool*>(temp.get());
+    memset(vused, 0, sizeof(bool) * nVerts);
 
-    for( size_t j = 0; j < nFaces; ++j )
+    for (size_t j = 0; j < nFaces; ++j)
     {
-        index_t i0 = indices[ j*3 ];
-        index_t i1 = indices[ j*3 + 1 ];
-        index_t i2 = indices[ j*3 + 2 ];
+        index_t i0 = indices[j * 3];
+        index_t i1 = indices[j * 3 + 1];
+        index_t i2 = indices[j * 3 + 2];
 
-        if ( i0 == index_t(-1)
-             || i1 == index_t(-1)
-             || i2 == index_t(-1 ) )
+        if (i0 == index_t(-1)
+            || i1 == index_t(-1)
+            || i2 == index_t(-1))
         {
             // skip unused faces
             continue;
         }
 
-        if ( i0 < nVerts )  vused[ i0 ] = true;
-        if ( i1 < nVerts )  vused[ i1 ] = true;
-        if ( i2 < nVerts )  vused[ i2 ] = true;
+        if (i0 < nVerts)  vused[i0] = true;
+        if (i1 < nVerts)  vused[i1] = true;
+        if (i2 < nVerts)  vused[i2] = true;
     }
 
     if (!welded)
@@ -559,22 +631,106 @@ inline bool IsValidVertexRemap( _In_reads_(nFaces*3) const index_t* indices, siz
             return false;
     }
 
-    if ( allowdups )
+    if (allowdups)
         return true;
 
     // check that each 'used' vertex is used and only used once
-    auto verts = reinterpret_cast<uint32_t*>( temp.get() + sizeof(bool) * nVerts );
-    memcpy( verts, vertexRemap, sizeof(uint32_t) * nVerts );
+    auto verts = reinterpret_cast<uint32_t*>(temp.get() + sizeof(bool) * nVerts);
+    memcpy(verts, vertexRemap, sizeof(uint32_t) * nVerts);
 
-    std::sort( verts, verts + nVerts );
+    std::sort(verts, verts + nVerts);
 
     size_t curvert = 0;
-    for( uint32_t j = 0; j < nVerts; ++j )
+    for (uint32_t j = 0; j < nVerts; ++j)
     {
-        if ( !vused[ j ] )
+        if (!vused[j])
             continue;
 
-        if ( verts[ curvert ] != j )
+        if (verts[curvert] != j)
+            return false;
+
+        ++curvert;
+    }
+
+    return true;
+}
+
+
+//--------------------------------------------------------------------------------------
+template<typename index_t>
+inline bool IsValidVertexDestMap(
+    _In_reads_(nFaces * 3) const index_t* indices,
+    size_t nFaces,
+    _In_reads_(nVerts) const uint32_t* vertexDestMap,
+    size_t nVerts,
+    size_t baseVert)
+{
+    if (!indices || !nFaces || !vertexDestMap || !nVerts)
+        return false;
+
+    size_t maxVert = baseVert + nVerts;
+    size_t unused = 0;
+
+    for (size_t j = 0; j < nVerts; ++j)
+    {
+        if (vertexDestMap[j] == uint32_t(-1))
+            ++unused;
+        else if (vertexDestMap[j] < baseVert)
+            return false;
+        else if (vertexDestMap[j] >= maxVert)
+            return false;
+    }
+
+    std::unique_ptr<uint8_t[]> temp(new (std::nothrow) uint8_t[(sizeof(bool) + sizeof(uint32_t)) * nVerts]);
+    if (!temp)
+        return false;
+
+    auto vused = reinterpret_cast<bool*>(temp.get());
+    memset(vused, 0, sizeof(bool) * nVerts);
+
+    for (size_t j = 0; j < nFaces; ++j)
+    {
+        index_t i0 = indices[j * 3];
+        index_t i1 = indices[j * 3 + 1];
+        index_t i2 = indices[j * 3 + 2];
+
+        if (i0 == index_t(-1)
+            || i1 == index_t(-1)
+            || i2 == index_t(-1))
+        {
+            // skip unused faces
+            continue;
+        }
+
+        if (i0 < nVerts)  vused[i0] = true;
+        if (i1 < nVerts)  vused[i1] = true;
+        if (i2 < nVerts)  vused[i2] = true;
+    }
+
+    size_t expectedUnused = 0;
+
+    for (size_t j = 0; j < nVerts; ++j)
+    {
+        if (!vused[j])
+            ++expectedUnused;
+    }
+
+    if (unused > expectedUnused)
+        return false;
+
+    // check that each 'used' vertex is used and only used once
+    auto verts = reinterpret_cast<uint32_t*>(temp.get() + sizeof(bool) * nVerts);
+    memcpy(verts, vertexDestMap, sizeof(uint32_t) * nVerts);
+
+    std::sort(verts, verts + nVerts);
+
+    size_t curvert = 0;
+    for (uint32_t j = 0; j < nVerts; ++j)
+    {
+        if (!vused[j])
+            continue;
+
+        if (verts[curvert] != j + baseVert)
             return false;
 
         ++curvert;
@@ -600,5 +756,5 @@ inline bool IsValidMeshlet(const DirectX::Meshlet& meshlet, size_t nVerts, size_
 //--------------------------------------------------------------------------------------
 inline bool IsValidMeshletTriangle(const DirectX::MeshletTriangle& mtri, size_t nVerts)
 {
-    return (mtri.i0 < nVerts && mtri.i1 < nVerts && mtri.i2 < nVerts);
+    return (mtri.i0 < nVerts&& mtri.i1 < nVerts&& mtri.i2 < nVerts);
 }
