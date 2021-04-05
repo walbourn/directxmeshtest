@@ -13,9 +13,6 @@
 #include "TestGeometry.h"
 #include "ShapesGenerator.h"
 
-#include "TestHelpers.h"
-#include "TestGeometry.h"
-
 using namespace DirectX;
 using namespace TestGeometry;
 
