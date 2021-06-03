@@ -333,12 +333,6 @@ bool Test03()
         printf("\nERROR: invalid args test D failed\n");
     }
 
-    if (FVF::ComputeVertexSize(c_VertexPosition, MAXD3DDECLLENGTH + 2, 0) != 0)
-    {
-        success = false;
-        printf("\nERROR: invalid args test E failed\n");
-    }
-
     // large decl tests
     auto bigDecl = std::make_unique<D3DVERTEXELEMENT9[]>(MAXD3DDECLLENGTH + 1);
     auto tooBigDecl = std::make_unique<D3DVERTEXELEMENT9[]>(MAXD3DDECLLENGTH + 2);
@@ -364,6 +358,12 @@ bool Test03()
     {
         success = false;
         printf("\nERROR: big decl failed: %zu .. 768\n", vsize);
+    }
+
+    if (FVF::ComputeVertexSize(tooBigDecl.get(), MAXD3DDECLLENGTH + 2, 0) != 0)
+    {
+        success = false;
+        printf("\nERROR: invalid args too big test failed\n");
     }
 
     if (FVF::ComputeVertexSize(tooBigDecl.get(), 0) != 0)
@@ -473,16 +473,11 @@ bool Test05()
         printf("\nERROR: invalid args test A failed\n");
     }
 
+#pragma warning(suppress : 6385) // test forces invalid SAL usage
     if (FVF::ComputeFVF(nullptr, 0) != 0)
     {
         success = false;
         printf("\nERROR: invalid args test B failed\n");
-    }
-
-    if (FVF::ComputeFVF(c_VertexPosition, MAXD3DDECLLENGTH + 2) != 0)
-    {
-        success = false;
-        printf("\nERROR: invalid args test C failed\n");
     }
 
     // large decl tests
@@ -499,6 +494,12 @@ bool Test05()
     tooBigDecl[MAXD3DDECLLENGTH] = c_VertexPosition[0];
     tooBigDecl[MAXD3DDECLLENGTH].Offset = static_cast<WORD>(offset);
     tooBigDecl[MAXD3DDECLLENGTH + 1] = D3DDECL_END();
+
+    if (FVF::ComputeFVF(tooBigDecl.get(), MAXD3DDECLLENGTH + 2) != 0)
+    {
+        success = false;
+        printf("\nERROR: invalid args too big test failed\n");
+    }
 
     if (FVF::ComputeFVF(tooBigDecl.get()) != 0)
     {
@@ -560,10 +561,17 @@ bool Test06()
         printf("\nERROR: invalid args test C failed\n");
     }
 
+    if (FVF::CreateDeclFromFVF(D3DFVF_XYZB5, decl) != 0)
+    {
+        // 5 betas not supported without indices
+        success = false;
+        printf("\nERROR: invalid args test D failed\n");
+    }
+
     if (FVF::CreateDeclFromFVF(D3DFVF_XYZ | 0xF00 /* 15 texture coords*/, decl) != 0)
     {
         success = false;
-        printf("\nERROR: invalid args test D failed\n");
+        printf("\nERROR: invalid args test E failed\n");
     }
 
     return success;

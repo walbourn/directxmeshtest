@@ -238,7 +238,8 @@ bool Test07()
             success = false;
             printf("\nERROR (2): %zu: %zu .. %zu\n", j, il.size(), s_fvfVertexSize[j].layoutLen);
         }
-        else if (s_fvfVertexSize[j].pIL && !IsMatch(s_fvfVertexSize[j].pIL, s_fvfVertexSize[j].layoutLen, il.data(), il.size()))
+        else if (s_fvfVertexSize[j].pIL
+            && !IsMatch(s_fvfVertexSize[j].pIL, s_fvfVertexSize[j].layoutLen, il.data(), il.size()))
         {
             success = false;
             printf("\nERROR (3): %zu: input layout does not match\n", j);
@@ -265,10 +266,17 @@ bool Test07()
         printf("\nERROR: invalid args test C failed\n");
     }
 
+    if (FVF::CreateInputLayoutFromFVF(D3DFVF_XYZB5, il) != 0)
+    {
+        // 5 betas not supported without indices
+        success = false;
+        printf("\nERROR: invalid args test D failed\n");
+    }
+
     if (FVF::CreateInputLayoutFromFVF(D3DFVF_XYZ | 0xF00 /* 15 texture coords*/, il) != 0)
     {
         success = false;
-        printf("\nERROR: invalid args test D failed\n");
+        printf("\nERROR: invalid args test E failed\n");
     }
 
     return success;
