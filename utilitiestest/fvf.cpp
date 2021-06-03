@@ -155,6 +155,28 @@ namespace
         { D3DFVF_XYZRHW | D3DFVF_TEX1 | D3DFVF_TEXCOORDSIZE3(0), 28u, nullptr, 2 },
         { D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_SPECULAR | D3DFVF_TEX1, 28u, nullptr, 4 },
     };
+
+    bool IsMatch(const D3DVERTEXELEMENT9* a, const D3DVERTEXELEMENT9* b)
+    {
+        size_t len = FVF::GetDeclLength(a);
+        if (len != FVF::GetDeclLength(b))
+            return false;
+
+        for (size_t j = 0; j < len; ++j)
+        {
+            if (a[j].Method != b[j].Method
+                || a[j].Offset != b[j].Offset
+                || a[j].Stream != b[j].Stream
+                || a[j].Type != b[j].Type
+                || a[j].Usage != b[j].Usage
+                || a[j].UsageIndex != b[j].UsageIndex)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 
@@ -456,9 +478,10 @@ bool Test06()
             success = false;
             printf("\nERROR (2): %zu: %zu .. %zu\n", j, decl.size(), s_fvfVertexSize[j].declLength + 1);
         }
-        else if (s_fvfVertexSize[j].pDecl)
+        else if (s_fvfVertexSize[j].pDecl && !IsMatch(s_fvfVertexSize[j].pDecl, decl.data()))
         {
-            // TODO - Compare decls
+            success = false;
+            printf("\nERROR (3): %zu: decls do not match\n", j);
         }
     }
 
