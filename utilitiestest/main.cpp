@@ -16,10 +16,12 @@ struct TestInfo
 };
 
 extern bool Test01();
+extern bool Test02();
 
 TestInfo g_Tests[] =
 {
-    { "WaveFrontReader", Test01 }
+    { "WaveFrontReader", Test01 },
+    { "ComputeFVFVertexSize", Test02 }
 };
 
 

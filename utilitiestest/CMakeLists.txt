@@ -25,9 +25,10 @@ if(MSVC)
 endif()
 
 set(TEST_SOURCES
+    ../../Utilities/FlexibleVertexFormat.h
     ../../Utilities/WaveFrontReader.h)
 
-add_executable(${PROJECT_NAME} main.cpp wavefrontobj.cpp ${TEST_SOURCES})
+add_executable(${PROJECT_NAME} main.cpp fvf.cpp wavefrontobj.cpp ${TEST_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ../../Utilities)
