@@ -17,11 +17,17 @@ struct TestInfo
 
 extern bool Test01();
 extern bool Test02();
+extern bool Test03();
+extern bool Test04();
+extern bool Test05();
 
 TestInfo g_Tests[] =
 {
-    { "WaveFrontReader", Test01 },
-    { "ComputeFVFVertexSize", Test02 }
+    { "ComputeVertexSize(FVF)", Test02 },
+    { "ComputeVertexSize(pDecl)", Test03 }, 
+    { "GetDeclLength", Test04 },
+    { "ComputeFVF", Test05 },
+    { "WaveFrontReader", Test01 }
 };
 
 
