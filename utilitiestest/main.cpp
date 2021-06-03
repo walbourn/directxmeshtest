@@ -20,6 +20,7 @@ extern bool Test02();
 extern bool Test03();
 extern bool Test04();
 extern bool Test05();
+extern bool Test06();
 
 TestInfo g_Tests[] =
 {
@@ -27,6 +28,7 @@ TestInfo g_Tests[] =
     { "ComputeVertexSize(pDecl)", Test03 }, 
     { "GetDeclLength", Test04 },
     { "ComputeFVF", Test05 },
+    { "CreateDeclFromFVF", Test06 },
     { "WaveFrontReader", Test01 }
 };
 

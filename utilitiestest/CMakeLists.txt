@@ -1,13 +1,16 @@
-﻿# DirectXMesh Utilities Module Test
-#
-# Copyright (c) Microsoft Corporation.
+﻿# Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 #
 # http://go.microsoft.com/fwlink/?LinkId=248926
 
 cmake_minimum_required (VERSION 3.11)
 
-project (utilitiestest LANGUAGES CXX)
+project (utilitiestest
+  DESCRIPTION "DirectXMesh Utilities Module Test"
+  HOMEPAGE_URL "https://go.microsoft.com/fwlink/?LinkID=324981"
+  LANGUAGES CXX)
+
+option(ENABLE_CODE_ANALYSIS "Use Static Code Analysis on build" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -51,6 +54,10 @@ if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
 endif()
 if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
     target_compile_options(${PROJECT_NAME} PRIVATE /permissive- /Zc:__cplusplus)
+
+   if(ENABLE_CODE_ANALYSIS)
+      target_compile_options(${PROJECT_NAME} PRIVATE /analyze)
+   endif()
 
     set(WarningsEXE "/wd4061" "/wd4365" "/wd4668" "/wd4820" "/wd5031" "/wd5032" "/wd5039" "/wd5045" )
     target_compile_options(${PROJECT_NAME} PRIVATE ${WarningsEXE})
