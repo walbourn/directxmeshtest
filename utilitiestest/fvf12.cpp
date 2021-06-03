@@ -35,7 +35,7 @@ namespace
         { D3DFVF_XYZB2, 20u, nullptr, 2 },
         { D3DFVF_XYZB3, 24u, nullptr, 2 },
         { D3DFVF_XYZB4, 28u, nullptr, 2 },
-        { D3DFVF_XYZB5, 32u, nullptr, 0 },
+        { D3DFVF_XYZB5 | D3DFVF_LASTBETA_UBYTE4, 32u, nullptr, 0 },
         { D3DFVF_XYZ | D3DFVF_TEX3, 36u, nullptr, 4 },
         { D3DFVF_XYZ | D3DFVF_TEX4, 44u, nullptr, 5 },
         { D3DFVF_XYZ | D3DFVF_TEX5, 52u, nullptr, 6 },
@@ -80,12 +80,19 @@ bool Test08()
             printf("\nERROR: %zu: %08X failed\n", j, s_fvfVertexSize[j].fvf);
         }
 
-        if (il.size() != s_fvfVertexSize[j].layoutLen + 1)
+        if (il.size() != s_fvfVertexSize[j].layoutLen)
         {
             success = false;
-            printf("\nERROR (2): %zu: %zu .. %zu\n", j, il.size(), s_fvfVertexSize[j].layoutLen + 1);
+            printf("\nERROR (2): %zu: %zu .. %zu\n", j, il.size(), s_fvfVertexSize[j].layoutLen);
+        }
+        else if (s_fvfVertexSize[j].pIL)
+        {
+            // TODO - Compare input layout
         }
     }
+
+    // invalid args
+    // TODO -
 
     return success;
 }
