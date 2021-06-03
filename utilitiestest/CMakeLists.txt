@@ -64,7 +64,7 @@ if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
       target_compile_options(${PROJECT_NAME} PRIVATE /analyze)
    endif()
 
-    set(WarningsEXE "/wd4061" "/wd4365" "/wd4668" "/wd4820" "/wd5031" "/wd5032" "/wd5039" "/wd5045" )
+    set(WarningsEXE "/wd4061" "/wd4365" "/wd4668" "/wd4710" "/wd4820" "/wd5031" "/wd5032" "/wd5039" "/wd5045" )
     target_compile_options(${PROJECT_NAME} PRIVATE ${WarningsEXE})
 endif()
 
