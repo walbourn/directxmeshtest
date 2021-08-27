@@ -728,9 +728,9 @@ bool Test16()
         std::unique_ptr<XMFLOAT3[]> positions(new XMFLOAT3[vertices.size()]);
         {
             size_t j = 0;
-            for (auto it = vertices.cbegin(); it != vertices.cend(); ++it)
+            for (const auto& it : vertices)
             {
-                positions[j] = it->position;
+                positions[j] = it.position;
                 ++j;
             }
         }
@@ -894,9 +894,9 @@ bool Test16()
         std::unique_ptr<XMFLOAT3[]> positions(new XMFLOAT3[vertices.size()]);
         {
             size_t j = 0;
-            for (auto it = vertices.cbegin(); it != vertices.cend(); ++it)
+            for (const auto& it : vertices)
             {
-                positions[j] = it->position;
+                positions[j] = it.position;
                 ++j;
             }
         }

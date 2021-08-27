@@ -1101,9 +1101,9 @@ bool Test04()
             sprintf_s( output, "INFO: %zu attribute groups: ", subsets.size() );
             OutputDebugStringA( output );
 
-            for (auto it = subsets.cbegin(); it != subsets.cend(); ++it)
+            for (const auto& it : subsets)
             {
-                sprintf_s(output, "(%zu, %zu) ", it->first, it->second);
+                sprintf_s(output, "(%zu, %zu) ", it.first, it.second);
                 OutputDebugStringA(output);
             }
 

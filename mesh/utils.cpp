@@ -416,9 +416,9 @@ bool Test24()
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
-            for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
+            for (const auto& it : subsets)
             {
-                printe("ERROR: ComputeSubsets null failed %zu,%zu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets null failed %zu,%zu\n", it.first, it.second);
             }
             success = false;
         }
@@ -451,9 +451,9 @@ bool Test24()
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
-            for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
+            for (const auto& it : subsets)
             {
-                printe("ERROR: ComputeSubsets identity failed %zu,%zu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets identity failed %zu,%zu\n", it.first, it.second);
             }
             success = false;
         }
@@ -475,9 +475,9 @@ bool Test24()
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
-            for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
+            for (const auto& it : subsets)
             {
-                printe("ERROR: ComputeSubsets zero failed %zu,%zu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets zero failed %zu,%zu\n", it.first, it.second);
             }
             success = false;
         }
@@ -509,9 +509,9 @@ bool Test24()
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
-            for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
+            for (const auto& it : subsets)
             {
-                printe("ERROR: ComputeSubsets unsorted failed %zu,%zu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets unsorted failed %zu,%zu\n", it.first, it.second);
             }
             success = false;
         }
@@ -538,9 +538,9 @@ bool Test24()
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
-            for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
+            for (const auto& it : subsets)
             {
-                printe("ERROR: ComputeSubsets sorted failed %zu,%zu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets sorted failed %zu,%zu\n", it.first, it.second);
             }
             success = false;
         }
@@ -566,9 +566,9 @@ bool Test24()
         }
         else if ( memcmp( s_result, subsets.data(), sizeof(s_result) ) != 0 )
         {
-            for( auto it = subsets.cbegin(); it != subsets.cend(); ++it )
+            for (const auto& it : subsets)
             {
-                printe("ERROR: ComputeSubsets sorted (2) failed %zu,%zu\n", it->first, it->second );
+                printe("ERROR: ComputeSubsets sorted (2) failed %zu,%zu\n", it.first, it.second);
             }
             success = false;
         }

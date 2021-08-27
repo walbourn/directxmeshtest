@@ -292,9 +292,9 @@ private:
             std::swap( *it, *(it+2) );
         }
 
-        for( auto it = vertices.begin(); it != vertices.end(); ++it )
+        for (auto& it : vertices)
         {
-            it->textureCoordinate.x = ( 1.f - it->textureCoordinate.x );
+            it.textureCoordinate.x = (1.f - it.textureCoordinate.x);
         }
     }
 
