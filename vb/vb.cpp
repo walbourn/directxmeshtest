@@ -9,6 +9,8 @@
 
 #include <d3d11_1.h>
 
+#include <type_traits>
+
 #include "DirectXMesh.h"
 
 #include "TestHelpers.h"
@@ -581,6 +583,9 @@ extern const wchar_t* GetName( DXGI_FORMAT fmt );
 // VBReader
 bool Test03()
 {
+    static_assert(std::is_nothrow_move_constructible<VBReader>::value, "Move Ctor.");
+    static_assert(std::is_nothrow_move_assignable<VBReader>::value, "Move Assign.");
+
     bool success = true;
 
     // Single-stream
@@ -974,6 +979,9 @@ bool Test03()
 // VBWriter
 bool Test04()
 {
+    static_assert(std::is_nothrow_move_constructible<VBWriter>::value, "Move Ctor.");
+    static_assert(std::is_nothrow_move_assignable<VBWriter>::value, "Move Assign.");
+
     bool success = true;
 
     // Single-stream
