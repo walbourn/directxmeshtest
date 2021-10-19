@@ -21,7 +21,7 @@ enum
     FLAGS_IGNORE_SLOWDOWN_AT    = 0x1,
 };
 
-static const float g_Epsilon = 0.0001f;
+constexpr float g_Epsilon = 0.0001f;
 
 struct TestMedia
 {
