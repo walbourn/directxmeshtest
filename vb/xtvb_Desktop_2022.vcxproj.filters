@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="directxtest.cpp" />
+    <ClCompile Include="inputdesc.cpp" />
+    <ClCompile Include="testutils.cpp" />
+    <ClCompile Include="vb.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{d34ec5d6-db77-4c29-baa8-912c20da9458}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\directxtest.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ShapesGenerator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\TestGeometry.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\TestHelpers.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\TestInputLayouts.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Utilities\WaveFrontReader.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
