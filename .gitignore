@@ -24,8 +24,4 @@ Debug
 Profile
 Release
 x64
-CMakeCache.txt
-CMakeFiles/
-Makefile
-cmake/
-cmake_install.cmake
+CMakeUserPresets.json
