@@ -16,6 +16,7 @@ struct TestInfo
 };
 
 extern bool Test01();
+#if !defined(WINAPI_FAMILY) || (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
 extern bool Test02();
 extern bool Test03();
 extern bool Test04();
@@ -23,9 +24,11 @@ extern bool Test05();
 extern bool Test06();
 extern bool Test07();
 extern bool Test08();
+#endif
 
 TestInfo g_Tests[] =
 {
+#if !defined(WINAPI_FAMILY) || (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
     { "ComputeVertexSize(FVF)", Test02 },
     { "ComputeVertexSize(pDecl)", Test03 }, 
     { "GetDeclLength", Test04 },
@@ -33,6 +36,7 @@ TestInfo g_Tests[] =
     { "CreateDeclFromFVF", Test06 },
     { "CreateInputLayoutFromFVF(D3D11)", Test07 },
     { "CreateInputLayoutFromFVF(D3D12)", Test08 },
+#endif
     { "WaveFrontReader", Test01 }
 };
 

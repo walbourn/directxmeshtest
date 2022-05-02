@@ -1,7 +1,5 @@
 ﻿# Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-#
-# http://go.microsoft.com/fwlink/?LinkId=248926
 
 cmake_minimum_required (VERSION 3.11)
 
@@ -20,6 +18,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/CMake")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/CMake")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/CMake")
 
+if (DEFINED VCPKG_TARGET_ARCHITECTURE)
+    set(DIRECTX_ARCH ${VCPKG_TARGET_ARCHITECTURE})
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Ww][Ii][Nn]32$")
+    set(DIRECTX_ARCH x86)
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Xx]64$")
+    set(DIRECTX_ARCH x64)
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Aa][Rr][Mm]$")
+    set(DIRECTX_ARCH arm)
+elseif(CMAKE_GENERATOR_PLATFORM MATCHES "^[Aa][Rr][Mm]64$")
+    set(DIRECTX_ARCH arm64)
+endif()
+
 if(MSVC)
     # Use max Warning Level
     string(REPLACE "/W3 " "/Wall " CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
@@ -28,12 +38,18 @@ if(MSVC)
 endif()
 
 set(TEST_SOURCES
-    ../../Utilities/FlexibleVertexFormat.h
+    wavefrontobj.cpp
     ../../Utilities/WaveFrontReader.h)
 
-add_executable(${PROJECT_NAME}
-    main.cpp fvf.cpp fvf11.cpp fvf12.cpp wavefrontobj.cpp
-    ${TEST_SOURCES})
+if (NOT WINDOWS_STORE)
+  set(TEST_SOURCES ${TEST_SOURCES}
+      fvf.cpp
+      fvf11.cpp
+      fvf12.cpp
+      ../../Utilities/FlexibleVertexFormat.h)
+endif()
+
+add_executable(${PROJECT_NAME} main.cpp ${TEST_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ../../Utilities)
@@ -41,16 +57,20 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_include_directories(${PROJECT_NAME} PRIVATE
     ../common)
 
-if(MSVC)
-    if (${CMAKE_SIZEOF_VOID_P} EQUAL "4")
-        target_compile_options(${PROJECT_NAME} PRIVATE /arch:SSE2)
-    endif()
+if (MINGW OR (NOT WIN32) OR VCPKG_TOOLCHAIN)
+    message("INFO: Using VCPKG for DirectXMath.")
+    find_package(directxmath CONFIG REQUIRED)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectXMath)
 endif()
 
-if (NOT WIN32)
-    find_package(directx-headers CONFIG REQUIRED)
-    find_package(directxmath CONFIG REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectX-Headers Microsoft::DirectXMath)
+if(NOT ${DIRECTX_ARCH} MATCHES "^arm")
+    if (${CMAKE_SIZEOF_VOID_P} EQUAL "4")
+        set(ARCH_SSE2 $<$<CXX_COMPILER_ID:MSVC>:/arch:SSE2> $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse2>)
+    else()
+        set(ARCH_SSE2 $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse2>)
+    endif()
+
+    target_compile_options(${PROJECT_NAME} PRIVATE ${ARCH_SSE2})
 endif()
 
 if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
@@ -69,5 +89,11 @@ if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
 endif()
 
 if(WIN32)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE _UNICODE UNICODE _WIN32_WINNT=0x0601)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE _UNICODE UNICODE)
+
+    if(WINDOWS_STORE)
+      target_compile_definitions(${PROJECT_NAME} PRIVATE WINAPI_FAMILY=WINAPI_FAMILY_APP _WIN32_WINNT=0x0A00)
+    else()
+      target_compile_definitions(${PROJECT_NAME} PRIVATE _WIN32_WINNT=0x0601)
+    endif()
 endif()
