@@ -38,7 +38,7 @@ add_executable(xtmesh
    mesh/directxtest.cpp)
 target_include_directories(xtmesh PRIVATE ./common)
 add_test(NAME "mesh" COMMAND xtmesh)
-set_tests_properties(xtmesh PROPERTIES TIMEOUT 60)
+set_tests_properties(mesh PROPERTIES TIMEOUT 60)
 
 # VB
 list(APPEND TEST_EXES xtvb)
@@ -50,14 +50,14 @@ add_executable(xtvb ${TEST_SOURCES}
    vb/testutils.cpp vb/directxtest.cpp)
 target_include_directories(xtvb PRIVATE ./common)
 add_test(NAME "vertexBuffer" COMMAND xtvb)
-set_tests_properties(xtvb PROPERTIES TIMEOUT 60)
+set_tests_properties(vertexBuffer PROPERTIES TIMEOUT 60)
 
 # CP
 list(APPEND TEST_EXES xtcp)
 add_executable(xtcp cp/process.cpp cp/directxtest.cpp)
 target_include_directories(xtcp PRIVATE ./common)
 add_test(NAME "contentProcess" COMMAND xtcp)
-set_tests_properties(xtcp PROPERTIES TIMEOUT 60)
+set_tests_properties(contentProcess PROPERTIES TIMEOUT 60)
 
 message("INFO: Enabled tests: ${TEST_EXES}")
 foreach(t IN LISTS TEST_EXES)
