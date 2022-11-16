@@ -48,6 +48,6 @@
                                        digest[8], digest[9], digest[10], digest[11], digest[12], digest[13], digest[14], digest[15] );
 #endif
 
-#define MEDIA_PATH L"D:\\Microsoft\\directxmeshmedia\\"
+#define MEDIA_PATH L"%DIRECTXMESH_MEDIA_PATH%\\"
 
 #define TEMP_PATH L"%TEMP%\\"

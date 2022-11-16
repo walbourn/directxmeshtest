@@ -720,7 +720,7 @@ bool Test16()
         std::unique_ptr<uint32_t[]> remap(new uint32_t[nFaces]);
         memset(remap.get(), 0xff, sizeof(uint32_t) * nFaces);
 
-        float acmrDef, atvrDef;
+        float acmrDef = 0.f, atvrDef = 0.f;
 
         std::unique_ptr<uint32_t[]> adj(new uint32_t[3 * nFaces]);
         memset(adj.get(), 0xcd, sizeof(uint32_t) * 3 * nFaces);
