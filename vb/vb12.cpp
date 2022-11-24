@@ -6,7 +6,12 @@
 
 #include "directxtest.h"
 
+#ifdef USING_DIRECTX_HEADERS
+#include <directx/d3d12.h>
+#else
 #include <d3d12.h>
+#endif
+
 #include "DirectXMesh.h"
 
 #include "DirectXMeshP.h"
@@ -1425,7 +1430,7 @@ bool Test05_DX12()
             }
             else
             {
-                __declspec(align(16)) XMVECTOR temp;
+                XM_ALIGNED_DATA(16) XMVECTOR temp;
                 hr = reader->Read( &temp, "DATA", 0, 1 );
                 if ( FAILED(hr) )
                 {
@@ -1501,7 +1506,7 @@ bool Test05_DX12()
             }
             else
             {
-                __declspec(align(16)) XMVECTOR temp;
+                XM_ALIGNED_DATA(16) XMVECTOR temp;
                 hr = reader->Read(&temp, "DATA", 0, 1, true);
                 if (FAILED(hr))
                 {

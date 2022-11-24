@@ -27,9 +27,17 @@
 
 #include <Windows.h>
 
+#ifdef __MINGW32__
+#include <unknwn.h>
+#endif
+
 #define _XM_NO_XMVECTOR_OVERLOADS_
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
+
+#if (DIRECTX_MATH_VERSION < 315)
+#define XM_ALIGNED_DATA(x) __declspec(align(x))
+#endif
 
 #define _DIRECTX_TEST_NAME_ "DirectXMesh"
 

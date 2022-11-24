@@ -184,7 +184,7 @@ bool Test14()
         }
 
         // invalid args
-        hr = Clean( indices.get(), 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, adj.get(), nullptr, dups );
+        hr = Clean( indices.get(), 12, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, adj.get(), nullptr, dups );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: Clean(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -764,7 +764,7 @@ bool Test14()
         }
 
         // invalid args
-        hr = Clean( indices.get(), 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, adj.get(), nullptr, dups );
+        hr = Clean( indices.get(), 12, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, adj.get(), nullptr, dups );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: Clean(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );

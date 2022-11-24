@@ -146,7 +146,7 @@ bool Test26()
 
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
-        hr = WeldVertices(newIndices.get(), 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(16) expected failure for strip cut verts (%08X)\n", static_cast<unsigned int>(hr));
@@ -475,7 +475,7 @@ bool Test26()
 
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
-        hr = WeldVertices(newIndices.get(), 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(32) expected failure for strip cut verts (%08X)\n", static_cast<unsigned int>(hr));
@@ -911,7 +911,7 @@ bool Test27()
                         printe("\nERROR: CompactVB expected failure for bad stride value (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
-                    hr = CompactVB(vertices.data(), sizeof(TestVertex), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, trailingUnused, remap.get(), finalVertices.get());
+                    hr = CompactVB(vertices.data(), sizeof(TestVertex), UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, trailingUnused, remap.get(), finalVertices.get());
                     if (hr != E_INVALIDARG)
                     {
                         printe("\nERROR: CompactVB expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr));

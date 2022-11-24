@@ -483,7 +483,7 @@ bool Test06()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = Validate( g_cubeIndices16, 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, nullptr, VALIDATE_DEFAULT, &msgs );
+        hr = Validate( g_cubeIndices16, 12, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: Validate(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -654,7 +654,7 @@ bool Test06()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
-        hr = Validate( g_cubeIndices32, 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, nullptr, VALIDATE_DEFAULT, &msgs );
+        hr = Validate( g_cubeIndices32, 12, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: Validate(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );

@@ -317,7 +317,7 @@ bool Test13()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = ComputeTangentFrame( g_fmCubeIndices16, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, D3D11_16BIT_INDEX_STRIP_CUT_VALUE,
+        hr = ComputeTangentFrame( g_fmCubeIndices16, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/,
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -553,7 +553,7 @@ bool Test13()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
-        hr = ComputeTangentFrame( g_fmCubeIndices32, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, D3D11_32BIT_INDEX_STRIP_CUT_VALUE,
+        hr = ComputeTangentFrame( g_fmCubeIndices32, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/,
                                   tangents.get(), bitangents.get() );
         if ( hr != E_INVALIDARG )
         {

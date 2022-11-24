@@ -376,7 +376,7 @@ bool Test07()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, 0.f, preps.get(), nullptr );
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -598,7 +598,7 @@ bool Test07()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, 0.f, preps.get(), nullptr );
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1423,7 +1423,7 @@ bool Test10()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = GenerateGSAdjacency( g_cubeIndices16, 12, s_cubePointReps, s_cubeAdj, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, gsadj.get() );
+        hr = GenerateGSAdjacency( g_cubeIndices16, 12, s_cubePointReps, s_cubeAdj, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: GenerateGSAdjacency(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1530,7 +1530,7 @@ bool Test10()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = GenerateGSAdjacency( g_cubeIndices32, 12, s_cubePointReps, s_cubeAdj, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, gsadj.get() );
+        hr = GenerateGSAdjacency( g_cubeIndices32, 12, s_cubePointReps, s_cubeAdj, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: GenerateGSAdjacency(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1768,7 +1768,7 @@ bool Test12()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );   
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1870,7 +1870,7 @@ bool Test12()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );   
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -2436,7 +2436,7 @@ bool Test19()
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, s_cubePointReps, nullptr, 0, remap.data(), destvb.get(), preps.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -2469,7 +2469,7 @@ bool Test19()
             success = false;
         }
 
-        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, preps.get(), remap.data() );
+        hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, preps.get(), remap.data() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVBAndPointReps [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
