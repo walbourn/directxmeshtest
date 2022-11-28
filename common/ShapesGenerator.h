@@ -74,7 +74,8 @@ public:
             { 0, 0 },
         };
 
-        size /= 2;
+        XMVECTOR tsize = XMVectorReplicate(size);
+        tsize = XMVectorDivide(tsize, g_XMTwo);
 
         // Create each face in turn.
         for (int i = 0; i < FaceCount; i++)
@@ -98,10 +99,18 @@ public:
             indices.push_back( index_t(vbase + 3) );
 
             // Four vertices per face.
-            vertices.push_back(Vertex((normal - side1 - side2) * size, normal, textureCoordinates[0]));
-            vertices.push_back(Vertex((normal - side1 + side2) * size, normal, textureCoordinates[1]));
-            vertices.push_back(Vertex((normal + side1 + side2) * size, normal, textureCoordinates[2]));
-            vertices.push_back(Vertex((normal + side1 - side2) * size, normal, textureCoordinates[3]));
+
+            // (normal - side1 - side2) * tsize // normal // t0
+            vertices.push_back(Vertex(XMVectorMultiply(XMVectorSubtract(XMVectorSubtract(normal, side1), side2), tsize), normal, textureCoordinates[0]));
+
+            // (normal - side1 + side2) * tsize // normal // t1
+            vertices.push_back(Vertex(XMVectorMultiply(XMVectorAdd(XMVectorSubtract(normal, side1), side2), tsize), normal, textureCoordinates[1]));
+
+            // (normal + side1 + side2) * tsize // normal // t2
+            vertices.push_back(Vertex(XMVectorMultiply(XMVectorAdd(normal, XMVectorAdd(side1, side2)), tsize), normal, textureCoordinates[2]));
+
+            // (normal + side1 - side2) * tsize // normal // t3
+            vertices.push_back(Vertex(XMVectorMultiply(XMVectorSubtract(XMVectorAdd(normal, side1), side2), tsize), normal, textureCoordinates[3]));
         }
 
         if ( !rhcoords )

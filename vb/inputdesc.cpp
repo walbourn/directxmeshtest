@@ -9,6 +9,10 @@
 
 #include <d3d11_1.h>
 
+#ifdef __MINGW32__
+#define D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT (32)
+#endif
+
 #include "DirectXMesh.h"
 
 #include "TestHelpers.h"

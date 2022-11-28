@@ -219,7 +219,7 @@ bool Test22()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        ComputeVertexCacheMissRate( g_fmCubeIndices16, 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( g_fmCubeIndices16, 12, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, OPTFACES_V_DEFAULT, acmr, atvr );
         if( acmr != -1.f || atvr != -1.f )
         {
             printe("\nERROR: ComputeVertexCacheMissRate(16) expected failure for strip cut value (ACMR %f, ATVR %f)\n", acmr, atvr );
@@ -308,7 +308,7 @@ bool Test22()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385 6387)  
-        ComputeVertexCacheMissRate( g_fmCubeIndices32, 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, OPTFACES_V_DEFAULT, acmr, atvr );
+        ComputeVertexCacheMissRate( g_fmCubeIndices32, 12, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, OPTFACES_V_DEFAULT, acmr, atvr );
         if( acmr != -1.f || atvr != -1.f )
         {
             printe("\nERROR: ComputeVertexCacheMissRate(32) expected failure for strip cut value (ACMR %f, ATVR %f)\n", acmr, atvr );

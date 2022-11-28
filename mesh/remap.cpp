@@ -273,7 +273,7 @@ bool Test03()
             success = false;
         }
 
-        hr = FinalizeIB( g_fmCubeIndices16, 12, s_remap, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, destib.get() );
+        hr = FinalizeIB( g_fmCubeIndices16, 12, s_remap, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, destib.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeIB(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -310,7 +310,7 @@ bool Test03()
             success = false;
         }
 
-        hr = FinalizeIB( destib.get(), 12, s_remap, D3D11_16BIT_INDEX_STRIP_CUT_VALUE );
+        hr = FinalizeIB( destib.get(), 12, s_remap, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/ );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeIB(16) [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -591,7 +591,7 @@ bool Test03()
             success = false;
         }
 
-        hr = FinalizeIB( g_fmCubeIndices32, 12, s_remap, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, destib.get() );
+        hr = FinalizeIB( g_fmCubeIndices32, 12, s_remap, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, destib.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeIB(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -628,7 +628,7 @@ bool Test03()
             success = false;
         }
 
-        hr = FinalizeIB( destib.get(), 12, s_remap, D3D11_32BIT_INDEX_STRIP_CUT_VALUE );
+        hr = FinalizeIB( destib.get(), 12, s_remap, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/ );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeIB(32) [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1262,7 +1262,7 @@ bool Test04()
             success = false;
         }
 
-        hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, nullptr, 0, s_remap, destvb.get() );
+        hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, 0, s_remap, destvb.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVB expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1293,7 +1293,7 @@ bool Test04()
             success = false;
         }
 
-        hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_remap );
+        hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, s_remap );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: FinalizeVB [in-place] expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );

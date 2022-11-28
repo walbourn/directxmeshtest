@@ -109,7 +109,7 @@ bool Test26()
         memcpy(newIndices.get(), g_cubeIndices16, sizeof(g_cubeIndices16));
 
         size_t ntests = 0;
-        HRESULT hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        HRESULT hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) cube identity failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -129,7 +129,7 @@ bool Test26()
         // null remap
         memcpy(newIndices.get(), g_cubeIndices16, sizeof(g_cubeIndices16));
         ntests = 0;
-        hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, nullptr, [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, nullptr, [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) cube identity [null remap] failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -146,25 +146,25 @@ bool Test26()
 
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
-        hr = WeldVertices(newIndices.get(), 12, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(16) expected failure for strip cut verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, UINT32_MAX, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, UINT32_MAX, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), UINT32_MAX, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), UINT32_MAX, 8, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
             printe("\nERROR: WeldVertices(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, 8, nullptr, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, nullptr, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(16) expected failure for nullptr point reps (%08X)\n", static_cast<unsigned int>(hr));
@@ -177,7 +177,7 @@ bool Test26()
             0, 1, 2, 23, 4, 5, 6, 7,
         };
 
-        hr = WeldVertices(newIndices.get(), 12, 8, s_badReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_badReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_UNEXPECTED)
         {
             printe("ERROR: WeldVertices(16) expected failure for  bad vert count (%08X)\n", static_cast<unsigned int>(hr));
@@ -185,19 +185,19 @@ bool Test26()
         }
 
         // Unused
-        hr = WeldVertices(newIndices.get(), 12, 8, s_unused, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_unused, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) cube unused failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedfirst, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedfirst, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) cube unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedall, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedall, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) cube unused all failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -214,7 +214,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices16, sizeof(g_fmCubeIndices16));
 
         size_t ntests = 0;
-        HRESULT hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
+        HRESULT hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) fmcube A failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -234,7 +234,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices16, sizeof(g_fmCubeIndices16));
         ntests = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (hr != S_OK)
         {
             printe("ERROR: WeldVertices(16) fmcube B failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -390,7 +390,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices16, sizeof(g_fmCubeIndices16));
         ntests = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
+        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) fmcube eps A failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -410,7 +410,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices16, sizeof(g_fmCubeIndices16));
         ntests = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (FAILED(hr))
         {
             printe("ERROR: WeldVertices(16) fmcube eps B failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -438,7 +438,7 @@ bool Test26()
         memcpy(newIndices.get(), g_cubeIndices32, sizeof(g_cubeIndices32));
 
         size_t ntests = 0;
-        HRESULT hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        HRESULT hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) cube identity failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -458,7 +458,7 @@ bool Test26()
         // null remap
         memcpy(newIndices.get(), g_cubeIndices32, sizeof(g_cubeIndices32));
         ntests = 0;
-        hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, nullptr, [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubePointReps, nullptr, [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) cube identity [null remap] failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -475,25 +475,25 @@ bool Test26()
 
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
-        hr = WeldVertices(newIndices.get(), 12, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(32) expected failure for strip cut verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, UINT32_MAX, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, UINT32_MAX, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), UINT32_MAX, 8, s_cubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), UINT32_MAX, 8, s_cubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
             printe("\nERROR: WeldVertices(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, 8, nullptr, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, nullptr, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: WeldVertices(32) expected failure for nullptr point reps (%08X)\n", static_cast<unsigned int>(hr));
@@ -506,7 +506,7 @@ bool Test26()
             0, 1, 2, 23, 4, 5, 6, 7,
         };
 
-        hr = WeldVertices(newIndices.get(), 12, 8, s_badReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_badReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_UNEXPECTED)
         {
             printe("ERROR: WeldVertices(32) expected failure for  bad vert count (%08X)\n", static_cast<unsigned int>(hr));
@@ -514,19 +514,19 @@ bool Test26()
         }
 
         // Unused
-        hr = WeldVertices(newIndices.get(), 12, 8, s_unused, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_unused, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) cube unused failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedfirst, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedfirst, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) cube unused 1st failed (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedall, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { return true; });
+        hr = WeldVertices(newIndices.get(), 12, 8, s_unusedall, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) cube unused all failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -543,7 +543,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices32, sizeof(g_fmCubeIndices32));
 
         size_t ntests = 0;
-        HRESULT hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
+        HRESULT hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) fmcube A failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -563,7 +563,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices32, sizeof(g_fmCubeIndices32));
         ntests = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (hr != S_OK)
         {
             printe("ERROR: WeldVertices(32) fmcube B failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -719,7 +719,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices32, sizeof(g_fmCubeIndices32));
         ntests = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return false; });
+        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return false; });
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) fmcube eps A failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -739,7 +739,7 @@ bool Test26()
         memcpy(newIndices.get(), g_fmCubeIndices32, sizeof(g_fmCubeIndices32));
         ntests = 0;
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 24);
-        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t v0, uint32_t v1) -> bool { ++ntests;  return true; });
+        hr = WeldVertices(newIndices.get(), 12, 24, s_fmCubePointRepsEps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
         if (FAILED(hr))
         {
             printe("ERROR: WeldVertices(32) fmcube eps B failed (%08X)\n", static_cast<unsigned int>(hr));
@@ -911,7 +911,7 @@ bool Test27()
                         printe("\nERROR: CompactVB expected failure for bad stride value (%08X)\n", static_cast<unsigned int>(hr));
                         success = false;
                     }
-                    hr = CompactVB(vertices.data(), sizeof(TestVertex), D3D11_32BIT_INDEX_STRIP_CUT_VALUE, trailingUnused, remap.get(), finalVertices.get());
+                    hr = CompactVB(vertices.data(), sizeof(TestVertex), UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, trailingUnused, remap.get(), finalVertices.get());
                     if (hr != E_INVALIDARG)
                     {
                         printe("\nERROR: CompactVB expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr));

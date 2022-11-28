@@ -269,7 +269,7 @@ bool Test11()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, D3D11_16BIT_INDEX_STRIP_CUT_VALUE, CNORM_DEFAULT, normals.get() );
+        hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ComputeNormals(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
@@ -657,7 +657,7 @@ bool Test11()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, D3D11_32BIT_INDEX_STRIP_CUT_VALUE, CNORM_DEFAULT, normals.get() );
+        hr = ComputeNormals( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, CNORM_DEFAULT, normals.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ComputeNormals(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );

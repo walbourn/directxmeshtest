@@ -27,9 +27,17 @@
 
 #include <Windows.h>
 
+#ifdef __MINGW32__
+#include <unknwn.h>
+#endif
+
 #define _XM_NO_XMVECTOR_OVERLOADS_
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
+
+#if (DIRECTX_MATH_VERSION < 315)
+#define XM_ALIGNED_DATA(x) __declspec(align(x))
+#endif
 
 #define _DIRECTX_TEST_NAME_ "DirectXMesh"
 
@@ -48,6 +56,6 @@
                                        digest[8], digest[9], digest[10], digest[11], digest[12], digest[13], digest[14], digest[15] );
 #endif
 
-#define MEDIA_PATH L"D:\\Microsoft\\directxmeshmedia\\"
+#define MEDIA_PATH L"%DIRECTXMESH_MEDIA_PATH%\\"
 
 #define TEMP_PATH L"%TEMP%\\"

@@ -6,7 +6,12 @@
 
 #include "directxtest.h"
 
+#ifdef USING_DIRECTX_HEADERS
+#include <directx/d3d12.h>
+#else
 #include <d3d12.h>
+#endif
+
 #include "DirectXMesh.h"
 
 #include "TestHelpers.h"
