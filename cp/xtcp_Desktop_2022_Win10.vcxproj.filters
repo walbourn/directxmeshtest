@@ -13,6 +13,9 @@
     <ClInclude Include="..\common\directxtest.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="..\common\ShapesGenerator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
     <ClInclude Include="..\common\TestGeometry.h">
       <Filter>Common</Filter>
     </ClInclude>
