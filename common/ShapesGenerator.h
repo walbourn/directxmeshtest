@@ -33,16 +33,16 @@ public:
         DirectX::XMFLOAT2 textureCoordinate;
 
         Vertex() {}
-        Vertex( DirectX::XMFLOAT3 const& position, DirectX::XMFLOAT3 const& normal, DirectX::XMFLOAT2 const& textureCoordinate ) :
-            position(position),
-            normal(normal),
-            textureCoordinate(textureCoordinate) {}
+        Vertex( DirectX::XMFLOAT3 const& iposition, DirectX::XMFLOAT3 const& inormal, DirectX::XMFLOAT2 const& itextureCoordinate ) :
+            position(iposition),
+            normal(inormal),
+            textureCoordinate(itextureCoordinate) {}
 
-        Vertex(DirectX::FXMVECTOR position, DirectX::FXMVECTOR normal, DirectX::FXMVECTOR textureCoordinate)
+        Vertex(DirectX::FXMVECTOR iposition, DirectX::FXMVECTOR inormal, DirectX::FXMVECTOR itextureCoordinate)
         {
-            DirectX::XMStoreFloat3(&this->position, position);
-            DirectX::XMStoreFloat3(&this->normal, normal);
-            DirectX::XMStoreFloat2(&this->textureCoordinate, textureCoordinate);
+            DirectX::XMStoreFloat3(&this->position, iposition);
+            DirectX::XMStoreFloat3(&this->normal, inormal);
+            DirectX::XMStoreFloat2(&this->textureCoordinate, itextureCoordinate);
         }
     };
 

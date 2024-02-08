@@ -426,7 +426,7 @@ bool Test04()
     if (len != MAXD3DDECLLENGTH)
     {
         success = false;
-        printf("\nERROR: big decl failed: %zu .. %u\n", len, MAXD3DDECLLENGTH);
+        printf("\nERROR: big decl failed: %zu .. %d\n", len, MAXD3DDECLLENGTH);
     }
 
     if (FVF::GetDeclLength(tooBigDecl.get()) != 0)

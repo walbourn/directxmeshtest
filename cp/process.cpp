@@ -153,7 +153,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "\nERROR: Failed loading mesh data (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -171,7 +171,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate mesh data (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -195,7 +195,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps [preps] (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps [preps] (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
         else if ( !IsValidPointReps( preps.get(), nVerts ) )
@@ -213,7 +213,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -221,7 +221,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -232,7 +232,7 @@ bool Test01()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed ComputeNormals (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "\nERROR: Failed ComputeNormals (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
         else
@@ -259,7 +259,7 @@ bool Test01()
                 XMVECTOR len = XMVector3Length( n );
                 if ( XMVector3Less( len, g_MeshEpsilon ) )
                 {
-                    print( "%u: %f %f %f\n", i0, XMVectorGetX(n), XMVectorGetY(n), XMVectorGetZ(n) );
+                    print( "%d: %f %f %f\n", i0, XMVectorGetX(n), XMVectorGetY(n), XMVectorGetZ(n) );
                     pass = false;
                 }
 
@@ -267,7 +267,7 @@ bool Test01()
                 len = XMVector3Length( n );
                 if ( XMVector3Less( len, g_MeshEpsilon ) )
                 {
-                    print( "%u: %f %f %f\n", i1, XMVectorGetX(n), XMVectorGetY(n), XMVectorGetZ(n) );
+                    print( "%d: %f %f %f\n", i1, XMVectorGetX(n), XMVectorGetY(n), XMVectorGetZ(n) );
                     pass = false;
                 }
 
@@ -275,14 +275,14 @@ bool Test01()
                 len = XMVector3Length( n );
                 if ( XMVector3Less( len, g_MeshEpsilon ) )
                 {
-                    print( "%u: %f %f %f\n", i2, XMVectorGetX(n), XMVectorGetY(n), XMVectorGetZ(n) );
+                    print( "%d: %f %f %f\n", i2, XMVectorGetX(n), XMVectorGetY(n), XMVectorGetZ(n) );
                     pass = false;
                 }
             }
 
             if ( !pass )
             {
-                printe("\nERROR: ComputeNormals failed to provide non-zero length normal vectors:\n%S\n", szPath );
+                printe("\nERROR: ComputeNormals failed to provide non-zero length normal vectors:\n%ls\n", szPath );
                 success = false;
             }
         }
@@ -301,7 +301,7 @@ bool Test01()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "\nERROR: Failed ComputeTangentFrame (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+                printe( "\nERROR: Failed ComputeTangentFrame (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
                 continue;
             }
             else
@@ -329,7 +329,7 @@ bool Test01()
                     XMVECTOR len = XMVector3Length( t );
                     if ( XMVector3Less( len, g_MeshEpsilon ) )
                     {
-                        print( "%u: %f %f %f\n", i0, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t) );
+                        print( "%d: %f %f %f\n", i0, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t) );
                         pass = false;
                     }
 
@@ -337,7 +337,7 @@ bool Test01()
                     len = XMVector3Length( t );
                     if ( XMVector3Less( len, g_MeshEpsilon ) )
                     {
-                        print( "%u: %f %f %f\n", i1, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t) );
+                        print( "%d: %f %f %f\n", i1, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t) );
                         pass = false;
                     }
 
@@ -345,14 +345,14 @@ bool Test01()
                     len = XMVector3Length( t );
                     if ( XMVector3Less( len, g_MeshEpsilon ) )
                     {
-                        print( "%u: %f %f %f\n", i2, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t) );
+                        print( "%d: %f %f %f\n", i2, XMVectorGetX(t), XMVectorGetY(t), XMVectorGetZ(t) );
                         pass = false;
                     }
                 }
 
                 if ( !pass )
                 {
-                    printe("\nERROR: ComputeTangentFrame failed to provide non-zero length tangent vectors:\n%S\n", szPath );
+                    printe("\nERROR: ComputeTangentFrame failed to provide non-zero length tangent vectors:\n%ls\n", szPath );
                     success = false;
                 }
 
@@ -379,7 +379,7 @@ bool Test01()
                     XMVECTOR len = XMVector3Length( b );
                     if ( XMVector3Less( len, g_MeshEpsilon ) )
                     {
-                        print( "%u: %f %f %f\n", i0, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b) );
+                        print( "%d: %f %f %f\n", i0, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b) );
                         pass = false;
                     }
 
@@ -387,7 +387,7 @@ bool Test01()
                     len = XMVector3Length( b );
                     if ( XMVector3Less( len, g_MeshEpsilon ) )
                     {
-                        print( "%u: %f %f %f\n", i1, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b) );
+                        print( "%d: %f %f %f\n", i1, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b) );
                         pass = false;
                     }
 
@@ -395,14 +395,14 @@ bool Test01()
                     len = XMVector3Length( b );
                     if ( XMVector3Less( len, g_MeshEpsilon ) )
                     {
-                        print( "%u: %f %f %f\n", i2, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b) );
+                        print( "%d: %f %f %f\n", i2, XMVectorGetX(b), XMVectorGetY(b), XMVectorGetZ(b) );
                         pass = false;
                     }
                 }
 
                 if ( !pass )
                 {
-                    printe("\nERROR: ComputeTangentFrame failed to provide non-zero length bitangent vectors:\n%S\n", szPath );
+                    printe("\nERROR: ComputeTangentFrame failed to provide non-zero length bitangent vectors:\n%ls\n", szPath );
                     success = false;
                 }
             }
@@ -469,7 +469,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "\nERROR: Failed loading mesh data (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -487,7 +487,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate mesh data (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -502,7 +502,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -510,7 +510,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate [adjacency] (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate [adjacency] (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -526,14 +526,14 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: Clean [bowties] failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("\nERROR: Clean [bowties] failed (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
         if ( g_TestMedia[index].bowtieDups != dupVerts.size() )
         {
             success = false;
-            printe( "\nERROR: Unexpected duplicate count for bowties %zu .. %zu:\n%S\n", dupVerts.size(), g_TestMedia[index].bowtieDups, szPath );
+            printe( "\nERROR: Unexpected duplicate count for bowties %zu .. %zu:\n%ls\n", dupVerts.size(), g_TestMedia[index].bowtieDups, szPath );
             continue;
         }
 
@@ -543,7 +543,7 @@ bool Test02()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate cleaned [bowties] mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate cleaned [bowties] mesh (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -562,14 +562,14 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe("\nERROR: Clean [attributes] failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+                printe("\nERROR: Clean [attributes] failed (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
                 continue;
             }
 
             if ( g_TestMedia[index].attrDups != dupVerts.size() )
             {
                 success = false;
-                printe( "\nERROR: Unexpected duplicate count for attributes %zu .. %zu:\n%S\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
+                printe( "\nERROR: Unexpected duplicate count for attributes %zu .. %zu:\n%ls\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
                 continue;
             }
 
@@ -579,7 +579,7 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
                 continue;
             }
 
@@ -595,7 +595,7 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe("\nERROR: Clean [full] failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+                printe("\nERROR: Clean [full] failed (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
                 continue;
             }
 
@@ -603,7 +603,7 @@ bool Test02()
             if ( expectedDups != dupVerts.size() )
             {
                 success = false;
-                printe( "\nERROR: Unexpected duplicate [full] count %zu .. %zu:\n%S\n", dupVerts.size(), expectedDups, szPath );
+                printe( "\nERROR: Unexpected duplicate [full] count %zu .. %zu:\n%ls\n", dupVerts.size(), expectedDups, szPath );
                 continue;
             }
 
@@ -613,7 +613,7 @@ bool Test02()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+                printe( "\nERROR: Failed Validate cleaned [attributes] mesh (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
                 continue;
             }
         }
@@ -673,7 +673,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "\nERROR: Failed loading mesh data (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -691,7 +691,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate mesh data (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -706,7 +706,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("\nERROR: failed GenerateAdjacencyAndPointReps (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -714,7 +714,7 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "\nERROR: Failed Validate [adjacency] mesh data (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -752,14 +752,14 @@ bool Test03()
             {
                 pass = false;
                 success = false;
-                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 continue;
             }
             else if ( !IsValidFaceRemap( mesh->indices.data(), faceRemap.get(), nFaces ) )
             {
                 pass = false;
                 success = false;
-                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed remap invalid:\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
+                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed remap invalid:\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
                 continue;
             }
             else
@@ -792,7 +792,7 @@ bool Test03()
                             {
                                 pass = false;
                                 success = false;
-                                printe("\nERROR: OptimizeFacesLRU failed compared to original:\n%S\n", szPath);
+                                printe("\nERROR: OptimizeFacesLRU failed compared to original:\n%ls\n", szPath);
                                 print("\toriginal: ACMR %f, ATVR %f\n", acmr, atvr);
                                 print("\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2);
                             }
@@ -801,7 +801,7 @@ bool Test03()
                         {
                             pass = false;
                             success = false;
-                            printe("\nERROR: OptimizeFacesLRU failed compared to D3DX strip order:\n%S\n", szPath);
+                            printe("\nERROR: OptimizeFacesLRU failed compared to D3DX strip order:\n%ls\n", szPath);
                             print("\toriginal: ACMR %f, ATVR %f\n", acmr, atvr);
                             print("\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2);
                             print("\texpected: ACMR %f, ATVR %f\n", g_TestMedia[index].stripOrderACMR, g_TestMedia[index].stripOrderATVR);
@@ -814,7 +814,7 @@ bool Test03()
                         {
                             pass = false;
                             success = false;
-                            printe("\nERROR: OptimizeFaces [strip order] failed compared to D3DX:\n%S\n", szPath );
+                            printe("\nERROR: OptimizeFaces [strip order] failed compared to D3DX:\n%ls\n", szPath );
                             print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
                             print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
                             print( "\texpected: ACMR %f, ATVR %f\n", g_TestMedia[index].stripOrderACMR, g_TestMedia[index].stripOrderATVR );
@@ -827,7 +827,7 @@ bool Test03()
                         {
                             pass = false;
                             success = false;
-                            printe("\nERROR: OptimizeFaces [device independent] failed compared to D3DX:\n%S\n", szPath );
+                            printe("\nERROR: OptimizeFaces [device independent] failed compared to D3DX:\n%ls\n", szPath );
                             print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
                             print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
                             print( "\texpected: ACMR %f, ATVR %f\n", g_TestMedia[index].independentACMR, g_TestMedia[index].independentATVR );
@@ -842,7 +842,7 @@ bool Test03()
                             {
                                 pass = false;
                                 success = false;
-                                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%S\n",
+                                printe("\nERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%ls\n",
                                        s_vcache[ vindex ], s_restart[ vindex ], szPath );
                                 print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
                                 print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
@@ -863,13 +863,13 @@ bool Test03()
                 {
                     pass = false;
                     success = false;
-                    printe("\nERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                    printe("\nERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 }
                 else if ( !IsValidVertexRemap( newIndices.get(), nFaces, vertRemap.get(), nVerts ) )
                 {
                     pass = false;
                     success = false;
-                    printe("\nERROR: OptimizeVertices %u vcache, %u remap invalid:\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
+                    printe("\nERROR: OptimizeVertices %u vcache, %u remap invalid:\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
                 }
                 else
                 {
@@ -878,7 +878,7 @@ bool Test03()
                     {
                         pass = false;
                         success = false;
-                        printe("\nERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                        printe("\nERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nVerts ] );
@@ -888,7 +888,7 @@ bool Test03()
                     {
                         pass = false;
                         success = false;
-                        printe("\nERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                        printe("\nERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     if (SUCCEEDED(hr))
@@ -900,7 +900,7 @@ bool Test03()
                         {
                             pass = false;
                             success = false;
-                            printe("\nERROR: OptimizeVertices %u vcache, %u failed compared to original:\n%S\n", s_vcache[vindex], s_restart[vindex], szPath);
+                            printe("\nERROR: OptimizeVertices %u vcache, %u failed compared to original:\n%ls\n", s_vcache[vindex], s_restart[vindex], szPath);
                             print("\toriginal: vertex fetch ratio %f\n", ratioOrig);
                             print("\toptimized: vertex fetch ratio %f\n", ratio);
                         }
@@ -965,7 +965,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "ERROR: Failed loading mesh data (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -983,7 +983,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate mesh data (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -998,7 +998,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: failed to generate required adj (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("ERROR: failed to generate required adj (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1006,7 +1006,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate [adjacency] mesh data (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate [adjacency] mesh data (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -1023,7 +1023,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: Clean failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("ERROR: Clean failed (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1035,7 +1035,7 @@ bool Test04()
         if ( g_TestMedia[index].attrDups != dupVerts.size() )
         {
             success = false;
-            printe( "ERROR: Unexpected duplicate count %zu .. %zu:\n%S\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
+            printe( "ERROR: Unexpected duplicate count %zu .. %zu:\n%ls\n", dupVerts.size(), g_TestMedia[index].attrDups, szPath );
             continue;
         }
 
@@ -1045,7 +1045,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate cleaned mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate cleaned mesh (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -1056,13 +1056,13 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe("ERROR: AttributeSort failed (%08X)\n:%S", static_cast<unsigned int>(hr), szPath );
+            printe("ERROR: AttributeSort failed (%08X)\n:%ls", static_cast<unsigned int>(hr), szPath );
             continue;
         }
         else if ( !IsValidFaceRemap( sortedIndices.get(), faceRemap.get(), nFaces ) )
         {
             success = false;
-            printe("ERROR: Attribute failed remap invalid:\n%S\n", szPath );
+            printe("ERROR: Attribute failed remap invalid:\n%ls\n", szPath );
             continue;
         }
 
@@ -1078,7 +1078,7 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed Validate attribute sorted mesh (%08X):\n%S\n%S\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
+            printe( "ERROR: Failed Validate attribute sorted mesh (%08X):\n%ls\n%ls\n", static_cast<unsigned int>(hr), szPath, msgs.c_str() );
             continue;
         }
 
@@ -1125,14 +1125,14 @@ bool Test04()
             {
                 pass = false;
                 success = false;
-                printe("ERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                printe("ERROR: OptimizeFaces %u vcache, %u restart failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 continue;
             }
             else if ( !IsValidFaceRemap( sortedIndices.get(), faceRemap.get(), nFaces ) )
             {
                 pass = false;
                 success = false;
-                printe("ERROR: OptimizeFaces %u vcache, %u restart failed remap invalid:\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
+                printe("ERROR: OptimizeFaces %u vcache, %u restart failed remap invalid:\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
                 continue;
             }
             else
@@ -1166,7 +1166,7 @@ bool Test04()
                             {
                                 pass = false;
                                 success = false;
-                                printe("ERROR: OptimizeFacesLRU failed compared to original:\n%S\n", szPath);
+                                printe("ERROR: OptimizeFacesLRU failed compared to original:\n%ls\n", szPath);
                                 print("\toriginal: ACMR %f, ATVR %f\n", acmr, atvr);
                                 print("\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2);
                             }
@@ -1175,7 +1175,7 @@ bool Test04()
                         {
                             pass = false;
                             success = false;
-                            printe("ERROR: OptimizeFacesLRU failed compared to D3DX strip order:\n%S\n", szPath);
+                            printe("ERROR: OptimizeFacesLRU failed compared to D3DX strip order:\n%ls\n", szPath);
                             print("\toriginal: ACMR %f, ATVR %f\n", acmr, atvr);
                             print("\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2);
                             print("\texpected: ACMR %f, ATVR %f\n", g_TestMedia[index].attrStripOrderACMR, g_TestMedia[index].attrStripOrderATVR);
@@ -1188,7 +1188,7 @@ bool Test04()
                         {
                             pass = false;
                             success = false;
-                            printe("ERROR: OptimizeFaces [strip order] failed compared to D3DX:\n%S\n", szPath );
+                            printe("ERROR: OptimizeFaces [strip order] failed compared to D3DX:\n%ls\n", szPath );
                             print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
                             print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
                             print( "\texpected: ACMR %f, ATVR %f\n", g_TestMedia[index].attrStripOrderACMR, g_TestMedia[index].attrStripOrderATVR );
@@ -1201,7 +1201,7 @@ bool Test04()
                         {
                             pass = false;
                             success = false;
-                            printe("ERROR: OptimizeFaces [device independent] failed compared to D3DX:\n%S\n", szPath );
+                            printe("ERROR: OptimizeFaces [device independent] failed compared to D3DX:\n%ls\n", szPath );
                             print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
                             print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
                             print( "\texpected: ACMR %f, ATVR %f\n", g_TestMedia[index].attrIndependentACMR, g_TestMedia[index].attrIndependentATVR );
@@ -1216,7 +1216,7 @@ bool Test04()
                             {
                                 pass = false;
                                 success = false;
-                                printe("ERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%S\n",
+                                printe("ERROR: OptimizeFaces %u vcache, %u restart failed making new version slower:\n%ls\n",
                                        s_vcache[ vindex ], s_restart[ vindex ], szPath );
                                 print( "\toriginal: ACMR %f, ATVR %f\n", acmr, atvr );
                                 print( "\toptimized: ACMR %f, ATVR %f\n", acmr2, atvr2 );
@@ -1237,13 +1237,13 @@ bool Test04()
                 {
                     pass = false;
                     success = false;
-                    printe("ERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                    printe("ERROR: OptimizeVertices %u vcache, %u restart failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                 }
                 else if ( !IsValidVertexRemap( newIndices.get(), nFaces, vertRemap.get(), nTotalVerts ) )
                 {
                     pass = false;
                     success = false;
-                    printe("ERROR: OptimizeVertices %u vcache, %u remap invalid:\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
+                    printe("ERROR: OptimizeVertices %u vcache, %u remap invalid:\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], szPath );
                 }
                 else
                 {
@@ -1252,7 +1252,7 @@ bool Test04()
                     {
                         pass = false;
                         success = false;
-                        printe("ERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                        printe("ERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nTotalVerts ] );
@@ -1263,7 +1263,7 @@ bool Test04()
                     {
                         pass = false;
                         success = false;
-                        printe("ERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%S\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
+                        printe("ERROR: FinalizeVB (%u vcache, %u) failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
                     if (SUCCEEDED(hr))
@@ -1275,7 +1275,7 @@ bool Test04()
                         {
                             pass = false;
                             success = false;
-                            printe("ERROR: OptimizeVertices %u vcache, %u remap failed compared to original:\n%S\n", s_vcache[vindex], s_restart[vindex], szPath);
+                            printe("ERROR: OptimizeVertices %u vcache, %u remap failed compared to original:\n%ls\n", s_vcache[vindex], s_restart[vindex], szPath);
                             print("\toriginal: vertex fetch ratio %f\n", ratioOrig);
                             print("\toptimized: vertex fetch ratio %f\n", ratio);
                         }

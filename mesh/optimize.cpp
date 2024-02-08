@@ -410,17 +410,17 @@ bool Test16()
         if ( FAILED( Validate( s_unusedIB, 12, 8, s_unusedAdj, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: OptimizeFaces(16) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: OptimizeFaces(16) test data failed validation:\n%ls\n", msgs.c_str() );
         }
         if (FAILED(Validate(s_unusedIB_1st, 12, 8, s_unusedAdj_1st, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFaces(16) test data 1st failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFaces(16) test data 1st failed validation:\n%ls\n", msgs.c_str());
         }
         if (FAILED(Validate(s_unusedIB_all, 12, 8, s_unusedAdj_all, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFaces(16) test data all failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFaces(16) test data all failed validation:\n%ls\n", msgs.c_str());
         }
 #endif
 
@@ -612,17 +612,17 @@ bool Test16()
         if ( FAILED( Validate( s_unusedIB, 12, 8, s_unusedAdj, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: OptimizeFaces(32) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: OptimizeFaces(32) test data failed validation:\n%ls\n", msgs.c_str() );
         }
         if (FAILED(Validate(s_unusedIB_1st, 12, 8, s_unusedAdj_1st, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFaces(32) test data 1st failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFaces(32) test data 1st failed validation:\n%ls\n", msgs.c_str());
         }
         if (FAILED(Validate(s_unusedIB_all, 12, 8, s_unusedAdj_all, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFaces(32) test data all failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFaces(32) test data all failed validation:\n%ls\n", msgs.c_str());
         }
 #endif
 
@@ -1256,17 +1256,17 @@ bool Test25()
         if (FAILED(Validate(s_unusedIB, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFacesLRU(16) test data failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFacesLRU(16) test data failed validation:\n%ls\n", msgs.c_str());
         }
         if (FAILED(Validate(s_unusedIB_1st, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFacesLRU(16) test data 1st failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFacesLRU(16) test data 1st failed validation:\n%ls\n", msgs.c_str());
         }
         if (FAILED(Validate(s_unusedIB_all, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFacesLRU(16) test data all failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFacesLRU(16) test data all failed validation:\n%ls\n", msgs.c_str());
         }
 #endif
 
@@ -1384,17 +1384,17 @@ bool Test25()
         if (FAILED(Validate(s_unusedIB, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFacesLRU(32) test data failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFacesLRU(32) test data failed validation:\n%ls\n", msgs.c_str());
         }
         if (FAILED(Validate(s_unusedIB_1st, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFacesLRU(32) test data 1st failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFacesLRU(32) test data 1st failed validation:\n%ls\n", msgs.c_str());
         }
         if (FAILED(Validate(s_unusedIB_all, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: OptimizeFacesLRU(32) test data all failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: OptimizeFacesLRU(32) test data all failed validation:\n%ls\n", msgs.c_str());
         }
 #endif
 
@@ -1730,7 +1730,7 @@ bool Test17()
         std::unique_ptr<uint32_t[]> remap( new uint32_t[ 24 ] );
         memset( remap.get(), 0xcd, sizeof(uint32_t) * 24 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -1825,7 +1825,7 @@ bool Test17()
         std::unique_ptr<uint32_t[]> remap( new uint32_t[ 24 ] );
         memset( remap.get(), 0xcd, sizeof(uint32_t) * 24 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -1881,7 +1881,7 @@ bool Test17()
         if ( FAILED( Validate( s_unusedIB, 12, 8, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: OptimizeVertices(16) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: OptimizeVertices(16) test data failed validation:\n%ls\n", msgs.c_str() );
         }
 #endif
 
@@ -1983,7 +1983,7 @@ bool Test17()
         if ( FAILED( Validate( s_unusedIB, 12, 8, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: OptimizeVertices(32) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: OptimizeVertices(32) test data failed validation:\n%ls\n", msgs.c_str() );
         }
 #endif
 

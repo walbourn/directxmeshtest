@@ -668,19 +668,19 @@ bool Test13()
         if (FAILED(Validate(s_unused, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: ComputeTangentFrame(16) test data failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: ComputeTangentFrame(16) test data failed validation:\n%ls\n", msgs.c_str());
         }
 
         if (FAILED(Validate(s_unused_1st, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: ComputeTangentFrame(16) test data 1st failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: ComputeTangentFrame(16) test data 1st failed validation:\n%ls\n", msgs.c_str());
         }
 
         if (FAILED(Validate(s_unused_all, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: ComputeTangentFrame(16) test data all failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: ComputeTangentFrame(16) test data all failed validation:\n%ls\n", msgs.c_str());
         }
 #endif
 
@@ -809,19 +809,19 @@ bool Test13()
         if ( FAILED( Validate( s_unused, 12, 24, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: ComputeTangentFrame(32) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: ComputeTangentFrame(32) test data failed validation:\n%ls\n", msgs.c_str() );
         }
 
         if (FAILED(Validate(s_unused_1st, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: ComputeTangentFrame(32 test data 1st failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: ComputeTangentFrame(32 test data 1st failed validation:\n%ls\n", msgs.c_str());
         }
 
         if (FAILED(Validate(s_unused_all, 12, 24, nullptr, VALIDATE_UNUSED, &msgs)))
         {
             success = false;
-            printe("\nERROR: ComputeTangentFrame(32) test data all failed validation:\n%S\n", msgs.c_str());
+            printe("\nERROR: ComputeTangentFrame(32) test data all failed validation:\n%ls\n", msgs.c_str());
         }
 #endif
 
