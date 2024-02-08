@@ -12,14 +12,14 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
   message(FATAL_ERROR "DirectXMesh Test Suite should be built by the main CMakeLists")
 endif()
 
+if(WIN32 AND (NOT DEFINED ENV{DIRECTXMESH_MEDIA_PATH}))
+  message(WARNING "Tests make use of DIRECTXMESH_MEDIA_PATH environment variable to find media")
+endif()
+
 set(TEST_EXES headertest utilitiestest)
 add_executable(headertest headertest/main.cpp)
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/utilitiestest)
-
-if(WIN32 AND (NOT DEFINED ENV{DIRECTXMESH_MEDIA_PATH}))
-  message(WARNING "Tests make use of DIRECTXMESH_MEDIA_PATH environment variable to find media")
-endif()
 
 # MESH
 list(APPEND TEST_EXES xtmesh)
@@ -91,13 +91,13 @@ if(MSVC)
     endif()
 
     if((MSVC_VERSION GREATER_EQUAL 1928)
-      AND (CMAKE_SIZEOF_VOID_P EQUAL 8)
-      AND NOT ENABLE_OPENEXR_SUPPORT
-      AND ((NOT (CMAKE_CXX_COMPILER_ID MATCHES "Clang|IntelLLVM")) OR (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13.0)))
-      foreach(t IN LISTS TEST_EXES)
-        target_compile_options(${t} PRIVATE "$<$<NOT:$<CONFIG:DEBUG>>:/guard:ehcont>")
-        target_link_options(${t} PRIVATE "$<$<NOT:$<CONFIG:DEBUG>>:/guard:ehcont>")
-      endforeach()
+       AND (CMAKE_SIZEOF_VOID_P EQUAL 8)
+       AND NOT ENABLE_OPENEXR_SUPPORT
+       AND ((NOT (CMAKE_CXX_COMPILER_ID MATCHES "Clang|IntelLLVM")) OR (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13.0)))
+        foreach(t IN LISTS TEST_EXES)
+          target_compile_options(${t} PRIVATE "$<$<NOT:$<CONFIG:DEBUG>>:/guard:ehcont>")
+          target_link_options(${t} PRIVATE "$<$<NOT:$<CONFIG:DEBUG>>:/guard:ehcont>")
+        endforeach()
     endif()
 else()
     foreach(t IN LISTS TEST_EXES)
