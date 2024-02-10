@@ -1451,7 +1451,7 @@ bool Test05()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
+            printe( "ERROR: Failed setting up VB reader for format %ls, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1459,7 +1459,7 @@ bool Test05()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB reader for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
+                printe( "ERROR: Failed setting up stream for VB reader for format %ls, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -1468,7 +1468,7 @@ bool Test05()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed reading VB format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
+                    printe( "ERROR: Failed reading VB format %ls, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
                 }
                 else
                 {
@@ -1477,7 +1477,7 @@ bool Test05()
                     if ( !XMVector4NearEqual( chk, temp, g_VBEpsilon ) )
                     {
                         success = false;
-                        printe( "ERROR: Failed reading VB format %S, index %zu: %f %f %f %f ... %f %f %f %f\n", GetName( v.format ), index,
+                        printe( "ERROR: Failed reading VB format %ls, index %zu: %f %f %f %f ... %f %f %f %f\n", GetName( v.format ), index,
                                 XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
                                 v.vector.x, v.vector.y, v.vector.z, v.vector.w );
                     }
@@ -1488,7 +1488,7 @@ bool Test05()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed reading VB format %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+                    printe("ERROR: Failed reading VB format %ls (x2bias), index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -1501,7 +1501,7 @@ bool Test05()
                         if (!isx2bias || (fabsf(XMVectorGetX(chk) - 1.f) > 0.001f))
                         {
                             success = false;
-                            printe("ERROR: Failed reading VB format %S (x2bias %u), index %zu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), isx2bias, index,
+                            printe("ERROR: Failed reading VB format %ls (x2bias %d), index %zu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), isx2bias, index,
                                 XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
                                 v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                         }
@@ -1526,7 +1526,7 @@ bool Test05()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: Failed setting up VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+            printe("ERROR: Failed setting up VB reader for format %ls X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
         }
         else
         {
@@ -1534,7 +1534,7 @@ bool Test05()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: Failed setting up stream for VB reader for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+                printe("ERROR: Failed setting up stream for VB reader for format %ls X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1543,7 +1543,7 @@ bool Test05()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed reading VB format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+                    printe("ERROR: Failed reading VB format %ls X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 else
                 {
@@ -1552,7 +1552,7 @@ bool Test05()
                     if (!XMVector4NearEqual(chk, temp, g_VBEpsilon))
                     {
                         success = false;
-                        printe("ERROR: Failed reading VB format %S X2BIAS, index %zu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), index,
+                        printe("ERROR: Failed reading VB format %ls X2BIAS, index %zu: %f %f %f %f ... %f %f %f %f\n", GetName(v.format), index,
                             XMVectorGetX(temp), XMVectorGetY(temp), XMVectorGetZ(temp), XMVectorGetW(temp),
                             v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                     }
@@ -1586,7 +1586,7 @@ bool Test06()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
+            printe( "ERROR: Failed setting up VB writer for format %ls, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -1596,7 +1596,7 @@ bool Test06()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed setting up stream for VB writer for format %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
+                printe( "ERROR: Failed setting up stream for VB writer for format %ls, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
             }
             else
             {
@@ -1605,12 +1605,12 @@ bool Test06()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB writer %S, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
+                    printe( "ERROR: Failed writing VB writer %ls, index %zu (%08X)\n", GetName( v.format ), index, static_cast<unsigned int>(hr) );
                 }
                 else if ( memcmp( buff, &v.bytes[0], v.stride ) != 0 )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB format %S, index %zu: %f %f %f %f\n", GetName( v.format ), index,
+                    printe( "ERROR: Failed writing VB format %ls, index %zu: %f %f %f %f\n", GetName( v.format ), index,
                             v.vector.x, v.vector.y, v.vector.z, v.vector.w );
                     printe( "    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
                             buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
@@ -1624,7 +1624,7 @@ bool Test06()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB writer %S (x2bias), index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+                    printe("ERROR: Failed writing VB writer %ls (x2bias), index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 {
                     bool isx2bias = IsX2BiasSupported(v.format);
@@ -1633,7 +1633,7 @@ bool Test06()
                          || (isx2bias && memcpy(buff, &v.bytes[0], v.stride) == 0) )
                     {
                         success = false;
-                        printe("ERROR: Failed writing VB format %S (x2bais %u), index %zu: %f %f %f %f\n", GetName(v.format), isx2bias, index,
+                        printe("ERROR: Failed writing VB format %ls (x2bais %d), index %zu: %f %f %f %f\n", GetName(v.format), isx2bias, index,
                             v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                         printe("    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
                             buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
@@ -1661,7 +1661,7 @@ bool Test06()
         if (FAILED(hr))
         {
             success = false;
-            printe("ERROR: Failed setting up VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+            printe("ERROR: Failed setting up VB writer for format %ls X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
         }
         else
         {
@@ -1671,7 +1671,7 @@ bool Test06()
             if (FAILED(hr))
             {
                 success = false;
-                printe("ERROR: Failed setting up stream for VB writer for format %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+                printe("ERROR: Failed setting up stream for VB writer for format %ls X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
             }
             else
             {
@@ -1680,12 +1680,12 @@ bool Test06()
                 if (FAILED(hr))
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB writer %S X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
+                    printe("ERROR: Failed writing VB writer %ls X2BIAS, index %zu (%08X)\n", GetName(v.format), index, static_cast<unsigned int>(hr));
                 }
                 else if (memcmp(buff, &v.bytes[0], v.stride) != 0)
                 {
                     success = false;
-                    printe("ERROR: Failed writing VB format %S X2BIAS, index %zu: %f %f %f %f\n", GetName(v.format), index,
+                    printe("ERROR: Failed writing VB format %ls X2BIAS, index %zu: %f %f %f %f\n", GetName(v.format), index,
                         v.vector.x, v.vector.y, v.vector.z, v.vector.w);
                     printe("    %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n... %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n",
                         buff[0], buff[1], buff[2], buff[3], buff[4], buff[5], buff[6], buff[7],
@@ -1745,7 +1745,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed loading mesh data (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "ERROR: Failed loading mesh data (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1754,7 +1754,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB reader (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "ERROR: Failed setting up VB reader (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1764,7 +1764,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up stream for VB reader (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "ERROR: Failed setting up stream for VB reader (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1773,7 +1773,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB writer (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "ERROR: Failed setting up VB writer (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1783,7 +1783,7 @@ bool Test07()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up stream for VB writer (%08X):\n%S\n", static_cast<unsigned int>(hr), szPath );
+            printe( "ERROR: Failed setting up stream for VB writer (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath );
             continue;
         }
 
@@ -1797,7 +1797,7 @@ bool Test07()
             if ( FAILED(hr) )
             {
                 success = false;
-                printe( "ERROR: Failed reading VB %s %u (%08X):\n%S\n",
+                printe( "ERROR: Failed reading VB %s %u (%08X):\n%ls\n",
                         g_VBMedia[index].ilDesc[ j ].SemanticName, g_VBMedia[index].ilDesc[ j ].SemanticIndex, static_cast<unsigned int>(hr), szPath );
             }
             else
@@ -1806,7 +1806,7 @@ bool Test07()
                 if ( FAILED(hr) )
                 {
                     success = false;
-                    printe( "ERROR: Failed writing VB writer %s %u (%08X):\n%S\n",
+                    printe( "ERROR: Failed writing VB writer %s %u (%08X):\n%ls\n",
                             g_VBMedia[index].ilDesc[ j ].SemanticName, g_VBMedia[index].ilDesc[ j ].SemanticIndex, static_cast<unsigned int>(hr), szPath );
                 }
             }
@@ -1819,7 +1819,7 @@ bool Test07()
         else
         {
             success = false;
-            printe( "ERROR: Failed comparing VB read/write cycle results:\n%S\n", szPath );
+            printe( "ERROR: Failed comparing VB read/write cycle results:\n%ls\n", szPath );
         }
     }
 

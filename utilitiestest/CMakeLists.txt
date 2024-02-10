@@ -18,7 +18,7 @@ set(TEST_SOURCES
     wavefrontobj.cpp
     ../../Utilities/WaveFrontReader.h)
 
-if (NOT WINDOWS_STORE)
+if(NOT WINDOWS_STORE)
   set(TEST_SOURCES ${TEST_SOURCES}
       fvf.cpp
       fvf11.cpp

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // remap.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ bool Test03()
             success = false;
         }
         else
-        {	
+        {
             for( size_t j = 0; j < 1023; ++j )
             {
                 if ( destib[ j ] != remap[ srcib[ j ] ] )
@@ -104,7 +104,7 @@ bool Test03()
             success = false;
         }
         else
-        {	
+        {
             for( size_t j = 0; j < 1023; ++j )
             {
                 if ( destib[ j ] != remap[ srcib[ j ] ] )
@@ -206,7 +206,7 @@ bool Test03()
         std::unique_ptr<uint16_t[]> destib( new uint16_t[ 12 * 3 ] );
         memset( destib.get(), 0xff, sizeof(uint16_t) * 12 * 3 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -241,7 +241,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -259,9 +259,9 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
-        }        
+        }
 
         // invalid args
         #pragma warning(push)
@@ -362,7 +362,7 @@ bool Test03()
             success = false;
         }
         else
-        {	
+        {
             for( size_t j = 0; j < 1023; ++j )
             {
                 if ( destib[ j ] != remap[ srcib[ j ] ] )
@@ -422,7 +422,7 @@ bool Test03()
             success = false;
         }
         else
-        {	
+        {
             for( size_t j = 0; j < 1023; ++j )
             {
                 if ( destib[ j ] != inverseRemap[ srcib[ j ] ] )
@@ -483,7 +483,7 @@ bool Test03()
             success = false;
         }
         else
-        {	
+        {
             for( size_t j = 0; j < 1023; ++j )
             {
                 if ( destib[ j ] != inverseRemap[ srcib[ j ] ] )
@@ -524,7 +524,7 @@ bool Test03()
         std::unique_ptr<uint32_t[]> destib( new uint32_t[ 12 * 3 ] );
         memset( destib.get(), 0xff, sizeof(uint32_t) * 12 * 3 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -559,7 +559,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -577,9 +577,9 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
-        }        
+        }
 
         // invalid args
         #pragma warning(push)
@@ -688,14 +688,14 @@ bool Test03()
         if ( FAILED( Validate( s_unused, 12, 24, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: test data failed validation:\n%ls\n", msgs.c_str() );
         }
 #endif
 
         std::unique_ptr<uint16_t[]> destib( new uint16_t[ 12 * 3 ] );
         memset( destib.get(), 0xff, sizeof(uint16_t) * 12 * 3 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, uint32_t(-1), 15,
@@ -730,7 +730,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -748,9 +748,9 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
-        }        
+        }
     }
 
     // Unused (32)
@@ -783,14 +783,14 @@ bool Test03()
         if ( FAILED( Validate( s_unused, 12, 24, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: test data failed validation:\n%ls\n", msgs.c_str() );
         }
 #endif
 
         std::unique_ptr<uint32_t[]> destib( new uint32_t[ 12 * 3 ] );
         memset( destib.get(), 0xff, sizeof(uint32_t) * 12 * 3 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, uint32_t(-1), 15,
@@ -825,7 +825,7 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -843,9 +843,9 @@ bool Test03()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
-        }        
+        }
     }
 
     return success;
@@ -1202,7 +1202,7 @@ bool Test04()
         std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 24 ] );
         memset( destvb.get(), 0xff, sizeof(uint32_t) * 24 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -1243,7 +1243,7 @@ bool Test04()
             {
                 printe("\t%zu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
             }
-        }        
+        }
 
         // invalid args
         #pragma warning(push)
@@ -1320,14 +1320,14 @@ bool Test04()
         std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 24 ] );
         memset( destvb.get(), 0, sizeof(uint32_t) * 24 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, uint32_t(-1), 10,
                                             14, 12, 13, 15,
                                             19, uint32_t(-1), 16, 18,
                                             22, 20, 21, 23 };
 
-        const static uint32_t s_sorted[] = { 3, 1, 0, 2,
+        static const uint32_t s_sorted[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 0, 10,
                                             14, 12, 13, 15,
@@ -1455,7 +1455,7 @@ bool Test05()
         remap.reserve( 65535 + 256 );
         for( uint32_t j = 0; j < (65535 + 256); ++j )
             remap.push_back( (65535 + 255) - j );
- 
+
         std::vector<uint32_t> dups;
         dups.reserve( 256 );
         for( uint32_t j = 0; j < 256; ++j )
@@ -1506,7 +1506,7 @@ bool Test05()
         remap.reserve( 65535 + 256 );
         for( uint32_t j = 0; j < (65535 + 256); ++j )
             remap.push_back( j );
- 
+
         std::shuffle(std::begin(remap), std::end(remap), rng);
 
         std::unique_ptr<uint32_t[]> inverseRemap(new uint32_t[65535 + 256]);
@@ -1572,7 +1572,7 @@ bool Test05()
         for( uint32_t j = 0; j < 4; ++j )
             dups.push_back( j );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -1580,7 +1580,7 @@ bool Test05()
                                             22, 20, 21, 23,
                                             27, 26, 25, 24 };
 
-        const static uint32_t s_sorted[] = { 3, 1, 0, 2,
+        static const uint32_t s_sorted[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -1621,7 +1621,7 @@ bool Test05()
         for( uint32_t j = 0; j < 4; ++j )
             dups.push_back( j );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, uint32_t(-1), 10,
                                             14, 12, 13, 15,
@@ -1629,7 +1629,7 @@ bool Test05()
                                             22, 20, 21, 23,
                                             27, 26, uint32_t(-1), 24 };
 
-        const static uint32_t s_sorted[] = { 3, 1, 0, 2,
+        static const uint32_t s_sorted[] = { 3, 1, 0, 2,
                                              6, 4, 5, 7,
                                              11, 9, 0, 10,
                                              14, 12, 13, 15,
@@ -1649,7 +1649,7 @@ bool Test05()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
     }
@@ -1689,7 +1689,7 @@ bool Test18()
             success = false;
         }
         else
-        {	
+        {
             for( size_t j = 0; j < 341; ++j )
             {
                 uint32_t f = remap[j];
@@ -1884,7 +1884,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -1903,7 +1903,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -2159,7 +2159,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -2178,7 +2178,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
 
@@ -2254,7 +2254,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
     }
@@ -2296,7 +2296,7 @@ bool Test18()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
     }

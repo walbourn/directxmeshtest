@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // adjacency.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -299,7 +299,7 @@ bool Test07()
         std::unique_ptr<uint32_t[]> preps( new uint32_t[ 8 ] );
         memset( preps.get(), 0xff, sizeof(uint32_t) * 8 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -324,7 +324,7 @@ bool Test07()
         }
 
         // epsilon is same as exact for cube with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.0001f, preps.get(), nullptr );   
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.0001f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -335,7 +335,7 @@ bool Test07()
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] invalid pointRep\n" );
             success = false;
         }
-        else if ( memcmp( preps.get(), s_cubePointReps, sizeof(s_cubePointReps) ) != 0 ) 
+        else if ( memcmp( preps.get(), s_cubePointReps, sizeof(s_cubePointReps) ) != 0 )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] failed\n" );
             success = false;
@@ -411,7 +411,7 @@ bool Test07()
         std::unique_ptr<uint32_t[]> preps( new uint32_t[ 24 ] );
         memset( preps.get(), 0xff, sizeof(uint32_t) * 24 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, preps.get(), nullptr );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -422,7 +422,7 @@ bool Test07()
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] invalid pointRep\n" );
             success = false;
         }
-        else if ( memcmp( preps.get(), s_fmCubePointReps, sizeof(s_fmCubePointReps) ) != 0 ) 
+        else if ( memcmp( preps.get(), s_fmCubePointReps, sizeof(s_fmCubePointReps) ) != 0 )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] failed\n" );
             success = false;
@@ -436,7 +436,7 @@ bool Test07()
         }
 
         // epsilon
-        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), nullptr );   
+        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -466,7 +466,7 @@ bool Test07()
         std::unique_ptr<uint32_t[]> preps( new uint32_t[ 4 ] );
         memset( preps.get(), 0xff, sizeof(uint32_t) * 4 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, preps.get(), nullptr );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -491,7 +491,7 @@ bool Test07()
         }
 
         // epsilon is same as exact for tetra with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.0001f, preps.get(), nullptr );   
+        hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.0001f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -521,7 +521,7 @@ bool Test07()
         std::unique_ptr<uint32_t[]> preps( new uint32_t[ 8 ] );
         memset( preps.get(), 0xff, sizeof(uint32_t) * 8 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -546,7 +546,7 @@ bool Test07()
         }
 
         // epsilon is same as exact for cube with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.0001f, preps.get(), nullptr );   
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.0001f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -633,7 +633,7 @@ bool Test07()
         std::unique_ptr<uint32_t[]> preps( new uint32_t[ 24 ] );
         memset( preps.get(), 0xff, sizeof(uint32_t) * 24 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, preps.get(), nullptr );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -658,7 +658,7 @@ bool Test07()
         }
 
         // epsilon
-        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), nullptr );   
+        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -688,7 +688,7 @@ bool Test07()
         std::unique_ptr<uint32_t[]> preps( new uint32_t[ 4 ] );
         memset( preps.get(), 0xff, sizeof(uint32_t) * 4 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, preps.get(), nullptr );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -713,7 +713,7 @@ bool Test07()
         }
 
         // epsilon is same as exact for tetra with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.0001f, preps.get(), nullptr );   
+        hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.0001f, preps.get(), nullptr );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -756,7 +756,7 @@ bool Test08()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get() );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -788,7 +788,7 @@ bool Test08()
         }
 
         // nullptr preps
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, nullptr, adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -824,7 +824,7 @@ bool Test08()
             std::wstring msgs;
             if (FAILED(Validate(s_unused16_1st, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
             {
-                printe("ERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] validate failed\n%S\n", msgs.c_str());
+                printe("ERROR: GenerateAdjacencyAndPointReps(16) cube [unused 1st] validate failed\n%ls\n", msgs.c_str());
                 success = false;
             }
         }
@@ -845,13 +845,13 @@ bool Test08()
             std::wstring msgs;
             if (FAILED(Validate(s_unused16_all, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
             {
-                printe("ERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] validate failed\n%S\n", msgs.c_str());
+                printe("ERROR: GenerateAdjacencyAndPointReps(16) cube [unused all] validate failed\n%ls\n", msgs.c_str());
                 success = false;
             }
         }
 
         // epsilon is same as exact for cube with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.0001f, preps.get(), adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, 8, 0.0001f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -891,7 +891,7 @@ bool Test08()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, preps.get(), adj.get() );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -923,7 +923,7 @@ bool Test08()
         }
 
         // nullptr preps
-        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, nullptr, adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -943,7 +943,7 @@ bool Test08()
         }
 
         // epsilon picks different pointreps, but has same adjancecy
-        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -983,7 +983,7 @@ bool Test08()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 4 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 4 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, preps.get(), adj.get() );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1015,7 +1015,7 @@ bool Test08()
         }
 
         // nullptr preps
-        hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, nullptr, adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1035,7 +1035,7 @@ bool Test08()
         }
 
         // epsilon is same as exact for tetra with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.0001f, preps.get(), adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_tetraIndices16, 4, g_tetraVerts, 4, 0.0001f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(16) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1075,7 +1075,7 @@ bool Test08()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get() );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1107,7 +1107,7 @@ bool Test08()
         }
 
         // nullptr preps
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, nullptr, adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1143,7 +1143,7 @@ bool Test08()
             std::wstring msgs;
             if (FAILED(Validate(s_unused32_1st, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
             {
-                printe("ERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] validate failed\n%S\n", msgs.c_str());
+                printe("ERROR: GenerateAdjacencyAndPointReps(32) cube [unused 1st] validate failed\n%ls\n", msgs.c_str());
                 success = false;
             }
         }
@@ -1164,13 +1164,13 @@ bool Test08()
             std::wstring msgs;
             if (FAILED(Validate(s_unused32_all, 12, 8, adj.get(), VALIDATE_UNUSED, &msgs)))
             {
-                printe("ERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] validate failed\n%S\n", msgs.c_str());
+                printe("ERROR: GenerateAdjacencyAndPointReps(32) cube [unused all] validate failed\n%ls\n", msgs.c_str());
                 success = false;
             }
         }
 
         // epsilon is same as exact for cube with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.0001f, preps.get(), adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, 8, 0.0001f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) cube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1210,7 +1210,7 @@ bool Test08()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, preps.get(), adj.get() );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1242,7 +1242,7 @@ bool Test08()
         }
 
         // nullptr preps
-        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, nullptr, adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1262,7 +1262,7 @@ bool Test08()
         }
 
         // epsilon picks different pointreps, but has same adjancecy
-        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, 0.0001f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) fmcube [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1302,7 +1302,7 @@ bool Test08()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 4 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 4 );
 
-        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, preps.get(), adj.get() );   
+        HRESULT hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1334,7 +1334,7 @@ bool Test08()
         }
 
         // nullptr preps
-        hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, nullptr, adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.f, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [nullpr exact] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1354,7 +1354,7 @@ bool Test08()
         }
 
         // epsilon is same as exact for tetra with no overlapping verts
-        hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.0001f, preps.get(), adj.get() );   
+        hr = GenerateAdjacencyAndPointReps( g_tetraIndices32, 4, g_tetraVerts, 4, 0.0001f, preps.get(), adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) tetra [epsilon] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1415,7 +1415,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_cubeGSAdj16[j] )
                 {
-                    print("%zu: %u ... %u\n", j, gsadj[j], s_cubeGSAdj16[j] );
+                    print("%zu: %d ... %d\n", j, gsadj[j], s_cubeGSAdj16[j] );
                 }
             }
         }
@@ -1472,7 +1472,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_fmCubeGSAdj16[j] )
                 {
-                    print("%zu: %u ... %u\n", j, gsadj[j], s_fmCubeGSAdj16[j] );
+                    print("%zu: %d ... %d\n", j, gsadj[j], s_fmCubeGSAdj16[j] );
                 }
             }
         }
@@ -1497,12 +1497,12 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_tetraGSAdj16[j] )
                 {
-                    print("%zu: %u ... %u\n", j, gsadj[j], s_tetraGSAdj16[j] );
+                    print("%zu: %d ... %d\n", j, gsadj[j], s_tetraGSAdj16[j] );
                 }
             }
         }
     }
-    
+
     // 32-bit (cube)
     {
         std::unique_ptr<uint32_t[]> gsadj( new uint32_t[ 12 * 6 ] );
@@ -1625,9 +1625,9 @@ bool Test10()
             3, 4, 6, 3, 1, 0,
             3, 0, 4, 5, 6, 1,
             uint16_t(-1), uint16_t(-1), uint16_t(-1), uint16_t(-1), uint16_t(-1), uint16_t(-1),
-            2, 7, 6, 5, 7, 0, 
+            2, 7, 6, 5, 7, 0,
             0, 1, 2, 6, 7, 5,
-            0, 2, 7, 6, 5, 4, 
+            0, 2, 7, 6, 5, 4,
             5, 0, 7, 2, 6, 4,
             5, 7, 6, 3, 4, 0
         };
@@ -1637,7 +1637,7 @@ bool Test10()
         if ( FAILED( Validate( s_unused16, 12, 8, s_unusedAdj, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: GenerateGSAdjacency(16) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: GenerateGSAdjacency(16) test data failed validation:\n%ls\n", msgs.c_str() );
         }
 #endif
 
@@ -1655,7 +1655,7 @@ bool Test10()
             {
                 if ( gsadj[ j ] != s_unusedGSAdj[j] )
                 {
-                    print("%zu: %u ... %u\n", j, gsadj[j], s_unusedGSAdj[j] );
+                    print("%zu: %d ... %d\n", j, gsadj[j], s_unusedGSAdj[j] );
                 }
             }
         }
@@ -1675,9 +1675,9 @@ bool Test10()
             3, 4, 6, 3, 1, 0,
             3, 0, 4, 5, 6, 1,
             uint32_t(-1), uint32_t(-1), uint32_t(-1), uint32_t(-1), uint32_t(-1), uint32_t(-1),
-            2, 7, 6, 5, 7, 0, 
+            2, 7, 6, 5, 7, 0,
             0, 1, 2, 6, 7, 5,
-            0, 2, 7, 6, 5, 4, 
+            0, 2, 7, 6, 5, 4,
             5, 0, 7, 2, 6, 4,
             5, 7, 6, 3, 4, 0
         };
@@ -1687,7 +1687,7 @@ bool Test10()
         if ( FAILED( Validate( s_unused32, 12, 8, s_unusedAdj, VALIDATE_UNUSED | VALIDATE_ASYMMETRIC_ADJ, &msgs ) ) )
         {
             success = false;
-            printe("\nERROR: GenerateGSAdjacency(32) test data failed validation:\n%S\n", msgs.c_str() );
+            printe("\nERROR: GenerateGSAdjacency(32) test data failed validation:\n%ls\n", msgs.c_str() );
         }
 #endif
 
@@ -1726,7 +1726,7 @@ bool Test12()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 8, s_cubePointReps, adj.get() );   
+        HRESULT hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 8, s_cubePointReps, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1746,7 +1746,7 @@ bool Test12()
         }
 
         // identity preps
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 8, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 8, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) cube [identity] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1768,28 +1768,28 @@ bool Test12()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, UINT32_MAX, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, UINT32_MAX, nullptr, adj.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, UINT32_MAX, g_cubeVerts, 8, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, UINT32_MAX, g_cubeVerts, 8, nullptr, adj.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 2, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, 2, nullptr, adj.get() );
         if ( hr != E_UNEXPECTED )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1803,7 +1803,7 @@ bool Test12()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = ConvertPointRepsToAdjacency( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, s_fmCubePointReps, adj.get() );   
+        HRESULT hr = ConvertPointRepsToAdjacency( g_fmCubeIndices16, 12, g_fmCubeVerts, 24, s_fmCubePointReps, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1828,7 +1828,7 @@ bool Test12()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 8, s_cubePointReps, adj.get() );   
+        HRESULT hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 8, s_cubePointReps, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) cube failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1848,7 +1848,7 @@ bool Test12()
         }
 
         // identity preps
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 8, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 8, nullptr, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) cube [identity] failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1870,28 +1870,28 @@ bool Test12()
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for strip cut value (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX, nullptr, adj.get() );
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for 32-max value verts (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, UINT32_MAX, g_cubeVerts, 8, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, UINT32_MAX, g_cubeVerts, 8, nullptr, adj.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
-        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 2, nullptr, adj.get() );   
+        hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, 2, nullptr, adj.get() );
         if ( hr != E_UNEXPECTED )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1905,7 +1905,7 @@ bool Test12()
         std::unique_ptr<uint32_t[]> adj( new uint32_t[ 3 * 12 ] );
         memset( adj.get(), 0xff, sizeof(uint32_t) * 3 * 12 );
 
-        HRESULT hr = ConvertPointRepsToAdjacency( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, s_fmCubePointReps, adj.get() );   
+        HRESULT hr = ConvertPointRepsToAdjacency( g_fmCubeIndices32, 12, g_fmCubeVerts, 24, s_fmCubePointReps, adj.get() );
         if ( FAILED(hr) )
         {
             printe("\nERROR: ConvertPointRepsToAdjacency(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
@@ -1961,7 +1961,7 @@ bool Test23()
             2, 6, 7
         };
 
-        static const uint32_t s_sortedAdj[] = 
+        static const uint32_t s_sortedAdj[] =
         {
             5, 6, 1,
             0, 4, 7,
@@ -1989,7 +1989,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -1998,7 +1998,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );
             }
         }
 
@@ -2018,7 +2018,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2027,7 +2027,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );
             }
         }
 
@@ -2093,7 +2093,7 @@ bool Test23()
             2, 6, 7
         };
 
-        static const uint32_t s_sortedAdj[] = 
+        static const uint32_t s_sortedAdj[] =
         {
             5, 6, 1,
             0, 4, 7,
@@ -2121,7 +2121,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2130,7 +2130,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );
             }
         }
 
@@ -2150,7 +2150,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2159,7 +2159,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );
             }
         }
 
@@ -2225,7 +2225,7 @@ bool Test23()
             2, 6, 7
         };
 
-        static const uint32_t s_sortedAdj[] = 
+        static const uint32_t s_sortedAdj[] =
         {
             5, 6, 1,
             0, 4, 7,
@@ -2253,7 +2253,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %d %d %d\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2262,7 +2262,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );
             }
         }
     }
@@ -2293,7 +2293,7 @@ bool Test23()
             2, 6, 7
         };
 
-        static const uint32_t s_sortedAdj[] = 
+        static const uint32_t s_sortedAdj[] =
         {
             5, 6, 1,
             0, 4, 7,
@@ -2321,7 +2321,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
         }
         else if ( memcmp( adj.get(), s_sortedAdj, sizeof(s_sortedAdj) ) != 0 )
@@ -2330,7 +2330,7 @@ bool Test23()
             success = false;
             for( size_t j = 0; j < (12*3); j += 3 )
             {
-                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );  
+                print("\t%zu: %u %u %u\n", j, adj[ j ], adj[ j + 1 ], adj[ j + 2 ] );
             }
         }
     }
@@ -2501,7 +2501,7 @@ bool Test19()
         std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 24 ] );
         memset( destvb.get(), 0xff, sizeof(uint32_t) * 24 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -2534,7 +2534,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );
             }
         }
 
@@ -2560,14 +2560,14 @@ bool Test19()
             {
                 printe("\t%zu: %u .. %u\n", j, srcvb[ j ], s_remap[ j ] );
             }
-        }        
+        }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
         {
             printe("ERROR: FinalizeVBAndPointReps fmcube [in-place] pr failed\n" );
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );
             }
         }
     }
@@ -2586,7 +2586,7 @@ bool Test19()
         std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 24 ] );
         memset( destvb.get(), 0, sizeof(uint32_t) * 24 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, uint32_t(-1), 10,
                                             14, 12, 13, 15,
@@ -2617,7 +2617,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2626,7 +2626,7 @@ bool Test19()
             success = false;
             for( size_t j = 0; j < 24; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );
             }
         }
     }
@@ -2723,7 +2723,7 @@ bool Test20()
         std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 28 ] );
         memset( destvb.get(), 0xff, sizeof(uint32_t) * 28 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, 8, 10,
                                             14, 12, 13, 15,
@@ -2762,7 +2762,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2771,7 +2771,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );
             }
         }
     }
@@ -2790,7 +2790,7 @@ bool Test20()
         std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 28 ] );
         memset( destvb.get(), 0, sizeof(uint32_t) * 28 );
 
-        const static uint32_t s_remap[] = { 3, 1, 0, 2,
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
                                             6, 4, 5, 7,
                                             11, 9, uint32_t(-1), 10,
                                             14, 12, 13, 15,
@@ -2829,7 +2829,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
         }
         else if ( memcmp( prout.get(), s_preps, sizeof(s_preps) ) != 0 )
@@ -2838,7 +2838,7 @@ bool Test20()
             success = false;
             for( size_t j = 0; j < 28; ++j )
             {
-                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );  
+                printe("\t%zu: %u .. %u\n", j, prout[ j ], s_preps[ j ] );
             }
         }
     }
