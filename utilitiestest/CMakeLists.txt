@@ -12,8 +12,6 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
   message(FATAL_ERROR "DirectXMesh Test Suite should be built by the main CMakeLists")
 endif()
 
-option(ENABLE_CODE_ANALYSIS "Use Static Code Analysis on build" OFF)
-
 set(TEST_SOURCES
     wavefrontobj.cpp
     ../../Utilities/WaveFrontReader.h)
