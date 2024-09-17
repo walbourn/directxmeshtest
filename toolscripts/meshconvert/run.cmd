@@ -2,7 +2,8 @@
 
 setlocal
 
-set TARGETEXE=..\..\..\Meshconvert\Bin\Desktop_2019\Win32\Debug\meshconvert.exe
+set TARGETEXE=..\..\..\out\build\x64-Debug\bin\meshconvert.exe
+REM set TARGETEXE=..\..\..\Meshconvert\Bin\Desktop_2019\Win32\Debug\meshconvert.exe
 REM set TARGETEXE=..\..\..\Meshconvert\Bin\Desktop_2019\Win32\Release\meshconvert.exe
 REM set TARGETEXE=D:\vcpkg\installed\arm64-windows\tools\directxmesh\meshconvert.exe
 set SPEC=*
