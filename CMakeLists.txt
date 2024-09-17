@@ -59,7 +59,7 @@ target_include_directories(xtcp PRIVATE ./common)
 add_test(NAME "contentProcess" COMMAND xtcp)
 set_tests_properties(contentProcess PROPERTIES TIMEOUT 60)
 
-message("INFO: Enabled tests: ${TEST_EXES}")
+message(STATUS "Enabled tests: ${TEST_EXES}")
 foreach(t IN LISTS TEST_EXES)
   target_include_directories(${t} PRIVATE ../Utilities)
   target_link_libraries(${t} PRIVATE DirectXMesh)
