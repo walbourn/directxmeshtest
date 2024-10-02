@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // process.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 //-------------------------------------------------------------------------------------
 
@@ -44,6 +44,7 @@ static const TestMedia g_TestMedia[] =
     // flags                    | filename                              | striporder           | independent          | attr-striporder      | attr-independent     | dups
     { FLAGS_NONE,               MEDIA_PATH L"cup._obj",                 1.050532f, 1.473881f,  0.761170f, 1.067910f,  1.268085f, 1.779104f,  1.002128f, 1.405970f,  0,  0   },
     { FLAGS_IGNORE_SLOWDOWN_AT, MEDIA_PATH L"teapot._obj",              1.013672f, 1.958491f,  0.646484f, 1.249057f,  1.013672f, 1.958491f,  0.646484f, 1.249057f,  0,  0   },
+#ifndef BUILD_BVT_ONLY
     { FLAGS_NONE,               MEDIA_PATH L"SuperSimpleRunner._obj",   1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        1.660000f, 1.f,        0,  0   },
     { FLAGS_NONE,               MEDIA_PATH L"shuttle._obj",             0.878247f, 1.745161f,  0.696429f, 1.383871f,  0.870130f, 1.285372f,  0.798701f, 1.179856f,  0,  107 },
     { FLAGS_NONE,               MEDIA_PATH L"player_ship_a._obj",       1.102867f, 1.053140f,  1.091062f, 1.041868f,  1.102867f, 1.053140f,  1.091062f, 1.041868f,  0,  0   },
@@ -52,6 +53,7 @@ static const TestMedia g_TestMedia[] =
     { FLAGS_NONE,               MEDIA_PATH L"cylinder.vbo",             1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  1.079365f, 1.046154f,  0,  0   },
     { FLAGS_NONE,               MEDIA_PATH L"torus.vbo",                1.000918f, 2.001837f,  0.642332f, 1.284665f,  1.000918f, 2.001837f,  0.642332f, 1.284665f,  0,  0   },
     { FLAGS_NONE,               MEDIA_PATH L"Head_Big_Ears.vbo",        0.815828f, 1.604267f,  0.664554f, 1.306799f,  0.815828f, 1.604267f,  0.664554f, 1.306799f,  0,  0   },
+#endif
 };
 
 namespace
@@ -882,7 +884,7 @@ bool Test03()
                     }
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nVerts ] );
-                    hr = FinalizeVB( mesh->vertices.data(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts, nullptr, 0, 
+                    hr = FinalizeVB( mesh->vertices.data(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts, nullptr, 0,
                                      vertRemap.get(), vb.get() );
                     if ( FAILED(hr) )
                     {
@@ -1257,7 +1259,7 @@ bool Test04()
 
                     std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nTotalVerts ] );
                     hr = FinalizeVB( mesh->vertices.data(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts,
-                                     dupVerts.empty() ? nullptr : dupVerts.data(), dupVerts.size(), 
+                                     dupVerts.empty() ? nullptr : dupVerts.data(), dupVerts.size(),
                                      vertRemap.get(), vb.get() );
                     if ( FAILED(hr) )
                     {

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // vb12.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 //-------------------------------------------------------------------------------------
 
@@ -644,11 +644,13 @@ namespace
     {
         { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cube._obj" },
         { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cup._obj" },
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"tetrahedron._obj" },
         { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"teapot._obj" },
+    #ifndef BUILD_BVT_ONLY
+        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"tetrahedron._obj" },
         { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"sphere.vbo" },
         { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cylinder.vbo" },
         { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"torus.vbo" },
+    #endif
     };
 }
 
@@ -1720,7 +1722,7 @@ bool Test07_DX12()
         {
             hr = mesh->Load( szPath );
         }
-        
+
         ++ncount;
 
         if ( FAILED(hr) )

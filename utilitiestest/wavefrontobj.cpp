@@ -27,6 +27,11 @@ namespace
 
     const TestMedia s_TestMedia[] =
     {
+        { FLAGS_NO_TEXCOORDS, MEDIA_PATH L"cube._obj", 24, 12, 1 },
+        { FLAGS_NO_TEXCOORDS, MEDIA_PATH L"teapot._obj", 530, 1024, 1 },
+        { FLAGS_NONE, MEDIA_PATH L"cup._obj", 1340, 1880, 3 },
+
+    #ifndef BUILD_BVT_ONLY
         { FLAGS_POSONLY, MEDIA_PATH L"diamond._obj", 6, 9, 1 },
         { FLAGS_POSONLY, MEDIA_PATH L"tetrahedron._obj", 4, 4, 1 },
         { FLAGS_POSONLY, MEDIA_PATH L"octahedron._obj", 6, 8, 1 },
@@ -35,18 +40,15 @@ namespace
         { FLAGS_POSONLY, MEDIA_PATH L"shuttle._obj", 310, 616, 8 },
         { FLAGS_POSONLY, MEDIA_PATH L"airboat._obj", 5797, 11566, 8 },
 
-        { FLAGS_NO_TEXCOORDS, MEDIA_PATH L"cube._obj", 24, 12, 1 },
-        { FLAGS_NO_TEXCOORDS, MEDIA_PATH L"teapot._obj", 530, 1024, 1 },
-
         { FLAGS_NO_NORMALS, MEDIA_PATH L"SuperSimpleRunner._obj", 166, 100, 1 },
         { FLAGS_NO_NORMALS, MEDIA_PATH L"Head_Big_Ears._obj", 17575, 34560, 2 },
 
         { FLAGS_NONE, MEDIA_PATH L"player_ship_a._obj", 621, 593, 2 },
-        { FLAGS_NONE, MEDIA_PATH L"cup._obj", 1340, 1880, 3 },
 
         { FLAGS_32BITONLY | FLAGS_NO_NORMALS, MEDIA_PATH L"FSEngineGeo._obj", 25116, 15074, 2 },
         { FLAGS_32BITONLY, MEDIA_PATH L"FSEngineGeoN._obj", 26589, 15074, 2 },
         { FLAGS_32BITONLY, MEDIA_PATH L"John40K._obj", 40289, 40000, 2 },
+    #endif
     };
 }
 
