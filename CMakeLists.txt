@@ -8,18 +8,33 @@ project (DirectXMeshTest
   HOMEPAGE_URL "https://github.com/walbourn/directxmeshtest/wiki"
   LANGUAGES CXX)
 
+option(BUILD_BVT "Build-verification test" OFF)
+
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
   message(FATAL_ERROR "DirectXMesh Test Suite should be built by the main CMakeLists")
 endif()
 
-if(WIN32 AND (NOT DEFINED ENV{DIRECTXMESH_MEDIA_PATH}))
+if(WIN32 AND (NOT DEFINED ENV{DIRECTXMESH_MEDIA_PATH}) AND (NOT BUILD_BVT))
   message(WARNING "Tests make use of DIRECTXMESH_MEDIA_PATH environment variable to find media")
+endif()
+
+if(BUILD_BVT)
+  message(STATUS "Building for Build Verification Tests (BVTs)")
+  set(BVT_MEDIA_PATH "${CMAKE_CURRENT_LIST_DIR}/media")
+  cmake_path(NATIVE_PATH BVT_MEDIA_PATH BVT_MEDIA_PATH)
 endif()
 
 set(TEST_EXES headertest utilitiestest)
 add_executable(headertest headertest/main.cpp)
 
+# UTILITIES
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/utilitiestest)
+list(APPEND TEST_EXES utilitiestest)
+add_test(NAME "utilsTest" COMMAND utilitiestest)
+set_tests_properties(utilsTest PROPERTIES TIMEOUT 60)
+if(BUILD_BVT)
+  set_tests_properties(utilsTest PROPERTIES ENVIRONMENT "DIRECTXMESH_MEDIA_PATH=${BVT_MEDIA_PATH}")
+endif()
 
 # MESH
 list(APPEND TEST_EXES xtmesh)
@@ -51,6 +66,9 @@ add_executable(xtvb ${TEST_SOURCES}
 target_include_directories(xtvb PRIVATE ./common)
 add_test(NAME "vertexBuffer" COMMAND xtvb)
 set_tests_properties(vertexBuffer PROPERTIES TIMEOUT 60)
+if(BUILD_BVT)
+  set_tests_properties(vertexBuffer PROPERTIES ENVIRONMENT "DIRECTXMESH_MEDIA_PATH=${BVT_MEDIA_PATH}")
+endif()
 
 # CP
 list(APPEND TEST_EXES xtcp)
@@ -58,6 +76,9 @@ add_executable(xtcp cp/process.cpp cp/directxtest.cpp)
 target_include_directories(xtcp PRIVATE ./common)
 add_test(NAME "contentProcess" COMMAND xtcp)
 set_tests_properties(contentProcess PROPERTIES TIMEOUT 60)
+if(BUILD_BVT)
+  set_tests_properties(contentProcess PROPERTIES ENVIRONMENT "DIRECTXMESH_MEDIA_PATH=${BVT_MEDIA_PATH}")
+endif()
 
 message(STATUS "Enabled tests: ${TEST_EXES}")
 foreach(t IN LISTS TEST_EXES)
@@ -89,6 +110,12 @@ if(DEFINED COMPILER_DEFINES)
       target_compile_definitions(${t} PRIVATE ${COMPILER_DEFINES})
       target_compile_options(${t} PRIVATE ${COMPILER_SWITCHES})
       target_link_options(${t} PRIVATE ${LINKER_SWITCHES})
+    endforeach()
+endif()
+
+if(BUILD_BVT)
+    foreach(t IN LISTS TEST_EXES)
+      target_compile_definitions(${t} PRIVATE -DBUILD_BVT_ONLY)
     endforeach()
 endif()
 
