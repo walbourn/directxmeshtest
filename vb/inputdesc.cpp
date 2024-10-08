@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // inputdesc.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -67,7 +67,8 @@ namespace
         { "VertexPositionNormalTexture", 3, g_VertexPositionNormalTexture, 32, { 0, 12, 24 } },
         { "VertexPositionNormalColorTexture", 4, g_VertexPositionNormalColorTexture, 48, { 0, 12, 24, 40 } },
         { "VertexPositionNormalTangentColorTexture", 5, g_VertexPositionNormalTangentColorTexture, 52, { 0, 12, 24, 40, 44 } },
-        { "VertexPositionNormalTangentColorTextureSkinning", 7, g_VertexPositionNormalTangentColorTextureSkinning, 60, { 0, 12, 24, 40, 44, 52, 56 } },        { "D3DTutorial", 2, g_D3DTutorial, 24, { 0, 12 } },
+        { "VertexPositionNormalTangentColorTextureSkinning", 7, g_VertexPositionNormalTangentColorTextureSkinning, 60, { 0, 12, 24, 40, 44, 52, 56 } },
+        { "D3DTutorial", 2, g_D3DTutorial, 24, { 0, 12 } },
         { "VSStarterKit", 5, g_VSStarterKit, 52, { 0, 12, 24, 40, 44 } },
         { "tangentSpaceVertexLayout", 5, g_tangentspacevertexlayout, 56, { 0, 12, 20, 32, 44 } },
         { "quadLayout", 2, g_quadlayout, 24, { 0, 16 } },
@@ -76,7 +77,7 @@ namespace
         { "SkinnedLayout", 6, g_SkinnedLayout, 52, { 0, 12, 16, 20, 32, 40 } },
         { "UnSkinnedLayout", 4, g_UnSkinnedLayout, 48, { 0, 16, 28, 36 } },
         { "layout", 3, g_layout, 32, { 0, 12, 24 } },
-        { "colorLayout", 1, g_colorLayout, 16, { 0 } }
+        { "colorLayout", 1, g_colorLayout, 16, { 0 } },
     };
 }
 
@@ -113,6 +114,74 @@ bool Test01()
     if ( !IsValid( s_leaflayout, std::size(s_leaflayout) ) )
     {
         printe("ERROR: IsValid failed for desc leaflayout\n" );
+        success = false;
+    }
+
+    // invalid args
+    if ( IsValid(nullptr, 0) )
+    {
+        printe("ERROR: IsValid should fail for invalid arg of null elements\n");
+        success = false;
+    }
+
+    {
+        auto tooBig = std::make_unique<D3D11_INPUT_ELEMENT_DESC[]>(128);
+        if (IsValid(tooBig.get(), 0))
+        {
+            printe("ERROR: IsValid should fail for invalid arg of 0 count\n");
+            success = false;
+        }
+
+        if (IsValid(tooBig.get(), 128))
+        {
+            printe("ERROR: IsValid should fail for invalid arg of too large a count\n");
+            success = false;
+        }
+    }
+
+    D3D11_INPUT_ELEMENT_DESC badElement{};
+    badElement.Format = DXGI_FORMAT_UNKNOWN;
+    if ( IsValid(&badElement, 1) )
+    {
+        printe("ERROR: IsValid should fail for invalid dxgi format\n");
+        success = false;
+    }
+
+    badElement.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    badElement.AlignedByteOffset = 23;
+    if ( IsValid(&badElement, 1) )
+    {
+        printe("ERROR: IsValid should fail for invalid element alignment\n");
+        success = false;
+    }
+
+    badElement.InputSlot = 585;
+    if ( IsValid(&badElement, 1) )
+    {
+        printe("ERROR: IsValid should fail for invalid element slot\n");
+        success = false;
+    }
+
+    badElement.InputSlot = 0;
+    badElement.InputSlotClass = static_cast<D3D11_INPUT_CLASSIFICATION>(85);
+    if ( IsValid(&badElement, 1) )
+    {
+        printe("ERROR: IsValid should fail for invalid slot class\n");
+        success = false;
+    }
+
+    badElement.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+    badElement.InstanceDataStepRate = 16;
+    if ( IsValid(&badElement, 1) )
+    {
+        printe("ERROR: IsValid should fail for invalid instance rate");
+        success = false;
+    }
+
+    badElement.InputSlotClass = D3D11_INPUT_PER_INSTANCE_DATA;
+    if ( IsValid(&badElement, 1) )
+    {
+        printe("ERROR: IsValid should fail for invalid semantic name");
         success = false;
     }
 

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // inputdesc12.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 //-------------------------------------------------------------------------------------
 
@@ -119,6 +119,79 @@ bool Test01_DX12()
     if (!IsValid( desc ))
     {
         printe("ERROR: IsValid failed for desc leaflayout\n");
+        success = false;
+    }
+
+    // invalid args
+    D3D12_INPUT_LAYOUT_DESC failDesc{};
+    if ( IsValid(failDesc) )
+    {
+        printe("ERROR: IsValid should fail for invalid arg of null elements\n");
+        success = false;
+    }
+
+    {
+        auto tooBig = std::make_unique<D3D12_INPUT_ELEMENT_DESC[]>(128);
+        failDesc.pInputElementDescs = tooBig.get();
+        if ( IsValid(failDesc) )
+        {
+            printe("ERROR: IsValid should fail for invalid arg of 0 count\n");
+            success = false;
+        }
+
+        failDesc.NumElements = 128;
+        if ( IsValid(failDesc) )
+        {
+            printe("ERROR: IsValid should fail for invalid arg of too large a count\n");
+            success = false;
+        }
+    }
+
+    D3D12_INPUT_ELEMENT_DESC badElement{};
+    badElement.Format = DXGI_FORMAT_UNKNOWN;
+    failDesc.NumElements = 1;
+    failDesc.pInputElementDescs = &badElement;
+    if ( IsValid(failDesc) )
+    {
+        printe("ERROR: IsValid should fail for invalid dxgi format\n");
+        success = false;
+    }
+
+    badElement.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    badElement.AlignedByteOffset = 23;
+    if ( IsValid(failDesc) )
+    {
+        printe("ERROR: IsValid should fail for invalid element alignment\n");
+        success = false;
+    }
+
+    badElement.InputSlot = 585;
+    if ( IsValid(failDesc) )
+    {
+        printe("ERROR: IsValid should fail for invalid element slot\n");
+        success = false;
+    }
+
+    badElement.InputSlot = 0;
+    badElement.InputSlotClass = static_cast<D3D12_INPUT_CLASSIFICATION>(85);
+    if ( IsValid(failDesc) )
+    {
+        printe("ERROR: IsValid should fail for invalid slot class\n");
+        success = false;
+    }
+
+    badElement.InputSlotClass = D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA;
+    badElement.InstanceDataStepRate = 16;
+    if ( IsValid(failDesc) )
+    {
+        printe("ERROR: IsValid should fail for invalid instance rate");
+        success = false;
+    }
+
+    badElement.InputSlotClass = D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA;
+    if ( IsValid(failDesc) )
+    {
+        printe("ERROR: IsValid should fail for invalid semantic name");
         success = false;
     }
 
