@@ -48,6 +48,33 @@ namespace
         { "fOcc",       0, DXGI_FORMAT_R32_FLOAT,          1, 64, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
     };
 
+    const D3D11_INPUT_ELEMENT_DESC s_leaflayoutMixed[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "mTransform", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "mTransform", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "mTransform", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "TEXTURE", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "mTransform", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+        { "fOcc",       0, DXGI_FORMAT_R32_FLOAT,          1, 64, D3D11_INPUT_PER_INSTANCE_DATA, 10 },
+    };
+
+    const D3D11_INPUT_ELEMENT_DESC s_alignedElements[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R16_UNORM, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "FloatData", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "ShortData", 0, DXGI_FORMAT_R16_UNORM, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "ByteData", 0, DXGI_FORMAT_R16_UNORM, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+
+    const D3D11_INPUT_ELEMENT_DESC s_unusualSize[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "ByteData", 0, DXGI_FORMAT_R8_UNORM, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "ByteData2", 0, DXGI_FORMAT_R8_UNORM, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "ShortData", 0, DXGI_FORMAT_R16_UNORM, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+
     struct TestDesc
     {
         const char* name;
@@ -78,6 +105,8 @@ namespace
         { "UnSkinnedLayout", 4, g_UnSkinnedLayout, 48, { 0, 16, 28, 36 } },
         { "layout", 3, g_layout, 32, { 0, 12, 24 } },
         { "colorLayout", 1, g_colorLayout, 16, { 0 } },
+        { "alignedElements", 4, s_alignedElements, 18, { 0, 2, 14, 16 } },
+        { "unusualSize", 4, s_unusualSize, 16, { 0, 12, 13, 14 } },
     };
 }
 
@@ -114,6 +143,12 @@ bool Test01()
     if ( !IsValid( s_leaflayout, std::size(s_leaflayout) ) )
     {
         printe("ERROR: IsValid failed for desc leaflayout\n" );
+        success = false;
+    }
+
+    if (!IsValid(s_leaflayoutMixed, std::size(s_leaflayoutMixed)))
+    {
+        printe("ERROR: IsValid failed for desc leaflayoutMixed\n");
         success = false;
     }
 
@@ -200,7 +235,8 @@ bool Test02()
         uint32_t offsets[ D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
         memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
+        uint32_t strides[D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT];
+        memset( strides, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
         ComputeInputLayout( g_InputDescs[ j ].desc, g_InputDescs[ j ].elements, offsets, strides );
 
@@ -269,7 +305,8 @@ bool Test02()
         uint32_t offsets[ D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
         memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
+        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ] = {};
+        memset( strides, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
         ComputeInputLayout( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation), offsets, strides );
 
@@ -311,7 +348,8 @@ bool Test02()
         uint32_t offsets[ D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT ];
         memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
-        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ];
+        uint32_t strides[ D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT ] = {};
+        memset( strides, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
 
         ComputeInputLayout( s_instlayout, std::size(s_instlayout), offsets, strides );
 
@@ -379,6 +417,42 @@ bool Test02()
             for( size_t k = 0; k < std::size(s_leaflayout); ++k )
             {
                 print( "%u   ", offsets[ k ] );
+            }
+            print("\n\texpected: 0  12  24  0  16  32  48");
+        }
+
+        memset(offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT);
+
+        ComputeInputLayout(s_leaflayoutMixed, std::size(s_leaflayoutMixed), offsets, strides);
+
+        if (strides[0] != 20
+            || strides[1] != 68)
+        {
+            printe("ERROR: ComputeInputLayout failed for desc leaflayoutMixed (expected strides 20 / 68)\n");
+            success = false;
+
+            print("\tstrides:");
+            for (size_t k = 0; k < 2; ++k)
+            {
+                print("%u   ", strides[k]);
+            }
+            print("\n");
+        }
+        else if (offsets[0] != 0
+            || offsets[1] != 0
+            || offsets[2] != 16
+            || offsets[3] != 32
+            || offsets[4] != 12
+            || offsets[5] != 48
+            || offsets[6] != 64)
+        {
+            printe("ERROR: ComputeInputLayout failed for desc leaflayoutMixed\n");
+            success = false;
+
+            print("\toffsets:");
+            for (size_t k = 0; k < std::size(s_leaflayoutMixed); ++k)
+            {
+                print("%u   ", offsets[k]);
             }
             print("\n\texpected: 0  12  24  0  16  32  48");
         }
