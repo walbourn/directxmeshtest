@@ -30,7 +30,7 @@ TestInfo g_Tests[] =
 {
 #if !defined(WINAPI_FAMILY) || (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
     { "ComputeVertexSize(FVF)", Test02 },
-    { "ComputeVertexSize(pDecl)", Test03 }, 
+    { "ComputeVertexSize(pDecl)", Test03 },
     { "GetDeclLength", Test04 },
     { "ComputeFVF", Test05 },
     { "CreateDeclFromFVF", Test06 },

@@ -640,16 +640,18 @@ namespace
         const wchar_t *                 fname;
     };
 
+    using Vertex = DX::WaveFrontReader<uint16_t>::Vertex;
+
     const VBMedia g_VBMedia[] =
     {
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cube._obj" },
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cup._obj" },
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"teapot._obj" },
+        { g_layout, std::size(g_layout), sizeof(Vertex), MEDIA_PATH L"cube._obj" },
+        { g_layout, std::size(g_layout), sizeof(Vertex), MEDIA_PATH L"cup._obj" },
+        { g_layout, std::size(g_layout), sizeof(Vertex), MEDIA_PATH L"teapot._obj" },
     #ifndef BUILD_BVT_ONLY
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"tetrahedron._obj" },
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"sphere.vbo" },
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"cylinder.vbo" },
-        { g_layout, std::size(g_layout), sizeof(WaveFrontReader<uint16_t>::Vertex), MEDIA_PATH L"torus.vbo" },
+        { g_layout, std::size(g_layout), sizeof(Vertex), MEDIA_PATH L"tetrahedron._obj" },
+        { g_layout, std::size(g_layout), sizeof(Vertex), MEDIA_PATH L"sphere.vbo" },
+        { g_layout, std::size(g_layout), sizeof(Vertex), MEDIA_PATH L"cylinder.vbo" },
+        { g_layout, std::size(g_layout), sizeof(Vertex), MEDIA_PATH L"torus.vbo" },
     #endif
     };
 }
@@ -1711,7 +1713,7 @@ bool Test07_DX12()
         wchar_t ext[_MAX_EXT];
         _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 
-        std::unique_ptr<WaveFrontReader<uint16_t>> mesh( new WaveFrontReader<uint16_t>() );
+        std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
 
         HRESULT hr;
         if ( _wcsicmp( ext, L".vbo" ) == 0 )
