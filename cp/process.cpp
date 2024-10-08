@@ -138,7 +138,8 @@ bool Test01()
 
         ++ncount;
 
-        std::unique_ptr<WaveFrontReader<uint16_t>> mesh( new WaveFrontReader<uint16_t>() );
+        std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
+        using Vertex = DX::WaveFrontReader<uint16_t>::Vertex;
 
         print( "." );
 
@@ -454,7 +455,8 @@ bool Test02()
 
         ++ncount;
 
-        std::unique_ptr<WaveFrontReader<uint16_t>> mesh( new WaveFrontReader<uint16_t>() );
+        std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
+        using Vertex = DX::WaveFrontReader<uint16_t>::Vertex;
 
         print( "." );
 
@@ -658,7 +660,8 @@ bool Test03()
 
         ++ncount;
 
-        std::unique_ptr<WaveFrontReader<uint16_t>> mesh( new WaveFrontReader<uint16_t>() );
+        std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
+        using Vertex = DX::WaveFrontReader<uint16_t>::Vertex;
 
         print( "." );
 
@@ -855,7 +858,7 @@ bool Test03()
                 }
 
                 float ratioOrig;
-                ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(WaveFrontReader<uint16_t>::Vertex), ratioOrig);
+                ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(Vertex), ratioOrig);
 
                 std::unique_ptr<uint32_t[]> vertRemap( new uint32_t[ nVerts ] );
                 memset( vertRemap.get(), 0xcd, sizeof(uint32_t) * nVerts );
@@ -883,8 +886,8 @@ bool Test03()
                         printe("\nERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
-                    std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nVerts ] );
-                    hr = FinalizeVB( mesh->vertices.data(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts, nullptr, 0,
+                    std::unique_ptr<Vertex> vb( new Vertex[ nVerts ] );
+                    hr = FinalizeVB( mesh->vertices.data(), sizeof(Vertex), nVerts, nullptr, 0,
                                      vertRemap.get(), vb.get() );
                     if ( FAILED(hr) )
                     {
@@ -896,7 +899,7 @@ bool Test03()
                     if (SUCCEEDED(hr))
                     {
                         float ratio;
-                        ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(WaveFrontReader<uint16_t>::Vertex), ratio);
+                        ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(Vertex), ratio);
 
                         if (ratio > ratioOrig)
                         {
@@ -950,7 +953,8 @@ bool Test04()
 
         ++ncount;
 
-        std::unique_ptr<WaveFrontReader<uint16_t>> mesh( new WaveFrontReader<uint16_t>() );
+        std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
+        using Vertex = DX::WaveFrontReader<uint16_t>::Vertex;
 
         print( "." );
 
@@ -1229,7 +1233,7 @@ bool Test04()
                 }
 
                 float ratioOrig;
-                ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(WaveFrontReader<uint16_t>::Vertex), ratioOrig);
+                ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(Vertex), ratioOrig);
 
                 std::unique_ptr<uint32_t[]> vertRemap( new uint32_t[ nTotalVerts ] );
                 memset( vertRemap.get(), 0xcd, sizeof(uint32_t) * nTotalVerts );
@@ -1257,8 +1261,8 @@ bool Test04()
                         printe("ERROR: FinalizeIB (%u vcache, %u) failed (%08X):\n%ls\n", s_vcache[ vindex ], s_restart[ vindex ], static_cast<unsigned int>(hr), szPath );
                     }
 
-                    std::unique_ptr<WaveFrontReader<uint16_t>::Vertex> vb( new WaveFrontReader<uint16_t>::Vertex[ nTotalVerts ] );
-                    hr = FinalizeVB( mesh->vertices.data(), sizeof(WaveFrontReader<uint16_t>::Vertex), nVerts,
+                    std::unique_ptr<Vertex> vb( new Vertex[ nTotalVerts ] );
+                    hr = FinalizeVB( mesh->vertices.data(), sizeof(Vertex), nVerts,
                                      dupVerts.empty() ? nullptr : dupVerts.data(), dupVerts.size(),
                                      vertRemap.get(), vb.get() );
                     if ( FAILED(hr) )
@@ -1271,7 +1275,7 @@ bool Test04()
                     if (SUCCEEDED(hr))
                     {
                         float ratio;
-                        ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(WaveFrontReader<uint16_t>::Vertex), ratio);
+                        ComputeVertexFetchRateRatio(newIndices.get(), nFaces, nVerts, sizeof(Vertex), ratio);
 
                         if (ratio > ratioOrig)
                         {

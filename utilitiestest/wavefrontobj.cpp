@@ -79,7 +79,7 @@ bool Test01()
         uint32_t flags = s_TestMedia[index].options;
         if ((flags & FLAGS_32BITONLY) == 0)
         {
-            WaveFrontReader<uint16_t> wfReader;
+            DX::WaveFrontReader<uint16_t> wfReader;
 
             HRESULT hr = wfReader.Load(szPath);
             if (FAILED(hr))
@@ -114,7 +114,7 @@ bool Test01()
 
         // 32-bit test
         {
-            WaveFrontReader<uint32_t> wfReader;
+            DX::WaveFrontReader<uint32_t> wfReader;
 
             HRESULT hr = wfReader.Load(szPath);
             if (FAILED(hr))

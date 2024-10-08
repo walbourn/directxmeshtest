@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // optimize.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -12,7 +12,6 @@
 #include "ShapesGenerator.h"
 #include "TestHelpers.h"
 #include "TestGeometry.h"
-#include "WaveFrontReader.h"
 
 using namespace DirectX;
 using namespace TestGeometry;
@@ -54,7 +53,7 @@ bool Test15()
             attributesZero.push_back( 0 );
         }
 
-        static const uint32_t s_attributes[] = { 0, 0, 1, 1, 2, 2, 2, 3, 4, 4, 5, 5 }; 
+        static const uint32_t s_attributes[] = { 0, 0, 1, 1, 2, 2, 2, 3, 4, 4, 5, 5 };
         static const uint32_t s_attributesId[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
         static const uint32_t s_attributesZero[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -331,7 +330,7 @@ bool Test16()
             9, 11, 2,
             5, uint32_t(-1), 1,
             2, 11, 4,
-            uint32_t(-1), uint32_t(-1), uint32_t(-1), 
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
             uint32_t(-1), 10, 8,
             0, 7, 9,
             8, 10, 3,
@@ -533,7 +532,7 @@ bool Test16()
             9, 11, 2,
             5, uint32_t(-1), 1,
             2, 11, 4,
-            uint32_t(-1), uint32_t(-1), uint32_t(-1), 
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
             uint32_t(-1), 10, 8,
             0, 7, 9,
             8, 10, 3,

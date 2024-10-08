@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // meshlets.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -12,7 +12,6 @@
 #include "ShapesGenerator.h"
 #include "TestHelpers.h"
 #include "TestGeometry.h"
-#include "WaveFrontReader.h"
 
 using namespace DirectX;
 using namespace TestGeometry;
