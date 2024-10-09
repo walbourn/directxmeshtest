@@ -169,6 +169,8 @@ bool Test01_DX12()
 
     {
         auto tooBig = std::make_unique<D3D12_INPUT_ELEMENT_DESC[]>(128);
+        memset(tooBig.get(), 0, sizeof(D3D12_INPUT_ELEMENT_DESC) * 128);
+
         failDesc.pInputElementDescs = tooBig.get();
         if ( IsValid(failDesc) )
         {

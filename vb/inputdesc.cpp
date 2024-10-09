@@ -161,6 +161,8 @@ bool Test01()
 
     {
         auto tooBig = std::make_unique<D3D11_INPUT_ELEMENT_DESC[]>(128);
+        memset(tooBig.get(), 0, sizeof(D3D11_INPUT_ELEMENT_DESC) * 128);
+
         if (IsValid(tooBig.get(), 0))
         {
             printe("ERROR: IsValid should fail for invalid arg of 0 count\n");
