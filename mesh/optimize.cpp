@@ -140,8 +140,22 @@ bool Test15()
         }
 
         // invalid args
+        hr = AttributeSort(0, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: AttributeSort expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = AttributeSort(23, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: AttributeSort expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = AttributeSort( UINT32_MAX, attributesZero.data(), remap.get() );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
@@ -160,6 +174,8 @@ bool Test15()
 bool Test16()
 {
     bool success = true;
+
+    // TODO: Needs OptimizeFacesEx test for 16-bit and 32-bit
 
     // 16-bit fmcube
     {
@@ -220,8 +236,29 @@ bool Test16()
         }
 
         // invalid args
+        hr = OptimizeFaces(static_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(16) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFaces(g_fmCubeIndices16, 12, s_fmCubeAdj, remap.get(), 24, 32);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(16) expected to fail for restart/vertexCache issue (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = OptimizeFaces(static_cast<const uint16_t*>(nullptr), 23, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(16) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = OptimizeFaces( g_fmCubeIndices16, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
@@ -290,8 +327,29 @@ bool Test16()
         }
 
         // invalid args
+        hr = OptimizeFaces(static_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(32) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFaces(g_fmCubeIndices32, 12, s_fmCubeAdj, remap.get(), 24, 32);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(32) expected to fail for restart/vertexCache issue (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = OptimizeFaces(static_cast<const uint32_t*>(nullptr), 23, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(32) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = OptimizeFaces( g_fmCubeIndices32, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
@@ -1045,6 +1103,8 @@ bool Test25()
 {
     bool success = true;
 
+    // TODO: Needs OptimizeFacesLRUEx test for 16-bit and 32-bit
+
     // 16-bit fmcube
     {
         std::unique_ptr<uint32_t[]> remap(new uint32_t[12 * 3]);
@@ -1102,8 +1162,22 @@ bool Test25()
         }
 
         // invalid args
-#pragma warning(push)
-#pragma warning(disable:6385)
+        hr = OptimizeFacesLRU(static_cast<const uint16_t*>(nullptr), 0, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(16) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        #pragma warning(push)
+        #pragma warning(disable:6385)
+        hr = OptimizeFacesLRU(static_cast<const uint16_t*>(nullptr), 23, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(16) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = OptimizeFacesLRU(g_fmCubeIndices16, UINT32_MAX, remap.get());
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
@@ -1117,7 +1191,7 @@ bool Test25()
             printe("\nERROR: OptimizeFacesLRU(16) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-#pragma warning(pop)
+        #pragma warning(pop)
     }
 
     // 32-bit fmcube
@@ -1177,8 +1251,22 @@ bool Test25()
         }
 
         // invalid args
-#pragma warning(push)
-#pragma warning(disable:6385)
+        hr = OptimizeFacesLRU(static_cast<const uint32_t*>(nullptr), 0, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(32) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        #pragma warning(push)
+        #pragma warning(disable:6385)
+        hr = OptimizeFacesLRU(static_cast<const uint32_t*>(nullptr), 23, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(32) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = OptimizeFacesLRU(g_fmCubeIndices32, UINT32_MAX, remap.get());
         if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
         {
@@ -1192,7 +1280,7 @@ bool Test25()
             printe("\nERROR: OptimizeFacesLRU(32) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
-#pragma warning(pop)
+        #pragma warning(pop)
     }
 
     // Unused (16)

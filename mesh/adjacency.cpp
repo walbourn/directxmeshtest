@@ -374,8 +374,29 @@ bool Test07()
         }
 
         // invalid args
+        hr = GenerateAdjacencyAndPointReps(static_cast<const uint16_t*>(nullptr), 0, nullptr, 0, 0.f, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for 0 count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_cubeIndices16, 12, g_cubeVerts, 8, 0.f, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for null result (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = GenerateAdjacencyAndPointReps(static_cast<const uint16_t*>(nullptr), 23, nullptr, 52, 0.f, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for null parameters (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices16, 12, g_cubeVerts, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
@@ -596,8 +617,29 @@ bool Test07()
         }
 
         // invalid args
+        hr = GenerateAdjacencyAndPointReps(static_cast<const uint32_t*>(nullptr), 0, nullptr, 0, 0.f, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for 0 count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_cubeIndices32, 12, g_cubeVerts, 8, 0.f, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for null result (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = GenerateAdjacencyAndPointReps(static_cast<const uint32_t*>(nullptr), 23, nullptr, 52, 0.f, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for null parameters (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         hr = GenerateAdjacencyAndPointReps( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, 0.f, preps.get(), nullptr );
         if ( hr != E_INVALIDARG )
         {
@@ -1421,8 +1463,22 @@ bool Test10()
         }
 
         // invalid args
+        hr = GenerateGSAdjacency(static_cast<const uint16_t *>(nullptr), 0, nullptr, nullptr, 0, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for 0 count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = GenerateGSAdjacency(static_cast<const uint16_t *>(nullptr), 23, nullptr, nullptr, 52, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for null parameter (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         hr = GenerateGSAdjacency( g_cubeIndices16, 12, s_cubePointReps, s_cubeAdj, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -1528,8 +1584,22 @@ bool Test10()
         }
 
         // invalid args
+        hr = GenerateGSAdjacency(static_cast<const uint32_t *>(nullptr), 0, nullptr, nullptr, 0, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for 0 count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = GenerateGSAdjacency(static_cast<const uint32_t *>(nullptr), 23, nullptr, nullptr, 52, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for null parameter (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         hr = GenerateGSAdjacency( g_cubeIndices32, 12, s_cubePointReps, s_cubeAdj, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, gsadj.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -1766,8 +1836,22 @@ bool Test12()
         }
 
         // invalid args
+        hr = ConvertPointRepsToAdjacency(static_cast<const uint16_t*>(nullptr), 0, nullptr, 0, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for 0 count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = ConvertPointRepsToAdjacency(static_cast<const uint16_t*>(nullptr), 23, nullptr, 52, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for null parameter (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         hr = ConvertPointRepsToAdjacency( g_cubeIndices16, 12, g_cubeVerts, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -1868,8 +1952,22 @@ bool Test12()
         }
 
         // invalid args
+        hr = ConvertPointRepsToAdjacency(static_cast<const uint32_t*>(nullptr), 0, nullptr, 0, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for 0 count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = ConvertPointRepsToAdjacency(static_cast<const uint32_t*>(nullptr), 23, nullptr, 52, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for null parameter (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         hr = ConvertPointRepsToAdjacency( g_cubeIndices32, 12, g_cubeVerts, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, adj.get() );
         if ( hr != E_INVALIDARG )
         {
@@ -2032,8 +2130,36 @@ bool Test23()
         }
 
         // invalid args
+        hr = ReorderIBAndAdjacency(static_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(16) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
+        hr = ReorderIBAndAdjacency(static_cast<const uint16_t*>(nullptr), 23, nullptr, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(16) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIBAndAdjacency( destib.get(), 12, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
+        if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(16) expected to fail for inib==out (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIBAndAdjacency( g_cubeIndices16, 12, adj.get(), s_faceRemap, destib.get(), adj.get() );
+        if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(16) expected to fail for inadj==out (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = ReorderIBAndAdjacency( g_cubeIndices16, 12, s_cubeAdj, nullptr, destib.get(), adj.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -2164,8 +2290,36 @@ bool Test23()
         }
 
         // invalid args
+       hr = ReorderIBAndAdjacency(static_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(32) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = ReorderIBAndAdjacency(static_cast<const uint32_t*>(nullptr), 23, nullptr, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(32) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIBAndAdjacency( destib.get(), 12, s_cubeAdj, s_faceRemap, destib.get(), adj.get() );
+        if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(32) expected to fail for inib==out (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIBAndAdjacency( g_cubeIndices32, 12, adj.get(), s_faceRemap, destib.get(), adj.get() );
+        if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
+        {
+            printe("\nERROR: ReorderIBAndAdjacency(32) expected to fail for inadj==out (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = ReorderIBAndAdjacency( g_cubeIndices32, 12, s_cubeAdj, nullptr, destib.get(), adj.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -2420,8 +2574,29 @@ bool Test19()
         }
 
         // invalid args
+        hr = FinalizeVBAndPointReps(nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
+        hr = FinalizeVBAndPointReps(nullptr, sizeof(uint32_t), 23, nullptr, nullptr, 52, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, nullptr, 0, remap.data(), srcvb.get(), preps.get());
+        if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
+        {
+            printe("\nERROR: FinalizeVBAndPointReps expected to fail for in=out (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = FinalizeVBAndPointReps( srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, nullptr, 0, nullptr, destvb.get(), preps.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -2704,6 +2879,21 @@ bool Test20()
                     break;
                 }
             }
+        }
+
+        // invalid args
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, dups.data(), 0, remap.data(), destvb.get(), preps.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps expected to fail for 0 dup count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, nullptr, dups.size(), remap.data(), destvb.get(), preps.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps expected to fail for null dup with dup count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
     }
 

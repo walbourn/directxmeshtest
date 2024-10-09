@@ -48,6 +48,13 @@ namespace
         { FLAGS_32BITONLY | FLAGS_NO_NORMALS, MEDIA_PATH L"FSEngineGeo._obj", 25116, 15074, 2 },
         { FLAGS_32BITONLY, MEDIA_PATH L"FSEngineGeoN._obj", 26589, 15074, 2 },
         { FLAGS_32BITONLY, MEDIA_PATH L"John40K._obj", 40289, 40000, 2 },
+
+        { FLAGS_NONE, MEDIA_PATH "sphere.vbo", 561, 1056, 1 },
+        { FLAGS_NONE, MEDIA_PATH "cylinder.vbo", 130, 126, 1 },
+        { FLAGS_NONE, MEDIA_PATH "torus.vbo", 1089, 2178, 1 },
+        { FLAGS_NONE, MEDIA_PATH "Head_Big_Ears.vbo", 17575, 34560, 1 },
+
+        // TODO: Need files with the following extended mtls: Ke, map_Ks, norm, map_emissive, map_ORM
     #endif
     };
 }
@@ -74,6 +81,9 @@ bool Test01()
         OutputDebugStringA("\n");
 #endif
 
+        wchar_t ext[_MAX_EXT];
+        _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
+
         bool pass = true;
 
         uint32_t flags = s_TestMedia[index].options;
@@ -81,7 +91,15 @@ bool Test01()
         {
             DX::WaveFrontReader<uint16_t> wfReader;
 
-            HRESULT hr = wfReader.Load(szPath);
+            HRESULT hr;
+            if ( _wcsicmp( ext, L".vbo" ) == 0 )
+            {
+                hr = wfReader.LoadVBO(szPath);
+            }
+            else
+            {
+                 hr = wfReader.Load(szPath);
+            }
             if (FAILED(hr))
             {
                 printf("ERROR: WaveFront OBJ 16-bit load failed (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath);
@@ -92,16 +110,17 @@ bool Test01()
             {
                 if (wfReader.vertices.size() != s_TestMedia[index].nverts
                     || wfReader.indices.size() != s_TestMedia[index].nfaces * 3
-                    || wfReader.attributes.size() != s_TestMedia[index].nfaces
+                    || (!wfReader.attributes.empty() && wfReader.attributes.size() != s_TestMedia[index].nfaces)
                     || wfReader.materials.size() != s_TestMedia[index].nmtls
                     || (wfReader.hasNormals != ((flags & FLAGS_NO_NORMALS) == 0))
                     || (wfReader.hasTexcoords != ((flags & FLAGS_NO_TEXCOORDS) == 0))
                     )
                 {
-                    printf("ERROR: WaveFront OBJ 16-bit test failed\n:%ls\n\tverts: %zu   inds: %zu   attr: %zu   mats: %zu%s%s\n",
+                    printf("ERROR: WaveFront OBJ 16-bit test failed\n:%ls\n\tverts: %zu   inds: %zu (faces: %zu)   attr: %zu   mats: %zu%s%s\n",
                         szPath,
                         wfReader.vertices.size(),
                         wfReader.indices.size(),
+                        wfReader.indices.size() / 3,
                         wfReader.attributes.size(),
                         wfReader.materials.size(),
                         wfReader.hasNormals ? " normals" : "",
@@ -116,7 +135,16 @@ bool Test01()
         {
             DX::WaveFrontReader<uint32_t> wfReader;
 
-            HRESULT hr = wfReader.Load(szPath);
+            HRESULT hr;
+            if ( _wcsicmp( ext, L".vbo" ) == 0 )
+            {
+                hr = wfReader.LoadVBO(szPath);
+            }
+            else
+            {
+                hr = wfReader.Load(szPath);
+            }
+
             if (FAILED(hr))
             {
                 printf("ERROR: WaveFront OBJ 32-bit load failed (%08X):\n%ls\n", static_cast<unsigned int>(hr), szPath);
@@ -127,16 +155,17 @@ bool Test01()
             {
                 if (wfReader.vertices.size() != s_TestMedia[index].nverts
                     || wfReader.indices.size() != s_TestMedia[index].nfaces * 3
-                    || wfReader.attributes.size() != s_TestMedia[index].nfaces
+                    || (!wfReader.attributes.empty() && wfReader.attributes.size() != s_TestMedia[index].nfaces)
                     || wfReader.materials.size() != s_TestMedia[index].nmtls
                     || (wfReader.hasNormals != ((flags & FLAGS_NO_NORMALS) == 0))
                     || (wfReader.hasTexcoords != ((flags & FLAGS_NO_TEXCOORDS) == 0))
                     )
                 {
-                    printf("ERROR: WaveFront OBJ 32-bit test failed\n:%ls\n\tverts: %zu   inds: %zu   attr: %zu   mats: %zu%s%s\n",
+                    printf("ERROR: WaveFront OBJ 32-bit test failed\n:%ls\n\tverts: %zu   inds: %zu (faces: %zu)   attr: %zu   mats: %zu%s%s\n",
                         szPath,
                         wfReader.vertices.size(),
                         wfReader.indices.size(),
+                        wfReader.indices.size() / 3,
                         wfReader.attributes.size(),
                         wfReader.materials.size(),
                         wfReader.hasNormals ? " normals" : "",
@@ -153,6 +182,53 @@ bool Test01()
         print(".");
 
         ++ncount;
+    }
+
+    // invalid args
+    {
+        DX::WaveFrontReader<uint16_t> wfReader;
+
+        HRESULT hr = wfReader.Load(nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printf("ERROR: WaveFront OBJ load should have failed with invalid arg (actual %08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = wfReader.Load(L"File-does-not-exist._obj");
+        if (hr != HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+        {
+            printf("ERROR: WaveFront OBJ load should have failed with file not found (actual %08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = wfReader.LoadMTL(nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printf("ERROR: WaveFront OBJ loadmtl should have failed with invalid arg (actual %08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = wfReader.LoadMTL(L"File-does-not-exist._obj");
+        if (hr != HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+        {
+            printf("ERROR: WaveFront OBJ loadmtl should have failed with file not found (actual %08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = wfReader.LoadVBO(nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printf("ERROR: WaveFront OBJ loadvbo should have failed with invalid arg (actual %08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = wfReader.LoadVBO(L"File-does-not-exist.vbo");
+        if (hr != HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+        {
+            printf("ERROR: WaveFront OBJ loadvbo should have failed with file not found (actual %08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
     }
 
     print("\n%zu obj files tested, %zu obj files passed ", ncount, npass);

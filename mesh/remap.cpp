@@ -1908,8 +1908,29 @@ bool Test18()
         }
 
         // invalid args
+        hr = ReorderIB(static_cast<const uint16_t *>(nullptr), 0, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIB(16) remap expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
+        hr = ReorderIB(static_cast<const uint16_t *>(nullptr), 23, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIB(16) remap expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIB(destib.get(), 12, nullptr, destib.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIB(16) remap expected to fail for in==out (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = ReorderIB( g_cubeIndices16, 12, nullptr, destib.get() );
         if ( SUCCEEDED(hr) )
         {
@@ -2183,8 +2204,29 @@ bool Test18()
         }
 
         // invalid args
+        hr = ReorderIB(static_cast<const uint32_t *>(nullptr), 0, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIB(32) remap expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
+        hr = ReorderIB(static_cast<const uint32_t *>(nullptr), 23, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIB(32) remap expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIB(destib.get(), 12, nullptr, destib.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: ReorderIB(16) remap expected to fail for in==out (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = ReorderIB( g_cubeIndices32, 12, nullptr, destib.get() );
         if ( SUCCEEDED(hr) )
         {

@@ -897,6 +897,13 @@ bool Test27()
                     }
 
                     // invalid args
+                    hr = CompactVB(finalVertices.get(), sizeof(TestVertex), vertices.size(), trailingUnused, remap.get(), finalVertices.get());
+                    if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
+                    {
+                        printe("\nERROR: CompactVB 16-bit expected to fail for in=out (%08X)\n", static_cast<unsigned int>(hr));
+                        success = false;
+                    }
+
                     #pragma warning(push)
                     #pragma warning(disable:6385 6387)
                     hr = CompactVB(vertices.data(), sizeof(TestVertex), vertices.size(), trailingUnused, nullptr, finalVertices.get());
@@ -1205,6 +1212,14 @@ bool Test27()
                             printe("ERROR: CompactVB(4) 32-bit failed creating correct new VB (%zu: %u .. %u)\n", j, finalUInt[j], remap[j]);
                             success = false;
                         }
+                    }
+
+                    // invalid args
+                    hr = CompactVB(finalVertices.get(), sizeof(TestVertex), vertices.size(), trailingUnused, remap.get(), finalVertices.get());
+                    if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
+                    {
+                        printe("\nERROR: CompactVB 32-bit expected to fail for in=out (%08X)\n", static_cast<unsigned int>(hr));
+                        success = false;
                     }
                 }
             }

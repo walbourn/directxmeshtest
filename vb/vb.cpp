@@ -76,6 +76,12 @@ namespace
         { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
     };
 
+    const D3D11_INPUT_ELEMENT_DESC s_cubeIL2[] =
+    {
+        { "SV_Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+
     //---------------------------------------------------------------------------------
 
     struct VSStarterKitVertex1
@@ -703,7 +709,14 @@ bool Test03()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB reader (%08X)\n", static_cast<unsigned int>(hr) );
+            printe( "ERROR: Failed setting up VB reader 1 (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        hr = reader->Initialize( s_cubeIL2, std::size(s_cubeIL2) );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe( "ERROR: Failed setting up VB reader 2 (%08X)\n", static_cast<unsigned int>(hr) );
         }
         else
         {
@@ -882,6 +895,8 @@ bool Test03()
                     printe( "ERROR: VB reader with POSITION2 semantic name should fail\n" );
                 }
             }
+
+            reader->Release();
         }
     }
 
@@ -1099,8 +1114,16 @@ bool Test04()
         if ( FAILED(hr) )
         {
             success = false;
-            printe( "ERROR: Failed setting up VB writer (%08X)\n", static_cast<unsigned int>(hr) );
+            printe( "ERROR: Failed setting up VB writer 1 (%08X)\n", static_cast<unsigned int>(hr) );
         }
+
+        hr = writer->Initialize( s_cubeIL2, std::size(s_cubeIL2) );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe( "ERROR: Failed setting up VB writer 2 (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
         else
         {
             size_t nVerts = std::size(s_cubeVB);
@@ -1219,6 +1242,8 @@ bool Test04()
                     printe( "ERROR: VB writer with POSITION2 semantic name should fail\n" );
                 }
             }
+
+            writer->Release();
         }
     }
 

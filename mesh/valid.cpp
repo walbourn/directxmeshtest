@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // valid.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -481,8 +481,22 @@ bool Test06()
         }
 
         // invalid args
+        hr = Validate(static_cast<const uint16_t *>(nullptr), 0, 0, nullptr, VALIDATE_DEFAULT, &msgs );
+        if ( hr != E_INVALIDARG )
+        {
+            printe("ERROR: Validate(16) didn't fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385)
+        hr = Validate(static_cast<const uint16_t *>(nullptr), 23, 52, nullptr, VALIDATE_DEFAULT, nullptr );
+        if ( hr != E_INVALIDARG )
+        {
+            printe("ERROR: Validate(16) didn't fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = Validate( g_cubeIndices16, 12, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
@@ -652,8 +666,22 @@ bool Test06()
         }
 
         // invalid args
+        hr = Validate(static_cast<const uint32_t *>(nullptr), 0, 0, nullptr, VALIDATE_DEFAULT, &msgs );
+        if ( hr != E_INVALIDARG )
+        {
+            printe("ERROR: Validate(32) didn't fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
+        hr = Validate(static_cast<const uint32_t *>(nullptr), 23, 52, nullptr, VALIDATE_DEFAULT, nullptr );
+        if ( hr != E_INVALIDARG )
+        {
+            printe("ERROR: Validate(32) didn't fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         hr = Validate( g_cubeIndices32, 12, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_INVALIDARG )
         {
