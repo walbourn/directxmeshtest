@@ -139,7 +139,6 @@ bool Test01()
         ++ncount;
 
         std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
-        using Vertex = DX::WaveFrontReader<uint16_t>::Vertex;
 
         print( "." );
 
@@ -456,7 +455,6 @@ bool Test02()
         ++ncount;
 
         std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
-        using Vertex = DX::WaveFrontReader<uint16_t>::Vertex;
 
         print( "." );
 
