@@ -188,6 +188,8 @@ bool Test01()
     {
         DX::WaveFrontReader<uint16_t> wfReader;
 
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         HRESULT hr = wfReader.Load(nullptr);
         if (hr != E_INVALIDARG)
         {
@@ -229,6 +231,7 @@ bool Test01()
             printf("ERROR: WaveFront OBJ loadvbo should have failed with file not found (actual %08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
+        #pragma warning(pop)
     }
 
     print("\n%zu obj files tested, %zu obj files passed ", ncount, npass);

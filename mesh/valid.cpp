@@ -489,7 +489,7 @@ bool Test06()
         }
 
         #pragma warning(push)
-        #pragma warning(disable:6385)
+        #pragma warning(disable:6385 6387)
         hr = Validate(static_cast<const uint16_t *>(nullptr), 23, 52, nullptr, VALIDATE_DEFAULT, nullptr );
         if ( hr != E_INVALIDARG )
         {

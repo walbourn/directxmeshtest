@@ -148,7 +148,7 @@ bool Test15()
         }
 
         #pragma warning(push)
-        #pragma warning(disable:6385)
+        #pragma warning(disable:6385 6387)
         hr = AttributeSort(23, nullptr, nullptr);
         if (hr != E_INVALIDARG)
         {
@@ -251,7 +251,7 @@ bool Test16()
         }
 
         #pragma warning(push)
-        #pragma warning(disable:6385)
+        #pragma warning(disable:6385 6387)
         hr = OptimizeFaces(static_cast<const uint16_t*>(nullptr), 23, nullptr, nullptr);
         if (hr != E_INVALIDARG)
         {
@@ -1170,7 +1170,7 @@ bool Test25()
         }
 
         #pragma warning(push)
-        #pragma warning(disable:6385)
+        #pragma warning(disable:6385 6387)
         hr = OptimizeFacesLRU(static_cast<const uint16_t*>(nullptr), 23, nullptr);
         if (hr != E_INVALIDARG)
         {

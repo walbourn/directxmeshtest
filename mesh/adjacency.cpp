@@ -389,7 +389,7 @@ bool Test07()
         }
 
         #pragma warning(push)
-        #pragma warning(disable:6385)
+        #pragma warning(disable:6385 6387)
         hr = GenerateAdjacencyAndPointReps(static_cast<const uint16_t*>(nullptr), 23, nullptr, 52, 0.f, nullptr, nullptr);
         if ( hr != E_INVALIDARG )
         {
@@ -1471,7 +1471,7 @@ bool Test10()
         }
 
         #pragma warning(push)
-        #pragma warning(disable:6385)
+        #pragma warning(disable:6385 6387)
         hr = GenerateGSAdjacency(static_cast<const uint16_t *>(nullptr), 23, nullptr, nullptr, 52, nullptr);
         if ( hr != E_INVALIDARG )
         {
@@ -1844,7 +1844,7 @@ bool Test12()
         }
 
         #pragma warning(push)
-        #pragma warning(disable:6385)
+        #pragma warning(disable:6385 6387)
         hr = ConvertPointRepsToAdjacency(static_cast<const uint16_t*>(nullptr), 23, nullptr, 52, nullptr, nullptr);
         if ( hr != E_INVALIDARG )
         {
