@@ -22,6 +22,7 @@ struct TestInfo
     TestFN func;
 };
 
+extern bool Test00();
 extern bool Test01();
 extern bool Test02();
 extern bool Test03();
@@ -55,6 +56,7 @@ extern bool Test30();
 
 TestInfo g_Tests[] =
 {
+    { "Internal", Test00 },
     { "IsValid*/BPE", Test01 },
     { "TestHelpers (internal)", Test02 },
     { "ReorderIB", Test18 },

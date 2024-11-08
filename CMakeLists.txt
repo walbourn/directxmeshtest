@@ -43,6 +43,7 @@ add_executable(xtmesh
    mesh/clean.cpp
    mesh/concat.cpp
    mesh/meshlets.cpp
+   mesh/misc.cpp
    mesh/normals.cpp
    mesh/optimize.cpp
    mesh/remap.cpp

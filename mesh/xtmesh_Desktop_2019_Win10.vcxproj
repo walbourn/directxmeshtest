@@ -248,6 +248,7 @@
     <ClCompile Include="concat.cpp" />
     <ClCompile Include="directxtest.cpp" />
     <ClCompile Include="meshlets.cpp" />
+    <ClCompile Include="misc.cpp" />
     <ClCompile Include="normals.cpp" />
     <ClCompile Include="optimize.cpp" />
     <ClCompile Include="remap.cpp" />
