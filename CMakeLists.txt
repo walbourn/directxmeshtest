@@ -45,6 +45,11 @@ if(BUILD_BVT)
   set_tests_properties(utilsTest PROPERTIES ENVIRONMENT "DIRECTXMESH_MEDIA_PATH=${BVT_MEDIA_PATH}")
 endif()
 
+# fuzzloaders
+list(APPEND TEST_EXES fuzzloaders)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/fuzzloaders)
+
 # MESH
 list(APPEND TEST_EXES xtmesh)
 add_executable(xtmesh
@@ -154,6 +159,13 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
       foreach(t IN LISTS TEST_EXES)
         target_compile_options(${t} PRIVATE /analyze /WX)
       endforeach()
+    endif()
+    if(BUILD_FUZZING
+       AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.32))
+        foreach(t IN LISTS TEST_EXES)
+          target_compile_options(${t} PRIVATE ${ASAN_SWITCHES})
+          target_link_libraries(${t} PRIVATE ${ASAN_LIBS})
+        endforeach()
     endif()
 endif()
 
