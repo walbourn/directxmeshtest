@@ -61,10 +61,11 @@ namespace
         OPT_RECURSIVE = 1,
         OPT_WAVEFRONT_OBJ,
         OPT_SDKMESH,
+        OPT_VBO,
         OPT_MAX
     };
 
-    static_assert(OPT_MAX <= 32, "dwOptions is a DWORD bitfield");
+    static_assert(OPT_MAX <= 32, "dwOptions is a unsigned int bitfield");
 
     //////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
@@ -75,6 +76,7 @@ namespace
         { L"r",         OPT_RECURSIVE },
         { L"wfo",       OPT_WAVEFRONT_OBJ },
         { L"sdkmesh",   OPT_SDKMESH },
+        { L"vbo",       OPT_VBO },
         { nullptr,      0 }
     };
 
@@ -212,6 +214,7 @@ namespace
             L"   -r                  wildcard filename search is recursive\n"
             L"   -wfo                force use of WaveFront OBJ loader\n"
             L"   -sdkmesh            force use of SDKMESH loader\n";
+            L"   -vbo                force use of VBO loader\n";
 
         wprintf(L"%ls", s_usage);
     }
@@ -231,7 +234,7 @@ namespace
 int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
 {
     // Process command line
-    DWORD dwOptions = 0;
+    uint32_t dwOptions = 0;
     std::list<SConversion> conversion;
 
     for (int iArg = 1; iArg < argc; iArg++)
@@ -248,7 +251,7 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             if (*pValue)
                 *pValue++ = 0;
 
-            DWORD dwOption = LookupByName(pArg, g_pOptions);
+            uint32_t dwOption = LookupByName(pArg, g_pOptions);
 
             if (!dwOption || (dwOptions & (1 << dwOption)))
             {
@@ -262,13 +265,15 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             {
             case OPT_WAVEFRONT_OBJ:
             case OPT_SDKMESH:
+            case OPT_VBO:
                 {
-                    DWORD mask = (1 << OPT_WAVEFRONT_OBJ)
-                        | (1 << OPT_SDKMESH);
+                    const uint32_t mask = (1 << OPT_WAVEFRONT_OBJ)
+                        | (1 << OPT_SDKMESH)
+                        | (1 << OPT_VBO);
                     mask &= ~(1 << dwOption);
                     if (dwOptions & mask)
                     {
-                        wprintf(L"-wfo, -sdkmesh are mutually exclusive options\n");
+                        wprintf(L"-wfo, -sdkmesh, -vbo are mutually exclusive options\n");
                         return 1;
                     }
                 }
