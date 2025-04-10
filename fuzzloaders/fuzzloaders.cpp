@@ -290,7 +290,7 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
         }
         else
         {
-            SConversion conv;
+            SConversion conv = {};
             conv.szSrc = pArg;
 
             conversion.push_back(conv);
@@ -321,6 +321,11 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
         {
             usesdkmesh = true;
         }
+        else
+        {
+            usewfo = true;
+            usesdkmesh = true;
+        }
 
         // Load source image
 #ifdef _DEBUG
@@ -330,8 +335,6 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
 
         if (usewfo)
         {
-            bool pass = false;
-
 #if 0
             hr = DirectX::LoadFromDDSFile(pConv.szSrc.c_str(), c_ddsFlags, nullptr, result);
             if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
@@ -339,7 +342,13 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
                 wprintf(L"ERROR: DDSTexture file not not found:\n%ls\n", pConv.szSrc.c_str());
                 return 1;
             }
-            else if (FAILED(hr) && hr != E_INVALIDARG && hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED) && hr != E_OUTOFMEMORY && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF) && (hr != E_FAIL || (hr == E_FAIL && isdds)))
+            else if (FAILED(hr)
+                     && hr != E_INVALIDARG
+                     && hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED)
+                     && hr != E_OUTOFMEMORY
+                     && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF)
+                     && hr != HRESULT_FROM_WIN32(ERROR_INVALID_DATA)
+                     && (hr != E_FAIL || (hr == E_FAIL && isdds)))
             {
 #ifdef _DEBUG
                 char buff[128] = {};
@@ -350,49 +359,12 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             }
             else
             {
-                pass = true;
-            }
-
-            // Validate memory version
-            {
-                DirectX::Blob blob;
-                hr = LoadBlobFromFile(pConv.szSrc.c_str(), blob);
-
-                if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
-                {
-                    wprintf(L"ERROR: DDSTexture file not not found:\n%ls\n", pConv.szSrc.c_str());
-                    return 1;
-                }
-                if (FAILED(hr) && hr != E_OUTOFMEMORY)
-                {
-#ifdef _DEBUG
-                    char buff[128] = {};
-                    sprintf_s(buff, "LoadBlobFromFile failed with %08X\n", static_cast<unsigned int>(hr));
-                    OutputDebugStringA(buff);
-#endif
-                    wprintf(L"!");
-                }
-                else
-                {
-                    hr = DirectX::LoadFromDDSMemory(blob.GetBufferPointer(), blob.GetBufferSize(), c_ddsFlags, nullptr, result);
-                    if (FAILED(hr) && hr != E_INVALIDARG && hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED) && hr != E_OUTOFMEMORY && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF) && (hr != E_FAIL || (hr == E_FAIL && isdds)))
-                    {
-#ifdef _DEBUG
-                        char buff[128] = {};
-                        sprintf_s(buff, "DDSTextureFromMemory failed with %08X\n", static_cast<unsigned int>(hr));
-                        OutputDebugStringA(buff);
-#endif
-                        wprintf(L"!");
-                    }
-                    else if (pass)
-                    {
-                        wprintf(L"%ls", SUCCEEDED(hr) ? L"*" : L".");
-                    }
-                }
+                wprintf(L"%ls", SUCCEEDED(hr) ? L"*" : L".");
             }
 #endif
         }
-        else if (usesdkmesh)
+
+        if (usesdkmesh)
         {
 #if 0
             hr = DirectX::LoadFromHDRFile(pConv.szSrc.c_str(), nullptr, result); // LoadFromHDRFile exercises LoadFromHDRMemory
@@ -401,7 +373,13 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
                 wprintf(L"ERROR: HDRTexture file not not found:\n%ls\n", pConv.szSrc.c_str());
                 return 1;
             }
-            else if (FAILED(hr) && hr != E_INVALIDARG && hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED) && hr != E_OUTOFMEMORY && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF) && (hr != E_FAIL || (hr == E_FAIL && ishdr)))
+            else if (FAILED(hr)
+                     && hr != E_INVALIDARG
+                     && hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED)
+                     && hr != E_OUTOFMEMORY
+                     && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF)
+                     && hr != HRESULT_FROM_WIN32(ERROR_INVALID_DATA)
+                     && (hr != E_FAIL || (hr == E_FAIL && ishdr)))
             {
 #ifdef _DEBUG
                 char buff[128] = {};
@@ -415,9 +393,6 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
                 wprintf(L"%ls", SUCCEEDED(hr) ? L"*" : L".");
             }
 #endif
-        }
-        else
-        {
         }
         fflush(stdout);
     }
@@ -436,15 +411,6 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
 //--------------------------------------------------------------------------------------
 extern "C" __declspec(dllexport) int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size)
 {
-    // Validate memory version
-
-#if 0
-    std::ignore = DirectX::LoadFromDDSMemory(data, size, c_ddsFlags, nullptr, result);
-    std::ignore = DirectX::LoadFromTGAMemory(data, size, DirectX::TGA_FLAGS_NONE, nullptr, result);
-    std::ignore = DirectX::LoadFromTGAMemory(data, size, DirectX::TGA_FLAGS_BGR, nullptr, result);
-    std::ignore = LoadFromHDRMemory(data, size, nullptr, result);
-#endif
-
     // Disk version
     wchar_t tempFileName[MAX_PATH] = {};
     wchar_t tempPath[MAX_PATH] = {};
@@ -466,13 +432,10 @@ extern "C" __declspec(dllexport) int LLVMFuzzerTestOneInput(const uint8_t *data,
             return 0;
     }
 
+    // TODO - How to deal with auxiliary files for MTL/textures?
+
 #if 0
     std::ignore = DirectX::LoadFromDDSFile(tempFileName, c_ddsFlags, nullptr, result);
-    std::ignore = DirectX::LoadFromHDRFile(tempFileName, nullptr, result);
-    std::ignore = DirectX::LoadFromTGAFile(tempFileName, DirectX::TGA_FLAGS_NONE, nullptr, result);
-    std::ignore = DirectX::LoadFromTGAFile(tempFileName, DirectX::TGA_FLAGS_BGR, nullptr, result);
-    std::ignore = LoadFromPortablePixMap(tempFileName, nullptr, result);
-    std::ignore = LoadFromPortablePixMapHDR(tempFileName, nullptr, result);
 #endif
 
     return 0;

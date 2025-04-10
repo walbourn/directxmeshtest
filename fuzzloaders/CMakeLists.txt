@@ -8,7 +8,16 @@ project (fuzzloaders
   HOMEPAGE_URL "http://go.microsoft.com/fwlink/?LinkID=324981"
   LANGUAGES CXX)
 
-if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
+if(CMAKE_VERSION VERSION_LESS 3.21)
+  get_property(not_top DIRECTORY PROPERTY PARENT_DIRECTORY)
+  if(not_top)
+    set(PROJECT_IS_TOP_LEVEL false)
+  else()
+    set(PROJECT_IS_TOP_LEVEL true)
+  endif()
+endif()
+
+if(PROJECT_IS_TOP_LEVEL)
   message(FATAL_ERROR "DirectXMesh Fuzz Tester should be built by the main CMakeLists")
 endif()
 
@@ -30,15 +39,13 @@ else()
     find_package(directx-headers CONFIG QUIET)
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE DirectXMesh bcrypt.lib version.lib)
+target_link_libraries(${PROJECT_NAME} PRIVATE DirectXMesh Utilities bcrypt.lib version.lib)
 
 if(directxmath_FOUND)
-    message(STATUS "Using DirectXMath package")
     target_link_libraries(${PROJECT_NAME} PUBLIC Microsoft::DirectXMath)
 endif()
 
 if(directx-headers_FOUND)
-    message(STATUS "Using DirectX-Headers package")
     target_link_libraries(${PROJECT_NAME} PRIVATE Microsoft::DirectX-Headers Microsoft::DirectX-Guids)
     target_compile_definitions(${PROJECT_NAME} PRIVATE USING_DIRECTX_HEADERS)
 else()
