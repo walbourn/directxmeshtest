@@ -267,7 +267,7 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             case OPT_SDKMESH:
             case OPT_VBO:
                 {
-                    const uint32_t mask = (1 << OPT_WAVEFRONT_OBJ)
+                    uint32_t mask = (1 << OPT_WAVEFRONT_OBJ)
                         | (1 << OPT_SDKMESH)
                         | (1 << OPT_VBO);
                     mask &= ~(1 << dwOption);
