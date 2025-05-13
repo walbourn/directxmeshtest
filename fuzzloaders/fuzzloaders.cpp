@@ -39,6 +39,7 @@
 
 #include "DirectXMesh.h"
 #include "WaveFrontReader.h"
+#include "Mesh.h"
 
 #define TOOL_VERSION DIRECTX_MESH_VERSION
 #include "CmdLineHelpers.h"
@@ -62,6 +63,7 @@ namespace
         OPT_RECURSIVE = 1,
         OPT_WAVEFRONT_OBJ,
         OPT_WAVEFRONT_MTL,
+        OPT_VBO,
         OPT_MAX
     };
 
@@ -76,6 +78,7 @@ namespace
         { L"r",         OPT_RECURSIVE },
         { L"wfo",       OPT_WAVEFRONT_OBJ },
         { L"mtl",       OPT_WAVEFRONT_MTL },
+        { L"vbo",       OPT_VBO },
         { nullptr,      0 }
     };
 
@@ -92,7 +95,8 @@ namespace
             L"\n"
             L"   -r                  wildcard filename search is recursive\n"
             L"   -wfo                force use of WaveFront OBJ loader\n"
-            L"   -mtl                force use of WaveFront MTL loader\n";
+            L"   -mtl                force use of WaveFront MTL loader\n"
+            L"   -vbo                force use of VBO loader\n";
 
         wprintf(L"%ls", s_usage);
     }
@@ -143,13 +147,15 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             {
             case OPT_WAVEFRONT_OBJ:
             case OPT_WAVEFRONT_MTL:
+            case OPT_VBO:
                 {
                     uint32_t mask = (1 << OPT_WAVEFRONT_OBJ)
-                        | (1 << OPT_WAVEFRONT_MTL);
+                        | (1 << OPT_WAVEFRONT_MTL)
+                        | (1 << OPT_VBO);
                     mask &= ~(1 << dwOption);
                     if (dwOptions & mask)
                     {
-                        wprintf(L"-wfo, -mtl are mutually exclusive options\n");
+                        wprintf(L"-wfo, -mtl, -vbo are mutually exclusive options\n");
                         return 1;
                     }
                 }
@@ -189,11 +195,13 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
     {
         wchar_t ext[_MAX_EXT] = {};
         _wsplitpath_s(pConv.szSrc.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT);
-        bool iswfo = (_wcsicmp(ext, L"._obj") == 0) || (_wcsicmp(ext, L".obj") == 0);
-        bool ismtl = (_wcsicmp(ext, L".mtl") == 0);
+        const bool iswfo = (_wcsicmp(ext, L"._obj") == 0) || (_wcsicmp(ext, L".obj") == 0);
+        const bool ismtl = (_wcsicmp(ext, L".mtl") == 0);
+        const bool isvbo = (_wcsicmp(ext, L".vbo") == 0);
 
         bool usewfo = false;
         bool usemtl = false;
+        bool usevbo = false;
         if (dwOptions & (1 << OPT_WAVEFRONT_OBJ))
         {
             usewfo = true;
@@ -202,10 +210,15 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
         {
             usemtl = true;
         }
+        else if (dwOptions & (1 << OPT_VBO))
+        {
+            usevbo = true;
+        }
         else
         {
             usewfo = true;
             usemtl = true;
+            usevbo = true;
         }
 
         // Load source image
@@ -276,6 +289,37 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
                 wprintf(L"%ls", SUCCEEDED(hr) ? L"*" : L".");
             }
         }
+
+        if (usevbo)
+        {
+            std::unique_ptr<Mesh> inMesh;
+            HRESULT hr = Mesh::CreateFromVBO(pConv.szSrc.c_str(), inMesh);
+            if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
+            {
+                wprintf(L"ERROR: VBO file not not found:\n%ls\n", pConv.szSrc.c_str());
+                return 1;
+            }
+            else if (FAILED(hr)
+                     && hr != E_INVALIDARG
+                     && hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED)
+                     && hr != E_OUTOFMEMORY
+                     && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF)
+                     && hr != HRESULT_FROM_WIN32(ERROR_INVALID_DATA)
+                     && hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW)
+                     && (hr != E_FAIL || (hr == E_FAIL && isvbo)))
+            {
+#ifdef _DEBUG
+                char buff[128] = {};
+                sprintf_s(buff, "VBO failed with %08X\n", static_cast<unsigned int>(hr));
+                OutputDebugStringA(buff);
+#endif
+                wprintf(L"!");
+            }
+            else
+            {
+                wprintf(L"%ls", SUCCEEDED(hr) ? L"*" : L".");
+            }
+        }
         fflush(stdout);
     }
 
@@ -323,6 +367,11 @@ extern "C" __declspec(dllexport) int LLVMFuzzerTestOneInput(const uint8_t *data,
     {
         DX::WaveFrontReader<uint32_t> wfr;
         std::ignore = wfr.LoadMTL(tempFileName);
+    }
+
+    {
+        std::unique_ptr<Mesh> inMesh;
+        std::ignore = Mesh::CreateFromVBO(tempFileName, inMesh);
     }
 
     return 0;

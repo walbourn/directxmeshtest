@@ -23,7 +23,9 @@ endif()
 
 add_executable(${PROJECT_NAME}
     fuzzloaders.cpp
-    ../../Meshconvert/CmdLineHelpers.h)
+    ../../Meshconvert/CmdLineHelpers.h
+    ../../Meshconvert/Mesh.h
+    ../../Meshconvert/Mesh.cpp)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ../../Meshconvert)
 
