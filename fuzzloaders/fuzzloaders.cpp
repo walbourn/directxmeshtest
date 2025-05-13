@@ -38,6 +38,7 @@
 #include <utility>
 
 #include "DirectXMesh.h"
+#include "WaveFrontReader.h"
 
 #define TOOL_VERSION DIRECTX_MESH_VERSION
 #include "CmdLineHelpers.h"
@@ -60,8 +61,7 @@ namespace
     {
         OPT_RECURSIVE = 1,
         OPT_WAVEFRONT_OBJ,
-        OPT_SDKMESH,
-        OPT_VBO,
+        OPT_WAVEFRONT_MTL,
         OPT_MAX
     };
 
@@ -75,134 +75,13 @@ namespace
     {
         { L"r",         OPT_RECURSIVE },
         { L"wfo",       OPT_WAVEFRONT_OBJ },
-        { L"sdkmesh",   OPT_SDKMESH },
-        { L"vbo",       OPT_VBO },
+        { L"mtl",       OPT_WAVEFRONT_MTL },
         { nullptr,      0 }
     };
 
     //////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-
-    //---------------------------------------------------------------------------------
-    // Memory blob
-    class Blob
-    {
-    public:
-        Blob() noexcept : m_buffer(nullptr), m_size(0) {}
-        Blob(Blob&& moveFrom) noexcept : m_buffer(nullptr), m_size(0) { *this = std::move(moveFrom); }
-        ~Blob() { Release(); }
-
-        Blob& operator= (Blob&& moveFrom) noexcept
-        {
-            if (this != &moveFrom)
-            {
-                Release();
-
-                m_buffer = moveFrom.m_buffer;
-                m_size = moveFrom.m_size;
-
-                moveFrom.m_buffer = nullptr;
-                moveFrom.m_size = 0;
-            }
-            return *this;
-        }
-
-        Blob(const Blob&) = delete;
-        Blob& operator=(const Blob&) = delete;
-
-        HRESULT Initialize(_In_ size_t size) noexcept
-        {
-            if (!size)
-                return E_INVALIDARG;
-
-            Release();
-
-            m_buffer = new (std::nothrow) uint8_t[size];
-            if (!m_buffer)
-            {
-                Release();
-                return E_OUTOFMEMORY;
-            }
-
-            m_size = size;
-
-            return S_OK;
-        }
-
-        void Release() noexcept
-        {
-            if (m_buffer)
-            {
-                delete [] m_buffer;
-                m_buffer = nullptr;
-            }
-
-            m_size = 0;
-        }
-
-        void *GetBufferPointer() const noexcept { return m_buffer; }
-        size_t GetBufferSize() const noexcept { return m_size; }
-
-    private:
-        void*   m_buffer;
-        size_t  m_size;
-    };
-
-    //-------------------------------------------------------------------------------------
-    HRESULT LoadBlobFromFile(_In_z_ const wchar_t* szFile, Blob& blob)
-    {
-        if (szFile == nullptr)
-            return E_INVALIDARG;
-
-        ScopedHandle hFile(safe_handle(CreateFileW(szFile, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING,
-            FILE_FLAG_SEQUENTIAL_SCAN, nullptr)));
-        if (!hFile)
-        {
-            return HRESULT_FROM_WIN32(GetLastError());
-        }
-
-        // Get the file size
-        LARGE_INTEGER fileSize = {};
-        if (!GetFileSizeEx(hFile.get(), &fileSize))
-        {
-            return HRESULT_FROM_WIN32(GetLastError());
-        }
-
-        // File is too big for 32-bit allocation, so reject read (4 GB should be plenty large enough for our test images)
-        if (fileSize.HighPart > 0)
-        {
-            return HRESULT_FROM_WIN32(ERROR_FILE_TOO_LARGE);
-        }
-
-        // Need at least 1 byte of data
-        if (!fileSize.LowPart)
-        {
-            return E_FAIL;
-        }
-
-        // Create blob memory
-        HRESULT hr = blob.Initialize(fileSize.LowPart);
-        if (FAILED(hr))
-            return hr;
-
-        // Load entire file into blob memory
-        DWORD bytesRead = 0;
-        if (!ReadFile(hFile.get(), blob.GetBufferPointer(), static_cast<DWORD>(blob.GetBufferSize()), &bytesRead, nullptr))
-        {
-            blob.Release();
-            return HRESULT_FROM_WIN32(GetLastError());
-        }
-
-        // Verify we got the whole blob loaded
-        if (bytesRead != blob.GetBufferSize())
-        {
-            blob.Release();
-            return E_FAIL;
-        }
-
-        return S_OK;
-    }
 
     void PrintUsage()
     {
@@ -213,8 +92,7 @@ namespace
             L"\n"
             L"   -r                  wildcard filename search is recursive\n"
             L"   -wfo                force use of WaveFront OBJ loader\n"
-            L"   -sdkmesh            force use of SDKMESH loader\n";
-            L"   -vbo                force use of VBO loader\n";
+            L"   -mtl                force use of WaveFront MTL loader\n";
 
         wprintf(L"%ls", s_usage);
     }
@@ -264,16 +142,14 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             switch (dwOption)
             {
             case OPT_WAVEFRONT_OBJ:
-            case OPT_SDKMESH:
-            case OPT_VBO:
+            case OPT_WAVEFRONT_MTL:
                 {
                     uint32_t mask = (1 << OPT_WAVEFRONT_OBJ)
-                        | (1 << OPT_SDKMESH)
-                        | (1 << OPT_VBO);
+                        | (1 << OPT_WAVEFRONT_MTL);
                     mask &= ~(1 << dwOption);
                     if (dwOptions & mask)
                     {
-                        wprintf(L"-wfo, -sdkmesh, -vbo are mutually exclusive options\n");
+                        wprintf(L"-wfo, -mtl are mutually exclusive options\n");
                         return 1;
                     }
                 }
@@ -311,25 +187,25 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
 
     for (auto& pConv : conversion)
     {
-        wchar_t ext[_MAX_EXT];
+        wchar_t ext[_MAX_EXT] = {};
         _wsplitpath_s(pConv.szSrc.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT);
         bool iswfo = (_wcsicmp(ext, L"._obj") == 0) || (_wcsicmp(ext, L".obj") == 0);
-        bool issdkmesh = (_wcsicmp(ext, L".sdkmesh") == 0);
+        bool ismtl = (_wcsicmp(ext, L".mtl") == 0);
 
         bool usewfo = false;
-        bool usesdkmesh = false;
+        bool usemtl = false;
         if (dwOptions & (1 << OPT_WAVEFRONT_OBJ))
         {
             usewfo = true;
         }
-        else if (dwOptions & (1 << OPT_SDKMESH))
+        else if (dwOptions & (1 << OPT_WAVEFRONT_MTL))
         {
-            usesdkmesh = true;
+            usemtl = true;
         }
         else
         {
             usewfo = true;
-            usesdkmesh = true;
+            usemtl = true;
         }
 
         // Load source image
@@ -340,11 +216,13 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
 
         if (usewfo)
         {
-#if 0
-            hr = DirectX::LoadFromDDSFile(pConv.szSrc.c_str(), c_ddsFlags, nullptr, result);
+            DX::WaveFrontReader<uint32_t> wfr;
+
+            // Loads ignoring any MTL file reference.
+            HRESULT hr = wfr.Load(pConv.szSrc.c_str(), true, false);
             if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
             {
-                wprintf(L"ERROR: DDSTexture file not not found:\n%ls\n", pConv.szSrc.c_str());
+                wprintf(L"ERROR: WaveFront OBJ file not not found:\n%ls\n", pConv.szSrc.c_str());
                 return 1;
             }
             else if (FAILED(hr)
@@ -353,11 +231,11 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
                      && hr != E_OUTOFMEMORY
                      && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF)
                      && hr != HRESULT_FROM_WIN32(ERROR_INVALID_DATA)
-                     && (hr != E_FAIL || (hr == E_FAIL && isdds)))
+                     && (hr != E_FAIL || (hr == E_FAIL && iswfo)))
             {
 #ifdef _DEBUG
                 char buff[128] = {};
-                sprintf_s(buff, "DDSTextureFromFile failed with %08X\n", static_cast<unsigned int>(hr));
+                sprintf_s(buff, "WaveFront OBJ failed with %08X\n", static_cast<unsigned int>(hr));
                 OutputDebugStringA(buff);
 #endif
                 wprintf(L"!");
@@ -366,16 +244,16 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             {
                 wprintf(L"%ls", SUCCEEDED(hr) ? L"*" : L".");
             }
-#endif
         }
 
-        if (usesdkmesh)
+        if (usemtl)
         {
-#if 0
-            hr = DirectX::LoadFromHDRFile(pConv.szSrc.c_str(), nullptr, result); // LoadFromHDRFile exercises LoadFromHDRMemory
+            DX::WaveFrontReader<uint32_t> wfr;
+
+            HRESULT hr = wfr.LoadMTL(pConv.szSrc.c_str());
             if (hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
             {
-                wprintf(L"ERROR: HDRTexture file not not found:\n%ls\n", pConv.szSrc.c_str());
+                wprintf(L"ERROR: WaveFront MTL file not not found:\n%ls\n", pConv.szSrc.c_str());
                 return 1;
             }
             else if (FAILED(hr)
@@ -384,11 +262,11 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
                      && hr != E_OUTOFMEMORY
                      && hr != HRESULT_FROM_WIN32(ERROR_HANDLE_EOF)
                      && hr != HRESULT_FROM_WIN32(ERROR_INVALID_DATA)
-                     && (hr != E_FAIL || (hr == E_FAIL && ishdr)))
+                     && (hr != E_FAIL || (hr == E_FAIL && ismtl)))
             {
 #ifdef _DEBUG
                 char buff[128] = {};
-                sprintf_s(buff, "HDRTexture failed with %08X\n", static_cast<unsigned int>(hr));
+                sprintf_s(buff, "WaveFront MTL failed with %08X\n", static_cast<unsigned int>(hr));
                 OutputDebugStringA(buff);
 #endif
                 wprintf(L"!");
@@ -397,7 +275,6 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
             {
                 wprintf(L"%ls", SUCCEEDED(hr) ? L"*" : L".");
             }
-#endif
         }
         fflush(stdout);
     }
@@ -437,11 +314,16 @@ extern "C" __declspec(dllexport) int LLVMFuzzerTestOneInput(const uint8_t *data,
             return 0;
     }
 
-    // TODO - How to deal with auxiliary files for MTL/textures?
+    {
+        DX::WaveFrontReader<uint32_t> wfr;
+        // Loads ignoring any MTL file reference.
+        std::ignore = wfr.Load(tempFileName, true, false);
+    }
 
-#if 0
-    std::ignore = DirectX::LoadFromDDSFile(tempFileName, c_ddsFlags, nullptr, result);
-#endif
+    {
+        DX::WaveFrontReader<uint32_t> wfr;
+        std::ignore = wfr.LoadMTL(tempFileName);
+    }
 
     return 0;
 }
