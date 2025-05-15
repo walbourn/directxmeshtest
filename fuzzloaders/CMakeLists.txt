@@ -69,7 +69,8 @@ if(MINGW)
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|IntelLLVM")
-    set(WarningsEXE "-Wpedantic" "-Wextra" "-Wno-c++98-compat" "-Wno-c++98-compat-pedantic" "-Wno-float-equal" "-Wno-global-constructors" "-Wno-language-extension-token" "-Wno-missing-prototypes" "-Wno-missing-variable-declarations" "-Wno-reserved-id-macro" "-Wno-unused-macros" "-Wno-switch-enum")
+    set(WarningsEXE "-Wpedantic" "-Wextra" "-Wno-c++98-compat" "-Wno-c++98-compat-pedantic" "-Wno-float-equal" "-Wno-global-constructors" "-Wno-language-extension-token" "-Wno-exit-time-destructors" "-Wno-missing-prototypes"
+                    "-Wno-missing-variable-declarations" "-Wno-reserved-id-macro" "-Wno-unused-macros" "-Wno-switch-enum")
     if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 16.0)
         list(APPEND WarningsEXE "-Wno-unsafe-buffer-usage")
     endif()
