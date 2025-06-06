@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // DirectXTest.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -114,6 +114,6 @@ int __cdecl wmain()
 
     if ( !RunTests() )
         return -1;
-       
+
     return 0;
 }

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // tangentframe.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ bool Test13()
             XMFLOAT3( 0.f, 0.f, 1.f ),
         };
 
-    static const XMFLOAT3 s_fmCubeTangents[24] = 
+    static const XMFLOAT3 s_fmCubeTangents[24] =
     {
             XMFLOAT3( -1.0f, 0.0f, 0.0f ),
             XMFLOAT3( -1.0f, 0.0f, 0.0f ),
@@ -103,7 +103,7 @@ bool Test13()
             XMFLOAT3( -1.0f, 0.0f, 0.0f ),
     };
 
-    static const XMFLOAT3 s_fmCubeBiTangents[24] = 
+    static const XMFLOAT3 s_fmCubeBiTangents[24] =
     {
             XMFLOAT3( 0.0f, -0.0f, 1.0f ),
             XMFLOAT3( 0.0f, -0.0f, 1.0f ),
@@ -406,7 +406,7 @@ bool Test13()
             }
             success = false;
         }
-        
+
         hr = ComputeTangentFrame( g_fmCubeIndices32, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
                                   tangents4.get(), bitangents.get() );
         if ( FAILED(hr) )
@@ -930,7 +930,7 @@ bool Test13()
 
     // degenerate case (zero Us)
     {
-        static const XMFLOAT2 s_uvs[ 24 ] = 
+        static const XMFLOAT2 s_uvs[ 24 ] =
             {
                 DirectX::XMFLOAT2( 0.0f, 0.0f ),
                 DirectX::XMFLOAT2( 0.0f, 0.0f ),
@@ -1002,7 +1002,7 @@ bool Test13()
 
     // degenerate case (zero Vs)
     {
-        static const XMFLOAT2 s_uvs[ 24 ] = 
+        static const XMFLOAT2 s_uvs[ 24 ] =
             {
                 DirectX::XMFLOAT2( 1.0f, 0.0f ),
                 DirectX::XMFLOAT2( 0.0f, 0.0f ),

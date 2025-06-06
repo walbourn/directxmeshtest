@@ -176,7 +176,7 @@ namespace
         { D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 /*D3DFVF_VERTEX*/, 32u, c_VertexPositionNormalTexture, 3 },
         { D3DFVF_XYZ | D3DFVF_NORMAL, 24u, c_VertexPositionNormal, 2 },
         { D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE, 28u, c_VertexPositionNormalColor, 3 },
-        { D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX1, 36u, c_VertexPositionNormalColorTexture, 4 },        
+        { D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX1, 36u, c_VertexPositionNormalColorTexture, 4 },
         { D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_SPECULAR | D3DFVF_TEX1 /*D3DFVF_TLVERTEX*/, 32u, c_VertexPositionTL, 4 },
 
         { D3DFVF_XYZB1, 16u, c_VertexPositionBeta1, 2 },

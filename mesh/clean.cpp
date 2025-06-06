@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // clean.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -430,7 +430,7 @@ bool Test14()
 
         static const uint32_t s_cleanAdj[] =
             {
-                3, uint32_t(-1), uint32_t(-1), 
+                3, uint32_t(-1), uint32_t(-1),
                 uint32_t(-1), uint32_t(-1), uint32_t(-1),
                 uint32_t(-1), uint32_t(-1), uint32_t(-1),
                 uint32_t(-1), uint32_t(-1), 0
@@ -1010,7 +1010,7 @@ bool Test14()
 
         static const uint32_t s_cleanAdj[] =
             {
-                3, uint32_t(-1), uint32_t(-1), 
+                3, uint32_t(-1), uint32_t(-1),
                 uint32_t(-1), uint32_t(-1), uint32_t(-1),
                 uint32_t(-1), uint32_t(-1), uint32_t(-1),
                 uint32_t(-1), uint32_t(-1), 0

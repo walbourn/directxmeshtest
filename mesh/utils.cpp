@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // utils.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ bool Test02()
             printe("ERROR: CreateVertexBuffer failed\n" );
             success = false;
         }
-           
+
         vb = CreateVertexBuffer32( 65535, VB_IDENTITY );
         if ( !vb || !IsTestVBCorrect32( vb.get(), 65535, VB_IDENTITY ) )
         {
@@ -307,7 +307,7 @@ bool Test22()
 
         // invalid args
         #pragma warning(push)
-        #pragma warning(disable:6385 6387)  
+        #pragma warning(disable:6385 6387)
         ComputeVertexCacheMissRate( g_fmCubeIndices32, 12, UINT32_MAX /*D3D11_32BIT_INDEX_STRIP_CUT_VALUE*/, OPTFACES_V_DEFAULT, acmr, atvr );
         if( acmr != -1.f || atvr != -1.f )
         {
@@ -519,7 +519,7 @@ bool Test24()
 
     // sorted
     {
-        static const uint32_t s_attr[] = { 0, 0, 1, 1, 2, 2, 2, 3, 4, 4, 5, 5 }; 
+        static const uint32_t s_attr[] = { 0, 0, 1, 1, 2, 2, 2, 3, 4, 4, 5, 5 };
 
         static const std::pair<size_t,size_t> s_result[] = {
             std::pair<size_t,size_t>( 0, 2 ),
@@ -548,7 +548,7 @@ bool Test24()
 
     // sorted (2)
     {
-        static const uint32_t s_attr[] = { 3, 3, 3, 6, 7, 7, 7, 12, 12, 20, 20, 20 }; 
+        static const uint32_t s_attr[] = { 3, 3, 3, 6, 7, 7, 7, 12, 12, 20, 20, 20 };
 
         static const std::pair<size_t,size_t> s_result[] = {
             std::pair<size_t,size_t>( 0, 3 ),

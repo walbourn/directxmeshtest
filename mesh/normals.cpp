@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // normals.cpp
-//  
+//
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //-------------------------------------------------------------------------------------
@@ -1010,7 +1010,7 @@ bool Test11()
         std::wstring msgs;
         if ( FAILED( Validate( s_unused, 12, 8, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
-            success = false;            
+            success = false;
             printe("\nERROR: ComputeNormals(16) test data failed validation:\n%ls\n", msgs.c_str() );
         }
 
@@ -1157,7 +1157,7 @@ bool Test11()
         std::wstring msgs;
         if ( FAILED( Validate( s_unused, 12, 8, nullptr, VALIDATE_UNUSED, &msgs ) ) )
         {
-            success = false;            
+            success = false;
             printe("\nERROR: ComputeNormals(32) test data failed validation:\n%ls\n", msgs.c_str() );
         }
         if (FAILED(Validate(s_unused_1st, 12, 8, nullptr, VALIDATE_UNUSED, &msgs)))
