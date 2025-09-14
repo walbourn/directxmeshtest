@@ -192,6 +192,7 @@ bool Test01()
         success = false;
     }
 
+    badElement.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
     badElement.InputSlot = 585;
     if ( IsValid(&badElement, 1) )
     {
@@ -459,6 +460,19 @@ bool Test02()
             print("\n\texpected: 0  12  24  0  16  32  48");
         }
     }
+
+    // invalid args (for code coverage)
+#ifdef NDEBUG
+    {
+        uint32_t offsets[D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT];
+        memset( offsets, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
+
+        uint32_t strides[D3D11_IA_VERTEX_INPUT_RESOURCE_SLOT_COUNT];
+        memset( strides, 0xff, sizeof(uint32_t) * D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT );
+
+        ComputeInputLayout(nullptr, 0, offsets, strides);
+    }
+#endif
 
     return success;
 }

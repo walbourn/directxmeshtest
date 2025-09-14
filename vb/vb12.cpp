@@ -1068,6 +1068,76 @@ bool Test03_DX12()
         }
     }
 
+    // Instancing (not supported)
+    {
+        std::unique_ptr<VBReader> reader( new VBReader() );
+
+        static const D3D12_INPUT_ELEMENT_DESC s_InputElements[] =
+        {
+            { "SV_Position", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,   0 },
+            { "NORMAL",      0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,   0 },
+            { "TEXCOORD",    0, DXGI_FORMAT_R32G32_FLOAT,       0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,   0 },
+            { "InstMatrix",  0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1 },
+            { "InstMatrix",  1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1 },
+            { "InstMatrix",  2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA, 1 },
+        };
+
+        D3D12_INPUT_LAYOUT_DESC desc = { s_InputElements, static_cast<UINT>(std::size(s_InputElements))};
+        HRESULT hr = reader->Initialize( desc );
+        if (SUCCEEDED(hr))
+        {
+            success = false;
+            printe( "ERROR: Expected instancing failure (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+    }
+
+    // invalid args
+    {
+        std::unique_ptr<VBReader> reader( new VBReader() );
+
+        D3D12_INPUT_LAYOUT_DESC desc = { nullptr, 0 };
+        HRESULT hr = reader->Initialize( desc );
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid layout failure (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
+        desc = { g_VSStarterKitAnimation, 2342 };
+        hr = reader->Initialize( desc );
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected count out of range failure (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        hr = reader->AddStream(nullptr, 0, 0, 0);
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid arg failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        size_t nVerts = std::size(s_VSStarterKitVB1);
+
+        hr = reader->AddStream(s_VSStarterKitVB1, nVerts, 2824, sizeof(SimpleVertex));
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid slot failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        #pragma warning(pop)
+
+        hr = reader->AddStream(s_VSStarterKitVB1, nVerts, 0, 65535);
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid stride failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+    }
+
     return success;
 }
 

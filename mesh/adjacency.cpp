@@ -1506,6 +1506,14 @@ bool Test10()
             printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
+
+        memcpy(gsadj.get(), g_cubeIndices16, sizeof(g_cubeIndices16));
+        hr = GenerateGSAdjacency( gsadj.get(), 12, s_cubePointReps, s_cubeAdj, 2, gsadj.get() );
+        if ( hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED) )
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for in-place (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
         #pragma warning(pop)
     }
 
@@ -1625,6 +1633,14 @@ bool Test10()
         if ( hr != E_UNEXPECTED )
         {
             printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        memcpy(gsadj.get(), g_cubeIndices32, sizeof(g_cubeIndices32));
+        hr = GenerateGSAdjacency( gsadj.get(), 12, s_cubePointReps, s_cubeAdj, 2, gsadj.get() );
+        if ( hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED) )
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for in-place (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)

@@ -382,6 +382,27 @@ bool Test22()
         }
     }
 
+    // invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
+    {
+        float acmr, atvr;
+        ComputeVertexCacheMissRate( static_cast<const uint16_t*>(nullptr), 0, 0, OPTFACES_V_DEFAULT, acmr, atvr );
+        if( acmr != -1.f || atvr != -1.f )
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(16) expected failure invalid args (ACMR %f, ATVR %f)\n", acmr, atvr );
+            success = false;
+        }
+
+        ComputeVertexCacheMissRate( static_cast<const uint32_t*>(nullptr), 0, 0, OPTFACES_V_DEFAULT, acmr, atvr );
+        if( acmr != -1.f || atvr != -1.f )
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(32) expected failure invalid args (ACMR %f, ATVR %f)\n", acmr, atvr );
+            success = false;
+        }
+    }
+    #pragma warning(pop)
+
     return success;
 }
 
@@ -570,6 +591,16 @@ bool Test24()
             {
                 printe("ERROR: ComputeSubsets sorted (2) failed %zu,%zu\n", it.first, it.second);
             }
+            success = false;
+        }
+    }
+
+    // invalid args
+    {
+        auto subsets = ComputeSubsets( nullptr, 0 );
+        if (!subsets.empty())
+        {
+            printe("ERROR: ComputeSubsets invalid args failed count %zu .. 0\n", subsets.size() );
             success = false;
         }
     }

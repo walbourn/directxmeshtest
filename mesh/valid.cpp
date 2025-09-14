@@ -415,6 +415,8 @@ bool Test06()
             success = false;
         }
 
+        // TODO: VALIDATE_DEGENERATE with adjacency
+
         // Unused
         hr = Validate( s_unusedIndices16, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( FAILED(hr) )
@@ -599,6 +601,8 @@ bool Test06()
             printe("ERROR: Validate(32) degencube [degen] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
+
+        // TODO: VALIDATE_DEGENERATE with adjacency
 
         // Unused
         hr = Validate( s_unusedIndices32, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs );
@@ -900,6 +904,27 @@ bool Test09()
             printe("ERROR: Validate(16) [asymmetric neighbhor] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
+
+        hr = Validate( s_unusedIndices16_2, 12, 8, nullptr, VALIDATE_ASYMMETRIC_ADJ, &msgs );
+        if (SUCCEEDED(hr))
+        {
+            printe("ERROR: Validate(16) [asymmetric neighbhor] expected failure for missing adj parameter (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate( g_bowtieIndices16, 2, 5, nullptr, VALIDATE_BACKFACING, &msgs );
+        if ( SUCCEEDED(hr) )
+        {
+            printe("ERROR: Validate(16) [bface] expected failure for missing adj parameter (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
+            success = false;
+        }
+
+        hr = Validate( g_bowtieIndices16, 2, 5, nullptr, VALIDATE_BOWTIES, &msgs );
+        if ( SUCCEEDED(hr) )
+        {
+            printe("ERROR: Validate(16) [bowties] expected failure for missing adj parameter (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
+            success = false;
+        }
     }
 
     // 32-bit
@@ -1085,6 +1110,27 @@ bool Test09()
         if ( hr != E_FAIL )
         {
             printe("ERROR: Validate(32) [asymmetric neighbhor] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
+            success = false;
+        }
+
+        hr = Validate( s_unusedIndices32_2, 12, 8, nullptr, VALIDATE_ASYMMETRIC_ADJ, &msgs );
+        if (SUCCEEDED(hr))
+        {
+            printe("ERROR: Validate(32) [asymmetric neighbhor] expected failure for missing adj parameter (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate( g_bowtieIndices32, 2, 5, nullptr, VALIDATE_BACKFACING, &msgs );
+        if ( SUCCEEDED(hr) )
+        {
+            printe("ERROR: Validate(32) [bface] expected failure for missing adj parameter (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
+            success = false;
+        }
+
+        hr = Validate( g_bowtieIndices32, 2, 5, nullptr, VALIDATE_BOWTIES, &msgs );
+        if ( SUCCEEDED(hr) )
+        {
+            printe("ERROR: Validate(32) [bowties] expected failure for missing adj parameter (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
     }
