@@ -266,6 +266,20 @@ bool Test11()
             success = false;
         }
 
+        hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, 8, CNORM_WEIGHT_BY_AREA | CNORM_WIND_CW, normals.get() );
+        if ( FAILED(hr) )
+        {
+            printe("ERROR: ComputeNormals(16) cube [cw area] failed (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        hr = ComputeNormals( g_cubeIndices16, 12, g_cubeVerts, 8, CNORM_WEIGHT_EQUAL | CNORM_WIND_CW, normals.get() );
+        if ( FAILED(hr) )
+        {
+            printe("ERROR: ComputeNormals(16) cube [cw equal] failed (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
@@ -1246,6 +1260,24 @@ bool Test11()
             success = false;
         }
     }
+
+    // invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
+    HRESULT hr = ComputeNormals( reinterpret_cast<const uint16_t*>(nullptr), 0, nullptr, 0, CNORM_DEFAULT, nullptr );
+    if ( hr != E_INVALIDARG )
+    {
+        printe("\nERROR: ComputeNormals(16) [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+        success = false;
+    }
+
+    hr = ComputeNormals( reinterpret_cast<const uint32_t*>(nullptr), 0, nullptr, 0, CNORM_DEFAULT, nullptr );
+    if ( hr != E_INVALIDARG )
+    {
+        printe("\nERROR: ComputeNormals(32) [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+        success = false;
+    }
+    #pragma warning(pop)
 
     return success;
 }

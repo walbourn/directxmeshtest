@@ -1351,6 +1351,37 @@ bool Test04()
         }
     }
 
+    // Invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
+    {
+        HRESULT hr = FinalizeVB(nullptr, 0, 0, nullptr, 0, nullptr, nullptr);
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: FinalizeVB [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        std::unique_ptr<uint32_t[]> srcvb( new uint32_t[ 24 ] );
+        for( uint32_t j=0; j < 24; ++j)
+            srcvb[ j ] = j;
+
+        static const uint32_t s_remap[] = { 3, 1, 0, 2,
+                                            6, 4, 5, 7,
+                                            11, 9, uint32_t(-1), 10,
+                                            14, 12, 13, 15,
+                                            19, uint32_t(-1), 16, 18,
+                                            22, 20, 21, 23 };
+
+        hr = FinalizeVB( srcvb.get(), sizeof(uint32_t), 24, nullptr, 0, s_remap, srcvb.get() );
+        if ( hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED) )
+        {
+            printe("\nERROR: FinalizeVB [in-place] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+    }
+    #pragma warning(pop)
+
     return success;
 }
 
@@ -1654,6 +1685,46 @@ bool Test05()
         }
     }
 
+    // Invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
+    {
+        std::vector<uint32_t> dups;
+        dups.reserve( 256 );
+        for( uint32_t j = 0; j < 256; ++j )
+            dups.push_back( j );
+
+        std::unique_ptr<uint32_t[]> srcvb( new uint32_t[ 24 ] );
+        for( uint32_t j=0; j < 24; ++j)
+            srcvb[ j ] = j;
+
+        std::unique_ptr<uint32_t[]> destvb( new uint32_t[ 24 ] );
+        memset( destvb.get(), 0, sizeof(uint32_t) * 24 );
+
+        static const uint32_t s_sorted[] = { 3, 1, 0, 2,
+                                             6, 4, 5, 7,
+                                             11, 9, 0, 10,
+                                             14, 12, 13, 15,
+                                             19, 0, 16, 18,
+                                             22, 20, 21, 23,
+                                             3,  2,  0,  0 };
+
+        HRESULT hr = FinalizeVB(srcvb.get(), sizeof(uint32_t), 24, dups.data(), 0, s_sorted, destvb.get() );
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: FinalizeVB dups [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        hr = FinalizeVB(srcvb.get(), sizeof(uint32_t), 24, nullptr, dups.size(), s_sorted, destvb.get() );
+        if ( hr != E_INVALIDARG )
+        {
+            printe("\nERROR: FinalizeVB dups [invalid args 2] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+    }
+    #pragma warning(pop)
+
     return success;
 }
 
@@ -1924,8 +1995,8 @@ bool Test18()
             success = false;
         }
 
-        hr = ReorderIB(destib.get(), 12, nullptr, destib.get());
-        if (hr != E_INVALIDARG)
+        hr = ReorderIB(destib.get(), 12, s_faceRemap, destib.get());
+        if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
         {
             printe("\nERROR: ReorderIB(16) remap expected to fail for in==out (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
@@ -2220,10 +2291,10 @@ bool Test18()
             success = false;
         }
 
-        hr = ReorderIB(destib.get(), 12, nullptr, destib.get());
-        if (hr != E_INVALIDARG)
+        hr = ReorderIB(destib.get(), 12, s_faceRemap, destib.get());
+        if (hr != HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED))
         {
-            printe("\nERROR: ReorderIB(16) remap expected to fail for in==out (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: ReorderIB(32) remap expected to fail for in==out (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
