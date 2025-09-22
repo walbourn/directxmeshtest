@@ -1084,28 +1084,30 @@ bool Test13()
         memset( tangents4.get(), 0xff, sizeof(XMFLOAT4) * 24 );
         memset( bitangents.get(), 0xff, sizeof(XMFLOAT3) * 24 );
 
-        HRESULT hr = ComputeTangentFrame(reinterpret_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, nullptr);
+        const uint16_t* pNull16 = nullptr;
+        HRESULT hr = ComputeTangentFrame(pNull16, 0, nullptr, nullptr, nullptr, 0, nullptr);
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(16) [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        hr = ComputeTangentFrame(reinterpret_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, tangents4.get());
+        hr = ComputeTangentFrame(pNull16, 0, nullptr, nullptr, nullptr, 0, tangents4.get());
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(16) [invalid args t4] expected failure (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        hr = ComputeTangentFrame(reinterpret_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, nullptr);
+        const uint32_t* pNull32 = nullptr;
+        hr = ComputeTangentFrame(pNull32, 0, nullptr, nullptr, nullptr, 0, nullptr);
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(32) [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        hr = ComputeTangentFrame(reinterpret_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, tangents4.get());
+        hr = ComputeTangentFrame(pNull32, 0, nullptr, nullptr, nullptr, 0, tangents4.get());
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(32) [invalid args t4] expected failure (%08X)\n", static_cast<unsigned int>(hr));
@@ -1113,28 +1115,29 @@ bool Test13()
         }
 
         // bitangents versions
-        hr = ComputeTangentFrame(reinterpret_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, reinterpret_cast<XMFLOAT3*>(nullptr), nullptr);
+        XMFLOAT3* pNullBitangent = nullptr;
+        hr = ComputeTangentFrame(pNull16, 0, nullptr, nullptr, nullptr, 0, pNullBitangent, nullptr);
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(16) bi [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        hr = ComputeTangentFrame(reinterpret_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, tangents.get(), bitangents.get());
+        hr = ComputeTangentFrame(pNull16, 0, nullptr, nullptr, nullptr, 0, tangents.get(), bitangents.get());
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(16) bi [invalid args t3] expected failure (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        hr = ComputeTangentFrame(reinterpret_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, reinterpret_cast<XMFLOAT3*>(nullptr), nullptr);
+        hr = ComputeTangentFrame(pNull32, 0, nullptr, nullptr, nullptr, 0, pNullBitangent, nullptr);
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(32) bi [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        hr = ComputeTangentFrame(reinterpret_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr, nullptr, 0, tangents.get(), bitangents.get());
+        hr = ComputeTangentFrame(pNull32, 0, nullptr, nullptr, nullptr, 0, tangents.get(), bitangents.get());
         if (hr != E_INVALIDARG)
         {
             printe("ERROR: ComputeTangentFrame(32) bi [invalid args t3] expected failure (%08X)\n", static_cast<unsigned int>(hr));

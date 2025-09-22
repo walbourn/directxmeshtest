@@ -111,7 +111,9 @@ bool RunTests()
             print("FAIL\n");
         }
 
+    #ifdef _CRTDBG_MAP_ALLOC
         _CrtDumpMemoryLeaks();
+    #endif
     }
 
     print("Ran %zu tests, %zu pass, %zu fail\n", nPass+nFail, nPass, nFail);

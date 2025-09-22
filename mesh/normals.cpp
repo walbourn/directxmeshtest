@@ -1264,14 +1264,16 @@ bool Test11()
     // invalid args
     #pragma warning(push)
     #pragma warning(disable:6385 6387)
-    HRESULT hr = ComputeNormals( reinterpret_cast<const uint16_t*>(nullptr), 0, nullptr, 0, CNORM_DEFAULT, nullptr );
+    const uint16_t* pNull16 = nullptr;
+    HRESULT hr = ComputeNormals( pNull16, 0, nullptr, 0, CNORM_DEFAULT, nullptr );
     if ( hr != E_INVALIDARG )
     {
         printe("\nERROR: ComputeNormals(16) [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
         success = false;
     }
 
-    hr = ComputeNormals( reinterpret_cast<const uint32_t*>(nullptr), 0, nullptr, 0, CNORM_DEFAULT, nullptr );
+    const uint32_t* pNull32 = nullptr;
+    hr = ComputeNormals( pNull32, 0, nullptr, 0, CNORM_DEFAULT, nullptr );
     if ( hr != E_INVALIDARG )
     {
         printe("\nERROR: ComputeNormals(32) [invalid args] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
