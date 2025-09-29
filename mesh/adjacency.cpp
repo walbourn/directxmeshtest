@@ -2898,6 +2898,8 @@ bool Test20()
         }
 
         // invalid args
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
         hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, dups.data(), 0, remap.data(), destvb.get(), preps.get());
         if (hr != E_INVALIDARG)
         {
@@ -2918,6 +2920,7 @@ bool Test20()
             printe("\nERROR: FinalizeVBAndPointReps dups [arith overflow] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
+        #pragma warning(pop)
     }
 
     // Face-mapped Cube

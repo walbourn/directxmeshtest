@@ -1171,6 +1171,8 @@ bool Test03()
     }
 
     // invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
     {
         auto reader = std::make_unique<VBReader>();
 
@@ -1181,8 +1183,6 @@ bool Test03()
             printe( "ERROR: Expected invalid arg failure (%08X)\n", static_cast<unsigned int>(hr) );
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385 6387)
         hr = reader->Initialize( g_VSStarterKitAnimation, 2342 );
         if (hr != E_INVALIDARG)
         {
@@ -1205,7 +1205,6 @@ bool Test03()
             success = false;
             printe( "ERROR: Expected invalid slot failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
         }
-        #pragma warning(pop)
 
         hr = reader->AddStream(s_VSStarterKitVB1, nVerts, 0, 65535);
         if (hr != E_INVALIDARG)
@@ -1279,6 +1278,7 @@ bool Test03()
             }
         }
     }
+    #pragma warning(pop)
 
     return success;
 }
@@ -1675,6 +1675,8 @@ bool Test04()
     }
 
     // invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
     {
         auto reader = std::make_unique<VBReader>();
         auto writer = std::make_unique<VBWriter>();
@@ -1686,8 +1688,6 @@ bool Test04()
             printe( "ERROR: Expected invalid arg failure (%08X)\n", static_cast<unsigned int>(hr) );
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385 6387)
         hr = writer->Initialize( g_VSStarterKitAnimation, 2342 );
         if (hr != E_INVALIDARG)
         {
@@ -1712,7 +1712,6 @@ bool Test04()
             success = false;
             printe( "ERROR: Expected invalid slot failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
         }
-        #pragma warning(pop)
 
         hr = writer->AddStream(vb1.get(), nVerts, 0, 65535);
         if (hr != E_INVALIDARG)
@@ -1790,6 +1789,7 @@ bool Test04()
             }
         }
     }
+    #pragma warning(pop)
 
     return success;
 }

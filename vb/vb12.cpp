@@ -1147,6 +1147,8 @@ bool Test03_DX12()
     }
 
     // invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
     {
         auto reader = std::make_unique<VBReader>();
 
@@ -1158,8 +1160,6 @@ bool Test03_DX12()
             printe( "ERROR: Expected invalid layout failure (%08X)\n", static_cast<unsigned int>(hr) );
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385 6387)
         desc = { g_VSStarterKitAnimation, 2342 };
         hr = reader->Initialize( desc );
         if (hr != E_INVALIDARG)
@@ -1183,7 +1183,6 @@ bool Test03_DX12()
             success = false;
             printe( "ERROR: Expected invalid slot failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
         }
-        #pragma warning(pop)
 
         hr = reader->AddStream(s_VSStarterKitVB1, nVerts, 0, 65535);
         if (hr != E_INVALIDARG)
@@ -1258,6 +1257,7 @@ bool Test03_DX12()
             }
         }
     }
+    #pragma warning(pop)
 
     return success;
 }
@@ -1654,6 +1654,8 @@ bool Test04_DX12()
     }
 
     // invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
     {
         auto writer = std::make_unique<VBWriter>();
 
@@ -1665,8 +1667,6 @@ bool Test04_DX12()
             printe( "ERROR: Expected invalid layout failure (%08X)\n", static_cast<unsigned int>(hr) );
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385 6387)
         desc = { g_VSStarterKitAnimation, 2342 };
         hr = writer->Initialize( desc );
         if (hr != E_INVALIDARG)
@@ -1692,7 +1692,6 @@ bool Test04_DX12()
             success = false;
             printe( "ERROR: Expected invalid slot failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
         }
-        #pragma warning(pop)
 
         hr = writer->AddStream(vb1.get(), nVerts, 0, 65535);
         if (hr != E_INVALIDARG)
@@ -1771,6 +1770,7 @@ bool Test04_DX12()
             }
         }
     }
+    #pragma warning(pop)
 
     return success;
 }
