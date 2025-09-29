@@ -2911,6 +2911,13 @@ bool Test20()
             printe("\nERROR: FinalizeVBAndPointReps expected to fail for null dup with dup count (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
+
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), INT16_MAX, s_cubePointReps, dups.data(), UINT32_MAX, remap.data(), destvb.get(), preps.get());
+        if ( hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW) )
+        {
+            printe("\nERROR: FinalizeVBAndPointReps dups [arith overflow] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
     }
 
     // Face-mapped Cube

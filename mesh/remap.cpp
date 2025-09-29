@@ -1722,6 +1722,13 @@ bool Test05()
             printe("\nERROR: FinalizeVB dups [invalid args 2] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
+
+        hr = FinalizeVB(srcvb.get(), sizeof(uint32_t), INT32_MAX, dups.data(), UINT32_MAX, s_sorted, destvb.get() );
+        if ( hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW) )
+        {
+            printe("\nERROR: FinalizeVB dups [arith overflow] expected failure (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
     }
     #pragma warning(pop)
 

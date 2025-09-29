@@ -246,6 +246,58 @@ bool Test28()
     // 32-bit multiple submesh
     // TODO -
 
+    // invalid args
+    #pragma warning(push)
+    #pragma warning(disable:6385 6387)
+    {
+        std::vector<Meshlet> meshlets;
+        std::vector<uint8_t> uniqueVertexIB;
+        std::vector<MeshletTriangle> primitiveIndices;
+        uint16_t* null16 = nullptr;
+        XMFLOAT3* nullVerts = nullptr;
+        HRESULT hr = ComputeMeshlets(null16, 0, nullVerts, 0, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_INVALIDARG)
+        {
+            printe("ERROR: ComputeMeshlets(16) didn't fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_fmCubeIndices16, 0, g_fmCubeVerts, 0, s_fmCubeAdj,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_INVALIDARG)
+        {
+            printe("ERROR: ComputeMeshlets(16) didn't fail for zero counts (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_fmCubeIndices16, 12, g_fmCubeVerts, 24, s_fmCubeAdj,
+            meshlets, uniqueVertexIB, primitiveIndices, INT16_MAX);
+        if (hr != E_INVALIDARG)
+        {
+            printe("ERROR: ComputeMeshlets(16) didn't fail for out of range verts (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_fmCubeIndices16, 12, g_fmCubeVerts, 24, s_fmCubeAdj,
+            meshlets, uniqueVertexIB, primitiveIndices, MESHLET_DEFAULT_MAX_VERTS, INT16_MAX);
+        if (hr != E_INVALIDARG)
+        {
+            printe("ERROR: ComputeMeshlets(16) didn't fail for out of range prims (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        uint32_t* null32 = nullptr;
+        hr = ComputeMeshlets(null32, 0, nullVerts, 0, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_INVALIDARG)
+        {
+            printe("ERROR: ComputeMeshlets(32) didn't fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+    }
+    #pragma warning (pop)
+
     return success;
 }
 
@@ -289,6 +341,33 @@ bool Test29()
                 success = false;
             }
 
+            // invalid args
+            #pragma warning(push)
+            #pragma warning(disable:6385 6387)
+            {
+                XMFLOAT3* nullVerts = nullptr;
+                hr = ComputeCullData(nullVerts, 0,
+                    meshlets.data(), meshlets.size(),
+                    uniqueVertexIndices, vertIndices,
+                    primitiveIndices.data(), primitiveIndices.size(), &cull);
+                if (hr != E_INVALIDARG)
+                {
+                    printe("ERROR: ComputeCullData(16) didn't fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+                    success = false;
+                }
+
+                hr = ComputeCullData(g_fmCubeVerts, 0,
+                    meshlets.data(), meshlets.size(),
+                    uniqueVertexIndices, vertIndices,
+                    primitiveIndices.data(), primitiveIndices.size(), &cull);
+                if (hr != E_INVALIDARG)
+                {
+                    printe("ERROR: ComputeCullData(16) didn't fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+                    success = false;
+                }
+
+            }
+            #pragma warning (pop)
         }
     }
 
@@ -325,6 +404,33 @@ bool Test29()
                 success = false;
             }
 
+            // invalid args
+            #pragma warning(push)
+            #pragma warning(disable:6385 6387)
+            {
+                XMFLOAT3* nullVerts = nullptr;
+                hr = ComputeCullData(nullVerts, 0,
+                    meshlets.data(), meshlets.size(),
+                    uniqueVertexIndices, vertIndices,
+                    primitiveIndices.data(), primitiveIndices.size(), &cull);
+                if (hr != E_INVALIDARG)
+                {
+                    printe("ERROR: ComputeCullData(32) didn't fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+                    success = false;
+                }
+
+                hr = ComputeCullData(g_fmCubeVerts, 0,
+                    meshlets.data(), meshlets.size(),
+                    uniqueVertexIndices, vertIndices,
+                    primitiveIndices.data(), primitiveIndices.size(), &cull);
+                if (hr != E_INVALIDARG)
+                {
+                    printe("ERROR: ComputeCullData(32) didn't fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+                    success = false;
+                }
+
+            }
+            #pragma warning (pop)
         }
     }
 

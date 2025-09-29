@@ -34,6 +34,8 @@ namespace
         11, 3, 7,
         4, 10, 1
     };
+
+    const uint32_t s_fmCubeAttr[12] = {};
 }
 
 //-------------------------------------------------------------------------------------
@@ -175,8 +177,6 @@ bool Test16()
 {
     bool success = true;
 
-    // TODO: Needs OptimizeFacesEx test for 16-bit and 32-bit
-
     // 16-bit fmcube
     {
         std::unique_ptr<uint32_t[]> remap( new uint32_t[ 12*3 ] );
@@ -201,6 +201,29 @@ bool Test16()
         {
             success = false;
             printe("ERROR: OptimizeFaces(16) fmcube failed\n" );
+            for( size_t j = 0; j < 12; ++j )
+            {
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_reverse[j]);
+            }
+        }
+
+        hr = OptimizeFacesEx( g_fmCubeIndices16, 12, s_fmCubeAdj, s_fmCubeAttr, remap.get() );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        else if ( !IsValidFaceRemap( g_fmCubeIndices16, remap.get(), 12 ) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(16) fmcube failed remap invalid\n" );
+            for(size_t j=0; j < 12; ++j)
+                print("%zu -> %u\n", j, remap[j]);
+        }
+        else if ( memcmp( remap.get(), s_reverse, sizeof(s_reverse) ) != 0 )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(16) fmcube failed\n" );
             for( size_t j = 0; j < 12; ++j )
             {
                 print("\t%zu -> %u .. %u\n", j, remap[j], s_reverse[j]);
@@ -235,11 +258,53 @@ bool Test16()
             }
         }
 
+        memset( remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3 );
+
+        hr = OptimizeFacesEx( g_fmCubeIndices16, 12, s_fmCubeAdj, s_fmCubeAttr, remap.get(), OPTFACES_V_STRIPORDER );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(16) fmcube failed [striporder] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        else if ( !IsValidFaceRemap( g_fmCubeIndices16, remap.get(), 12 ) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(16) fmcube failed [striporder] remap invalid [striporder]\n" );
+            for(size_t j=0; j < 12; ++j)
+                print("%zu -> %u\n", j, remap[j]);
+        }
+        else if ( memcmp( remap.get(), s_strip, sizeof(s_strip) ) != 0 )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(16) fmcube failed [striporder]\n" );
+            for( size_t j = 0; j < 12; ++j )
+            {
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_strip[j]);
+            }
+        }
+
         // invalid args
-        hr = OptimizeFaces(static_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr);
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
+        uint16_t* null16 = nullptr;
+        hr = OptimizeFaces(null16, 0, nullptr, nullptr);
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFaces(16) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: OptimizeFaces(16) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFaces(g_fmCubeIndices16, 0, s_fmCubeAdj, remap.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(16) expected to fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFaces(g_fmCubeIndices16, 12, s_fmCubeAdj, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(16) expected to fail for null output parameter (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -250,19 +315,45 @@ bool Test16()
             success = false;
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385 6387)
-        hr = OptimizeFaces(static_cast<const uint16_t*>(nullptr), 23, nullptr, nullptr);
-        if (hr != E_INVALIDARG)
-        {
-            printe("\nERROR: OptimizeFaces(16) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
-            success = false;
-        }
-
         hr = OptimizeFaces( g_fmCubeIndices16, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: OptimizeFaces(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(null16, 0, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(16) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(g_fmCubeIndices16, 0, s_fmCubeAdj, s_fmCubeAttr, remap.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(16) expected to fail zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(g_fmCubeIndices16, 12, s_fmCubeAdj, s_fmCubeAttr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(16) expected to fail for null output parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(g_fmCubeIndices16, 12, s_fmCubeAdj, s_fmCubeAttr, remap.get(), 24, 32);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(16) expected to fail for restart/vertexCache issue (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx( g_fmCubeIndices16, UINT32_MAX, s_fmCubeAdj, s_fmCubeAttr, remap.get(), OPTFACES_V_STRIPORDER );
+        if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
+        {
+            printe("\nERROR: OptimizeFacesEx(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -298,6 +389,29 @@ bool Test16()
             }
         }
 
+        hr = OptimizeFacesEx( g_fmCubeIndices32, 12, s_fmCubeAdj, s_fmCubeAttr, remap.get() );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        else if ( !IsValidFaceRemap( g_fmCubeIndices32, remap.get(), 12 ) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(32) fmcube failed remap invalid\n" );
+            for(size_t j=0; j < 12; ++j)
+                print("%zu -> %u\n", j, remap[j]);
+        }
+        else if ( memcmp( remap.get(), s_reverse, sizeof(s_reverse) ) != 0 )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(32) fmcube failed\n" );
+            for( size_t j = 0; j < 12; ++j )
+            {
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_reverse[j]);
+            }
+        }
+
         // striporder
         memset( remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3 );
 
@@ -326,11 +440,53 @@ bool Test16()
             }
         }
 
+        memset( remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3 );
+
+        hr = OptimizeFacesEx( g_fmCubeIndices32, 12, s_fmCubeAdj, s_fmCubeAttr, remap.get(), OPTFACES_V_STRIPORDER );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(32) fmcube failed [striporder] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        else if ( !IsValidFaceRemap( g_fmCubeIndices32, remap.get(), 12 ) )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(32) fmcube failed [striporder] remap invalid [striporder]\n" );
+            for(size_t j=0; j < 12; ++j)
+                print("%zu -> %u\n", j, remap[j]);
+        }
+        else if ( memcmp( remap.get(), s_strip, sizeof(s_strip) ) != 0 )
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesEx(32) fmcube failed [striporder]\n" );
+            for( size_t j = 0; j < 12; ++j )
+            {
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_strip[j]);
+            }
+        }
+
         // invalid args
-        hr = OptimizeFaces(static_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr);
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
+        uint32_t* null32 = nullptr;
+        hr = OptimizeFaces(null32, 0, nullptr, nullptr);
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFaces(32) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: OptimizeFaces(32) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFaces(g_fmCubeIndices32, 0, s_fmCubeAdj, remap.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(32) expected to fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFaces(g_fmCubeIndices32, 12, s_fmCubeAdj, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFaces(32) expected to fail for null output parameter (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -341,19 +497,45 @@ bool Test16()
             success = false;
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385)
-        hr = OptimizeFaces(static_cast<const uint32_t*>(nullptr), 23, nullptr, nullptr);
-        if (hr != E_INVALIDARG)
-        {
-            printe("\nERROR: OptimizeFaces(32) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
-            success = false;
-        }
-
         hr = OptimizeFaces( g_fmCubeIndices32, UINT32_MAX, s_fmCubeAdj, remap.get(), OPTFACES_V_STRIPORDER );
         if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
         {
             printe("\nERROR: OptimizeFaces(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(null32, 0, nullptr, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(32) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(g_fmCubeIndices32, 0, s_fmCubeAdj, s_fmCubeAttr, remap.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(32) expected to fail zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(g_fmCubeIndices32, 12, s_fmCubeAdj, s_fmCubeAttr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(32) expected to fail for null output parameter (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx(g_fmCubeIndices32, 12, s_fmCubeAdj, s_fmCubeAttr, remap.get(), 24, 32);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesEx(32) expected to fail for restart/vertexCache issue (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesEx( g_fmCubeIndices32, UINT32_MAX, s_fmCubeAdj, s_fmCubeAttr, remap.get(), OPTFACES_V_STRIPORDER );
+        if ( hr != HRESULT_FROM_WIN32( ERROR_ARITHMETIC_OVERFLOW ) )
+        {
+            printe("\nERROR: OptimizeFacesEx(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
         #pragma warning(pop)
@@ -1103,8 +1285,6 @@ bool Test25()
 {
     bool success = true;
 
-    // TODO: Needs OptimizeFacesLRUEx test for 16-bit and 32-bit
-
     // 16-bit fmcube
     {
         std::unique_ptr<uint32_t[]> remap(new uint32_t[12 * 3]);
@@ -1129,6 +1309,29 @@ bool Test25()
         {
             success = false;
             printe("ERROR: OptimizeFacesLRU(16) fmcube failed\n");
+            for (size_t j = 0; j < 12; ++j)
+            {
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+            }
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices16, 12, s_fmCubeAttr, remap.get());
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRUEx(16) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
+        }
+        else if (!IsValidFaceRemap(g_fmCubeIndices16, remap.get(), 12))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRUEx(16) fmcube failed remap invalid\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%zu -> %u\n", j, remap[j]);
+        }
+        else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRUEx(16) fmcube failed\n");
             for (size_t j = 0; j < 12; ++j)
             {
                 print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
@@ -1162,19 +1365,27 @@ bool Test25()
         }
 
         // invalid args
-        hr = OptimizeFacesLRU(static_cast<const uint16_t*>(nullptr), 0, nullptr);
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
+        uint16_t* null16 = nullptr;
+        hr = OptimizeFacesLRU(null16, 0, nullptr);
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFacesLRU(16) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: OptimizeFacesLRU(16) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385 6387)
-        hr = OptimizeFacesLRU(static_cast<const uint16_t*>(nullptr), 23, nullptr);
+        hr = OptimizeFacesLRU(g_fmCubeIndices16, 0, remap.get());
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFacesLRU(16) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: OptimizeFacesLRU(16) expected to fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRU(g_fmCubeIndices16, 12, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(16) expected to fail for null output (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -1189,6 +1400,41 @@ bool Test25()
         if (hr != E_INVALIDARG)
         {
             printe("\nERROR: OptimizeFacesLRU(16) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(null16, 0, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(16) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices16, 0, s_fmCubeAttr, remap.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(16) expected to fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices16, 12, s_fmCubeAttr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(16) expected to fail for null output (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices16, UINT32_MAX, s_fmCubeAttr, remap.get());
+        if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(16) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices16, 12, s_fmCubeAttr, remap.get(), 128);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(16) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         #pragma warning(pop)
@@ -1224,6 +1470,29 @@ bool Test25()
             }
         }
 
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices32, 12, s_fmCubeAttr, remap.get());
+        if (FAILED(hr))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRUEx(32) fmcube failed (%08X)\n", static_cast<unsigned int>(hr));
+        }
+        else if (!IsValidFaceRemap(g_fmCubeIndices32, remap.get(), 12))
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRUEx(32) fmcube failed remap invalid\n");
+            for (size_t j = 0; j < 12; ++j)
+                print("%zu -> %u\n", j, remap[j]);
+        }
+        else if (memcmp(remap.get(), s_vcremap, sizeof(s_vcremap)) != 0)
+        {
+            success = false;
+            printe("ERROR: OptimizeFacesLRUEx(32) fmcube failed\n");
+            for (size_t j = 0; j < 12; ++j)
+            {
+                print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
+            }
+        }
+
         // vertex cache size
         memset(remap.get(), 0xcd, sizeof(uint32_t) * 12 * 3);
 
@@ -1251,19 +1520,27 @@ bool Test25()
         }
 
         // invalid args
-        hr = OptimizeFacesLRU(static_cast<const uint32_t*>(nullptr), 0, nullptr);
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
+        uint32_t* null32 = nullptr;
+        hr = OptimizeFacesLRU(null32, 0, nullptr);
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFacesLRU(32) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: OptimizeFacesLRU(32) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
-        #pragma warning(push)
-        #pragma warning(disable:6385)
-        hr = OptimizeFacesLRU(static_cast<const uint32_t*>(nullptr), 23, nullptr);
+        hr = OptimizeFacesLRU(g_fmCubeIndices32, 0, remap.get());
         if (hr != E_INVALIDARG)
         {
-            printe("\nERROR: OptimizeFacesLRU(32) expected to fail for null parameter (%08X)\n", static_cast<unsigned int>(hr));
+            printe("\nERROR: OptimizeFacesLRU(32) expected to fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRU(g_fmCubeIndices32, 12, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRU(32) expected to fail for null output (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -1278,6 +1555,41 @@ bool Test25()
         if (hr != E_INVALIDARG)
         {
             printe("\nERROR: OptimizeFacesLRU(32) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(null32, 0, nullptr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(32) expected to fail for null parameters (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices32, 0, s_fmCubeAttr, remap.get());
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(32) expected to fail for zero count (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices32, 12, s_fmCubeAttr, nullptr);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(32) expected to fail for null output (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices32, UINT32_MAX, s_fmCubeAttr, remap.get());
+        if (hr != HRESULT_FROM_WIN32(ERROR_ARITHMETIC_OVERFLOW))
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(32) expected failure for 32-max value faces (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeFacesLRUEx(g_fmCubeIndices32, 12, s_fmCubeAttr, remap.get(), 128);
+        if (hr != E_INVALIDARG)
+        {
+            printe("\nERROR: OptimizeFacesLRUEx(32) expected failure for too large a cache size (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
         #pragma warning(pop)

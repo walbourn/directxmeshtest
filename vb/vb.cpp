@@ -27,7 +27,8 @@ namespace
 {
     //---------------------------------------------------------------------------------
 
-    const XMVECTORF32 g_VBEpsilon = { { { 0.01f, 0.01f, 0.01f, 0.01f } } };
+    constexpr float g_Epsilon = 0.01f;
+    const XMVECTORF32 g_VBEpsilon = { { { g_Epsilon, g_Epsilon, g_Epsilon, g_Epsilon } } };
 
     //---------------------------------------------------------------------------------
 
@@ -703,7 +704,7 @@ bool Test03()
 
     // Single-stream
     {
-        std::unique_ptr<VBReader> reader( new VBReader() );
+        auto reader = std::make_unique<VBReader>();
 
         HRESULT hr = reader->Initialize( s_cubeIL, std::size(s_cubeIL) );
         if ( FAILED(hr) )
@@ -812,7 +813,7 @@ bool Test03()
 
                 // Position data (XMFLOAT3)
                 {
-                    std::unique_ptr<XMFLOAT3[]> buff3( new XMFLOAT3[ nVerts ] );
+                    auto buff3 = std::make_unique<XMFLOAT3[]>( nVerts );
                     memset( buff3.get(), 0xff, sizeof(XMFLOAT3) * nVerts );
 
                     hr = reader->Read( buff3.get(), "POSITION", 0, nVerts );
@@ -841,7 +842,7 @@ bool Test03()
 
                 // Texcoord data (XMFLOAT2)
                 {
-                    std::unique_ptr<XMFLOAT2[]> buff2( new XMFLOAT2[ nVerts ] );
+                    auto buff2 = std::make_unique<XMFLOAT2[]>( nVerts );
                     memset( buff2.get(), 0xff, sizeof(XMFLOAT2) * nVerts );
 
                     hr = reader->Read( buff2.get(), "TEXCOORD", 0, nVerts );
@@ -863,6 +864,60 @@ bool Test03()
                                 printe( "ERROR: Failed comparing VB XMFLOAT2 %zu: %f,%f ... %f,%f \n", j,
                                         XMVectorGetX( v ), XMVectorGetY( v ),
                                         s_cubeVB[ j ].Tex.x, s_cubeVB[ j ].Tex.y );
+                            }
+                        }
+                    }
+                }
+
+                // Partial texcoord data (float)
+                {
+                    auto buff1 = std::make_unique<float[]>( nVerts );
+                    memset( buff1.get(), 0xff, sizeof(float) * nVerts );
+
+                    hr = reader->Read( buff1.get(), "TEXCOORD", 0, nVerts );
+                    if ( FAILED(hr) )
+                    {
+                        success = false;
+                        printe( "ERROR: Failed reading VB float (%08X)\n", static_cast<unsigned int>(hr) );
+                    }
+                    else
+                    {
+                        for( size_t j = 0; j < nVerts; ++j )
+                        {
+                            if ( fabs( s_cubeVB[j].Tex.x - buff1[j] ) > g_Epsilon )
+                            {
+                                success = false;
+                                printe( "ERROR: Failed comparing VB float %zu: %f ... %f \n", j,
+                                        s_cubeVB[ j ].Tex.x, buff1[ j ] );
+                            }
+                        }
+                    }
+                }
+
+                // Homogenous position data (XMFLOAT4)
+                {
+                    auto buff4 = std::make_unique<XMFLOAT4[]>( nVerts );
+                    memset( buff4.get(), 0xff, sizeof(XMFLOAT4) * nVerts );
+
+                    hr = reader->Read( buff4.get(), "POSITION", 0, nVerts );
+                    if ( FAILED(hr) )
+                    {
+                        success = false;
+                        printe( "ERROR: Failed reading VB XMFLOAT4 (%08X)\n", static_cast<unsigned int>(hr) );
+                    }
+                    else
+                    {
+                        for( size_t j = 0; j < nVerts; ++j )
+                        {
+                            XMVECTOR v = XMLoadFloat4( &buff4[ j ] );
+                            XMVECTOR chk = XMVectorSetW( XMLoadFloat3( &s_cubeVB[ j ].Pos ), 1.0f );
+
+                            if ( !XMVector3NearEqual( chk, v, g_VBEpsilon ) )
+                            {
+                                success = false;
+                                printe( "ERROR: Failed comparing VB XMFLOAT4 %zu: %f,%f,%f,%f ... %f,%f,%f,%f\n", j,
+                                        XMVectorGetX( v ), XMVectorGetY( v ), XMVectorGetZ( v ), XMVectorGetW( v ),
+                                        s_cubeVB[ j ].Pos.x, s_cubeVB[ j ].Pos.y, s_cubeVB[ j ].Pos.z, 1.0f );
                             }
                         }
                     }
@@ -902,7 +957,7 @@ bool Test03()
 
     // Multi-stream
     {
-        std::unique_ptr<VBReader> reader( new VBReader() );
+        auto reader = std::make_unique<VBReader>();
 
         HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
@@ -1016,7 +1071,7 @@ bool Test03()
 
     // GetElement
     {
-        std::unique_ptr<VBReader> reader( new VBReader() );
+        auto reader = std::make_unique<VBReader>();
 
         HRESULT hr = reader->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
@@ -1095,7 +1150,7 @@ bool Test03()
 
     // Instancing (not supported)
     {
-        std::unique_ptr<VBReader> reader( new VBReader() );
+        auto reader = std::make_unique<VBReader>();
 
         static const D3D11_INPUT_ELEMENT_DESC s_InputElements[] =
         {
@@ -1117,7 +1172,7 @@ bool Test03()
 
     // invalid args
     {
-        std::unique_ptr<VBReader> reader( new VBReader() );
+        auto reader = std::make_unique<VBReader>();
 
         HRESULT hr = reader->Initialize( nullptr, 0 );
         if (hr != E_INVALIDARG)
@@ -1158,6 +1213,71 @@ bool Test03()
             success = false;
             printe( "ERROR: Expected invalid stride failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
         }
+
+        hr = reader->AddStream(s_VSStarterKitVB1, UINT32_MAX, 0, sizeof(SimpleVertex));
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid vertex count failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        hr = reader->Initialize( s_cubeIL, std::size(s_cubeIL) );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe( "ERROR: Failed setting up VB reader (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        else
+        {
+            hr = reader->AddStream( &s_cubeVB, std::size(s_cubeVB), 0, sizeof(SimpleVertex) );
+            if ( FAILED(hr) )
+            {
+                success = false;
+                printe( "ERROR: Failed setting up stream for VB reader (%08X)\n", static_cast<unsigned int>(hr) );
+            }
+            else
+            {
+                XMVECTOR* nullBuff = nullptr;
+                hr = reader->Read(nullBuff, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [read] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                float* nullBuff1 = nullptr;
+                hr = reader->Read(nullBuff1, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [read1] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                XMFLOAT2* nullBuff2 = nullptr;
+                hr = reader->Read(nullBuff2, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [read2] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                XMFLOAT3* nullBuff3 = nullptr;
+                hr = reader->Read(nullBuff3, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [read3] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                XMFLOAT4* nullBuff4 = nullptr;
+                hr = reader->Read(nullBuff4, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [read4] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+            }
+        }
     }
 
     return success;
@@ -1175,7 +1295,7 @@ bool Test04()
 
     // Single-stream
     {
-        std::unique_ptr<VBWriter> writer( new VBWriter() );
+        auto writer = std::make_unique<VBWriter>();
 
         HRESULT hr = writer->Initialize( s_cubeIL, std::size(s_cubeIL) );
         if ( FAILED(hr) )
@@ -1195,7 +1315,7 @@ bool Test04()
         {
             size_t nVerts = std::size(s_cubeVB);
 
-            std::unique_ptr<uint8_t[]> vb( new uint8_t[ sizeof(SimpleVertex) * nVerts ] );
+            auto vb = std::make_unique<uint8_t[]>( sizeof(SimpleVertex) * nVerts );
 
             hr = writer->AddStream( vb.get(), nVerts, 0, sizeof(SimpleVertex) );
             if ( FAILED(hr) )
@@ -1250,7 +1370,7 @@ bool Test04()
                     printe( "ERROR: VB written does not match expected value\n" );
                 }
 
-                // XMFLOAT2/XMFLOAT3
+                // XMFLOAT2/XMFLOAT3/XMFLOAT4/float
                 {
                     memset( vb.get(), 0xff, sizeof(SimpleVertex) * nVerts );
 
@@ -1285,6 +1405,34 @@ bool Test04()
                             printe( "ERROR: VB written does not match expected value\n" );
                         }
                     }
+
+                    std::vector<float> buff1;
+                    buff1.reserve( nVerts );
+                    for( size_t j = 0; j < nVerts; ++j )
+                    {
+                        buff1.push_back( s_cubeVB[ j ].Tex.x );
+                    }
+
+                    hr = writer->Write( buff1.data(), "TEXCOORD", 0, nVerts );
+                    if ( FAILED(hr) )
+                    {
+                        success = false;
+                        printe( "ERROR: Failed writing VB float (%08X)\n", static_cast<unsigned int>(hr) );
+                    }
+
+                    std::vector<XMFLOAT4> buff4;
+                    buff4.reserve( nVerts );
+                    for( size_t j = 0; j < nVerts; ++j )
+                    {
+                        buff4.push_back( XMFLOAT4( s_cubeVB[ j ].Pos.x, s_cubeVB[ j ].Pos.y, s_cubeVB[ j ].Pos.z, 1.f ) );
+                    }
+
+                    hr = writer->Write( buff4.data(), "POSITION", 0, nVerts );
+                    if ( FAILED(hr) )
+                    {
+                        success = false;
+                        printe( "ERROR: Failed writing VB float4 (%08X)\n", static_cast<unsigned int>(hr) );
+                    }
                 }
 
                 // Expected error cases
@@ -1316,7 +1464,7 @@ bool Test04()
 
     // Multi-stream
     {
-        std::unique_ptr<VBWriter> writer( new VBWriter() );
+        auto writer = std::make_unique<VBWriter>();
 
         HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
@@ -1328,8 +1476,8 @@ bool Test04()
         {
             size_t nVerts = std::size(s_VSStarterKitVB1);
 
-            std::unique_ptr<uint8_t[]> vb1( new uint8_t[ sizeof(VSStarterKitVertex1) * nVerts ] );
-            std::unique_ptr<uint8_t[]> vb2( new uint8_t[ sizeof(VSStarterKitVertex2) * nVerts ] );
+            auto vb1 = std::make_unique<uint8_t[]>( sizeof(VSStarterKitVertex1) * nVerts );
+            auto vb2 = std::make_unique<uint8_t[]>( sizeof(VSStarterKitVertex2) * nVerts );
 
             hr = writer->AddStream( vb1.get(), nVerts, 0, sizeof(VSStarterKitVertex1) );
             if ( FAILED(hr) )
@@ -1449,7 +1597,7 @@ bool Test04()
 
     // GetElement
     {
-        std::unique_ptr<VBWriter> writer( new VBWriter() );
+        auto writer = std::make_unique<VBWriter>();
 
         HRESULT hr = writer->Initialize( g_VSStarterKitAnimation, std::size(g_VSStarterKitAnimation) );
         if ( FAILED(hr) )
@@ -1526,6 +1674,123 @@ bool Test04()
         }
     }
 
+    // invalid args
+    {
+        auto reader = std::make_unique<VBReader>();
+        auto writer = std::make_unique<VBWriter>();
+
+        HRESULT hr = writer->Initialize( nullptr, 0 );
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid arg failure (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        #pragma warning(push)
+        #pragma warning(disable:6385 6387)
+        hr = writer->Initialize( g_VSStarterKitAnimation, 2342 );
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected count out of range failure (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        hr = writer->AddStream(nullptr, 0, 0, 0);
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid arg failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        size_t nVerts = std::size(s_VSStarterKitVB1);
+
+        auto vb1 = std::make_unique<uint8_t[]>( sizeof(VSStarterKitVertex1) * nVerts );
+
+        hr = writer->AddStream(vb1.get(), nVerts, 2824, sizeof(SimpleVertex));
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid slot failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        #pragma warning(pop)
+
+        hr = writer->AddStream(vb1.get(), nVerts, 0, 65535);
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid stride failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        hr = writer->AddStream(vb1.get(), UINT32_MAX, 0, sizeof(SimpleVertex));
+        if (hr != E_INVALIDARG)
+        {
+            success = false;
+            printe( "ERROR: Expected invalid vertex count failure [addstream] (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+
+        hr = writer->Initialize( s_cubeIL, std::size(s_cubeIL) );
+        if ( FAILED(hr) )
+        {
+            success = false;
+            printe( "ERROR: Failed setting up VB writer (%08X)\n", static_cast<unsigned int>(hr) );
+        }
+        else
+        {
+            nVerts = std::size(s_cubeVB);
+
+            auto vb = std::make_unique<uint8_t[]>( sizeof(SimpleVertex) * nVerts );
+
+            hr = writer->AddStream( vb.get(), nVerts, 0, sizeof(SimpleVertex) );
+            if ( FAILED(hr) )
+            {
+                success = false;
+                printe( "ERROR: Failed setting up stream for VB writer (%08X)\n", static_cast<unsigned int>(hr) );
+            }
+            else
+            {
+                XMVECTOR* nullBuff = nullptr;
+                hr = writer->Write(nullBuff, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [write] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                float* nullBuff1 = nullptr;
+                hr = writer->Write(nullBuff1, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [write1] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                XMFLOAT2* nullBuff2 = nullptr;
+                hr = writer->Write(nullBuff2, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [write2] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                XMFLOAT3* nullBuff3 = nullptr;
+                hr = writer->Write(nullBuff3, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [write3] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+
+                XMFLOAT4* nullBuff4 = nullptr;
+                hr = writer->Write(nullBuff4, nullptr, 0, 0);
+                if (hr != E_INVALIDARG)
+                {
+                    success = false;
+                    printe( "ERROR: Expected invalid arg failure [write4] (%08X)\n", static_cast<unsigned int>(hr) );
+                }
+            }
+        }
+    }
+
     return success;
 }
 
@@ -1542,7 +1807,7 @@ bool Test05()
 
         assert( BytesPerElement(v.format) == v.stride );
 
-        std::unique_ptr<VBReader> reader( new VBReader() );
+        auto reader = std::make_unique<VBReader>();
 
         D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
 
@@ -1617,7 +1882,7 @@ bool Test05()
         assert(IsX2BiasSupported(v.format));
         assert(BytesPerElement(v.format) == v.stride);
 
-        std::unique_ptr<VBReader> reader(new VBReader());
+        auto reader = std::make_unique<VBReader>();
 
         D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
 
@@ -1677,7 +1942,7 @@ bool Test06()
 
         assert( BytesPerElement(v.format) == v.stride );
 
-        std::unique_ptr<VBWriter> writer( new VBWriter() );
+        auto writer = std::make_unique<VBWriter>();
 
         D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
 
@@ -1752,7 +2017,7 @@ bool Test06()
         assert(IsX2BiasSupported(v.format));
         assert(BytesPerElement(v.format) == v.stride);
 
-        std::unique_ptr<VBWriter> writer(new VBWriter());
+        auto writer = std::make_unique<VBWriter>();
 
         D3D11_INPUT_ELEMENT_DESC ilDesc = { "DATA", 0, v.format, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 };
 
@@ -1827,7 +2092,7 @@ bool Test07()
         wchar_t ext[_MAX_EXT];
         _wsplitpath_s( szPath, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 
-        std::unique_ptr<DX::WaveFrontReader<uint16_t>> mesh( new DX::WaveFrontReader<uint16_t>() );
+        auto mesh = std::make_unique<DX::WaveFrontReader<uint16_t>>();
 
         HRESULT hr;
         if ( _wcsicmp( ext, L".vbo" ) == 0 )
@@ -1848,7 +2113,7 @@ bool Test07()
             continue;
         }
 
-        std::unique_ptr<VBReader> reader( new VBReader() );
+        auto reader = std::make_unique<VBReader>();
         hr = reader->Initialize( g_VBMedia[index].ilDesc, g_VBMedia[index].ilNumElements );
         if ( FAILED(hr) )
         {
@@ -1867,7 +2132,7 @@ bool Test07()
             continue;
         }
 
-        std::unique_ptr<VBWriter> writer( new VBWriter() );
+        auto writer = std::make_unique<VBWriter>();
         hr = writer->Initialize( g_VBMedia[index].ilDesc, g_VBMedia[index].ilNumElements );
         if ( FAILED(hr) )
         {
@@ -1876,7 +2141,7 @@ bool Test07()
             continue;
         }
 
-        std::unique_ptr<uint8_t[]> vb( new uint8_t[ nVerts * g_VBMedia[index].stride ] );
+        auto vb = std::make_unique<uint8_t[]>( nVerts * g_VBMedia[index].stride );
 
         hr = writer->AddStream( vb.get(), nVerts, 0, g_VBMedia[index].stride );
         if ( FAILED(hr) )

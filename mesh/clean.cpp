@@ -212,6 +212,13 @@ bool Test14()
             success = false;
         }
 
+        hr = Clean( indices.get(), 12, 2, nullptr, nullptr, dups );
+        if ( hr != E_FAIL )
+        {
+            printe("\nERROR: Clean(16) expected failure for no adj or attributes (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
         // Asymmetric neighbor
         static const uint32_t s_badNeighborCleanAdj[3 * 12] =
         {
@@ -789,6 +796,13 @@ bool Test14()
         if ( hr != E_FAIL )
         {
             printe("\nERROR: Clean(32) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        hr = Clean( indices.get(), 12, 2, nullptr, nullptr, dups );
+        if ( hr != E_FAIL )
+        {
+            printe("\nERROR: Clean(32) expected failure for both adj and attr null (%08X)\n", static_cast<unsigned int>(hr) );
             success = false;
         }
 
