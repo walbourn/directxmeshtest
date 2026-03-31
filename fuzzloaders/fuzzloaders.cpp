@@ -10,7 +10,7 @@
 //
 // Copyright (c) Microsoft Corporation.
 //
-// http://go.microsoft.com/fwlink/?LinkID=324981
+// https://go.microsoft.com/fwlink/?LinkID=324981
 //--------------------------------------------------------------------------------------
 
 #pragma warning(push)

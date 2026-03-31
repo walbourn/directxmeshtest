@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 3.21)
 
 project (fuzzloaders
   DESCRIPTION "DirectXMesh File Fuzzer"
-  HOMEPAGE_URL "http://go.microsoft.com/fwlink/?LinkID=324981"
+  HOMEPAGE_URL "https://go.microsoft.com/fwlink/?LinkID=324981"
   LANGUAGES CXX)
 
 if(PROJECT_IS_TOP_LEVEL)
