@@ -474,11 +474,32 @@ bool Test06()
             success = false;
         }
 
-        // Failure cases
+        // Bad indices
         hr = Validate( s_badIndices16, 1, 20, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
             printe("ERROR: Validate(16) [bad indices] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
+            success = false;
+        }
+
+        hr = Validate(g_badIndices16_I0, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Validate(16) [bad indices i0] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(g_badIndices16_I1, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Validate(16) [bad indices i1] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(g_badIndices16_I2, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Validate(16) [bad indices i2] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 
@@ -661,11 +682,32 @@ bool Test06()
             success = false;
         }
 
-        // Failure cases
+        // Bad indices
         hr = Validate( s_badIndices32, 1, 20, nullptr, VALIDATE_DEFAULT, &msgs );
         if ( hr != E_FAIL )
         {
             printe("ERROR: Validate(32) [bad indices] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
+            success = false;
+        }
+
+        hr = Validate(g_badIndices32_I0, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Validate(32) [bad indices i0] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(g_badIndices32_I1, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Validate(32) [bad indices i1] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
+            success = false;
+        }
+
+        hr = Validate(g_badIndices32_I2, 12, 8, nullptr, VALIDATE_DEFAULT, &msgs);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Validate(32) [bad indices i2] didn't fail as expected (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str());
             success = false;
         }
 

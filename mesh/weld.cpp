@@ -26,6 +26,11 @@ namespace
         0, 1, 2, 3, 4, 5, 6, 7,
     };
 
+    const uint32_t s_cubeFakePointReps[8] =
+    {
+        0, 2, 2, 2, 4, 5, 6, 7,
+    };
+
     // Face-mapped cube
     const uint32_t s_fmCubePointReps[24] =
     {
@@ -141,6 +146,15 @@ bool Test26()
             success = false;
         }
 
+        // force a fake weld candidate
+        ntests = 0;
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
+        if (FAILED(hr) || (ntests == 0))
+        {
+            printe("ERROR: WeldVertices(16) cube forced failed (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         memcpy(newIndices.get(), g_cubeIndices16, sizeof(g_cubeIndices16));
 
@@ -180,7 +194,7 @@ bool Test26()
         hr = WeldVertices(newIndices.get(), 12, 8, s_badReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
         if (hr != E_UNEXPECTED)
         {
-            printe("ERROR: WeldVertices(16) expected failure for  bad vert count (%08X)\n", static_cast<unsigned int>(hr));
+            printe("ERROR: WeldVertices(16) expected failure for bad vert count (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -201,6 +215,31 @@ bool Test26()
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(16) cube unused all failed (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // Bad indices
+        memcpy(newIndices.get(), g_badIndices16_I0, sizeof(g_badIndices16_I0));
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: WeldVertices(16) expected failure for bad index array 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(newIndices.get(), g_badIndices16_I1, sizeof(g_badIndices16_I1));
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: WeldVertices(16) expected failure for bad index array 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(newIndices.get(), g_badIndices16_I2, sizeof(g_badIndices16_I2));
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: WeldVertices(16) expected failure for bad index array 2 (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
     }
@@ -470,6 +509,15 @@ bool Test26()
             success = false;
         }
 
+        // force a fake weld candidate
+        ntests = 0;
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { ++ntests;  return true; });
+        if (FAILED(hr) || (ntests == 0))
+        {
+            printe("ERROR: WeldVertices(32) cube forced failed (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         memcpy(newIndices.get(), g_cubeIndices32, sizeof(g_cubeIndices32));
 
@@ -530,6 +578,31 @@ bool Test26()
         if (hr != S_FALSE)
         {
             printe("ERROR: WeldVertices(32) cube unused all failed (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // Bad indices
+        memcpy(newIndices.get(), g_badIndices32_I0, sizeof(g_badIndices32_I0));
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: WeldVertices(32) expected failure for bad index array 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(newIndices.get(), g_badIndices32_I1, sizeof(g_badIndices32_I1));
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: WeldVertices(32) expected failure for bad index array 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(newIndices.get(), g_badIndices32_I2, sizeof(g_badIndices32_I2));
+        hr = WeldVertices(newIndices.get(), 12, 8, s_cubeFakePointReps, remap.get(), [&](uint32_t, uint32_t) -> bool { return true; });
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: WeldVertices(32) expected failure for bad index array 2 (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
     }

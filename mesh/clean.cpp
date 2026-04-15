@@ -183,6 +183,33 @@ bool Test14()
             }
         }
 
+        // bad verticies
+        memcpy(adj.get(), s_cubeAdj, sizeof(s_cubeAdj));
+
+        memcpy(indices.get(), g_badIndices16_I0, sizeof(g_badIndices16_I0));
+        hr = Clean(indices.get(), 12, 8, adj.get(), nullptr, dups);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Clean(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(indices.get(), g_badIndices16_I1, sizeof(g_badIndices16_I1));
+        hr = Clean(indices.get(), 12, 8, adj.get(), nullptr, dups);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Clean(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(indices.get(), g_badIndices16_I2, sizeof(g_badIndices16_I2));
+        hr = Clean(indices.get(), 12, 8, adj.get(), nullptr, dups);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Clean(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         hr = Clean( indices.get(), 12, UINT16_MAX /*D3D11_16BIT_INDEX_STRIP_CUT_VALUE*/, adj.get(), nullptr, dups );
         if ( hr != E_INVALIDARG )
@@ -768,6 +795,33 @@ bool Test14()
                 printe("ERROR: Clean(32) cube validation failed (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
                 success = false;
             }
+        }
+
+        // bad verticies
+        memcpy(adj.get(), s_cubeAdj, sizeof(s_cubeAdj));
+
+        memcpy(indices.get(), g_badIndices32_I0, sizeof(g_badIndices32_I0));
+        hr = Clean(indices.get(), 12, 8, adj.get(), nullptr, dups);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Clean(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(indices.get(), g_badIndices32_I1, sizeof(g_badIndices32_I1));
+        hr = Clean(indices.get(), 12, 8, adj.get(), nullptr, dups);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Clean(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(indices.get(), g_badIndices32_I2, sizeof(g_badIndices32_I2));
+        hr = Clean(indices.get(), 12, 8, adj.get(), nullptr, dups);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Clean(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
 
         // invalid args

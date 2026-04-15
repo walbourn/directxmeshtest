@@ -59,6 +59,101 @@ extern const __declspec(selectany) uint32_t g_cubeIndices32[ 12*3 ] =
         5, 6, 4,
     };
 
+extern const __declspec(selectany) uint16_t g_badIndices16_I0[ 12*3 ] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        0xff00, 4, 6,
+        2, 1, 6,
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
+
+extern const __declspec(selectany) uint16_t g_badIndices16_I1[ 12*3 ] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 0xf0f0, 1,
+        3, 4, 6,
+        2, 1, 6,
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
+
+extern const __declspec(selectany) uint16_t g_badIndices16_I2[ 12*3 ] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        3, 4, 6,
+        2, 1, 6,
+        2, 6, 0xff0f,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
+
+extern const __declspec(selectany) uint32_t g_badIndices32_I0[ 12*3 ] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        0xff00, 4, 6,
+        2, 1, 6,
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
+
+extern const __declspec(selectany) uint32_t g_badIndices32_I1[ 12*3 ] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 0xf0f0, 1,
+        3, 4, 6,
+        2, 1, 6,
+        2, 6, 7,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
+
+extern const __declspec(selectany) uint32_t g_badIndices32_I2[ 12*3 ] =
+    {
+        0, 1, 2,
+        0, 3, 1,
+        0, 4, 3,
+        0, 5, 4,
+        3, 6, 1,
+        3, 4, 6,
+        2, 1, 6,
+        2, 6, 0xff0f,
+        0, 2, 7,
+        0, 7, 5,
+        5, 7, 6,
+        5, 6, 4,
+    };
 
 //--- Face-mapped Cube ----------------------------------------------------------------
 extern const __declspec(selectany) DirectX::XMFLOAT3 g_fmCubeVerts[ 24 ] =

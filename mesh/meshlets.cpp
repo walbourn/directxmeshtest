@@ -246,6 +246,60 @@ bool Test28()
     // 32-bit multiple submesh
     // TODO -
 
+    // bad indices
+    {
+        std::vector<Meshlet> meshlets;
+        std::vector<uint8_t> uniqueVertexIB;
+        std::vector<MeshletTriangle> primitiveIndices;
+        HRESULT hr = ComputeMeshlets(g_badIndices16_I0, 12, g_fmCubeVerts, 24, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ComputeMeshlets(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_badIndices16_I1, 12, g_fmCubeVerts, 24, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ComputeMeshlets(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_badIndices16_I2, 12, g_fmCubeVerts, 24, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ComputeMeshlets(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_badIndices32_I0, 12, g_fmCubeVerts, 24, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ComputeMeshlets(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_badIndices32_I1, 12, g_fmCubeVerts, 24, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ComputeMeshlets(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeMeshlets(g_badIndices32_I2, 12, g_fmCubeVerts, 24, nullptr,
+            meshlets, uniqueVertexIB, primitiveIndices);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ComputeMeshlets(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+    }
+
     // invalid args
     #pragma warning(push)
     #pragma warning(disable:6385 6387)

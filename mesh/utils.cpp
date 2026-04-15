@@ -382,6 +382,52 @@ bool Test22()
         }
     }
 
+    // bad indices
+    {
+        float acmr, atvr;
+        ComputeVertexCacheMissRate(g_badIndices16_I0, 12, 8, OPTFACES_V_DEFAULT, acmr, atvr);
+        if (acmr != -1.f || atvr != -1.f)
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(16) expected failure for bad indices 0 (ACMR %f, ATVR %f)\n", acmr, atvr);
+            success = false;
+        }
+
+        ComputeVertexCacheMissRate(g_badIndices16_I1, 12, 8, OPTFACES_V_DEFAULT, acmr, atvr);
+        if (acmr != -1.f || atvr != -1.f)
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(16) expected failure for bad indices 1 (ACMR %f, ATVR %f)\n", acmr, atvr);
+            success = false;
+        }
+
+        ComputeVertexCacheMissRate(g_badIndices16_I2, 12, 8, OPTFACES_V_DEFAULT, acmr, atvr);
+        if (acmr != -1.f || atvr != -1.f)
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(16) expected failure for bad indices 2 (ACMR %f, ATVR %f)\n", acmr, atvr);
+            success = false;
+        }
+
+        ComputeVertexCacheMissRate(g_badIndices32_I0, 12, 8, OPTFACES_V_DEFAULT, acmr, atvr);
+        if (acmr != -1.f || atvr != -1.f)
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(32) expected failure for bad indices 0 (ACMR %f, ATVR %f)\n", acmr, atvr);
+            success = false;
+        }
+
+        ComputeVertexCacheMissRate(g_badIndices32_I1, 12, 8, OPTFACES_V_DEFAULT, acmr, atvr);
+        if (acmr != -1.f || atvr != -1.f)
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(32) expected failure for bad indices 1 (ACMR %f, ATVR %f)\n", acmr, atvr);
+            success = false;
+        }
+
+        ComputeVertexCacheMissRate(g_badIndices32_I2, 12, 8, OPTFACES_V_DEFAULT, acmr, atvr);
+        if (acmr != -1.f || atvr != -1.f)
+        {
+            printe("\nERROR: ComputeVertexCacheMissRate(32) expected failure for bad indices 2 (ACMR %f, ATVR %f)\n", acmr, atvr);
+            success = false;
+        }
+    }
+
     // invalid args
     #pragma warning(push)
     #pragma warning(disable:6385 6387)
