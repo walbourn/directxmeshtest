@@ -36,6 +36,23 @@ namespace
     };
 
     const uint32_t s_fmCubeAttr[12] = {};
+
+    const uint32_t s_badCubeAdj[3 * 12] =
+    {
+        1, 9, 5,
+        7, 0, 11,
+        3, 8, 6,
+        4, 2, 10,
+        5, 0xff00, 11,
+        8, 4, 0,
+        7, 2, 9,
+        10, 6, 1,
+        9, 2, 5,
+        6, 8, 0,
+        11, 3, 7,
+        4, 10, 1
+    };
+
 }
 
 //-------------------------------------------------------------------------------------
@@ -283,6 +300,16 @@ bool Test16()
             }
         }
 
+        // TODO: Need to add nVerts to these methods to add validation for bad indices
+
+        // bad adj
+        hr = OptimizeFaces(g_fmCubeIndices16, 12, s_badCubeAdj, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            success = false;
+            printe("ERROR: OptimizeFaces(16) expected failure for bad adj (%08X)\n", static_cast<unsigned int>(hr));
+        }
+
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
@@ -463,6 +490,16 @@ bool Test16()
             {
                 print("\t%zu -> %u .. %u\n", j, remap[j], s_strip[j]);
             }
+        }
+
+        // TODO: Need to add nVerts to these methods to add validation for bad indices
+
+        // bad adj
+        hr = OptimizeFaces(g_fmCubeIndices32, 12, s_badCubeAdj, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            success = false;
+            printe("ERROR: OptimizeFaces(32) expected failure for bad adj (%08X)\n", static_cast<unsigned int>(hr));
         }
 
         // invalid args
@@ -1364,6 +1401,8 @@ bool Test25()
             }
         }
 
+        // TODO: Need to add nVerts to these methods to add validation for bad indices
+
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
@@ -1518,6 +1557,8 @@ bool Test25()
                 print("\t%zu -> %u .. %u\n", j, remap[j], s_vcremap[j]);
             }
         }
+
+        // TODO: Need to add nVerts to these methods to add validation for bad indices
 
         // invalid args
         #pragma warning(push)
@@ -2091,6 +2132,28 @@ bool Test17()
                 print("%zu -> %u .. %u\n", j, remap[j], s_remap[j]);
         }
 
+        // bad indices
+        hr = OptimizeVertices(g_badIndices16_I0, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeVertices(g_badIndices16_I1, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeVertices(g_badIndices16_I2, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
@@ -2191,6 +2254,50 @@ bool Test17()
             success = false;
             for (size_t j = 0; j < 8; ++j)
                 print("%zu -> %u .. %u\n", j, remap[j], s_remap[j]);
+        }
+
+        // bad indices
+        hr = OptimizeVertices(g_badIndices32_I0, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeVertices(g_badIndices32_I1, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeVertices(g_badIndices32_I2, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // bad indices
+        hr = OptimizeVertices(g_badIndices32_I0, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeVertices(g_badIndices32_I1, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = OptimizeVertices(g_badIndices32_I2, 12, 8, remap.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: OptimizeVertices(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
 
         // invalid args

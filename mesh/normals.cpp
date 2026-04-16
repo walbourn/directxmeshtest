@@ -280,6 +280,30 @@ bool Test11()
             success = false;
         }
 
+        // bad indices
+        memset(normals.get(), 0xff, sizeof(XMFLOAT3) * 8);
+
+        hr = ComputeNormals(g_badIndices16_I0, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeNormals(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeNormals(g_badIndices16_I1, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeNormals(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeNormals(g_badIndices16_I2, 12, g_cubeVerts, 8, CNORM_DEFAULT, normals.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeNormals(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)

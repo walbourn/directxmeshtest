@@ -314,6 +314,31 @@ bool Test13()
             success = false;
         }
 
+        // bad indices
+        hr = ComputeTangentFrame(g_badIndices16_I0, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeTangentFrame(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(g_badIndices16_I1, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeTangentFrame(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(g_badIndices16_I2, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeTangentFrame(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385)
@@ -547,6 +572,31 @@ bool Test13()
                 XMVECTOR r = XMLoadFloat3( &s_fmCubeTangents[j] );
                 print( "%zu: %f %f %f ... %f %f %f\n", j, XMVectorGetX(v), XMVectorGetY(v), XMVectorGetZ(v), XMVectorGetX(r), XMVectorGetY(r), XMVectorGetZ(r) );
             }
+            success = false;
+        }
+
+        // bad indices
+        hr = ComputeTangentFrame(g_badIndices32_I0, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeTangentFrame(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(g_badIndices32_I1, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeTangentFrame(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ComputeTangentFrame(g_badIndices32_I2, 12, g_fmCubeVerts, s_fmCubeNormals, g_fmCubeUVs, 24,
+            tangents.get(), bitangents.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ComputeTangentFrame(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 

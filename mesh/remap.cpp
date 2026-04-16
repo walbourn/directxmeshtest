@@ -263,6 +263,52 @@ bool Test03()
             }
         }
 
+        // bad indices
+        hr = FinalizeIB(g_badIndices16_I0, 12, s_remap, 24, destib.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = FinalizeIB(g_badIndices16_I1, 12, s_remap, 24, destib.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = FinalizeIB(g_badIndices16_I2, 12, s_remap, 24, destib.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(destib.get(), g_badIndices16_I0, sizeof(g_badIndices16_I0));
+        hr = FinalizeIB(destib.get(), 12, s_remap, 24);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(16) [in-place] expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(destib.get(), g_badIndices16_I1, sizeof(g_badIndices16_I1));
+        hr = FinalizeIB(destib.get(), 12, s_remap, 24);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(16) [in-place] expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(destib.get(), g_badIndices16_I2, sizeof(g_badIndices16_I2));
+        hr = FinalizeIB(destib.get(), 12, s_remap, 24);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(16) [in-place] expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
@@ -579,6 +625,52 @@ bool Test03()
             {
                 printe("\t%zu: %u %u %u\n", j, destib[ j ], destib[ j + 1 ], destib[ j + 2 ] );
             }
+        }
+
+        // bad indices
+        hr = FinalizeIB(g_badIndices32_I0, 12, s_remap, 24, destib.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = FinalizeIB(g_badIndices32_I1, 12, s_remap, 24, destib.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = FinalizeIB(g_badIndices32_I2, 12, s_remap, 24, destib.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(destib.get(), g_badIndices32_I0, sizeof(g_badIndices32_I0));
+        hr = FinalizeIB(destib.get(), 12, s_remap, 24);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(32) [in-place] expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(destib.get(), g_badIndices32_I1, sizeof(g_badIndices32_I1));
+        hr = FinalizeIB(destib.get(), 12, s_remap, 24);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(32) [in-place] expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        memcpy(destib.get(), g_badIndices32_I2, sizeof(g_badIndices32_I2));
+        hr = FinalizeIB(destib.get(), 12, s_remap, 24);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeIB(32) [in-place] expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
 
         // invalid args
@@ -1307,6 +1399,20 @@ bool Test04()
             success = false;
         }
         #pragma warning(pop)
+
+        static const uint32_t s_invalid[] = { 3, 1, 0, 2,
+                                              6, 4, 5, 7,
+                                              11, 9, 8, 0xff00,
+                                              14, 12, 13, 15,
+                                              19, 17, 16, 18,
+                                              22, 20, 21, 23 };
+
+        hr = FinalizeVB(srcvb.get(), sizeof(uint32_t), 24, nullptr, 0, s_invalid, destvb.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeVB expected failure for invalid remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
     }
 
     // Unused (4)
@@ -1633,6 +1739,21 @@ bool Test05()
             {
                 printe("\t%zu: %u .. %u\n", j, destvb[ j ], s_sorted[ j ] );
             }
+        }
+
+        static const uint32_t s_invalid[] = { 3, 1, 0, 2,
+                                              6, 4, 5, 7,
+                                              11, 9, 8, 10,
+                                              14, 12, 13, 15,
+                                              19, 17, 0xff00, 18,
+                                              22, 20, 21, 23,
+                                              27, 26, 25, 24 };
+
+        hr = FinalizeVB(srcvb.get(), sizeof(uint32_t), 24, dups.data(), dups.size(), s_invalid, destvb.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: FinalizeVB dups expected failure for invalid remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
     }
 

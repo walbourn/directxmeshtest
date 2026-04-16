@@ -74,6 +74,27 @@ namespace
         5, 7, 6, 3, 4, 0
     };
 
+    const uint32_t s_badPointReps[8] =
+    {
+        0, 1, 2, 0xf0f0, 4, 5, 6, 7,
+    };
+
+    const uint32_t s_badCubeAdj[3 * 12] =
+    {
+        1, 6, 8,
+        2, 4, 0,
+        3, 5, 1,
+        9, 11, 2,
+        5, 6, 1,
+        2, 0xff00, 4,
+        0, 4, 7,
+        6, 10, 8,
+        0, 7, 9,
+        8, 10, 3,
+        9, 7, 11,
+        10, 5, 3
+    };
+
     // Face-mapped cube
     const uint32_t s_fmCubePointReps[24] =
     {
@@ -388,6 +409,28 @@ bool Test07()
             success = false;
         }
 
+        // bad indices
+        hr = GenerateAdjacencyAndPointReps(g_badIndices16_I0, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices16_I1, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices16_I2, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         #pragma warning(push)
         #pragma warning(disable:6385 6387)
         hr = GenerateAdjacencyAndPointReps(static_cast<const uint16_t*>(nullptr), 23, nullptr, 52, 0.f, nullptr, nullptr);
@@ -628,6 +671,28 @@ bool Test07()
         if ( hr != E_INVALIDARG )
         {
             printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for null result (%08X)\n", static_cast<unsigned int>(hr) );
+            success = false;
+        }
+
+        // bad indices
+        hr = GenerateAdjacencyAndPointReps(g_badIndices32_I0, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices32_I1, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices32_I2, 12, g_cubeVerts, 8, 0.f, preps.get(), nullptr);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
             success = false;
         }
 
@@ -922,6 +987,28 @@ bool Test08()
                     print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
+        }
+
+        // bad indices
+        hr = GenerateAdjacencyAndPointReps(g_badIndices16_I0, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected to fail for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices16_I1, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected to fail for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices16_I2, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(16) expected to fail for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
     }
 
@@ -1242,6 +1329,28 @@ bool Test08()
                 }
             }
         }
+
+        // bad indices
+        hr = GenerateAdjacencyAndPointReps(g_badIndices32_I0, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected to fail for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices32_I1, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected to fail for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateAdjacencyAndPointReps(g_badIndices32_I2, 12, g_cubeVerts, 8, 0.f, preps.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateAdjacencyAndPointReps(32) expected to fail for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
     }
 
     // 32-bit adjacency (face-mapped cube)
@@ -1462,6 +1571,67 @@ bool Test10()
             }
         }
 
+        // bad indices
+        hr = GenerateGSAdjacency(g_badIndices16_I0, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateGSAdjacency(g_badIndices16_I1, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateGSAdjacency(g_badIndices16_I2, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        static const uint16_t s_badIndices[12*3] =
+        {
+            0xf0f0, 1, 2,
+            0, 3, 1,
+            0, 4, 3,
+            0, 5, 4,
+            3, 6, 1,
+            3, 4, 6,
+            2, 1, 6,
+            2, 6, 7,
+            0, 2, 7,
+            0, 7, 5,
+            5, 7, 6,
+            5, 6, 4,
+        };
+
+        hr = GenerateGSAdjacency(s_badIndices, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad index B (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // bad pointreps
+        hr = GenerateGSAdjacency(g_cubeIndices16, 12, s_badPointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad point reps (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // bad adjacency
+        hr = GenerateGSAdjacency(g_cubeIndices16, 12, s_cubePointReps, s_badCubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(16) expected failure for bad adjacency (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         hr = GenerateGSAdjacency(static_cast<const uint16_t *>(nullptr), 0, nullptr, nullptr, 0, nullptr);
         if ( hr != E_INVALIDARG )
@@ -1591,6 +1761,67 @@ bool Test10()
             }
         }
 
+        // bad indices
+        hr = GenerateGSAdjacency(g_badIndices32_I0, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateGSAdjacency(g_badIndices32_I1, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = GenerateGSAdjacency(g_badIndices32_I2, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        static const uint32_t s_badIndices[12*3] =
+        {
+            0xf0f0, 1, 2,
+            0, 3, 1,
+            0, 4, 3,
+            0, 5, 4,
+            3, 6, 1,
+            3, 4, 6,
+            2, 1, 6,
+            2, 6, 7,
+            0, 2, 7,
+            0, 7, 5,
+            5, 7, 6,
+            5, 6, 4,
+        };
+
+        hr = GenerateGSAdjacency(s_badIndices, 12, s_cubePointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad index B (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // bad pointreps
+        hr = GenerateGSAdjacency(g_cubeIndices32, 12, s_badPointReps, s_cubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad point reps (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // bad adjacency
+        hr = GenerateGSAdjacency(g_cubeIndices32, 12, s_cubePointReps, s_badCubeAdj, 8, gsadj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: GenerateGSAdjacency(32) expected failure for bad adjacency (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         hr = GenerateGSAdjacency(static_cast<const uint32_t *>(nullptr), 0, nullptr, nullptr, 0, nullptr);
         if ( hr != E_INVALIDARG )
@@ -1695,7 +1926,6 @@ bool Test10()
             }
         }
     }
-
 
     // Unused (16)
     {
@@ -1851,6 +2081,36 @@ bool Test12()
             }
         }
 
+        // bad indices
+        hr = ConvertPointRepsToAdjacency(g_badIndices16_I0, 12, g_cubeVerts, 8, s_cubePointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ConvertPointRepsToAdjacency(g_badIndices16_I1, 12, g_cubeVerts, 8, s_cubePointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ConvertPointRepsToAdjacency(g_badIndices16_I2, 12, g_cubeVerts, 8, s_cubePointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // bad pointreps
+        hr = ConvertPointRepsToAdjacency(g_cubeIndices16, 12, g_cubeVerts, 8, s_badPointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(16) expected failure for bad pointreps (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         hr = ConvertPointRepsToAdjacency(static_cast<const uint16_t*>(nullptr), 0, nullptr, 0, nullptr, nullptr);
         if ( hr != E_INVALIDARG )
@@ -1965,6 +2225,36 @@ bool Test12()
                     print("%zu (%zu/%zu): %u ... %u\n", j, (j/3), (j % 3), adj[j], s_cubeAdj[j] );
                 }
             }
+        }
+
+        // bad indices
+        hr = ConvertPointRepsToAdjacency(g_badIndices32_I0, 12, g_cubeVerts, 8, s_cubePointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for bad index 0 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ConvertPointRepsToAdjacency(g_badIndices32_I1, 12, g_cubeVerts, 8, s_cubePointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for bad index 1 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ConvertPointRepsToAdjacency(g_badIndices32_I2, 12, g_cubeVerts, 8, s_cubePointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for bad index 2 (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        // bad pointreps
+        hr = ConvertPointRepsToAdjacency(g_cubeIndices32, 12, g_cubeVerts, 8, s_badPointReps, adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: ConvertPointRepsToAdjacency(32) expected failure for bad pointreps (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
 
         // invalid args
@@ -2145,6 +2435,23 @@ bool Test23()
             }
         }
 
+        // bad remap
+        static const uint32_t s_invalid[] = { 4, 6, 10, 11, 1, 3, 8, 0xf0ff, 2, 5, 0, 7 };
+
+        hr = ReorderIBAndAdjacency(g_cubeIndices16, 12, s_cubeAdj, s_invalid, destib.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ReorderIBAndAdjacency(16) expected failure for bad remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIBAndAdjacency(destib.get(), 12, adj.get(), s_invalid);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ReorderIBAndAdjacency(16) [in-place] expected failure for bad remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
         hr = ReorderIBAndAdjacency(static_cast<const uint16_t*>(nullptr), 0, nullptr, nullptr, nullptr, nullptr);
         if (hr != E_INVALIDARG)
@@ -2305,8 +2612,25 @@ bool Test23()
             }
         }
 
+        // bad remap
+        static const uint32_t s_invalid[] = { 4, 6, 10, 11, 1, 3, 8, 0xf0ff, 2, 5, 0, 7 };
+
+        hr = ReorderIBAndAdjacency(g_cubeIndices32, 12, s_cubeAdj, s_invalid, destib.get(), adj.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ReorderIBAndAdjacency(32) expected failure for bad remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = ReorderIBAndAdjacency(destib.get(), 12, adj.get(), s_invalid);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("ERROR: ReorderIBAndAdjacency(32) [in-place] expected failure for bad remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
         // invalid args
-       hr = ReorderIBAndAdjacency(static_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr, nullptr, nullptr);
+        hr = ReorderIBAndAdjacency(static_cast<const uint32_t*>(nullptr), 0, nullptr, nullptr, nullptr, nullptr);
         if (hr != E_INVALIDARG)
         {
             printe("\nERROR: ReorderIBAndAdjacency(32) expected to fail for 0 count (%08X)\n", static_cast<unsigned int>(hr));
@@ -2587,6 +2911,24 @@ bool Test19()
                     break;
                 }
             }
+        }
+
+        // bad remap
+        static const uint32_t s_invalid[] = { 0, 1, 2, 0xf00f, 4, 5, 6, 7, 8 };
+
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, nullptr, 0, s_invalid,
+            destvb.get(), preps.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps expected failure for bad remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, preps.get(), s_invalid);
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps [inplace] expected failure for bad remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
 
         // invalid args
@@ -2895,6 +3237,27 @@ bool Test20()
                     break;
                 }
             }
+        }
+
+        // bad remap
+        static const uint32_t s_invalid[] = { 0, 1, 2, 0xf00f, 4, 5, 6, 7, 8 };
+
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, dups.data(), dups.size(), s_invalid,
+            destvb.get(), preps.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps dups expected failure for bad remap (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
+        }
+
+        static const uint32_t s_invalidDups[] = { 0, 1, 2, 0xf00f };
+
+        hr = FinalizeVBAndPointReps(srcvb.get(), sizeof(uint32_t), 8, s_cubePointReps, s_invalidDups, std::size(s_invalidDups), remap.data(),
+            destvb.get(), preps.get());
+        if (hr != E_UNEXPECTED)
+        {
+            printe("\nERROR: FinalizeVBAndPointReps dups expected failure for bad dups (%08X)\n", static_cast<unsigned int>(hr));
+            success = false;
         }
 
         // invalid args
