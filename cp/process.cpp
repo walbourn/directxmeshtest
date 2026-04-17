@@ -745,11 +745,11 @@ bool Test03()
 
             if (s_vcache[vindex] == uint32_t(-1))
             {
-                hr = OptimizeFacesLRU(mesh->indices.data(), nFaces, faceRemap.get());
+                hr = OptimizeFacesLRU(mesh->indices.data(), nFaces, nVerts, faceRemap.get());
             }
             else
             {
-                hr = OptimizeFaces(mesh->indices.data(), nFaces, adj.get(), faceRemap.get(), s_vcache[vindex], s_restart[vindex]);
+                hr = OptimizeFaces(mesh->indices.data(), nFaces, nVerts, adj.get(), faceRemap.get(), s_vcache[vindex], s_restart[vindex]);
             }
             if ( FAILED(hr) )
             {
@@ -1119,11 +1119,11 @@ bool Test04()
 
             if (s_vcache[vindex] == uint32_t(-1))
             {
-                hr = OptimizeFacesLRUEx(sortedIndices.get(), nFaces, attributes.get(), faceRemap.get());
+                hr = OptimizeFacesLRUEx(sortedIndices.get(), nFaces, nVerts, attributes.get(), faceRemap.get());
             }
             else
             {
-                hr = OptimizeFacesEx(sortedIndices.get(), nFaces, adj.get(), attributes.get(), faceRemap.get(), s_vcache[vindex], s_restart[vindex]);
+                hr = OptimizeFacesEx(sortedIndices.get(), nFaces, nVerts, adj.get(), attributes.get(), faceRemap.get(), s_vcache[vindex], s_restart[vindex]);
             }
             if ( FAILED(hr) )
             {
