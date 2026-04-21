@@ -53,6 +53,8 @@ namespace
         4, 10, 1
     };
 
+    constexpr uint32_t c_IntelCacheSize = 24;
+    constexpr uint32_t c_IntelRestart = 20;
 }
 
 //-------------------------------------------------------------------------------------
@@ -1129,7 +1131,7 @@ bool Test16()
             }
 
             // intel cache
-            hr = OptimizeFaces(indices.data(), nFaces, vertices.size(), adj.get(), remap.get(), 24, 20);
+            hr = OptimizeFaces(indices.data(), nFaces, vertices.size(), adj.get(), remap.get(), c_IntelCacheSize, c_IntelRestart);
             if (FAILED(hr))
             {
                 success = false;
@@ -1155,7 +1157,7 @@ bool Test16()
                 else
                 {
                     float acmr, atvr;
-                    ComputeVertexCacheMissRate(reorderedIB.data(), nFaces, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr);
+                    ComputeVertexCacheMissRate(reorderedIB.data(), nFaces, vertices.size(), c_IntelCacheSize, acmr, atvr);
 
                     if (acmr > acmrOrig
                         || atvr > atvrOrig)
@@ -1295,7 +1297,7 @@ bool Test16()
             }
 
             // intel cache
-            hr = OptimizeFaces(indices.data(), nFaces, vertices.size(), adj.get(), remap.get(), 20);
+            hr = OptimizeFaces(indices.data(), nFaces, vertices.size(), adj.get(), remap.get(), c_IntelCacheSize, c_IntelRestart);
             if (FAILED(hr))
             {
                 success = false;
@@ -1321,7 +1323,7 @@ bool Test16()
                 else
                 {
                     float acmr, atvr;
-                    ComputeVertexCacheMissRate(reorderedIB.data(), nFaces, vertices.size(), OPTFACES_V_DEFAULT, acmr, atvr);
+                    ComputeVertexCacheMissRate(reorderedIB.data(), nFaces, vertices.size(), c_IntelCacheSize, acmr, atvr);
 
                     if (acmr > acmrOrig
                         || atvr > atvrOrig)
