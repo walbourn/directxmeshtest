@@ -1119,11 +1119,11 @@ bool Test04()
 
             if (s_vcache[vindex] == uint32_t(-1))
             {
-                hr = OptimizeFacesLRUEx(sortedIndices.get(), nFaces, nVerts, attributes.get(), faceRemap.get());
+                hr = OptimizeFacesLRUEx(sortedIndices.get(), nFaces, nTotalVerts, attributes.get(), faceRemap.get());
             }
             else
             {
-                hr = OptimizeFacesEx(sortedIndices.get(), nFaces, nVerts, adj.get(), attributes.get(), faceRemap.get(), s_vcache[vindex], s_restart[vindex]);
+                hr = OptimizeFacesEx(sortedIndices.get(), nFaces, nTotalVerts, adj.get(), attributes.get(), faceRemap.get(), s_vcache[vindex], s_restart[vindex]);
             }
             if ( FAILED(hr) )
             {
