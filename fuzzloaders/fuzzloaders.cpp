@@ -152,7 +152,7 @@ int __cdecl wmain(_In_ int argc, _In_z_count_(argc) wchar_t* argv[])
                     uint32_t mask = (1 << OPT_WAVEFRONT_OBJ)
                         | (1 << OPT_WAVEFRONT_MTL)
                         | (1 << OPT_VBO);
-                    mask &= ~(1 << dwOption);
+                    mask &= ~(1u << dwOption);
                     if (dwOptions & mask)
                     {
                         wprintf(L"-wfo, -mtl, -vbo are mutually exclusive options\n");
