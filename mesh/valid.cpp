@@ -326,6 +326,52 @@ namespace
         uint32_t(-1), uint32_t(-1), uint32_t(-1),
         uint32_t(-1), uint32_t(-1), uint32_t(-1),
     };
+
+    template<typename index_t>
+    bool TestValidationGuards(const char* indexType)
+    {
+        const index_t unusedIndices[] =
+        {
+            index_t(-1), 0, 1,
+        };
+        const uint32_t unusedAdjacency[] =
+        {
+            uint32_t(-1), uint32_t(-1), uint32_t(-1),
+        };
+
+        std::wstring msgs;
+        HRESULT hr = Validate(unusedIndices, 1, 3, unusedAdjacency, VALIDATE_BOWTIES, &msgs);
+        if (FAILED(hr))
+        {
+            printe("ERROR: Validate(%s) [unused bowtie] failed (%08X)\n%ls\n", indexType, static_cast<unsigned int>(hr), msgs.c_str());
+            return false;
+        }
+
+        const index_t indices[] =
+        {
+            0, 1, 2,
+        };
+        const uint32_t invalidAdjacency[] =
+        {
+            1, uint32_t(-1), uint32_t(-1),
+        };
+
+        hr = Validate(indices, 1, 3, invalidAdjacency, VALIDATE_ASYMMETRIC_ADJ, nullptr);
+        if (hr != E_FAIL)
+        {
+            printe("ERROR: Validate(%s) [invalid adjacency, no msgs] didn't fail as expected (%08X)\n", indexType, static_cast<unsigned int>(hr));
+            return false;
+        }
+
+        hr = Validate(indices, 1, 3, invalidAdjacency, VALIDATE_ASYMMETRIC_ADJ, &msgs);
+        if (hr != E_FAIL || msgs.empty())
+        {
+            printe("ERROR: Validate(%s) [invalid adjacency, msgs] didn't fail as expected (%08X)\n%ls\n", indexType, static_cast<unsigned int>(hr), msgs.c_str());
+            return false;
+        }
+
+        return true;
+    }
 }
 
 
@@ -1175,6 +1221,16 @@ bool Test09()
             printe("ERROR: Validate(32) [bowties] expected failure for missing adj parameter (%08X)\n%ls\n", static_cast<unsigned int>(hr), msgs.c_str() );
             success = false;
         }
+    }
+
+    if (!TestValidationGuards<uint16_t>("16"))
+    {
+        success = false;
+    }
+
+    if (!TestValidationGuards<uint32_t>("32"))
+    {
+        success = false;
     }
 
     return success;
