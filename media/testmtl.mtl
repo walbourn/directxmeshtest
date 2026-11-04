@@ -1,0 +1,15 @@
+newmtl first
+Ka xyz 0.9505 1.0 1.089
+Kd 0.5
+Ks 0.1 0.2 0.3
+d -halo 0.25
+Tf 1 1 1
+
+newmtl second
+Kd spectral file.rfl 1.5
+Ke 1 0 0
+d 0.75
+
+newmtl third
+Kd 0.2 0.4 0.6 # trailing comment
+Ks xyz 0.5

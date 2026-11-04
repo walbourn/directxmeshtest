@@ -14,6 +14,7 @@ namespace
         FLAGS_NO_TEXCOORDS = 0x2,
         FLAGS_POSONLY = (FLAGS_NO_NORMALS | FLAGS_NO_TEXCOORDS),
         FLAGS_32BITONLY = 0x8000,
+        FLAGS_VERTEX_COLORS = 0x10000,
     };
 
     struct TestMedia
@@ -30,6 +31,8 @@ namespace
         { FLAGS_NO_TEXCOORDS, MEDIA_PATH L"cube._obj", 24, 12, 1 },
         { FLAGS_NO_TEXCOORDS, MEDIA_PATH L"teapot._obj", 530, 1024, 1 },
         { FLAGS_NONE, MEDIA_PATH L"cup._obj", 1340, 1880, 3 },
+        { FLAGS_POSONLY | FLAGS_VERTEX_COLORS, MEDIA_PATH L"cubevc._obj", 8, 12, 1 },
+        { FLAGS_NO_TEXCOORDS, MEDIA_PATH L"testmtl._obj", 24, 12, 4 },
 
     #ifndef BUILD_BVT_ONLY
         { FLAGS_POSONLY, MEDIA_PATH L"diamond._obj", 6, 9, 1 },
@@ -114,9 +117,10 @@ bool Test01()
                     || wfReader.materials.size() != s_TestMedia[index].nmtls
                     || (wfReader.hasNormals != ((flags & FLAGS_NO_NORMALS) == 0))
                     || (wfReader.hasTexcoords != ((flags & FLAGS_NO_TEXCOORDS) == 0))
+                    || (wfReader.hasVertexColors != ((flags & FLAGS_VERTEX_COLORS) != 0))
                     )
                 {
-                    printf("ERROR: WaveFront OBJ 16-bit test failed\n:%ls\n\tverts: %zu   inds: %zu (faces: %zu)   attr: %zu   mats: %zu%s%s\n",
+                    printf("ERROR: WaveFront OBJ 16-bit test failed\n:%ls\n\tverts: %zu   inds: %zu (faces: %zu)   attr: %zu   mats: %zu%s%s%s\n",
                         szPath,
                         wfReader.vertices.size(),
                         wfReader.indices.size(),
@@ -124,7 +128,8 @@ bool Test01()
                         wfReader.attributes.size(),
                         wfReader.materials.size(),
                         wfReader.hasNormals ? " normals" : "",
-                        wfReader.hasTexcoords ? " texcoords" : "");
+                        wfReader.hasTexcoords ? " texcoords" : "",
+                        wfReader.hasVertexColors ? " vertex colors" : "");
                     success = false;
                     pass = false;
                 }
@@ -159,9 +164,10 @@ bool Test01()
                     || wfReader.materials.size() != s_TestMedia[index].nmtls
                     || (wfReader.hasNormals != ((flags & FLAGS_NO_NORMALS) == 0))
                     || (wfReader.hasTexcoords != ((flags & FLAGS_NO_TEXCOORDS) == 0))
+                    || (wfReader.hasVertexColors != ((flags & FLAGS_VERTEX_COLORS) != 0))
                     )
                 {
-                    printf("ERROR: WaveFront OBJ 32-bit test failed\n:%ls\n\tverts: %zu   inds: %zu (faces: %zu)   attr: %zu   mats: %zu%s%s\n",
+                    printf("ERROR: WaveFront OBJ 32-bit test failed\n:%ls\n\tverts: %zu   inds: %zu (faces: %zu)   attr: %zu   mats: %zu%s%s%s\n",
                         szPath,
                         wfReader.vertices.size(),
                         wfReader.indices.size(),
@@ -169,7 +175,8 @@ bool Test01()
                         wfReader.attributes.size(),
                         wfReader.materials.size(),
                         wfReader.hasNormals ? " normals" : "",
-                        wfReader.hasTexcoords ? " texcoords" : "");
+                        wfReader.hasTexcoords ? " texcoords" : "",
+                        wfReader.hasVertexColors ? " vertex colors" : "");
                     success = false;
                     pass = false;
                 }
